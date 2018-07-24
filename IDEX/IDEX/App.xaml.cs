@@ -1,3 +1,4 @@
+using IDEX.View;
 using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -11,7 +12,7 @@ namespace IDEX
 		{
 			InitializeComponent();
 
-			MainPage = new MainPage();
+			MainPage = new MasterDetailPage1();
 		}
 
 		protected override void OnStart ()
