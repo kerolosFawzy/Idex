@@ -5,7 +5,7 @@
              x:Class="IDEX.MainPage">
 
     <StackLayout>
-    	<Label Text="Welcome to Xamarin.Forms!" 
+    	<Label Text="Welcome to new project!" 
            HorizontalOptions="Center"
            VerticalOptions="CenterAndExpand" />
     </StackLayout>
