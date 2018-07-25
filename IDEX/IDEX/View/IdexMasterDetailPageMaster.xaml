@@ -25,6 +25,8 @@
               Grid.Column="1"
               Grid.Row="2"
               Text="IDEX"
+              FontSize="Large"
+              TextColor="White"
               Style="{DynamicResource SubtitleStyle}"/>
         </Grid>
       </ListView.Header>

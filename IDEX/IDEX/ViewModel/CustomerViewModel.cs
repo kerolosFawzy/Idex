@@ -8,12 +8,12 @@ namespace IDEX.ViewModel
 {
     class CustomerViewModel
     {
-        ObservableCollection<Customer> customers { set; get; }
+        ObservableCollection<Customer> Customers { set; get; }
             = new ObservableCollection<Customer>();
 
         public CustomerViewModel() {
             Customer customer = new Customer { Id = 10 , Name = "kero" };
-            customers.Add(customer); 
+            Customers.Add(customer); 
         }
     }
 }
