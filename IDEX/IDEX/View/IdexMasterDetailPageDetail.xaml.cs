@@ -10,9 +10,9 @@ using Xamarin.Forms.Xaml;
 namespace IDEX.View
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class MasterDetailPage1Detail : ContentPage
+    public partial class IdexMasterDetailPageDetail : ContentPage
     {
-        public MasterDetailPage1Detail()
+        public IdexMasterDetailPageDetail()
         {
             InitializeComponent();
         }

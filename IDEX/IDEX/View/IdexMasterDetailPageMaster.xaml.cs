@@ -13,30 +13,31 @@ using Xamarin.Forms.Xaml;
 namespace IDEX.View
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class MasterDetailPage1Master : ContentPage
+    public partial class IdexMasterDetailPageMaster : ContentPage
     {
         public ListView ListView;
 
-        public MasterDetailPage1Master()
+        public IdexMasterDetailPageMaster()
         {
             InitializeComponent();
 
-            BindingContext = new MasterDetailPage1MasterViewModel();
+            BindingContext = new IdexMasterDetailPageMasterViewModel();
             ListView = MenuItemsListView;
         }
 
-        class MasterDetailPage1MasterViewModel : INotifyPropertyChanged
+        class IdexMasterDetailPageMasterViewModel : INotifyPropertyChanged
         {
-            public ObservableCollection<MasterDetailPage1MenuItem> MenuItems { get; set; }
+            public ObservableCollection<IdexMasterDetailPageMenuItem> MenuItems { get; set; }
             
-            public MasterDetailPage1MasterViewModel()
+            public IdexMasterDetailPageMasterViewModel()
             {
-                MenuItems = new ObservableCollection<MasterDetailPage1MenuItem>(new[]
+                MenuItems = new ObservableCollection<IdexMasterDetailPageMenuItem>(new[]
                 {
-                    new MasterDetailPage1MenuItem { Id = 0, Title = "Settings" },
-                    new MasterDetailPage1MenuItem { Id = 1, Title = "Help & Extras" },
-                    new MasterDetailPage1MenuItem { Id = 2, Title = "Statistics" },
-                    new MasterDetailPage1MenuItem { Id = 3, Title = "Drawing" },
+                    new IdexMasterDetailPageMenuItem { Id = 0, Title = "Home" },
+                    new IdexMasterDetailPageMenuItem { Id = 1, Title = "Settings" },
+                    new IdexMasterDetailPageMenuItem { Id = 2, Title = "Help" },
+                    new IdexMasterDetailPageMenuItem { Id = 3, Title = "Drawing" },
+                    new IdexMasterDetailPageMenuItem { Id = 4, Title = "Statistics" },
                 });
             }
             

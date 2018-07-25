@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 namespace IDEX.View
 {
 
-    public class MasterDetailPage1MenuItem
+    public class IdexMasterDetailPageMenuItem
     {
-        public MasterDetailPage1MenuItem()
+        public IdexMasterDetailPageMenuItem()
         {
-            TargetType = typeof(MasterDetailPage1Detail);
+            TargetType = typeof(IdexMasterDetailPageDetail);
         }
         public int Id { get; set; }
         public string Title { get; set; }

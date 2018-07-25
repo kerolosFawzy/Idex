@@ -12,7 +12,7 @@ namespace IDEX
 		{
 			InitializeComponent();
 
-			MainPage = new MasterDetailPage1();
+			MainPage =new IdexMasterDetailPage() ;
 		}
 
 		protected override void OnStart ()

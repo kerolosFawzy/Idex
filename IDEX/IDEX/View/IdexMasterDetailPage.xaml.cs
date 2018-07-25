@@ -10,24 +10,32 @@ using Xamarin.Forms.Xaml;
 namespace IDEX.View
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class MasterDetailPage1 : MasterDetailPage
+    public partial class IdexMasterDetailPage : MasterDetailPage
     {
-        public MasterDetailPage1()
+        public IdexMasterDetailPage()
         {
             InitializeComponent();
             MasterPage.ListView.ItemSelected += ListView_ItemSelected;
+            Detail = new NavigationPage(new MainPage());
         }
 
         private void ListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
         {
-            var item = e.SelectedItem as MasterDetailPage1MenuItem;
-            if (item == null)
+            if (!(e.SelectedItem is IdexMasterDetailPageMenuItem item))
                 return;
 
             var page = (Page)Activator.CreateInstance(item.TargetType);
-            page.Title = item.Title;
-
-            Detail = new NavigationPage(page);
+                
+            if (item.Title.Equals("Home")) {
+                page.Title = "Home";
+                Detail = new NavigationPage(new MainPage());
+            }
+            else
+            {
+                page.Title = item.Title;
+                Detail = new NavigationPage(page);
+            }
+                
             IsPresented = false;
 
             MasterPage.ListView.SelectedItem = null;
