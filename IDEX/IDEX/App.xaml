@@ -11,7 +11,7 @@
             <Style TargetType="Button" x:Key="FirstScreenButtons">
                 <Setter Property="FontSize" Value="Medium"/>
                 <Setter Property="TextColor" Value="White"/>
-                <Setter Property="BackgroundColor" Value="LightSeaGreen"/>
+                <Setter Property="BackgroundColor" Value="#008080"/>
             </Style>
         </ResourceDictionary>
     </Application.Resources>
