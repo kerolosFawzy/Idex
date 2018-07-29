@@ -9,6 +9,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\CustomController\CustomController.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Compile Update="View\IdexMasterDetailPageMenuItem.cs">
       <SubType>Code</SubType>
     </Compile>

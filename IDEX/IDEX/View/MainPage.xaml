@@ -1,18 +1,18 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:local="clr-namespace:IDEX.View"
+             xmlns:Custom="clr-namespace:CustomController;assembly=CustomController"
              x:Class="IDEX.MainPage"
              Title="IDEX">
 
     <StackLayout BackgroundColor="White" Padding="10"
          HorizontalOptions="Center"> 
-        <StackLayout Orientation="Horizontal" Spacing="10" HorizontalOptions="Center">
-            <Label Style="{StaticResource FirstScreenLabels}" HorizontalOptions="Start">Customer(s)</Label>
-            <Label Style="{StaticResource FirstScreenLabels}" HorizontalOptions="Center">Scheme(s)</Label>
-            <Label Style="{StaticResource FirstScreenLabels}" HorizontalOptions="End">Inspection(s)</Label>
+        <StackLayout Orientation="Horizontal" Spacing="10" HorizontalOptions="CenterAndExpand">
+            <Custom:ExtLabel Style="{StaticResource FirstScreenLabels}" HorizontalOptions="Start">Customer(s)</Custom:ExtLabel>
+            <Custom:ExtLabel Style="{StaticResource FirstScreenLabels}" HorizontalOptions="Center">Scheme(s)</Custom:ExtLabel>
+            <Custom:ExtLabel Style="{StaticResource FirstScreenLabels}" HorizontalOptions="End">Inspection(s)</Custom:ExtLabel>
         </StackLayout>
-        <local:StepProgressBarControl StepColor="#008080" Steps="3" StepSelected="1" x:Name="stepBar"/>
+        <Custom:StepProgressBarControl HorizontalOptions="CenterAndExpand" StepColor="#008080" Steps="3" StepSelected="1" x:Name="stepBar"/>
 
         <StackLayout Orientation="Horizontal" Spacing="20" >
             <ListView HorizontalOptions="Start" >
@@ -45,8 +45,8 @@
             </ListView.ItemTemplate>
         </ListView>
         <StackLayout HorizontalOptions="End" Orientation="Horizontal" >
-            <Button FontAttributes="Bold" Text="Back" BackgroundColor="White" TextColor="Black" BorderRadius="5"/>
-            <Button Text="next" Style="{StaticResource FirstScreenButtons}" BorderRadius="8"/>
+            <Custom:ExtButton FontAttributes="Bold" Text="Back" BackgroundColor="White" TextColor="Black" BorderRadius="5"/>
+            <Custom:ExtButton Text="next" Style="{StaticResource FirstScreenButtons}" BorderRadius="8"/>
         </StackLayout>
     </StackLayout>
 

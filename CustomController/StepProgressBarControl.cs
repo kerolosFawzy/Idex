@@ -4,9 +4,9 @@ using System.IO;
 using System.Linq;
 using Xamarin.Forms;
 
-namespace IDEX.View
+namespace CustomController
 {
-    class StepProgressBarControl : StackLayout
+    public class StepProgressBarControl : StackLayout
     {
         Button _lastButtonSelcted;
         public static readonly BindableProperty StepsProperty = BindableProperty
@@ -18,6 +18,7 @@ namespace IDEX.View
         public static readonly BindableProperty StepColorProperty = BindableProperty
             .Create(nameof(StepColor), typeof(Color), typeof(StepProgressBarControl), Color.LightGreen, defaultBindingMode: BindingMode.TwoWay);
 
+        #region //setter and getter for class properties
         public Color StepColor
         {
             get { return (Color)GetValue(StepColorProperty); }
@@ -35,6 +36,7 @@ namespace IDEX.View
             get { return (int)GetValue(StepSelectedProperty); }
             set { SetValue(StepSelectedProperty, value); }
         }
+        #endregion
 
         public StepProgressBarControl() {
             Orientation = StackOrientation.Horizontal;
@@ -93,7 +95,7 @@ namespace IDEX.View
             elementSelected.Style = Resources["selectedStyle"] as Style;
             _lastButtonSelcted = elementSelected;
         }
-
+        //todo change text size and buttons 
         private void AddStyle()
         {
             var unselectedStyle = new Style(typeof(Button))
@@ -103,26 +105,24 @@ namespace IDEX.View
                     new Setter { Property = Button.BorderColorProperty,   Value = StepColor },
                     new Setter { Property = Button.BorderWidthProperty,   Value = 0.5 },
 #pragma warning disable CS0618 // Type or member is obsolete
-                    new Setter { Property = Button.BorderRadiusProperty,   Value = 20 },
+                    new Setter { Property = Button.BorderRadiusProperty,   Value = 15 },
 #pragma warning restore CS0618 // Type or member is obsolete
-                    new Setter { Property = HeightRequestProperty,   Value = 40 },
-                    new Setter { Property = WidthRequestProperty,   Value = 40 }
+                    new Setter { Property = HeightRequestProperty,   Value = 30 },
+                    new Setter { Property = WidthRequestProperty,   Value = 30 }
             }
             };
 
             var selectedStyle = new Style(typeof(Button))
             {
                 Setters = {
-                   // new Setter {Property = Button.ImageProperty , Value= ImageSource.FromFile("rounded_image.png") },
-                  //  new Setter {Property = Button.ImageProperty , Value= Image.},
                     new Setter { Property = BackgroundColorProperty, Value = StepColor },
-new Setter { Property = Button.BorderColorProperty, Value = StepColor },
+                    new Setter { Property = Button.BorderColorProperty, Value = StepColor },
                     new Setter { Property = Button.BorderWidthProperty,   Value = 0.5 },
 #pragma warning disable CS0618 // Type or member is obsolete
-                    new Setter { Property = Button.BorderRadiusProperty,   Value = 20 },
+                    new Setter { Property = Button.BorderRadiusProperty,   Value = 15 },
 #pragma warning restore CS0618 // Type or member is obsolete
-                    new Setter { Property = HeightRequestProperty,   Value = 40 },
-                    new Setter { Property = WidthRequestProperty,   Value = 40 },
+                    new Setter { Property = HeightRequestProperty,   Value = 30 },
+                    new Setter { Property = WidthRequestProperty,   Value = 30 },
             }
             };
 
