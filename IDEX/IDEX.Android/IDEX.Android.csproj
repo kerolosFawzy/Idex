@@ -104,10 +104,13 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\slidder_image.jpg" />
+    <AndroidResource Include="Resources\drawable\rounded_image.png" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\rounded_image.png" />
+    <AndroidResource Include="Resources\drawable\checkbox_unchecked.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\checkbox_checked.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>

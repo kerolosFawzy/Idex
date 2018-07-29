@@ -5,45 +5,48 @@
              x:Class="IDEX.MainPage"
              Title="IDEX">
 
-    <StackLayout BackgroundColor="White" Padding="10"
-         HorizontalOptions="Center"> 
+    <StackLayout BackgroundColor="White" Padding="10" HorizontalOptions="Center" > 
+        
         <StackLayout Orientation="Horizontal" Spacing="10" HorizontalOptions="CenterAndExpand">
             <Custom:ExtLabel Style="{StaticResource FirstScreenLabels}" HorizontalOptions="Start">Customer(s)</Custom:ExtLabel>
             <Custom:ExtLabel Style="{StaticResource FirstScreenLabels}" HorizontalOptions="Center">Scheme(s)</Custom:ExtLabel>
             <Custom:ExtLabel Style="{StaticResource FirstScreenLabels}" HorizontalOptions="End">Inspection(s)</Custom:ExtLabel>
         </StackLayout>
+        
         <Custom:StepProgressBarControl HorizontalOptions="CenterAndExpand" StepColor="#008080" Steps="3" StepSelected="1" x:Name="stepBar"/>
 
         <StackLayout Orientation="Horizontal" Spacing="20" >
-            <ListView HorizontalOptions="Start" >
+            <ListView HorizontalOptions="Start" SeparatorVisibility="None" >
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <TextCell StyleId="{StaticResource FirstScreenLabels}" Text="{Binding }"/>
+                        <TextCell StyleId="{StaticResource FirstScreenLabels}"  Text="{Binding name}" />
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-            <ListView HorizontalOptions="Center" >
+            <ListView HorizontalOptions="Center" SeparatorVisibility="None">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <TextCell StyleId="{StaticResource FirstScreenLabels}" Text="KeroSchema"/>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-            <ListView HorizontalOptions="End" >
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <TextCell StyleId="{StaticResource FirstScreenLabels}" Text="KeroInspection"/>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
         </StackLayout>
-        <ListView>
+        
+        <Frame BorderColor="#ECECEC" HasShadow="False" Margin="10" VerticalOptions="EndAndExpand">
+            <ListView ItemsSource="{Binding Customers}" Margin="10" HasUnevenRows="False">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <ImageCell Text="Kero" ImageSource="first_screen_image1.png"/>
+                    <ViewCell>
+                            <StackLayout Orientation="Horizontal" >
+                               <Label Text="{Binding Name}" Margin="10" HorizontalOptions="StartAndExpand"  Style="{StaticResource FirstScreenLabels}" />
+                               <Custom:CustomCheckBox Checked="False" HeightRequest="20"/>
+                            </StackLayout>
+                    </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
+        </Frame>
+
         <StackLayout HorizontalOptions="End" Orientation="Horizontal" >
             <Custom:ExtButton FontAttributes="Bold" Text="Back" BackgroundColor="White" TextColor="Black" BorderRadius="5"/>
             <Custom:ExtButton Text="next" Style="{StaticResource FirstScreenButtons}" BorderRadius="8"/>

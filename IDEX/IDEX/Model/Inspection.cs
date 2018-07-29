@@ -8,6 +8,7 @@ namespace IDEX.Model
     {
         public int ID { get; set; }
         public string Name { get; set; }
-
+        public Scheme scheme { get; set; }
+        public int SchemeId { get; set; }
     }
 }
