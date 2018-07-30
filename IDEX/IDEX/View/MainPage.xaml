@@ -16,30 +16,35 @@
         <Custom:StepProgressBarControl HorizontalOptions="CenterAndExpand" StepColor="#008080" Steps="3" StepSelected="1" x:Name="stepBar"/>
 
         <StackLayout Orientation="Horizontal" Spacing="20" >
-            <ListView HorizontalOptions="Start" SeparatorVisibility="None" >
+            <ListView HorizontalOptions="Start" SeparatorVisibility="None" ItemsSource="{Binding Customer }">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <TextCell StyleId="{StaticResource FirstScreenLabels}"  Text="{Binding name}" />
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-            <ListView HorizontalOptions="Center" SeparatorVisibility="None">
+            <ListView HorizontalOptions="Center" SeparatorVisibility="None" >
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <TextCell StyleId="{StaticResource FirstScreenLabels}" Text="KeroSchema"/>
+                        <TextCell StyleId="{StaticResource FirstScreenLabels}" Text="KeroSchema" />
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
         </StackLayout>
         
         <Frame BorderColor="#ECECEC" HasShadow="False" Margin="10" VerticalOptions="EndAndExpand">
-            <ListView ItemsSource="{Binding Customers}" Margin="10" HasUnevenRows="False">
+            <ListView ItemsSource="{Binding Customers}" 
+                      Margin="10" HasUnevenRows="False" SelectionMode="None" 
+                      ItemTapped="MainListView_ItemTapped"
+                      >
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <ViewCell>
-                            <StackLayout Orientation="Horizontal" >
-                               <Label Text="{Binding Name}" Margin="10" HorizontalOptions="StartAndExpand"  Style="{StaticResource FirstScreenLabels}" />
-                               <Custom:CustomCheckBox Checked="False" HeightRequest="20"/>
+                    <ViewCell x:Name="ViewCell">
+                            <StackLayout Orientation="Horizontal" BackgroundColor="Transparent">
+                                <Label Text="{Binding Name}" 
+                                       Margin="10" HorizontalOptions="StartAndExpand"
+                                       Style="{StaticResource FirstScreenLabels}" />
+                               <Custom:CustomCheckBox Checked="{Binding IsChecked}" HeightRequest="20"/>
                             </StackLayout>
                     </ViewCell>
                 </DataTemplate>
@@ -49,8 +54,9 @@
 
         <StackLayout HorizontalOptions="End" Orientation="Horizontal" >
             <Custom:ExtButton FontAttributes="Bold" Text="Back" BackgroundColor="White" TextColor="Black" BorderRadius="5"/>
-            <Custom:ExtButton Text="next" Style="{StaticResource FirstScreenButtons}" BorderRadius="8"/>
+            <Custom:ExtButton Text="next" Style="{StaticResource FirstScreenButtons}" BorderRadius="8" Clicked="Next_Clicked"/>
         </StackLayout>
+        
     </StackLayout>
 
 </ContentPage>

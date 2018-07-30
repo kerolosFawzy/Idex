@@ -9,6 +9,7 @@ namespace CustomController
     {
         private static readonly string ImageChecked = "checkbox_checked.png";
         private static readonly string ImageUnchecked = "checkbox_unchecked.png";
+
         public static BindableProperty CheckedProperty = BindableProperty
             .Create(propertyName: "Checked",returnType : typeof(bool?)
             , declaringType: typeof(CustomCheckBox) , defaultValue: null 
@@ -25,7 +26,6 @@ namespace CustomController
             {
                 SetValue(CheckedProperty, value);
                 OnPropertyChanged();
-                //RaiseCheckedChanged();
             }
         }
         private static void CheckedValueChanged(BindableObject bindable , Object oldVlave , object newValue) {
@@ -62,6 +62,7 @@ namespace CustomController
         }
         public void OnClicked(object sender, EventArgs e)
         {
+            
             Checked = !Checked;
         }
     }

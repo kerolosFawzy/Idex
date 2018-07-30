@@ -1,4 +1,6 @@
-﻿using IDEX.ViewModel;
+﻿using CustomController;
+using IDEX.Model;
+using IDEX.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,10 +12,27 @@ namespace IDEX
 {
 	public partial class MainPage : ContentPage
 	{
-		public MainPage()
+        CustomerViewModel CustomerViewModel = new CustomerViewModel();
+
+        public MainPage()
 		{
 			InitializeComponent();
-            BindingContext = new CustomerViewModel();
-		}
-	}
+            BindingContext = CustomerViewModel;
+        }
+
+        private void MainListView_ItemTapped(object sender, ItemTappedEventArgs e)
+        {
+            var selectedItem = e.Item as Customer;
+
+            DisplayAlert("MainPage", selectedItem.IsChecked + "  " + selectedItem.Name, "oh");
+        }
+
+        private void Next_Clicked(object sender, EventArgs e)
+        {
+            System.Collections.ObjectModel.ObservableCollection<Customer>
+            customers = CustomerViewModel.Customers;
+            List<Customer> ts = customers.Where(x=> x.IsChecked == true).ToList();
+
+        }
+    }
 }
