@@ -4,9 +4,8 @@ using System.Text;
 
 namespace IDEX.Model
 {
-    class Scheme
+    class Scheme : BaseModel
     {
-        public int ID { get; set; }
         public string SchemeName { get; set; }
         public Customer customer { get; set; }
         public int CustomerId { get; set; }

@@ -1,11 +1,9 @@
-﻿using CustomController;
-using IDEX.Model;
+﻿using IDEX.Model;
 using IDEX.ViewModel;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace IDEX
@@ -18,21 +16,26 @@ namespace IDEX
 		{
 			InitializeComponent();
             BindingContext = CustomerViewModel;
+
+          //  var listview = ListView.FindName
         }
 
         private void MainListView_ItemTapped(object sender, ItemTappedEventArgs e)
         {
             var selectedItem = e.Item as Customer;
-
-            DisplayAlert("MainPage", selectedItem.IsChecked + "  " + selectedItem.Name, "oh");
+            //selectedItem.IsChecked = !selectedItem.IsChecked; 
+            //DisplayAlert("MainPage", selectedItem.IsChecked + "  " + selectedItem.Name, "oh");
         }
 
         private void Next_Clicked(object sender, EventArgs e)
         {
-            System.Collections.ObjectModel.ObservableCollection<Customer>
-            customers = CustomerViewModel.Customers;
-            List<Customer> ts = customers.Where(x=> x.IsChecked == true).ToList();
+            ObservableCollection<Customer> customers = CustomerViewModel.Customers;
+            List<Customer> ts = customers.Where(x => x.IsChecked == true).ToList();
+            DisplayAlert("selected Items " , ts.Count.ToString() , "Ok");
+            if (ts != null)
+                CustomerViewModel.SelectedCustomer = ts;
 
+            // var listview = this.FindByName<>("");
         }
     }
 }

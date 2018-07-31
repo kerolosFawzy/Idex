@@ -5,58 +5,86 @@
              x:Class="IDEX.MainPage"
              Title="IDEX">
 
-    <StackLayout BackgroundColor="White" Padding="10" HorizontalOptions="Center" > 
-        
-        <StackLayout Orientation="Horizontal" Spacing="10" HorizontalOptions="CenterAndExpand">
-            <Custom:ExtLabel Style="{StaticResource FirstScreenLabels}" HorizontalOptions="Start">Customer(s)</Custom:ExtLabel>
-            <Custom:ExtLabel Style="{StaticResource FirstScreenLabels}" HorizontalOptions="Center">Scheme(s)</Custom:ExtLabel>
-            <Custom:ExtLabel Style="{StaticResource FirstScreenLabels}" HorizontalOptions="End">Inspection(s)</Custom:ExtLabel>
-        </StackLayout>
-        
-        <Custom:StepProgressBarControl HorizontalOptions="CenterAndExpand" StepColor="#008080" Steps="3" StepSelected="1" x:Name="stepBar"/>
+    <ScrollView>
+        <Grid BackgroundColor="White" Padding="10" RowSpacing="5" >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="100"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
 
-        <StackLayout Orientation="Horizontal" Spacing="20" >
-            <ListView HorizontalOptions="Start" SeparatorVisibility="None" ItemsSource="{Binding Customer }">
+            <Custom:ExtLabel Grid.Row="0" Grid.Column="0" Margin="0,0,5,0" Style="{StaticResource FirstScreenLabels}" 
+                         HorizontalOptions="Start">Customer(s)</Custom:ExtLabel>
+            <Custom:ExtLabel Grid.Row="0" Grid.Column="1"  Style="{StaticResource FirstScreenLabels}" 
+                         HorizontalOptions="Center">Scheme(s)</Custom:ExtLabel>
+            <Custom:ExtLabel Grid.Row="0" Grid.Column="2" Margin="5,0,0,0" Style="{StaticResource FirstScreenLabels}" 
+                         HorizontalOptions="End">Inspection(s)</Custom:ExtLabel>
+
+            <Custom:StepProgressBarControl Grid.Row="1" Grid.ColumnSpan="3" 
+                                           HorizontalOptions="FillAndExpand" 
+                                           StepColor="#008080" Steps="3" 
+                                           StepSelected="1" x:Name="stepBar"
+                                           Margin="10,5,10,5"/>
+
+            <ListView Grid.Row="2" Grid.Column="0"
+                      Grid.ColumnSpan="1" HorizontalOptions="Start" 
+                      SeparatorVisibility="None" SelectionMode="None"
+                      ItemsSource="{Binding SelectedCustomer}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <TextCell StyleId="{StaticResource FirstScreenLabels}"  Text="{Binding name}" />
+                        <ViewCell>
+                            <Label HorizontalOptions="Center" VerticalOptions="Center" 
+                                   FontSize="Small" 
+                                   Style="{StaticResource FirstScreenLabels}"  
+                                   Text="{Binding Name}" />
+                        </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-            <ListView HorizontalOptions="Center" SeparatorVisibility="None" >
+
+            <ListView Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="1" HorizontalOptions="Center" SeparatorVisibility="None" >
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <TextCell StyleId="{StaticResource FirstScreenLabels}" Text="KeroSchema" />
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-        </StackLayout>
-        
-        <Frame BorderColor="#ECECEC" HasShadow="False" Margin="10" VerticalOptions="EndAndExpand">
-            <ListView ItemsSource="{Binding Customers}" 
+
+            <Frame Grid.Row="3" Grid.ColumnSpan="3" BorderColor="#ECECEC"
+                   Margin="10" VerticalOptions="Start" >
+                <ListView ItemsSource="{Binding Customers}" 
+                      VerticalOptions="FillAndExpand" 
                       Margin="10" HasUnevenRows="False" SelectionMode="None" 
-                      ItemTapped="MainListView_ItemTapped"
-                      >
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <ViewCell x:Name="ViewCell">
-                            <StackLayout Orientation="Horizontal" BackgroundColor="Transparent">
-                                <Label Text="{Binding Name}" 
+                      ItemTapped="MainListView_ItemTapped">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell x:Name="ViewCell">
+                                <StackLayout Orientation="Horizontal" BackgroundColor="Transparent">
+                                    <Label Text="{Binding Name}" 
                                        Margin="10" HorizontalOptions="StartAndExpand"
                                        Style="{StaticResource FirstScreenLabels}" />
-                               <Custom:CustomCheckBox Checked="{Binding IsChecked}" HeightRequest="20"/>
-                            </StackLayout>
-                    </ViewCell>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
-        </Frame>
+                                    <Custom:CustomCheckBox Checked="{Binding IsChecked}" HeightRequest="20"/>
+                                </StackLayout>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+            </Frame>
 
-        <StackLayout HorizontalOptions="End" Orientation="Horizontal" >
-            <Custom:ExtButton FontAttributes="Bold" Text="Back" BackgroundColor="White" TextColor="Black" BorderRadius="5"/>
-            <Custom:ExtButton Text="next" Style="{StaticResource FirstScreenButtons}" BorderRadius="8" Clicked="Next_Clicked"/>
-        </StackLayout>
-        
-    </StackLayout>
-
+            <StackLayout Grid.Row="4" Grid.Column="1"  
+                         Margin="10"
+                         Grid.ColumnSpan="2" Orientation="Horizontal" 
+                         HorizontalOptions="End">
+                <Custom:ExtButton FontAttributes="Bold" Text="Back" BackgroundColor="White" TextColor="Black" BorderRadius="5"/>
+                <Custom:ExtButton Text="next" Style="{StaticResource FirstScreenButtons}" BorderRadius="8" Clicked="Next_Clicked"/>
+            </StackLayout>
+        </Grid>
+    </ScrollView>
 </ContentPage>
