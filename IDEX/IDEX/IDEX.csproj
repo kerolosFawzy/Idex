@@ -21,7 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Update="View\IdexMasterDetailPageMenuItem.cs">
+    <Compile Update="Views\IdexMasterDetailPageMenuItem.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="View\MasterDetailPage1MenuItem.cs">
@@ -30,13 +30,16 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="View\IdexMasterDetailPage.xaml">
+    <EmbeddedResource Update="Views\IdexMasterDetailPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="View\IdexMasterDetailPageDetail.xaml">
+    <EmbeddedResource Update="Views\IdexMasterDetailPageDetail.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="View\IdexMasterDetailPageMaster.xaml">
+    <EmbeddedResource Update="Views\IdexMasterDetailPageMaster.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\SelectListViewScreen.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="View\MasterDetailPage1.xaml">

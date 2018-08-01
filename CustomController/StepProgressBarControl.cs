@@ -57,12 +57,13 @@ namespace CustomController
                     };
                     button.Clicked += Handle_Clicked;
                     Children.Add(button);
-                    if (i < Steps - 1)
+                    if (i < Steps - 1)   //for drawing lines between buttons  
                     {
                         var separatorLine = new Frame()
                         {
                             BackgroundColor = Color.Transparent,
                             Padding=2,
+                            Margin=-1, 
                             HeightRequest = 2,
                             WidthRequest = 50,
                             BorderColor = Color.Silver,

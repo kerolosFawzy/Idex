@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="IDEX.MainPage" Title="IDEX"
              xmlns:Custom="clr-namespace:CustomController;assembly=CustomController"
-             x:Class="IDEX.MainPage"
-             Title="IDEX">
+             >
 
     <ScrollView>
         <Grid BackgroundColor="White" Padding="10" RowSpacing="5" >
@@ -30,32 +30,36 @@
             <Custom:StepProgressBarControl Grid.Row="1" Grid.ColumnSpan="3" 
                                            HorizontalOptions="FillAndExpand" 
                                            StepColor="#008080" Steps="3" 
-                                           StepSelected="1" x:Name="stepBar"
+                                           StepSelected="1" x:Name="stepProgressBar"
                                            Margin="10,5,10,5"/>
 
-            <ListView Grid.Row="2" Grid.Column="0"
-                      Grid.ColumnSpan="1" HorizontalOptions="Start" 
-                      SeparatorVisibility="None" SelectionMode="None"
+            <Custom:RepeaterView Grid.Row="2" Grid.Column="0"
+                      Grid.ColumnSpan="1" HorizontalOptions="Start"
+                                
                       ItemsSource="{Binding SelectedCustomer}">
-                <ListView.ItemTemplate>
+                <Custom:RepeaterView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
                             <Label HorizontalOptions="Center" VerticalOptions="Center" 
-                                   FontSize="Small" 
+                                   Margin="5"
                                    Style="{StaticResource FirstScreenLabels}"  
-                                   Text="{Binding Name}" />
+                                   Text="{Binding Name}" FontSize="Medium"  />
                         </ViewCell>
                     </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
+                </Custom:RepeaterView.ItemTemplate>
+            </Custom:RepeaterView>
 
-            <ListView Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="1" HorizontalOptions="Center" SeparatorVisibility="None" >
-                <ListView.ItemTemplate>
+            <Custom:RepeaterView Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="1" HorizontalOptions="Center" >
+                <Custom:RepeaterView.ItemTemplate>
                     <DataTemplate>
-                        <TextCell StyleId="{StaticResource FirstScreenLabels}"  />
+                        <ViewCell>
+                            <Label HorizontalOptions="Center" VerticalOptions="Center" 
+                                   Style="{StaticResource FirstScreenLabels}"  
+                                   Text="{Binding }" FontSize="Small"  />
+                        </ViewCell>
                     </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
+                </Custom:RepeaterView.ItemTemplate>
+            </Custom:RepeaterView>
 
             <Frame Grid.Row="3" Grid.ColumnSpan="3" BorderColor="#ECECEC"
                    Margin="10" VerticalOptions="Start" >
@@ -77,18 +81,17 @@
                     </ListView.ItemTemplate>
                 </ListView>
             </Frame>
-
             <StackLayout Grid.Row="4" Grid.Column="1"  
                          Margin="10"
                          Grid.ColumnSpan="2" Orientation="Horizontal" 
                          HorizontalOptions="End">
-                
+
                 <Custom:ExtButton x:Name="BackButton" 
                                   Text="Back" FontAttributes="Bold" 
                                   TextColor="Black" BackgroundColor="White" 
                                   Style="{StaticResource FirstScreenButtons}" 
                                   Clicked="BackButton_Clicked"/>
-                
+
                 <Custom:ExtButton x:Name="NextButton" 
                                   Text="next" 
                                   Style="{StaticResource FirstScreenButtons}" 
