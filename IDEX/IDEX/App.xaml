@@ -9,10 +9,12 @@
                 <Setter Property="TextColor" Value="Black"/>
                 <Setter Property="LineBreakMode" Value="NoWrap"/>
             </Style>
+            
             <Style TargetType="Button" x:Key="FirstScreenButtons">
                 <Setter Property="FontSize" Value="Medium"/>
                 <Setter Property="TextColor" Value="White"/>
                 <Setter Property="BackgroundColor" Value="#008080"/>
+                <Setter Property="BorderRadius" Value="8"/>
             </Style>
           
         </ResourceDictionary>

@@ -7,9 +7,8 @@ using System.Text;
 
 namespace IDEX.Model
 {
-    class Customer : BaseModel 
+    class Customer : BaseModel , INotifyPropertyChanged
     {
-        public string Name { get; set; }
         public List<Scheme> Schemes { get; set; }
 
         private bool isChecked;

@@ -5,19 +5,20 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using Xamarin.Forms;
+using Xamarin.Forms.Internals;
 
 namespace IDEX
 {
-	public partial class MainPage : ContentPage
-	{
+    public partial class MainPage : ContentPage
+    {
         CustomerViewModel CustomerViewModel = new CustomerViewModel();
-
+        private int flag;
         public MainPage()
-		{
-			InitializeComponent();
+        {
+            InitializeComponent();
             BindingContext = CustomerViewModel;
-
-          //  var listview = ListView.FindName
+            flag = 0;
+            BackButton.IsVisible = false;
         }
 
         private void MainListView_ItemTapped(object sender, ItemTappedEventArgs e)
@@ -29,13 +30,54 @@ namespace IDEX
 
         private void Next_Clicked(object sender, EventArgs e)
         {
-            ObservableCollection<Customer> customers = CustomerViewModel.Customers;
-            List<Customer> ts = customers.Where(x => x.IsChecked == true).ToList();
-            DisplayAlert("selected Items " , ts.Count.ToString() , "Ok");
-            if (ts != null)
-                CustomerViewModel.SelectedCustomer = ts;
+            NavigationHandeler();
+        }
 
-            // var listview = this.FindByName<>("");
+        private void BackButton_Clicked(object sender, EventArgs e)
+        {
+            flag = 0;
+            BackButton.IsVisible = false;
+            Binding myBinding = new Binding("Customers")
+            {
+                Source = CustomerViewModel
+            };
+            MainPageListView.SetBinding(ListView.ItemsSourceProperty, myBinding);
+        }
+
+
+        List<Customer> ts = new List<Customer>();
+        SchemeViewModel schemeView = new SchemeViewModel();
+
+        private void NavigationHandeler()
+        {
+            if (flag == 0)
+            {
+                ObservableCollection<Customer> customers = CustomerViewModel.Customers;
+                ts = customers.Where(x => x.IsChecked == true).ToList();
+                if (ts != null)
+                {
+                    flag = 1;
+                    CustomerViewModel.SelectedCustomer = ts;
+                    BackButton.IsVisible = true;
+                    for (int i = 0; i < ts.Count(); i++)
+                    {
+                        List<Scheme> scheme = new List<Scheme>();
+                        scheme = schemeView.Schemes.Where(x => x.CustomerId == ts[i].ID).ToList();
+                        schemeView.SelectedSchemes.AddRange(scheme);
+
+                        if (scheme != null)
+                        {
+                         //   for (int x = 0; x < scheme.Count(); x++)
+
+                        }
+                    }
+                    Binding myBinding = new Binding("SelectedSchemes")
+                    {
+                        Source = schemeView
+                    };
+                    MainPageListView.SetBinding(ListView.ItemsSourceProperty, myBinding);
+                }
+            }
         }
     }
 }

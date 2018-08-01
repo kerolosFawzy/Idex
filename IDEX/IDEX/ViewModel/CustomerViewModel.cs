@@ -24,8 +24,6 @@ namespace IDEX.ViewModel
             }
         }
 
-
-
         public CustomerViewModel() {
             Customer customer;
             customer= new Customer { ID = 1, Name = "Hospital" };

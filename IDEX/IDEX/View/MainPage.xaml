@@ -52,14 +52,14 @@
             <ListView Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="1" HorizontalOptions="Center" SeparatorVisibility="None" >
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <TextCell StyleId="{StaticResource FirstScreenLabels}" Text="KeroSchema" />
+                        <TextCell StyleId="{StaticResource FirstScreenLabels}"  />
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
 
             <Frame Grid.Row="3" Grid.ColumnSpan="3" BorderColor="#ECECEC"
                    Margin="10" VerticalOptions="Start" >
-                <ListView ItemsSource="{Binding Customers}" 
+                <ListView x:Name="MainPageListView" ItemsSource="{Binding Customers}" 
                       VerticalOptions="FillAndExpand" 
                       Margin="10" HasUnevenRows="False" SelectionMode="None" 
                       ItemTapped="MainListView_ItemTapped">
@@ -67,7 +67,7 @@
                         <DataTemplate>
                             <ViewCell x:Name="ViewCell">
                                 <StackLayout Orientation="Horizontal" BackgroundColor="Transparent">
-                                    <Label Text="{Binding Name}" 
+                                    <Label x:Name="Listviewlable" Text="{Binding Name}" 
                                        Margin="10" HorizontalOptions="StartAndExpand"
                                        Style="{StaticResource FirstScreenLabels}" />
                                     <Custom:CustomCheckBox Checked="{Binding IsChecked}" HeightRequest="20"/>
@@ -82,8 +82,17 @@
                          Margin="10"
                          Grid.ColumnSpan="2" Orientation="Horizontal" 
                          HorizontalOptions="End">
-                <Custom:ExtButton FontAttributes="Bold" Text="Back" BackgroundColor="White" TextColor="Black" BorderRadius="5"/>
-                <Custom:ExtButton Text="next" Style="{StaticResource FirstScreenButtons}" BorderRadius="8" Clicked="Next_Clicked"/>
+                
+                <Custom:ExtButton x:Name="BackButton" 
+                                  Text="Back" FontAttributes="Bold" 
+                                  TextColor="Black" BackgroundColor="White" 
+                                  Style="{StaticResource FirstScreenButtons}" 
+                                  Clicked="BackButton_Clicked"/>
+                
+                <Custom:ExtButton x:Name="NextButton" 
+                                  Text="next" 
+                                  Style="{StaticResource FirstScreenButtons}" 
+                                  Clicked="Next_Clicked"/>
             </StackLayout>
         </Grid>
     </ScrollView>

@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IDEX.iOS", "IDEX\IDEX.iOS\I
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IDEX", "IDEX\IDEX\IDEX.csproj", "{FDE8BE15-EFD6-45EA-A681-177F279D8DEA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CustomController", "CustomController\CustomController.csproj", "{8C0BCEEF-5688-4691-8254-37DE6C246F8C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CustomController", "CustomController\CustomController.csproj", "{8C0BCEEF-5688-4691-8254-37DE6C246F8C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -82,7 +82,6 @@ Global
 		{38EAAF90-915C-46F7-91B8-B1071359EC83}.AppStore|iPhoneSimulator.Build.0 = AppStore|iPhoneSimulator
 		{38EAAF90-915C-46F7-91B8-B1071359EC83}.AppStore|iPhoneSimulator.Deploy.0 = AppStore|iPhoneSimulator
 		{38EAAF90-915C-46F7-91B8-B1071359EC83}.Debug|Any CPU.ActiveCfg = Debug|iPhoneSimulator
-		{38EAAF90-915C-46F7-91B8-B1071359EC83}.Debug|Any CPU.Build.0 = Debug|iPhoneSimulator
 		{38EAAF90-915C-46F7-91B8-B1071359EC83}.Debug|Any CPU.Deploy.0 = Debug|iPhoneSimulator
 		{38EAAF90-915C-46F7-91B8-B1071359EC83}.Debug|iPhone.ActiveCfg = Debug|iPhone
 		{38EAAF90-915C-46F7-91B8-B1071359EC83}.Debug|iPhone.Build.0 = Debug|iPhone
