@@ -10,7 +10,7 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
-                <RowDefinition Height="100"/>
+                <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
@@ -35,7 +35,6 @@
 
             <Custom:RepeaterView Grid.Row="2" Grid.Column="0"
                       Grid.ColumnSpan="1" HorizontalOptions="Start"
-                                
                       ItemsSource="{Binding SelectedCustomer}">
                 <Custom:RepeaterView.ItemTemplate>
                     <DataTemplate>
@@ -49,13 +48,15 @@
                 </Custom:RepeaterView.ItemTemplate>
             </Custom:RepeaterView>
 
-            <Custom:RepeaterView Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="1" HorizontalOptions="Center" >
+            <Custom:RepeaterView 
+                Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="1" 
+                HorizontalOptions="Center" ItemsSource="{Binding SelectedSchemes}">
                 <Custom:RepeaterView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
                             <Label HorizontalOptions="Center" VerticalOptions="Center" 
                                    Style="{StaticResource FirstScreenLabels}"  
-                                   Text="{Binding }" FontSize="Small"  />
+                                   Text="{Binding Name}" FontSize="Small"  />
                         </ViewCell>
                     </DataTemplate>
                 </Custom:RepeaterView.ItemTemplate>

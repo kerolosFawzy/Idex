@@ -10,17 +10,19 @@ namespace IDEX
 {
     public partial class MainPage : ContentPage
     {
-        CustomerViewModel CustomerViewModel = new CustomerViewModel();
+        #region
+        MainPageViewModel ViewModel = new MainPageViewModel();
         private int flag;
         List<Customer> ts = new List<Customer>();
-        SchemeViewModel schemeView = new SchemeViewModel();
         // 0 , 2 , 4 numbers of index of buttons 
         Button child1, child2; 
         IList<Xamarin.Forms.View> ButtonsChildern = new List<Xamarin.Forms.View>();
+        #endregion
+
         public MainPage()
         {
             InitializeComponent();
-            BindingContext = CustomerViewModel;
+            BindingContext = ViewModel;
             flag = 0;
             BackButton.IsVisible = false;
             ButtonsChildern = stepProgressBar.Children.ToList();
@@ -44,14 +46,11 @@ namespace IDEX
         {
             flag = 0;
             BackButton.IsVisible = false;
-            Binding myBinding = new Binding("Customers")
-            {
-                Source = CustomerViewModel
-            };
+            Binding myBinding = new Binding("Customers");
             child1.BackgroundColor= Color.FromHex("#008080");
             child2.BackgroundColor = Color.Transparent;
             MainPageListView.SetBinding(ListView.ItemsSourceProperty, myBinding);
-            schemeView.SelectedSchemes.Clear();
+            ViewModel.SchemeBindingList.Clear();
         }
 
 
@@ -60,23 +59,20 @@ namespace IDEX
         {
             if (flag == 0)
             {
-                ObservableCollection<Customer> customers = CustomerViewModel.Customers;
+                List<Customer> customers = ViewModel.Customers;
                 ts = customers.Where(x => x.IsChecked == true).ToList();
                 if (ts != null)
                 {
                     flag = 1;
-                    CustomerViewModel.SelectedCustomer = ts;
+                    ViewModel.SelectedCustomer = ts;
                     BackButton.IsVisible = true;
+                    List<Scheme> scheme = new List<Scheme>();
                     for (int i = 0; i < ts.Count(); i++)
                     {
-                        List<Scheme> scheme = new List<Scheme>();
-                        scheme = schemeView.Schemes.Where(x => x.CustomerId == ts[i].ID).ToList();
-                        schemeView.SelectedSchemes.AddRange(scheme);
+                        scheme.AddRange( ViewModel.Schemes.Where(x => x.CustomerId == ViewModel.SelectedCustomer[i].ID).ToList());
                     }
-                    Binding myBinding = new Binding("SelectedSchemes")
-                    {
-                        Source = schemeView
-                    };
+                    ViewModel.SchemeBindingList = scheme;
+                    Binding myBinding = new Binding("SchemeBindingList");
                     child2.BackgroundColor = Color.FromHex("#008080");
                     MainPageListView.SetBinding(ListView.ItemsSourceProperty, myBinding);
                 }
