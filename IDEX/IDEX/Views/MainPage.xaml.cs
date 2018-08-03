@@ -12,10 +12,10 @@ namespace IDEX
     {
         #region
         MainPageViewModel ViewModel = new MainPageViewModel();
-        private int flag;
-        List<Customer> ts = new List<Customer>();
-        // 0 , 2 , 4 numbers of index of buttons 
-        Button child1, child2; 
+       
+        //0 , 2 , 4 numbers of index of buttons 
+        // 1 , 3, 5 Class id for buttons 
+        Button CustomerButton, SchemeButton , InspectionButton; 
         IList<Xamarin.Forms.View> ButtonsChildern = new List<Xamarin.Forms.View>();
         #endregion
 
@@ -24,12 +24,16 @@ namespace IDEX
             InitializeComponent();
             BindingContext = ViewModel;
             flag = 0;
+
             BackButton.IsVisible = false;
             ButtonsChildern = stepProgressBar.Children.ToList();
-            child1 = ButtonsChildern[0] as Button;
-            child2 = ButtonsChildern[2] as Button;
-        }
+            CustomerButton = ButtonsChildern[0] as Button;
+            SchemeButton = ButtonsChildern[2] as Button;
+            InspectionButton = ButtonsChildern[4] as Button;
+            
 
+        }
+        
         private void MainListView_ItemTapped(object sender, ItemTappedEventArgs e)
         {
             var selectedItem = e.Item as Customer;
@@ -39,49 +43,18 @@ namespace IDEX
 
         private void Next_Clicked(object sender, EventArgs e)
         {
+            flag = flag + 1; 
             NavigationHandeler();
         }
 
         private void BackButton_Clicked(object sender, EventArgs e)
         {
-            flag = 0;
-            BackButton.IsVisible = false;
-            Binding myBinding = new Binding("Customers");
-            child1.BackgroundColor= Color.FromHex("#008080");
-            child2.BackgroundColor = Color.Transparent;
-            MainPageListView.SetBinding(ListView.ItemsSourceProperty, myBinding);
-            ViewModel.SchemeBindingList.Clear();
+            flag = flag - 1;
+            NavigationHandeler(); 
         }
 
+      
 
 
-        private void NavigationHandeler()
-        {
-            if (flag == 0)
-            {
-                List<Customer> customers = ViewModel.Customers;
-                ts = customers.Where(x => x.IsChecked == true).ToList();
-                if (ts != null)
-                {
-                    flag = 1;
-                    ViewModel.SelectedCustomer = ts;
-                    BackButton.IsVisible = true;
-                    List<Scheme> scheme = new List<Scheme>();
-                    for (int i = 0; i < ts.Count(); i++)
-                    {
-                        scheme.AddRange( ViewModel.Schemes.Where(x => x.CustomerId == ViewModel.SelectedCustomer[i].ID).ToList());
-                    }
-                    ViewModel.SchemeBindingList = scheme;
-                    Binding myBinding = new Binding("SchemeBindingList");
-                    child2.BackgroundColor = Color.FromHex("#008080");
-                    MainPageListView.SetBinding(ListView.ItemsSourceProperty, myBinding);
-                }
-                else
-                {
-                    DisplayAlert("Alert", "Please Select Customer(s) Frist", "ok");
-                }
-
-            }
-        }
     }
 }

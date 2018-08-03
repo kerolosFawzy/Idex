@@ -5,99 +5,101 @@
              xmlns:Custom="clr-namespace:CustomController;assembly=CustomController"
              >
 
-    <ScrollView>
-        <Grid BackgroundColor="White" Padding="10" RowSpacing="5" >
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
+    <Grid BackgroundColor="White" Padding="10" RowSpacing="5" >
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
 
-            <Custom:ExtLabel Grid.Row="0" Grid.Column="0" Margin="0,0,5,0" Style="{StaticResource FirstScreenLabels}" 
+        <Custom:ExtLabel Grid.Row="0" Grid.Column="0" Margin="0,0,5,0" Style="{StaticResource FirstScreenLabels}" 
                          HorizontalOptions="Start">Customer(s)</Custom:ExtLabel>
-            <Custom:ExtLabel Grid.Row="0" Grid.Column="1"  Style="{StaticResource FirstScreenLabels}" 
+        <Custom:ExtLabel Grid.Row="0" Grid.Column="1"  Style="{StaticResource FirstScreenLabels}" 
                          HorizontalOptions="Center">Scheme(s)</Custom:ExtLabel>
-            <Custom:ExtLabel Grid.Row="0" Grid.Column="2" Margin="5,0,0,0" Style="{StaticResource FirstScreenLabels}" 
+        <Custom:ExtLabel Grid.Row="0" Grid.Column="2" Margin="5,0,0,0" Style="{StaticResource FirstScreenLabels}" 
                          HorizontalOptions="End">Inspection(s)</Custom:ExtLabel>
 
-            <Custom:StepProgressBarControl Grid.Row="1" Grid.ColumnSpan="3" 
+        <Custom:StepProgressBarControl Grid.Row="1" Grid.ColumnSpan="3" 
                                            HorizontalOptions="FillAndExpand" 
                                            StepColor="#008080" Steps="3" 
                                            StepSelected="1" x:Name="stepProgressBar"
-                                           Margin="10,5,10,5"/>
+                                           Margin="10,5,10,5"
+                                           ItemClicked="{Binding ItemSelected}"
+                                           />
 
-            <Custom:RepeaterView Grid.Row="2" Grid.Column="0"
+        <Custom:RepeaterView Grid.Row="2" Grid.Column="0"
                       Grid.ColumnSpan="1" HorizontalOptions="Start"
-                      ItemsSource="{Binding SelectedCustomer}">
-                <Custom:RepeaterView.ItemTemplate>
-                    <DataTemplate>
-                        <ViewCell>
-                            <Label HorizontalOptions="Center" VerticalOptions="Center" 
+                      ItemsSource="{Binding SelectedCustomer}" x:Name="SelectedCustomerListView">
+            <Custom:RepeaterView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Label HorizontalOptions="Center" VerticalOptions="Center" 
                                    Margin="5"
                                    Style="{StaticResource FirstScreenLabels}"  
-                                   Text="{Binding Name}" FontSize="Medium"  />
-                        </ViewCell>
-                    </DataTemplate>
-                </Custom:RepeaterView.ItemTemplate>
-            </Custom:RepeaterView>
+                                   Text="{Binding Name}" FontSize="Small"  />
+                    </ViewCell>
+                </DataTemplate>
+            </Custom:RepeaterView.ItemTemplate>
+        </Custom:RepeaterView>
 
-            <Custom:RepeaterView 
+        <Custom:RepeaterView x:Name="SelectedSchemesListView"
                 Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="1" 
                 HorizontalOptions="Center" ItemsSource="{Binding SelectedSchemes}">
-                <Custom:RepeaterView.ItemTemplate>
-                    <DataTemplate>
-                        <ViewCell>
-                            <Label HorizontalOptions="Center" VerticalOptions="Center" 
+            <Custom:RepeaterView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <Label HorizontalOptions="Center" VerticalOptions="Center" 
                                    Style="{StaticResource FirstScreenLabels}"  
-                                   Text="{Binding Name}" FontSize="Small"  />
-                        </ViewCell>
-                    </DataTemplate>
-                </Custom:RepeaterView.ItemTemplate>
-            </Custom:RepeaterView>
+                                   Text="{Binding Name}" FontSize="Small"/>
+                    </ViewCell>
+                </DataTemplate>
+            </Custom:RepeaterView.ItemTemplate>
+        </Custom:RepeaterView>
 
-            <Frame Grid.Row="3" Grid.ColumnSpan="3" BorderColor="#ECECEC"
-                   Margin="10" VerticalOptions="Start" >
-                <ListView x:Name="MainPageListView" ItemsSource="{Binding Customers}" 
+        <Frame Grid.Row="3" Grid.ColumnSpan="3" BorderColor="#ECECEC"
+                   Margin="10" VerticalOptions="Start" MinimumHeightRequest="100" >
+            <ListView x:Name="MainPageListView" ItemsSource="{Binding Customers}" 
                       VerticalOptions="FillAndExpand" 
                       Margin="10" HasUnevenRows="False" SelectionMode="None" 
                       ItemTapped="MainListView_ItemTapped">
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <ViewCell x:Name="ViewCell">
-                                <StackLayout Orientation="Horizontal" BackgroundColor="Transparent">
-                                    <Label x:Name="Listviewlable" Text="{Binding Name}" 
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell x:Name="ViewCell">
+                            <StackLayout Orientation="Horizontal" BackgroundColor="Transparent">
+                                <Label x:Name="Listviewlable" Text="{Binding Name}" 
                                        Margin="10" HorizontalOptions="StartAndExpand"
                                        Style="{StaticResource FirstScreenLabels}" />
-                                    <Custom:CustomCheckBox Checked="{Binding IsChecked}" HeightRequest="20"/>
-                                </StackLayout>
-                            </ViewCell>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
-            </Frame>
-            <StackLayout Grid.Row="4" Grid.Column="1"  
+                                <Custom:CustomCheckBox Checked="{Binding IsChecked}" HeightRequest="20"/>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Frame>
+
+        <StackLayout Grid.Row="4" Grid.Column="1"  
                          Margin="10"
                          Grid.ColumnSpan="2" Orientation="Horizontal" 
                          HorizontalOptions="End">
 
-                <Custom:ExtButton x:Name="BackButton" 
+            <Custom:ExtButton x:Name="BackButton" IsVisible="{Binding BackBtnVisibilty}"
                                   Text="Back" FontAttributes="Bold" 
                                   TextColor="Black" BackgroundColor="White" 
                                   Style="{StaticResource FirstScreenButtons}" 
                                   Clicked="BackButton_Clicked"/>
 
-                <Custom:ExtButton x:Name="NextButton" 
+            <Custom:ExtButton x:Name="NextButton" 
                                   Text="next" 
                                   Style="{StaticResource FirstScreenButtons}" 
-                                  Clicked="Next_Clicked"/>
-            </StackLayout>
-        </Grid>
-    </ScrollView>
+                                  Command="{Binding NextItemClicked}"
+                                  />
+        </StackLayout>
+    </Grid>
 </ContentPage>

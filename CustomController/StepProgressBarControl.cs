@@ -1,5 +1,6 @@
 ﻿
 using System.Linq;
+using System.Windows.Input;
 using Xamarin.Forms;
 
 namespace CustomController
@@ -15,6 +16,9 @@ namespace CustomController
 
         public static readonly BindableProperty StepColorProperty = BindableProperty
             .Create(nameof(StepColor), typeof(Color), typeof(StepProgressBarControl), Color.LightGreen, defaultBindingMode: BindingMode.TwoWay);
+
+        public static readonly BindableProperty ItemClickedProperty = BindableProperty
+          .Create(nameof(ItemClicked), typeof(ICommand), typeof(StepProgressBarControl), null, defaultBindingMode: BindingMode.TwoWay);
 
         #region //setter and getter for class properties
         public Color StepColor
@@ -33,6 +37,12 @@ namespace CustomController
         {
             get { return (int)GetValue(StepSelectedProperty); }
             set { SetValue(StepSelectedProperty, value); }
+        }
+
+        public Command ItemClicked
+        {
+            get { return (Command)GetValue(ItemClickedProperty); }
+            set { SetValue(ItemClickedProperty, value); }
         }
         #endregion
 
@@ -85,7 +95,12 @@ namespace CustomController
             }
          
         }
-        void Handle_Clicked(object sender, System.EventArgs e) => SelectElement(sender as Button);
+        void Handle_Clicked(object sender, System.EventArgs e)
+        {
+            SelectElement(sender as Button);
+           
+            ItemClicked?.Execute(sender);
+        }
 
         private void SelectElement(Button elementSelected)
         {
