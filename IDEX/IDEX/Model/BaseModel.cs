@@ -1,19 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
-using System.Text;
+﻿using GalaSoft.MvvmLight;
 
 namespace IDEX.Model
 {
-    public class BaseModel : INotifyPropertyChanged
-    {
+    public class BaseModel : ObservableObject
+    { 
         public int ID { get; set; }
         public string Name { get; set; }
 
         private bool isChecked;
-
-        public event PropertyChangedEventHandler PropertyChanged;
 
         public bool IsChecked
         {
@@ -21,12 +15,8 @@ namespace IDEX.Model
             set
             {
                 isChecked = value;
-                NotifyPropertyChanged();
+                RaisePropertyChanged();
             }
-        }
-        protected virtual void NotifyPropertyChanged([CallerMemberName] string propertyName = "")
-        {
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
     }
 }

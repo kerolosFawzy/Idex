@@ -1,4 +1,5 @@
 ﻿
+using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Input;
 using Xamarin.Forms;
@@ -7,7 +8,7 @@ namespace CustomController
 {
     public class StepProgressBarControl : StackLayout
     {
-        Button _lastButtonSelcted;
+        //Button _lastButtonSelcted;
         public static readonly BindableProperty StepsProperty = BindableProperty
             .Create(nameof(Steps), typeof(int), typeof(StepProgressBarControl), 0);
 
@@ -19,6 +20,9 @@ namespace CustomController
 
         public static readonly BindableProperty ItemClickedProperty = BindableProperty
           .Create(nameof(ItemClicked), typeof(ICommand), typeof(StepProgressBarControl), null, defaultBindingMode: BindingMode.TwoWay);
+
+        public static readonly BindableProperty ItemSelectedIndexProperty = BindableProperty
+         .Create(nameof(ItemSelectedIndex), typeof(List<string>), typeof(StepProgressBarControl), null, defaultBindingMode: BindingMode.TwoWay);
 
         #region //setter and getter for class properties
         public Color StepColor
@@ -43,6 +47,12 @@ namespace CustomController
         {
             get { return (Command)GetValue(ItemClickedProperty); }
             set { SetValue(ItemClickedProperty, value); }
+        }
+
+        public List<string> ItemSelectedIndex
+        {
+            get { return (List<string>)GetValue(ItemSelectedIndexProperty); }
+            set { SetValue(ItemSelectedIndexProperty, value); }
         }
         #endregion
 
@@ -97,17 +107,41 @@ namespace CustomController
         }
         void Handle_Clicked(object sender, System.EventArgs e)
         {
-            SelectElement(sender as Button);
-           
             ItemClicked?.Execute(sender);
+
+            SelectElement(sender as Button);
         }
 
         private void SelectElement(Button elementSelected)
         {
-            if (_lastButtonSelcted != null)
-                _lastButtonSelcted.Style = Resources["unSelectedStyle"] as Style;
-            elementSelected.Style = Resources["selectedStyle"] as Style;
-            _lastButtonSelcted = elementSelected;
+            var selectedStyle = Resources["selectedStyle"] as Style;
+            var unSelectedStyle = Resources["unSelectedStyle"] as Style;
+           
+            if (ItemSelectedIndex != null )
+            {
+
+              var selectChildList =    from x1 in Children
+                                       join x2 in ItemSelectedIndex on x1.ClassId equals x2
+                                       select x1;
+                foreach(var item in selectChildList)
+                {
+                    ((Button)item).Style = selectedStyle;
+                }
+                 //TODo fix unselect buttons 
+                var unSelectChildList = from x1 in Children
+                                        join x2 in ItemSelectedIndex on x1.ClassId equals x2
+                                        where !x1.ClassId.Equals(x2)
+                                        select x1; 
+                foreach (var item in unSelectChildList)
+                {
+                    ((Button)item).Style = unSelectedStyle;
+                }
+            }
+
+            //if (_lastButtonSelcted != null)
+            //    _lastButtonSelcted.Style = Resources["unSelectedStyle"] as Style;
+            //elementSelected.Style = Resources["selectedStyle"] as Style;
+            //_lastButtonSelcted = elementSelected;
         }
         //todo change text size and buttons 
         private void AddStyle()

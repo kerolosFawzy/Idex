@@ -32,6 +32,7 @@
                                            StepSelected="1" x:Name="stepProgressBar"
                                            Margin="10,5,10,5"
                                            ItemClicked="{Binding ItemSelected}"
+                                           ItemSelectedIndex ="{Binding SelectedIndexs}"
                                            />
 
         <Custom:RepeaterView Grid.Row="2" Grid.Column="0"
@@ -65,7 +66,7 @@
 
         <Frame Grid.Row="3" Grid.ColumnSpan="3" BorderColor="#ECECEC"
                    Margin="10" VerticalOptions="Start" MinimumHeightRequest="100" >
-            <ListView x:Name="MainPageListView" ItemsSource="{Binding Customers}" 
+            <ListView x:Name="MainPageListView" ItemsSource="{Binding ItemListSource}" 
                       VerticalOptions="FillAndExpand" 
                       Margin="10" HasUnevenRows="False" SelectionMode="None" 
                       ItemTapped="MainListView_ItemTapped">
@@ -90,13 +91,13 @@
                          HorizontalOptions="End">
 
             <Custom:ExtButton x:Name="BackButton" IsVisible="{Binding BackBtnVisibilty}"
-                                  Text="Back" FontAttributes="Bold" 
+                                  Text="Back" FontAttributes="Bold" Command="{Binding BackButtonClicked}"
                                   TextColor="Black" BackgroundColor="White" 
                                   Style="{StaticResource FirstScreenButtons}" 
-                                  Clicked="BackButton_Clicked"/>
+                                  />
 
             <Custom:ExtButton x:Name="NextButton" 
-                                  Text="next" 
+                                  Text="{Binding NextButtonTitle}" 
                                   Style="{StaticResource FirstScreenButtons}" 
                                   Command="{Binding NextItemClicked}"
                                   />

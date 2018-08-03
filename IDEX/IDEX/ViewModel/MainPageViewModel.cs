@@ -1,6 +1,8 @@
 ﻿using IDEX.Model;
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Input;
 using Xamarin.Forms;
 
@@ -15,24 +17,42 @@ namespace IDEX.ViewModel
 
         public ICommand ItemSelected { get; set; }
         public ICommand NextItemClicked { get; set; }
+        public ICommand BackButtonClicked { get; set; }
 
         public MainPageViewModel()
         {
             AddDummyData();
             ItemSelected = new Command(handleItemClicked);
             NextItemClicked = new Command(handleNextItemClicked);
+            BackButtonClicked = new Command(HandleBackClicked);
+        }
+
+        private void HandleBackClicked(object obj)
+        {
+            flag -= 1;
+            NavigationHandeler();
+
         }
 
         private void handleNextItemClicked(object obj)
         {
-           
+            flag += 1;
+            NavigationHandeler();
         }
 
-        #region //three models List Defination 
+        private List<string> _selectedIndexs = new List<string>() { "1"};
+
+        public List<string> SelectedIndexs
+        {
+            get { return _selectedIndexs; }
+            set { _selectedIndexs = value;
+                RaisePropertyChanged();
+            }
+        }
+
+
+        #region three models List Defination 
         private List<Customer> _customers = new List<Customer>();
-
-
-
         public List<Customer> Customers
         {
             get { return _customers; }
@@ -121,18 +141,46 @@ namespace IDEX.ViewModel
 
         #endregion
 
-      
-        
+        private string _nextButtonTitle = "Next";
+
+        public string NextButtonTitle
+        {
+            get { return _nextButtonTitle; }
+            set
+            {
+                _nextButtonTitle = value;
+                RaisePropertyChanged();
+            }
+        }
+
         private void handleItemClicked(object obj)
         {
             var selectedButton = obj as Button;
             var classId = selectedButton.ClassId;
             if (classId.Equals("1")) {
-
-            } else if (classId.Equals("3")) {
+                SelectedIndexs.Clear();
+                SelectedIndexs.Add("1");
+            } else if (classId.Equals("2")) {
+                SelectedIndexs.Clear();
+                SelectedIndexs.Add("1");
+                SelectedIndexs.Add("2");
             } else {
+                SelectedIndexs.Clear();
+                SelectedIndexs.Add("1");
+                SelectedIndexs.Add("2");
+                SelectedIndexs.Add("3");
             }
         }
+
+        private IEnumerable _itemListSource = Enumerable.Empty<BaseModel>();
+        public IEnumerable ItemListSource
+        {
+            get { return _itemListSource; }
+            set { _itemListSource = value;
+                RaisePropertyChanged();
+            }
+        }
+
 
         private void AddDummyData() {
              
@@ -147,6 +195,8 @@ namespace IDEX.ViewModel
             Inspections.Add(new Inspection { ID = 1, Name = "Hospital Inspection File", SchemeId = 1 });
             Inspections.Add(new Inspection { ID = 2, Name = "School Inspection File", SchemeId = 2 });
             Inspections.Add(new Inspection { ID = 3, Name = "University Inspection File", SchemeId = 3 });
+
+            ItemListSource = Customers;
         }
 
 
@@ -213,65 +263,74 @@ namespace IDEX.ViewModel
             if (flag == 0)
             {
                 BackBtnVisibilty = false;
-                Binding myBinding = new Binding("Customers");
-                MainPageListView.SetBinding(ListView.ItemsSourceProperty, myBinding);
-                ClearAll();
+                ItemListSource = Customers;
 
+              //  SelectedIndexs = new List<int>() { 1 };
+                //Binding myBinding = new Binding("Customers");
+                //MainPageListView.SetBinding(ListView.ItemsSourceProperty, myBinding);
+                ClearAll();
+                NextButtonTitle = "Next";
                 CustomerButtonBg = SelectedButtonColor;
                 SchemeButtonBg = UnSelectedButtonColor;
                 InspectionButtonBg = UnSelectedButtonColor;
             }
             else if (flag == 1)
             {
-                List<Customer> customers = ViewModel.Customers;
+                List<Customer> customers = Customers;
                 ts = customers.Where(x => x.IsChecked == true).ToList();
                 if (ts.Count != 0)
                 {
-                    ViewModel.SelectedCustomer = ts;
-                    BackButton.IsVisible = true;
+                    SelectedCustomer = ts;
+                    BackBtnVisibilty = true;
                     List<Scheme> scheme = new List<Scheme>();
                     for (int i = 0; i < ts.Count(); i++)
                     {
-                        scheme.AddRange(ViewModel.Schemes.Where(x => x.CustomerId == ViewModel.SelectedCustomer[i].ID).ToList());
+                        scheme.AddRange(Schemes.Where(x => x.CustomerId == SelectedCustomer[i].ID).ToList());
                     }
-                    ViewModel.SchemeBindingList = scheme;
-                    Binding myBinding = new Binding("SchemeBindingList");
-                    CustomerButton.BackgroundColor = SelectedButtonColor;
-                    SchemeButton.BackgroundColor = SelectedButtonColor;
-                    InspectionButton.BackgroundColor = UnSelectedButtonColor;
-                    ViewModel.InsepctionBindingList.Clear();
-                    ViewModel.SelectedSchemes.Clear();
-                    MainPageListView.SetBinding(ListView.ItemsSourceProperty, myBinding);
+                    SchemeBindingList = scheme;
+                   // SelectedIndexs = new List<int>() { 1 , 3 };
+                    //CustomerButtonBg = SelectedButtonColor;
+                    //SchemeButtonBg = SelectedButtonColor;
+                    //InspectionButtonBg = UnSelectedButtonColor;
+                    InsepctionBindingList.Clear();
+                    SelectedSchemes.Clear();
+                    NextButtonTitle = "Next";
+
+                    ItemListSource = SchemeBindingList;
+
                 }
                 else
                 {
                     flag = flag - 1;
-                    DisplayAlert("Alert", "Please Select Customer(s) Frist", "ok");
+                    //DisplayAlert("Alert", "Please Select Customer(s) Frist", "ok");
                 }
             }
             else if (flag == 2)
             {
-                List<Scheme> schemes = ViewModel.SchemeBindingList.Where(x => x.IsChecked == true).ToList();
+                List<Scheme> schemes = SchemeBindingList.Where(x => x.IsChecked == true).ToList();
                 if (schemes.Count != 0)
                 {
-                    ViewModel.SelectedSchemes = schemes;
+                    SelectedSchemes = schemes;
                     List<Inspection> inspections = new List<Inspection>();
                     for (int i = 0; i < schemes.Count(); i++)
                     {
-                        inspections.AddRange(ViewModel.Inspections.Where(x => x.SchemeId == ViewModel.SelectedSchemes[i].ID).ToList());
+                        inspections.AddRange(Inspections.Where(x => x.SchemeId == SelectedSchemes[i].ID).ToList());
                     }
-                    ViewModel.InsepctionBindingList = inspections;
-                    Binding myBinding = new Binding("InsepctionBindingList");
-                    CustomerButton.BackgroundColor = SelectedButtonColor;
-                    SchemeButton.BackgroundColor = SelectedButtonColor;
-                    InspectionButton.BackgroundColor = SelectedButtonColor;
-                    NextButton.Text = "START";
-                    MainPageListView.SetBinding(ListView.ItemsSourceProperty, myBinding);
+                    InsepctionBindingList = inspections;
+                    
+
+                   // SelectedIndexs = new List<int>() { 1, 3  , 5};
+                    CustomerButtonBg = SelectedButtonColor;
+                    SchemeButtonBg = SelectedButtonColor;
+                    InspectionButtonBg= SelectedButtonColor;
+                    NextButtonTitle = "START";
+                    
+                    ItemListSource = InsepctionBindingList;
                 }
                 else
                 {
                     flag = flag - 1;
-                    DisplayAlert("Alert", "Please Select Scheme(s) Frist", "ok");
+                   // DisplayAlert("Alert", "Please Select Scheme(s) Frist", "ok");
                 }
             }
         }
