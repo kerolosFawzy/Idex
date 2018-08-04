@@ -30,6 +30,7 @@ namespace IDEX.ViewModel
         }
 
         #region Handle all buttons on the view 
+
         private void HandleBackClicked(object obj)
         {
             flag -= 1;
@@ -262,6 +263,8 @@ namespace IDEX.ViewModel
             for (int i = 1; i <= num; i++) {
                 SelectedIndexs.Add(i.ToString());
             }
+
+           
         }
         private void ClearAll()
         {
@@ -296,7 +299,7 @@ namespace IDEX.ViewModel
                         scheme.AddRange(Schemes.Where(x => x.CustomerId == SelectedCustomer[i].ID).ToList());
                     }
                     SchemeBindingList = scheme;
-
+                    BackBtnVisibilty = true; 
                     NextButtonTitle = "Next";
                     ItemListSource = SchemeBindingList;
                 }
@@ -321,6 +324,8 @@ namespace IDEX.ViewModel
                     {
                         inspections.AddRange(Inspections.Where(x => x.SchemeId == SelectedSchemes[i].ID).ToList());
                     }
+                    BackBtnVisibilty = true;
+
                     InsepctionBindingList = inspections;
                     NextButtonTitle = "START";
                     ItemListSource = InsepctionBindingList;

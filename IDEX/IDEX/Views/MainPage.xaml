@@ -29,7 +29,7 @@
         <Custom:StepProgressBarControl Grid.Row="1" Grid.ColumnSpan="3" 
                                            HorizontalOptions="FillAndExpand" 
                                            StepColor="#008080" Steps="3" 
-                                           StepSelected="1" x:Name="stepProgressBar"
+                                           
                                            Margin="10,5,10,5"
                                            ItemClicked="{Binding ItemSelected}"
                                            ItemSelectedIndex ="{Binding SelectedIndexs}"

@@ -1,4 +1,4 @@
-﻿
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Input;
@@ -22,9 +22,16 @@ namespace CustomController
         public static readonly BindableProperty ItemClickedProperty = BindableProperty
           .Create(nameof(ItemClicked), typeof(ICommand), typeof(StepProgressBarControl), null, defaultBindingMode: BindingMode.TwoWay);
 
+
         public static readonly BindableProperty ItemSelectedIndexProperty = BindableProperty
-         .Create(nameof(ItemSelectedIndex), typeof(List<string>), typeof(StepProgressBarControl), null, defaultBindingMode: BindingMode.TwoWay);
+            .Create(nameof(ItemSelectedIndex), typeof(List<string>), typeof(StepProgressBarControl), null , BindingMode.OneWay, propertyChanging: (bindable, oldValue, newValue) => {
+                var control = bindable as StepProgressBarControl;
+                control.SelectElement();
+            });
+
+       
         #endregion
+
         #region setter and getter for class properties
         public Color StepColor
         {
@@ -66,6 +73,8 @@ namespace CustomController
             AddStyle();
         }
 
+       
+
         protected override void OnPropertyChanged(string propertyName = null)
         {
             base.OnPropertyChanged(propertyName);
@@ -97,26 +106,27 @@ namespace CustomController
                     }
                 }
             }
-            else if (propertyName.Equals(StepSelectedProperty.PropertyName))
+            else if (propertyName.Equals(StepSelectedProperty.PropertyName) || propertyName.Equals(ItemSelectedIndexProperty.PropertyName))
             {
-                var children = Children.First(p => (!string.IsNullOrEmpty(p.ClassId).Equals(StepSelected)));
-                if (children != null)
-                    SelectElement(children as Button);
+                //var children = Children.First(p => (!string.IsNullOrEmpty(p.ClassId).Equals(StepSelected)));
+                //if (children != null)
+                SelectElement();
             }
             else if (propertyName.Equals(StepColorProperty.PropertyName))
             {
                 AddStyle();
             }
+     
 
         }
-        void Handle_Clicked(object sender, System.EventArgs e)
+        void Handle_Clicked(object sender, EventArgs e)
         {
             ItemClicked?.Execute(sender);
 
-            SelectElement(sender as Button);
+            SelectElement();
         }
 
-        private void SelectElement(Button elementSelected)
+        private void SelectElement()
         {
             var selectedStyle = Resources["selectedStyle"] as Style;
             var unSelectedStyle = Resources["unSelectedStyle"] as Style;
@@ -126,7 +136,6 @@ namespace CustomController
             }
             if (ItemSelectedIndex != null)
             {
-
                 var selectChildList = from x1 in Children
                                       join x2 in ItemSelectedIndex on x1.ClassId equals x2
                                       select x1;
@@ -134,10 +143,8 @@ namespace CustomController
                 {
                     ((Button)item).Style = selectedStyle;
                 }
-
             }
         }
-        //todo change text size and buttons 
         private void AddStyle()
         {
             var unselectedStyle = new Style(typeof(Button))

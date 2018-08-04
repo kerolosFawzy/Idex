@@ -10,7 +10,7 @@ namespace IDEX
 {
     public partial class MainPage : ContentPage
     {
-        MainPageViewModel ViewModel = new MainPageViewModel();
+        private MainPageViewModel ViewModel = new MainPageViewModel();
     
         public MainPage()
         {
