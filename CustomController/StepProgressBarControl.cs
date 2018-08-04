@@ -9,6 +9,7 @@ namespace CustomController
     public class StepProgressBarControl : StackLayout
     {
         //Button _lastButtonSelcted;
+        #region view BindableProperty
         public static readonly BindableProperty StepsProperty = BindableProperty
             .Create(nameof(Steps), typeof(int), typeof(StepProgressBarControl), 0);
 
@@ -23,8 +24,8 @@ namespace CustomController
 
         public static readonly BindableProperty ItemSelectedIndexProperty = BindableProperty
          .Create(nameof(ItemSelectedIndex), typeof(List<string>), typeof(StepProgressBarControl), null, defaultBindingMode: BindingMode.TwoWay);
-
-        #region //setter and getter for class properties
+        #endregion
+        #region setter and getter for class properties
         public Color StepColor
         {
             get { return (Color)GetValue(StepColorProperty); }
@@ -56,7 +57,8 @@ namespace CustomController
         }
         #endregion
 
-        public StepProgressBarControl() {
+        public StepProgressBarControl()
+        {
             Orientation = StackOrientation.Horizontal;
             HorizontalOptions = LayoutOptions.CenterAndExpand;
             Padding = new Thickness(10, 0);
@@ -64,7 +66,8 @@ namespace CustomController
             AddStyle();
         }
 
-        protected override void OnPropertyChanged(string propertyName = null) {
+        protected override void OnPropertyChanged(string propertyName = null)
+        {
             base.OnPropertyChanged(propertyName);
             if (propertyName.Equals(StepsProperty.PropertyName))
             {
@@ -82,8 +85,8 @@ namespace CustomController
                         var separatorLine = new Frame()
                         {
                             BackgroundColor = Color.Transparent,
-                            Padding=2,
-                            Margin=-1, 
+                            Padding = 2,
+                            Margin = -1,
                             HeightRequest = 2,
                             WidthRequest = 50,
                             BorderColor = Color.Silver,
@@ -100,10 +103,11 @@ namespace CustomController
                 if (children != null)
                     SelectElement(children as Button);
             }
-            else if (propertyName.Equals(StepColorProperty.PropertyName)) {
+            else if (propertyName.Equals(StepColorProperty.PropertyName))
+            {
                 AddStyle();
             }
-         
+
         }
         void Handle_Clicked(object sender, System.EventArgs e)
         {
@@ -116,32 +120,22 @@ namespace CustomController
         {
             var selectedStyle = Resources["selectedStyle"] as Style;
             var unSelectedStyle = Resources["unSelectedStyle"] as Style;
-           
-            if (ItemSelectedIndex != null )
+            foreach (var item in Children.Where(x => x.GetType() == typeof(Button)))
+            {
+                ((Button)item).Style = unSelectedStyle;
+            }
+            if (ItemSelectedIndex != null)
             {
 
-              var selectChildList =    from x1 in Children
-                                       join x2 in ItemSelectedIndex on x1.ClassId equals x2
-                                       select x1;
-                foreach(var item in selectChildList)
+                var selectChildList = from x1 in Children
+                                      join x2 in ItemSelectedIndex on x1.ClassId equals x2
+                                      select x1;
+                foreach (var item in selectChildList)
                 {
                     ((Button)item).Style = selectedStyle;
                 }
-                 //TODo fix unselect buttons 
-                var unSelectChildList = from x1 in Children
-                                        join x2 in ItemSelectedIndex on x1.ClassId equals x2
-                                        where !x1.ClassId.Equals(x2)
-                                        select x1; 
-                foreach (var item in unSelectChildList)
-                {
-                    ((Button)item).Style = unSelectedStyle;
-                }
-            }
 
-            //if (_lastButtonSelcted != null)
-            //    _lastButtonSelcted.Style = Resources["unSelectedStyle"] as Style;
-            //elementSelected.Style = Resources["selectedStyle"] as Style;
-            //_lastButtonSelcted = elementSelected;
+            }
         }
         //todo change text size and buttons 
         private void AddStyle()
@@ -180,5 +174,5 @@ namespace CustomController
                 { "selectedStyle", selectedStyle }
             };
         }
-        }
     }
+}

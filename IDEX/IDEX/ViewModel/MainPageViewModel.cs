@@ -12,21 +12,24 @@ namespace IDEX.ViewModel
     {
         private int flag;
         List<Customer> ts = new List<Customer>();
-        Color SelectedButtonColor = Color.FromHex("#008080");
-        Color UnSelectedButtonColor = Color.Transparent;
+        readonly Color SelectedButtonColor = Color.FromHex("#008080");
+        readonly Color UnSelectedButtonColor = Color.Transparent;
 
+        #region Commands for the view
         public ICommand ItemSelected { get; set; }
         public ICommand NextItemClicked { get; set; }
         public ICommand BackButtonClicked { get; set; }
+        #endregion
 
         public MainPageViewModel()
         {
             AddDummyData();
-            ItemSelected = new Command(handleItemClicked);
-            NextItemClicked = new Command(handleNextItemClicked);
+            ItemSelected = new Command(HandleItemClicked);
+            NextItemClicked = new Command(HandleNextItemClicked);
             BackButtonClicked = new Command(HandleBackClicked);
         }
 
+        #region Handle all buttons on the view 
         private void HandleBackClicked(object obj)
         {
             flag -= 1;
@@ -34,13 +37,13 @@ namespace IDEX.ViewModel
 
         }
 
-        private void handleNextItemClicked(object obj)
+        private void HandleNextItemClicked(object obj)
         {
             flag += 1;
             NavigationHandeler();
         }
 
-        private List<string> _selectedIndexs = new List<string>() { "1"};
+        private List<string> _selectedIndexs = new List<string>() {"1"};
 
         public List<string> SelectedIndexs
         {
@@ -49,7 +52,64 @@ namespace IDEX.ViewModel
                 RaisePropertyChanged();
             }
         }
+        private string _nextButtonTitle = "Next";
 
+        public string NextButtonTitle
+        {
+            get { return _nextButtonTitle; }
+            set
+            {
+                _nextButtonTitle = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        private void HandleItemClicked(object obj)
+        {
+            var selectedButton = obj as Button;
+            var classId = selectedButton.ClassId;
+            if (classId.Equals("1"))
+            {
+                AddSelectedIndexs(1);
+                flag = 0;
+
+            }
+            else if (classId.Equals("2"))
+            {
+                AddSelectedIndexs(2);
+                flag = 1;
+            }
+            else
+            {
+                AddSelectedIndexs(3);
+                flag = 2;
+            }
+            NavigationHandeler();
+        }
+
+        private IEnumerable _itemListSource = Enumerable.Empty<BaseModel>();
+        public IEnumerable ItemListSource
+        {
+            get { return _itemListSource; }
+            set
+            {
+                _itemListSource = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        private bool _backBtnVisibilty;
+
+        public bool BackBtnVisibilty
+        {
+            get { return _backBtnVisibilty; }
+            set
+            {
+                _backBtnVisibilty = value;
+                RaisePropertyChanged();
+            }
+        }
+        #endregion
 
         #region three models List Defination 
         private List<Customer> _customers = new List<Customer>();
@@ -88,7 +148,7 @@ namespace IDEX.ViewModel
         }
         #endregion
 
-        #region // init Selected Lists 
+        #region init Selected Lists 
 
         private List<Customer> _selectCustomers;
         public List<Customer> SelectedCustomer
@@ -141,75 +201,6 @@ namespace IDEX.ViewModel
 
         #endregion
 
-        private string _nextButtonTitle = "Next";
-
-        public string NextButtonTitle
-        {
-            get { return _nextButtonTitle; }
-            set
-            {
-                _nextButtonTitle = value;
-                RaisePropertyChanged();
-            }
-        }
-
-        private void handleItemClicked(object obj)
-        {
-            var selectedButton = obj as Button;
-            var classId = selectedButton.ClassId;
-            if (classId.Equals("1")) {
-                SelectedIndexs.Clear();
-                SelectedIndexs.Add("1");
-            } else if (classId.Equals("2")) {
-                SelectedIndexs.Clear();
-                SelectedIndexs.Add("1");
-                SelectedIndexs.Add("2");
-            } else {
-                SelectedIndexs.Clear();
-                SelectedIndexs.Add("1");
-                SelectedIndexs.Add("2");
-                SelectedIndexs.Add("3");
-            }
-        }
-
-        private IEnumerable _itemListSource = Enumerable.Empty<BaseModel>();
-        public IEnumerable ItemListSource
-        {
-            get { return _itemListSource; }
-            set { _itemListSource = value;
-                RaisePropertyChanged();
-            }
-        }
-
-
-        private void AddDummyData() {
-             
-            Customers.Add(new Customer { ID = 1, Name = "Hospital" });
-            Customers.Add(new Customer { ID = 2, Name = "School" });
-            Customers.Add(new Customer { ID = 3, Name = "University" });
-
-            Schemes.Add(new Scheme { ID = 1, CustomerId = 1, Name = "Hospital scheme" });
-            Schemes.Add(new Scheme { ID = 2, CustomerId = 2, Name = "School scheme" });
-            Schemes.Add(new Scheme { ID = 3, CustomerId = 3, Name = "University scheme" });
-
-            Inspections.Add(new Inspection { ID = 1, Name = "Hospital Inspection File", SchemeId = 1 });
-            Inspections.Add(new Inspection { ID = 2, Name = "School Inspection File", SchemeId = 2 });
-            Inspections.Add(new Inspection { ID = 3, Name = "University Inspection File", SchemeId = 3 });
-
-            ItemListSource = Customers;
-        }
-
-
-        private bool _backBtnVisibilty;
-
-        public bool BackBtnVisibilty
-        {
-            get { return _backBtnVisibilty; }
-            set { _backBtnVisibilty = value;
-                RaisePropertyChanged();
-            }
-        }
-
         #region step bar background Color 
 
         private Color _customerButtonBackgroundColor ;
@@ -248,7 +239,30 @@ namespace IDEX.ViewModel
 
         #endregion
 
+        private void AddDummyData()
+        {
 
+            Customers.Add(new Customer { ID = 1, Name = "Hospital" });
+            Customers.Add(new Customer { ID = 2, Name = "School" });
+            Customers.Add(new Customer { ID = 3, Name = "University" });
+
+            Schemes.Add(new Scheme { ID = 1, CustomerId = 1, Name = "Hospital scheme" });
+            Schemes.Add(new Scheme { ID = 2, CustomerId = 2, Name = "School scheme" });
+            Schemes.Add(new Scheme { ID = 3, CustomerId = 3, Name = "University scheme" });
+
+            Inspections.Add(new Inspection { ID = 1, Name = "Hospital Inspection File", SchemeId = 1 });
+            Inspections.Add(new Inspection { ID = 2, Name = "School Inspection File", SchemeId = 2 });
+            Inspections.Add(new Inspection { ID = 3, Name = "University Inspection File", SchemeId = 3 });
+
+            ItemListSource = Customers;
+        }
+
+        private void AddSelectedIndexs(int num) {
+            SelectedIndexs.Clear(); 
+            for (int i = 1; i <= num; i++) {
+                SelectedIndexs.Add(i.ToString());
+            }
+        }
         private void ClearAll()
         {
             SchemeBindingList.Clear();
@@ -264,15 +278,8 @@ namespace IDEX.ViewModel
             {
                 BackBtnVisibilty = false;
                 ItemListSource = Customers;
-
-              //  SelectedIndexs = new List<int>() { 1 };
-                //Binding myBinding = new Binding("Customers");
-                //MainPageListView.SetBinding(ListView.ItemsSourceProperty, myBinding);
-                ClearAll();
                 NextButtonTitle = "Next";
-                CustomerButtonBg = SelectedButtonColor;
-                SchemeButtonBg = UnSelectedButtonColor;
-                InspectionButtonBg = UnSelectedButtonColor;
+                AddSelectedIndexs(1); 
             }
             else if (flag == 1)
             {
@@ -280,6 +287,7 @@ namespace IDEX.ViewModel
                 ts = customers.Where(x => x.IsChecked == true).ToList();
                 if (ts.Count != 0)
                 {
+                    AddSelectedIndexs(2);
                     SelectedCustomer = ts;
                     BackBtnVisibilty = true;
                     List<Scheme> scheme = new List<Scheme>();
@@ -288,20 +296,16 @@ namespace IDEX.ViewModel
                         scheme.AddRange(Schemes.Where(x => x.CustomerId == SelectedCustomer[i].ID).ToList());
                     }
                     SchemeBindingList = scheme;
-                   // SelectedIndexs = new List<int>() { 1 , 3 };
-                    //CustomerButtonBg = SelectedButtonColor;
-                    //SchemeButtonBg = SelectedButtonColor;
-                    //InspectionButtonBg = UnSelectedButtonColor;
-                    InsepctionBindingList.Clear();
-                    SelectedSchemes.Clear();
+
                     NextButtonTitle = "Next";
-
                     ItemListSource = SchemeBindingList;
-
                 }
                 else
                 {
+                    AddSelectedIndexs(flag);
+
                     flag = flag - 1;
+
                     //DisplayAlert("Alert", "Please Select Customer(s) Frist", "ok");
                 }
             }
@@ -310,6 +314,7 @@ namespace IDEX.ViewModel
                 List<Scheme> schemes = SchemeBindingList.Where(x => x.IsChecked == true).ToList();
                 if (schemes.Count != 0)
                 {
+                    AddSelectedIndexs(3);
                     SelectedSchemes = schemes;
                     List<Inspection> inspections = new List<Inspection>();
                     for (int i = 0; i < schemes.Count(); i++)
@@ -317,21 +322,19 @@ namespace IDEX.ViewModel
                         inspections.AddRange(Inspections.Where(x => x.SchemeId == SelectedSchemes[i].ID).ToList());
                     }
                     InsepctionBindingList = inspections;
-                    
-
-                   // SelectedIndexs = new List<int>() { 1, 3  , 5};
-                    CustomerButtonBg = SelectedButtonColor;
-                    SchemeButtonBg = SelectedButtonColor;
-                    InspectionButtonBg= SelectedButtonColor;
                     NextButtonTitle = "START";
-                    
                     ItemListSource = InsepctionBindingList;
                 }
                 else
                 {
+                    AddSelectedIndexs(flag);
                     flag = flag - 1;
-                   // DisplayAlert("Alert", "Please Select Scheme(s) Frist", "ok");
+                    // DisplayAlert("Alert", "Please Select Scheme(s) Frist", "ok");
                 }
+            }
+            else if (flag == 3)
+            {
+                flag = 2; 
             }
         }
 

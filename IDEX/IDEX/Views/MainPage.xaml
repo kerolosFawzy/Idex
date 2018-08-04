@@ -69,7 +69,7 @@
             <ListView x:Name="MainPageListView" ItemsSource="{Binding ItemListSource}" 
                       VerticalOptions="FillAndExpand" 
                       Margin="10" HasUnevenRows="False" SelectionMode="None" 
-                      ItemTapped="MainListView_ItemTapped">
+                     >
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell x:Name="ViewCell">
