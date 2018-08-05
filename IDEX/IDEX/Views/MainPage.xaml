@@ -101,5 +101,6 @@
                                   Command="{Binding NextItemClicked}"
                                   />
         </StackLayout>
+        
     </Grid>
 </ContentPage>

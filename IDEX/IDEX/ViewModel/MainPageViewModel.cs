@@ -271,9 +271,8 @@ namespace IDEX.ViewModel
         {
             SchemeBindingList.Clear();
             InsepctionBindingList.Clear();
-            SelectedCustomer.Clear();
-            SelectedSchemes.Clear();
             SelectedInsepction.Clear();
+            SelectedSchemes = null; 
         }
 
         private void NavigationHandeler()
@@ -283,6 +282,8 @@ namespace IDEX.ViewModel
                 BackBtnVisibilty = false;
                 ItemListSource = Customers;
                 NextButtonTitle = "Next";
+                ClearAll(); 
+
                 AddSelectedIndexs(1); 
             }
             else if (flag == 1)
@@ -299,6 +300,7 @@ namespace IDEX.ViewModel
                     {
                         scheme.AddRange(Schemes.Where(x => x.CustomerId == SelectedCustomer[i].ID).ToList());
                     }
+                    
                     SchemeBindingList = scheme;
                     BackBtnVisibilty = true; 
                     NextButtonTitle = "Next";
@@ -306,10 +308,10 @@ namespace IDEX.ViewModel
                 }
                 else
                 {
-                    AddSelectedIndexs(flag);
 
                     flag = flag - 1;
-
+                    AddSelectedIndexs(flag+1);
+                    NavigationHandeler();
                     //DisplayAlert("Alert", "Please Select Customer(s) Frist", "ok");
                 }
             }
@@ -333,8 +335,9 @@ namespace IDEX.ViewModel
                 }
                 else
                 {
-                    AddSelectedIndexs(flag);
                     flag = flag - 1;
+                    AddSelectedIndexs(flag+1);
+                    NavigationHandeler();
                     // DisplayAlert("Alert", "Please Select Scheme(s) Frist", "ok");
                 }
             }
