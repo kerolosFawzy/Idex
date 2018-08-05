@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Collections.Specialized;
+using System.ComponentModel;
 using System.Linq;
 using System.Windows.Input;
 using Xamarin.Forms;
@@ -24,12 +27,9 @@ namespace CustomController
 
 
         public static readonly BindableProperty ItemSelectedIndexProperty = BindableProperty
-            .Create(nameof(ItemSelectedIndex), typeof(List<string>), typeof(StepProgressBarControl), null , BindingMode.OneWay, propertyChanging: (bindable, oldValue, newValue) => {
-                var control = bindable as StepProgressBarControl;
-                control.SelectElement();
-            });
+            .Create(nameof(ItemSelectedIndex), typeof(List<string>), typeof(StepProgressBarControl), null , BindingMode.OneWay );
 
-       
+
         #endregion
 
         #region setter and getter for class properties
@@ -60,7 +60,9 @@ namespace CustomController
         public List<string> ItemSelectedIndex
         {
             get { return (List<string>)GetValue(ItemSelectedIndexProperty); }
-            set { SetValue(ItemSelectedIndexProperty, value); }
+            set { SetValue(ItemSelectedIndexProperty, value);
+                
+            }
         }
         #endregion
 
@@ -73,11 +75,10 @@ namespace CustomController
             AddStyle();
         }
 
-       
-
         protected override void OnPropertyChanged(string propertyName = null)
         {
             base.OnPropertyChanged(propertyName);
+
             if (propertyName.Equals(StepsProperty.PropertyName))
             {
                 for (int i = 0; i < Steps; i++)

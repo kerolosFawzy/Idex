@@ -2,13 +2,15 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Linq;
 using System.Windows.Input;
 using Xamarin.Forms;
 
 namespace IDEX.ViewModel
 {
-    class MainPageViewModel : BaseViewModel
+    class MainPageViewModel : BaseViewModel , INotifyPropertyChanged
     {
         private int flag;
         List<Customer> ts = new List<Customer>();
@@ -44,7 +46,7 @@ namespace IDEX.ViewModel
             NavigationHandeler();
         }
 
-        private List<string> _selectedIndexs = new List<string>() {"1"};
+        private List<string> _selectedIndexs =new List<string>(){"1"};
 
         public List<string> SelectedIndexs
         {
@@ -53,17 +55,7 @@ namespace IDEX.ViewModel
                 RaisePropertyChanged();
             }
         }
-        private string _nextButtonTitle = "Next";
 
-        public string NextButtonTitle
-        {
-            get { return _nextButtonTitle; }
-            set
-            {
-                _nextButtonTitle = value;
-                RaisePropertyChanged();
-            }
-        }
 
         private void HandleItemClicked(object obj)
         {
@@ -99,8 +91,17 @@ namespace IDEX.ViewModel
             }
         }
 
+        private string _nextButtonTitle = "Next";
+        public string NextButtonTitle
+        {
+            get { return _nextButtonTitle; }
+            set
+            {
+                _nextButtonTitle = value;
+                RaisePropertyChanged();
+            }
+        }
         private bool _backBtnVisibilty;
-
         public bool BackBtnVisibilty
         {
             get { return _backBtnVisibilty; }
@@ -125,7 +126,6 @@ namespace IDEX.ViewModel
         public override void OnAppearing()
         {
             base.OnAppearing();
-
         }
 
         private List<Scheme> _Schemes = new List<Scheme>();
@@ -259,12 +259,13 @@ namespace IDEX.ViewModel
         }
 
         private void AddSelectedIndexs(int num) {
-            SelectedIndexs.Clear(); 
+            List<string> vs = new List<string>();
+             
+             
             for (int i = 1; i <= num; i++) {
-                SelectedIndexs.Add(i.ToString());
+                vs.Add(i.ToString());
             }
-
-           
+            SelectedIndexs = vs;
         }
         private void ClearAll()
         {
@@ -342,6 +343,8 @@ namespace IDEX.ViewModel
                 flag = 2; 
             }
         }
+       
+
 
     }
 }
