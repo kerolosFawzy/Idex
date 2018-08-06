@@ -31,7 +31,7 @@ namespace IDEX.ViewModel
             BackButtonClicked = new Command(HandleBackClicked);
         }
 
-        #region Handle all buttons on the view 
+        #region Handle all buttons on the view and listviews
 
         private void HandleBackClicked(object obj)
         {
@@ -72,7 +72,7 @@ namespace IDEX.ViewModel
                 AddSelectedIndexs(2);
                 flag = 1;
             }
-            else
+            else if(classId.Equals("3"))
             {
                 AddSelectedIndexs(3);
                 flag = 2;
@@ -202,44 +202,6 @@ namespace IDEX.ViewModel
 
         #endregion
 
-        #region step bar background Color 
-
-        private Color _customerButtonBackgroundColor ;
-
-        public Color CustomerButtonBg
-        {
-            get { return _customerButtonBackgroundColor ; }
-            set { _customerButtonBackgroundColor  = value;
-                RaisePropertyChanged();
-            }
-        }
-
-        private Color _schemeButtonBackgroundColor;
-
-        public Color SchemeButtonBg
-        {
-            get { return _schemeButtonBackgroundColor; }
-            set
-            {
-                _schemeButtonBackgroundColor = value;
-                RaisePropertyChanged();
-            }
-        }
-
-        private Color _inspectionButtonBackgroundColor;
-
-        public Color InspectionButtonBg
-        {
-            get { return _inspectionButtonBackgroundColor; }
-            set
-            {
-                _inspectionButtonBackgroundColor = value;
-                RaisePropertyChanged();
-            }
-        }
-
-        #endregion
-
         private void AddDummyData()
         {
 
@@ -274,7 +236,6 @@ namespace IDEX.ViewModel
             SelectedInsepction.Clear();
             SelectedSchemes = null; 
         }
-
         private void NavigationHandeler()
         {
             if (flag == 0)
@@ -347,7 +308,5 @@ namespace IDEX.ViewModel
             }
         }
        
-
-
     }
 }
