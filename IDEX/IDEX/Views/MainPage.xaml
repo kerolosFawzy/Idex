@@ -75,7 +75,7 @@
                     <DataTemplate>
                         <ViewCell x:Name="ViewCell">
                             <StackLayout Orientation="Horizontal" BackgroundColor="Transparent">
-                                <Label x:Name="Listviewlable" Text="{Binding Name}" 
+                                <Custom:ExtLabel x:Name="Listviewlable" Text="{Binding Name}" 
                                        Margin="10" HorizontalOptions="StartAndExpand"
                                        Style="{StaticResource FirstScreenLabels}" />
                                 <Custom:CustomCheckBox Checked="{Binding IsChecked}" HeightRequest="20"/>

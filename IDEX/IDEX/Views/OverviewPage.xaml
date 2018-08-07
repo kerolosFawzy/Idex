@@ -1,21 +1,28 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+<views:BaseContentPage
+             xmlns:views="clr-namespace:IDEX.Views"
+             xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="IDEX.Views.OverviewPage"
-             Title="{Binding Name}"
+             Title="Site"
              xmlns:Custom="clr-namespace:CustomController;assembly=CustomController">
-    <ContentPage.Content>
-        <StackLayout>
-            <ListView>
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <StackLayout Orientation="Horizontal">
-                            <Custom:ExtLabel Style="{StaticResource FirstScreenLabels}" 
-                                             HorizontalOptions="StartAndExpand"/>
-                        </StackLayout>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-        </StackLayout>
-    </ContentPage.Content>
-</ContentPage>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Name="ShowAll" Order="Primary" Text="ShowAll" Priority="0" />
+        <ToolbarItem Name="ScanBarcode" Order="Primary" Text="Scan Barcode"  Priority="1" />
+    </ContentPage.ToolbarItems>
+    
+    <StackLayout Orientation="Horizontal">
+        <ListView ItemsSource="{Binding ItemListSource}" VerticalOptions="FillAndExpand" HorizontalOptions="StartAndExpand">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <StackLayout Orientation="Horizontal" >
+                        <Custom:ExtLabel Style="{StaticResource FirstScreenLabels}" 
+                                             HorizontalOptions="StartAndExpand" Text="{Binding Name}"/>
+                        <Custom:ShapeView ViewShapeType="CircleIndicator" CornerRadius="2" IndicatorPercentage=".5"/>
+                    </StackLayout>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+    </StackLayout>
+</views:BaseContentPage>

@@ -1,31 +1,29 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using Xamarin.Forms;
 
 namespace CustomController
 {
-    class ProgressImage : BoxView
+    public class ShapeView : BoxView
     {
-        public static readonly BindableProperty ViewShapeTypeProperty = BindableProperty.Create(nameof(ViewShapeType), typeof(ShapeType), typeof(ProgressImage), ShapeType.Box);
+        public static readonly BindableProperty ViewShapeTypeProperty = BindableProperty.Create(nameof(ViewShapeType), typeof(ShapeType), typeof(ShapeView), ShapeType.Box);
 
-        public static readonly BindableProperty StrokeColorProperty = BindableProperty.Create(nameof(StrokeColor) , typeof(Color) , typeof(ProgressImage) , Color.FromHex("#ECECEC"));
+        public static readonly BindableProperty StrokeColorProperty = BindableProperty.Create(nameof(StrokeColor) , typeof(Color) , typeof(ShapeView) , Color.FromHex("#ECECEC"));
 
-        public static readonly BindableProperty StrokeWidthProperty = BindableProperty.Create(nameof(StrokeWidth) , typeof(float), typeof(ProgressImage) , 1f);
+        public static readonly BindableProperty StrokeWidthProperty = BindableProperty.Create(nameof(StrokeWidth) , typeof(float), typeof(ShapeView) , 1f);
 
-        public static readonly BindableProperty IndicatorPercentageProperty = BindableProperty.Create(nameof(IndicatorPercentage), typeof(float), typeof(ProgressImage), 0f);
+        public static readonly BindableProperty IndicatorPercentageProperty = BindableProperty.Create(nameof(IndicatorPercentage), typeof(float), typeof(ShapeView), 0f);
 
-        public new static readonly BindableProperty CornerRadiusProperty = BindableProperty.Create(nameof(CornerRadius), typeof(float), typeof(ProgressImage), 1f);
+        public new static readonly BindableProperty CornerRadiusProperty = BindableProperty.Create(nameof(CornerRadius), typeof(float), typeof(ShapeView), 1f);
 
-        public static readonly BindableProperty PaddingProperty = BindableProperty.Create(nameof(CornerRadius), typeof(Thickness), typeof(ProgressImage), default(Thickness));
+        public static readonly BindableProperty PaddingProperty = BindableProperty.Create(nameof(CornerRadius), typeof(Thickness), typeof(ShapeView), default(Thickness));
 
+        #region setter and getter for class Properties 
 
         public ShapeType ViewShapeType
         {
             get { return (ShapeType)GetValue(ViewShapeTypeProperty); }
             set { SetValue(ViewShapeTypeProperty, value); }
         }
-
 
         public Color StrokeColor
         {
@@ -67,8 +65,9 @@ namespace CustomController
             get { return (Thickness)GetValue(PaddingProperty); }
             set { SetValue(PaddingProperty, value); }
         }
+        #endregion 
 
-        public ProgressImage()
+        public ShapeView()
         {
         }
     }

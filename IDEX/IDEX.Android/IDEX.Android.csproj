@@ -86,6 +86,8 @@
     <Compile Include="MainActivity.cs" />
     <Compile Include="Resources\Resource.Designer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Shape.cs" />
+    <Compile Include="ShapeRenderer.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -117,6 +119,10 @@
     <Folder Include="Resources\drawable-xxxhdpi\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\CustomController\CustomController.csproj">
+      <Project>{8c0bceef-5688-4691-8254-37de6c246f8c}</Project>
+      <Name>CustomController</Name>
+    </ProjectReference>
     <ProjectReference Include="..\IDEX\IDEX.csproj">
       <Project>{F02194CB-9ED0-4198-B8DD-978CBA37CBDB}</Project>
       <Name>IDEX</Name>
