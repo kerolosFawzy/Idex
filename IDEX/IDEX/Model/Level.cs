@@ -13,6 +13,5 @@ namespace IDEX.Model
         public int OwnerId { get; set; }
         public Level Parent { get; set; }
         public List<Level> Children { get; set; }
-
     }
 }

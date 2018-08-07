@@ -106,8 +106,6 @@ namespace CustomController
             }
             else if (propertyName.Equals(StepSelectedProperty.PropertyName) || propertyName.Equals(ItemSelectedIndexProperty.PropertyName))
             {
-                //var children = Children.First(p => (!string.IsNullOrEmpty(p.ClassId).Equals(StepSelected)));
-                //if (children != null)
                 SelectElement();
             }
             else if (propertyName.Equals(StepColorProperty.PropertyName))

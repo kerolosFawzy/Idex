@@ -13,7 +13,8 @@ namespace IDEX.Views
             var viewAwair = BindingContext as BaseViewModel; 
             if (viewAwair !=null)
             {
-                viewAwair.OnAppearing(); 
+                viewAwair.OnAppearing();
+                viewAwair.Navigation = Navigation;
             }
             base.OnAppearing();
         }

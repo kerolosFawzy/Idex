@@ -1,14 +1,11 @@
 ﻿using IDEX.Model;
 using IDEX.ViewModel;
-using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
+
 using Xamarin.Forms;
 
 namespace IDEX
 {
-    public partial class MainPage : ContentPage
+    public partial class MainPage 
     {
         private MainPageViewModel ViewModel = new MainPageViewModel();
     
@@ -17,5 +14,6 @@ namespace IDEX
             InitializeComponent();
             BindingContext = ViewModel;
         }
+        
     }
 }

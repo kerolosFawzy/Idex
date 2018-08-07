@@ -1,8 +1,7 @@
 ﻿using IDEX.Model;
-using System;
+using IDEX.Views;
 using System.Collections;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows.Input;
@@ -123,11 +122,6 @@ namespace IDEX.ViewModel
             }
         }
 
-        public override void OnAppearing()
-        {
-            base.OnAppearing();
-        }
-
         private List<Scheme> _Schemes = new List<Scheme>();
 
         public List<Scheme> Schemes
@@ -202,6 +196,11 @@ namespace IDEX.ViewModel
 
         #endregion
 
+        public override void OnAppearing()
+        {
+            base.OnAppearing();
+        }
+
         private void AddDummyData()
         {
 
@@ -219,7 +218,7 @@ namespace IDEX.ViewModel
 
             ItemListSource = Customers;
         }
-
+        
         private void AddSelectedIndexs(int num) {
             List<string> vs = new List<string>();
              
@@ -304,7 +303,7 @@ namespace IDEX.ViewModel
             }
             else if (flag == 3)
             {
-                flag = 2; 
+                Navigation.PushAsync(new OverviewPage());
             }
         }
        

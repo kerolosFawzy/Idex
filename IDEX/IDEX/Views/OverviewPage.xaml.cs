@@ -1,4 +1,5 @@
-﻿using System;
+﻿using IDEX.ViewModel;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,12 +10,16 @@ using Xamarin.Forms.Xaml;
 
 namespace IDEX.Views
 {
-	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class OverviewPage : ContentPage
-	{
-		public OverviewPage ()
-		{
-			InitializeComponent ();
-		}
-	}
+
+    public partial class OverviewPage : ContentPage
+    {
+        private OverviewScreenViewModel overviewViewModel = new OverviewScreenViewModel();
+
+        public OverviewPage()
+        {
+            InitializeComponent();
+            BindingContext = overviewViewModel;
+        }
+
+    }
 }

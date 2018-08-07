@@ -1,13 +1,19 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="IDEX.Views.OverviewPage">
+             x:Class="IDEX.Views.OverviewPage"
+             Title="{Binding Name}"
+             xmlns:Custom="clr-namespace:CustomController;assembly=CustomController">
     <ContentPage.Content>
         <StackLayout>
             <ListView>
-                <ListView.ItemTemplate >
-                    
-                    
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <StackLayout Orientation="Horizontal">
+                            <Custom:ExtLabel Style="{StaticResource FirstScreenLabels}" 
+                                             HorizontalOptions="StartAndExpand"/>
+                        </StackLayout>
+                    </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
         </StackLayout>
