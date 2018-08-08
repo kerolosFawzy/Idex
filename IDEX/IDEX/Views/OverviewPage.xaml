@@ -7,22 +7,58 @@
              Title="Site"
              xmlns:Custom="clr-namespace:CustomController;assembly=CustomController">
     <ContentPage.ToolbarItems>
-        <ToolbarItem Name="ShowAll" Order="Primary" Text="ShowAll" Priority="0" />
-        <ToolbarItem Name="ScanBarcode" Order="Primary" Text="Scan Barcode"  Priority="1" />
+        <ToolbarItem Name="ShowAll" Order="Secondary" Text="Show All" Priority="0" />
+        <ToolbarItem Name="ScanBarcode" Order="Secondary" Text="Scan Barcode"  Priority="1" />
     </ContentPage.ToolbarItems>
-    
+
     <StackLayout Orientation="Horizontal">
-        <ListView ItemsSource="{Binding ItemListSource}" VerticalOptions="FillAndExpand" HorizontalOptions="StartAndExpand">
+        
+        <ListView HasUnevenRows="True" 
+                  ItemsSource="{Binding ItemListSource}" 
+                  SeparatorColor="Black" VerticalOptions="FillAndExpand" 
+                  HorizontalOptions="StartAndExpand">
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <StackLayout Orientation="Horizontal" >
-                        <Custom:ExtLabel Style="{StaticResource FirstScreenLabels}" 
+                    <ViewCell>
+                        <StackLayout Orientation="Horizontal" Padding="5"
+                                     VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" >
+                            
+                            <Grid HorizontalOptions="StartAndExpand">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Custom:ExtLabel Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" 
+                                                 Style="{StaticResource FirstScreenLabels}" FontSize="Medium"
                                              HorizontalOptions="StartAndExpand" Text="{Binding Name}"/>
-                        <Custom:ShapeView ViewShapeType="CircleIndicator" CornerRadius="2" IndicatorPercentage=".5"/>
-                    </StackLayout>
+                                <StackLayout Orientation="Horizontal" Grid.Row="1" Grid.Column="0" >
+                                    <Custom:ExtLabel Style="{StaticResource secondaryLabels}" 
+                                             HorizontalOptions="End" Text="ID:" />
+                                    <Custom:ExtLabel Style="{StaticResource secondaryLabels}" 
+                                             HorizontalOptions="Start" Text="{Binding ID}"/>
+                                </StackLayout>
+                                <StackLayout Orientation="Horizontal" Grid.Row="1" Grid.Column="1" >
+                                    <Custom:ExtLabel Style="{StaticResource secondaryLabels}" 
+                                             HorizontalOptions="End" Text="Completed:"/>
+                                    <Custom:ExtLabel Style="{StaticResource secondaryLabels}" 
+                                             HorizontalOptions="StartAndExpand" Text="{Binding ControlStatus}"/>
+                                </StackLayout>
+
+                            </Grid>
+                         
+                            <Custom:ShapeView ViewShapeType="CircleIndicator" Margin="5" 
+                                              Padding="2" StrokeWidth="1"
+                                              StrokeColor="#ECECEC" Color="#ECECEC"
+                                              IndicatorPercentage="70"/>
+                        </StackLayout>
+                    </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </ListView>
-
+        
     </StackLayout>
 </views:BaseContentPage>

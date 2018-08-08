@@ -11,6 +11,7 @@ namespace IDEX.Model
         public double Area { get; set; }
         public int LevelType { get; set; }
         public int OwnerId { get; set; }
+        public int ControlStatus { get; set; }
         public Level Parent { get; set; }
         public List<Level> Children { get; set; }
     }

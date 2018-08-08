@@ -5,7 +5,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="MvvmLightLibs" Version="5.4.1" />
     <PackageReference Include="ReactiveUI" Version="8.3.1" />
     <PackageReference Include="ReactiveUI.Events.XamForms" Version="8.3.1" />
     <PackageReference Include="Splat" Version="4.0.2" />

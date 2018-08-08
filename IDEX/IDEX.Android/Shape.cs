@@ -73,8 +73,10 @@ namespace IDEX.Droid
                     HandleStandardDraw(canvas, p => canvas.DrawCircle(x + this.Width / 2, y + this.Height / 2, (this.Width - 10) / 2, p));
                     break;
                 case ShapeType.CircleIndicator:
-                    HandleStandardDraw(canvas, p => canvas.DrawCircle(x + this.Width / 2, y + this.Height / 2, (this.Width - 10) / 2, p), drawFill: false);
-                    HandleStandardDraw(canvas, p => canvas.DrawArc(new RectF(x, y, x + this.Width, y + this.Height), QuarterTurnCounterClockwise, 360 * (ShapeView.IndicatorPercentage / 100), false, p), ShapeView.StrokeWidth + 3, false);
+                    HandleStandardDraw(canvas, p => canvas.DrawCircle(x + this.Width / 2, y + this.Height / 2, (this.Width - 10) / 2, p), drawFill: true);
+                    HandleStandardDraw(canvas, p => canvas.DrawArc(new RectF(x, y, x + this.Width, y + this.Height),
+                        QuarterTurnCounterClockwise, 360 * (ShapeView.IndicatorPercentage / 100),
+                        false, p), ShapeView.StrokeWidth + 3, false); //maybe back to false
                     break;
             }
         }

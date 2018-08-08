@@ -7,13 +7,13 @@ namespace CustomController
     {
         public static readonly BindableProperty ViewShapeTypeProperty = BindableProperty.Create(nameof(ViewShapeType), typeof(ShapeType), typeof(ShapeView), ShapeType.Box);
 
-        public static readonly BindableProperty StrokeColorProperty = BindableProperty.Create(nameof(StrokeColor) , typeof(Color) , typeof(ShapeView) , Color.FromHex("#ECECEC"));
+        public static readonly BindableProperty StrokeColorProperty = BindableProperty.Create(nameof(StrokeColor) , typeof(Color) , typeof(ShapeView) , Color.Default);
 
         public static readonly BindableProperty StrokeWidthProperty = BindableProperty.Create(nameof(StrokeWidth) , typeof(float), typeof(ShapeView) , 1f);
 
         public static readonly BindableProperty IndicatorPercentageProperty = BindableProperty.Create(nameof(IndicatorPercentage), typeof(float), typeof(ShapeView), 0f);
 
-        public new static readonly BindableProperty CornerRadiusProperty = BindableProperty.Create(nameof(CornerRadius), typeof(float), typeof(ShapeView), 1f);
+        public new static readonly BindableProperty CornerRadiusProperty = BindableProperty.Create(nameof(CornerRadius), typeof(float), typeof(ShapeView), 0f);
 
         public static readonly BindableProperty PaddingProperty = BindableProperty.Create(nameof(CornerRadius), typeof(Thickness), typeof(ShapeView), default(Thickness));
 

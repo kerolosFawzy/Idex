@@ -9,7 +9,11 @@
                 <Setter Property="TextColor" Value="Black"/>
                 <Setter Property="LineBreakMode" Value="WordWrap"/>
             </Style>
-            
+            <Style TargetType="Label" x:Key="secondaryLabels">
+                <Setter Property="FontSize" Value="Small"/>
+                <Setter Property="TextColor" Value="Gray"/>
+                <Setter Property="LineBreakMode" Value="WordWrap"/>
+            </Style>
             <Style TargetType="Button" x:Key="FirstScreenButtons">
                 <Setter Property="FontSize" Value="Medium"/>
                 <Setter Property="TextColor" Value="White"/>

@@ -8,7 +8,7 @@ namespace IDEX.ViewModel
 {
     class OverviewScreenViewModel : BaseViewModel, INotifyPropertyChanged
     {
-        #region the Four Main Lists
+        #region the Main Lists init
         private List<Level> _customerBuildings = new List<Level>();
 
         public List<Level> CustomerBuildings
@@ -61,7 +61,6 @@ namespace IDEX.ViewModel
         #endregion
 
         public OverviewScreenViewModel() { AddDummyData(); }
-
 
         void AddDummyData() {
             CustomerBuildings.Add(new Level { LevelType = 5 , Area = 30.5 , DoorNumber ="32" , ID=1 , Name = "Hosptial Customer" , OwnerId =1 , UserId = 1  });
