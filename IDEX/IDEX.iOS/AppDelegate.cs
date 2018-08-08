@@ -25,7 +25,7 @@ namespace IDEX.iOS
             global::Xamarin.Forms.Forms.Init();
             LoadApplication(new App());
 
-            return base.FinishedLaunching(app, options);
+            return base.FinishedLaunching(app, options); 
         }
     }
 }
