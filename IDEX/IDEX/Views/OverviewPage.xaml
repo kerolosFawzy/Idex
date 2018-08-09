@@ -13,15 +13,21 @@
 
     <StackLayout Orientation="Horizontal">
         
-        <ListView HasUnevenRows="True" 
+        <Custom:ExtListView HasUnevenRows="True" 
                   ItemsSource="{Binding ItemListSource}" 
                   SeparatorColor="Black" VerticalOptions="FillAndExpand" 
-                  HorizontalOptions="StartAndExpand">
+                  HorizontalOptions="StartAndExpand"
+                  x:Name="OverviewListView" ItemTapped="{Binding ItemTapped}"
+                            >
+            
             <ListView.ItemTemplate>
                 <DataTemplate>
-                    <ViewCell>
+                    <ViewCell >
                         <StackLayout Orientation="Horizontal" Padding="5"
-                                     VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" >
+                                     VerticalOptions="FillAndExpand" 
+                                     HorizontalOptions="FillAndExpand"
+                                     
+                                     >
                             
                             <Grid HorizontalOptions="StartAndExpand">
                                 <Grid.RowDefinitions>
@@ -49,16 +55,17 @@
                                 </StackLayout>
 
                             </Grid>
-                         
-                            <Custom:ShapeView ViewShapeType="CircleIndicator" Margin="5" 
+
+                            <!--<Custom:ShapeView ViewShapeType="CircleIndicator" Margin="5" 
                                               Padding="2" StrokeWidth="1"
-                                              StrokeColor="#ECECEC" Color="#ECECEC"
-                                              IndicatorPercentage="70"/>
+                                              StrokeColor="LightGray" Color="Gray"
+                                              IndicatorPercentage="70"/>-->
+                            
                         </StackLayout>
                     </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
-        </ListView>
+        </Custom:ExtListView>
         
     </StackLayout>
 </views:BaseContentPage>
