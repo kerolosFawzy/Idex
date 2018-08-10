@@ -6,6 +6,7 @@
              x:Class="IDEX.Views.OverviewPage"
              Title="Site"
              xmlns:Custom="clr-namespace:CustomController;assembly=CustomController">
+    
     <ContentPage.ToolbarItems>
         <ToolbarItem Name="ShowAll" Order="Secondary" Text="Show All" Priority="0" />
         <ToolbarItem Name="ScanBarcode" Order="Secondary" Text="Scan Barcode"  Priority="1" />
@@ -17,7 +18,7 @@
                   ItemsSource="{Binding ItemListSource}" 
                   SeparatorColor="Black" VerticalOptions="FillAndExpand" 
                   HorizontalOptions="StartAndExpand"
-                  x:Name="OverviewListView" ItemTapped="{Binding ItemTapped}"
+                  x:Name="OverviewListView"
                             >
             
             <ListView.ItemTemplate>
@@ -25,9 +26,7 @@
                     <ViewCell >
                         <StackLayout Orientation="Horizontal" Padding="5"
                                      VerticalOptions="FillAndExpand" 
-                                     HorizontalOptions="FillAndExpand"
-                                     
-                                     >
+                                     HorizontalOptions="FillAndExpand">
                             
                             <Grid HorizontalOptions="StartAndExpand">
                                 <Grid.RowDefinitions>

@@ -13,52 +13,15 @@ namespace IDEX.ViewModel
     class OverviewScreenViewModel : BaseViewModel, INotifyPropertyChanged
     {
         public ICommand ItemTapped { get; set; }
-       
+
         #region ALL Lists Init
-        private List<Level> _customerBuildings = new List<Level>();
+        private IEnumerable _allLevels = Enumerable.Empty<Level>();
 
-        public List<Level> CustomerBuildings
+        public IEnumerable AllLevels
         {
-            get { return _customerBuildings; }
-
-            set
-            {
-                _customerBuildings = value;
-                RaisePropertyChanged();
-            }
-        }
-
-        private List<Level> _buildings = new List<Level>();
-
-        public List<Level> Buildings
-        {
-            get { return _buildings; }
-            set
-            {
-                _buildings = value;
-                RaisePropertyChanged();
-            }
-        }
-        private List<Level> _floors = new List<Level>();
-
-        public List<Level> Floor
-        {
-            get { return _floors; }
-            set
-            {
-                _floors = value;
-                RaisePropertyChanged();
-            }
-        }
-        private List<Level> _rooms = new List<Level>();
-
-        public List<Level> Rooms
-        {
-            get { return _rooms; }
-            set
-            {
-                _rooms = value;
-                RaisePropertyChanged();
+            get { return _allLevels ; }
+            set { _allLevels = value;
+                RaisePropertyChanged(); 
             }
         }
 
@@ -73,34 +36,16 @@ namespace IDEX.ViewModel
             }
         }
 
-        #region selected lists 
-        private List<Level> _selectedBuilding;
+        private List<Level> _levelListWithChildren = new List<Level> ();
 
-        public List<Level> SelectedBuilding
+        public List<Level> LevelListWithChildren
         {
-            get { return _selectedBuilding; }
-            set { _selectedBuilding = value; }
+            get { return _levelListWithChildren; }
+            set { _levelListWithChildren = value;
+                RaisePropertyChanged(); 
+            }
         }
 
-        private List<Level> _selectedFloor;
-
-        public List<Level> SelectedFloor
-        {
-            get { return _selectedFloor; }
-            set { _selectedFloor = value; }
-        }
-
-        private List<Level> _selectedRoom;
-
-        public List<Level> SelectedRoom
-        {
-            get { return _selectedRoom; }
-            set { _selectedRoom = value; }
-        }
-
-
-
-        #endregion
 
         #endregion
 
@@ -118,61 +63,104 @@ namespace IDEX.ViewModel
 
         void NavigationHandler(Level SelecedLevel) 
         {
-            switch (SelecedLevel.LevelType) {
-                case 5:
-                    SelectedBuilding = Filtering(SelecedLevel.ID).ToList();
-                    ItemListSource = SelectedBuilding;
-                    break;
-                case 8:
-                    SelectedFloor = Filtering(SelecedLevel.ID).ToList();
-                    ItemListSource = SelectedFloor; 
-                    break;
-                case 11:
-                    SelectedRoom = Filtering(SelecedLevel.ID).ToList();
-                    ItemListSource = SelectedRoom;
-                    break;
-            }
+            if (SelecedLevel.Children.Count() != 0)
+                ItemListSource = SelecedLevel.Children;
+            else
+                return; 
 
         }
 
-        IEnumerable<Level> Filtering(int id)
+        void SetFirstListOfLevels()
         {
-            List<Level> Result = new List<Level>();
-            List<Level> search = ((List<Level>)ItemListSource);
-            switch (search[0].LevelType)
-            {
-                case 5:
-                    Result = Buildings.Where(x=> x.OwnerId == id).ToList();
-                    break;
-                case 8:
-                    Result = Floor.Where(x => x.OwnerId == id).ToList();
-                    break;
-                case 11:
-                    Result = Rooms.Where(x => x.OwnerId == id).ToList();
-                    break;
-            }
-            return Result; 
+            List<Level> allLevels = new List<Level>();
+            allLevels = AllLevels as List<Level>;
+
+            List<int> AllLevelTypes = allLevels.Select(x => x.LevelType).Distinct().ToList();
+            AllLevelTypes.Sort();
+
+            List<Level> Parents = allLevels
+                .Where(x => x.LevelType == AllLevelTypes.FirstOrDefault()).ToList();
+
+            ItemListSource = Parents;
+            SortChildren(AllLevelTypes , allLevels); 
         }
 
+        void SortChildren(List<int> AllLevelTypes,List<Level> allLevels ) {
+            for (int i = 0; i < AllLevelTypes.Count() -1; i++) {
+                List<Level> searchList = allLevels
+                    .Where(x => x.LevelType == AllLevelTypes[i] || x.LevelType == AllLevelTypes[i+1])
+                    .ToList();
+                foreach (Level level in searchList) {
+                    if (i != 0) {
+                        level.Parent = allLevels
+                               .Where(x => x.LevelType == AllLevelTypes[i - 1] && x.ID == level.OwnerId)
+                               .FirstOrDefault();
+                    }
+                    level.Children = allLevels
+                        .Where(x=>x.OwnerId == level.ID)
+                        .ToList();
+                    LevelListWithChildren.Add(level);
+                }
+            }
+            LevelListWithChildren = LevelListWithChildren.Distinct().ToList();
+
+        }
         void AddDummyData()
         {
-            CustomerBuildings.Add(new Level { LevelType = 5, Area = 30.5, DoorNumber = "32", ID = 1, Name = "Hosptial Customer", OwnerId = 1, UserId = 1 });
-            CustomerBuildings.Add(new Level { LevelType = 5, Area = 32.5, DoorNumber = "322", ID = 2, Name = "School Customer", OwnerId = 2, UserId = 2 });
-            CustomerBuildings.Add(new Level { LevelType = 5, Area = 33.5, DoorNumber = "321", ID = 3, Name = "university Customer", OwnerId = 3, UserId = 3 });
+            List<Level> FakeList = new List<Level>
+            {
+                new Level { LevelType = 5, Area = 30.5, DoorNumber = "32", ID = 1, Name = "Hosptial Customer", UserId = 1 },
+                new Level { LevelType = 5, Area = 32.5, DoorNumber = "322", ID = 2, Name = "School Customer", UserId = 2 },
 
-            Buildings.Add(new Level { LevelType = 8, Area = 30.5, DoorNumber = "32", ID = 10, Name = "Hosptial", OwnerId = 1 });
-            Buildings.Add(new Level { LevelType = 8, Area = 32.5, DoorNumber = "322", ID = 20, Name = "School", OwnerId = 2 });
-            Buildings.Add(new Level { LevelType = 8, Area = 33.5, DoorNumber = "321", ID = 30, Name = "university", OwnerId = 3 });
+                new Level { LevelType = 8, Area = 30.5, DoorNumber = "32", ID = 10, Name = "Hosptial", OwnerId = 1 },
+                new Level { LevelType = 8, Area = 32.5, DoorNumber = "322", ID = 20, Name = "School", OwnerId = 2 },
+                new Level { LevelType = 8, Area = 33.5, DoorNumber = "321", ID = 30, Name = "university", OwnerId = 2 },
 
-            Floor.Add(new Level { LevelType = 11, Area = 30.5, DoorNumber = "32", ID = 100, Name = "Hosptial floor", OwnerId = 10, UserId = 1 });
-            Floor.Add(new Level { LevelType = 11, Area = 32.5, DoorNumber = "322", ID = 200, Name = "School Floor", OwnerId = 20, UserId = 2 });
-            Floor.Add(new Level { LevelType = 11, Area = 33.5, DoorNumber = "321", ID = 300, Name = "university Floor", OwnerId = 30, UserId = 3 });
+                new Level { LevelType = 11, Area = 30.5, DoorNumber = "32", ID = 100, Name = "Hosptial floor", OwnerId = 10, UserId = 1 },
+                new Level { LevelType = 11, Area = 32.5, DoorNumber = "322", ID = 200, Name = "School Floor", OwnerId = 20, UserId = 2 },
+                new Level { LevelType = 11, Area = 33.5, DoorNumber = "321", ID = 300, Name = "university Floor", OwnerId = 30, UserId = 3 },
 
-            Rooms.Add(new Level { LevelType = 14, Area = 30.5, DoorNumber = "32", ID = 1000, Name = "Hosptial Room ", OwnerId = 100, UserId = 1 });
-            Rooms.Add(new Level { LevelType = 14, Area = 32.5, DoorNumber = "322", ID = 2000, Name = "School Rooms", OwnerId = 200, UserId = 2 });
-            Rooms.Add(new Level { LevelType = 14, Area = 33.5, DoorNumber = "321", ID = 3000, Name = "university Rooms", OwnerId = 300, UserId = 3 });
+                new Level { LevelType = 14, Area = 30.5, DoorNumber = "32", ID = 1000, Name = "Hosptial Room ", OwnerId = 100, UserId = 1 },
+                new Level { LevelType = 14, Area = 32.5, DoorNumber = "322", ID = 2000, Name = "School Rooms", OwnerId = 200, UserId = 2 },
+                new Level { LevelType = 14, Area = 33.5, DoorNumber = "321", ID = 3000, Name = "university Rooms", OwnerId = 300, UserId = 3 },
 
-            ItemListSource = CustomerBuildings;
+                new Level { LevelType = 14, Area = 30.5, DoorNumber = "32", ID = 10001, Name = "Hosptial Room 2", OwnerId = 100, UserId = 1 },
+                new Level { LevelType = 14, Area = 32.5, DoorNumber = "322", ID = 20001, Name = "School Rooms2", OwnerId = 200, UserId = 2 },
+                new Level { LevelType = 14, Area = 33.5, DoorNumber = "321", ID = 30001, Name = "university Rooms2", OwnerId = 300, UserId = 3 }
+            };
+            AllLevels = FakeList;
+            SetFirstListOfLevels();
         }
     }
 }
+
+
+#region
+//CustomerBuildings[0].Children.Add(Buildings[0]);
+//CustomerBuildings[0].Children.Add(Buildings[1]);
+//CustomerBuildings[1].Children.Add(Buildings[2]);
+
+//Buildings[0].Parent = CustomerBuildings[0];
+//Buildings[1].Parent = CustomerBuildings[0];
+//Buildings[2].Parent = CustomerBuildings[1];
+//Buildings[0].Children.Add(Floor[0]);
+//Buildings[1].Children.Add(Floor[1]);
+//Buildings[2].Children.Add(Floor[2]);
+
+//Floor[0].Parent = Buildings[0];
+//Floor[1].Parent = Buildings[1];
+//Floor[2].Parent = Buildings[2];
+//Floor[0].Children.Add(Rooms[0]);
+//Floor[1].Children.Add(Rooms[1]);
+//Floor[2].Children.Add(Rooms[2]);
+//Floor[0].Children.Add(Rooms[3]);
+//Floor[1].Children.Add(Rooms[4]);
+//Floor[2].Children.Add(Rooms[5]);
+
+//Rooms[0].Parent = Floor[0];
+//Rooms[1].Parent = Floor[1];
+//Rooms[2].Parent = Floor[2];
+//Rooms[3].Parent = Floor[3];
+//Rooms[4].Parent = Floor[4];
+//Rooms[5].Parent = Floor[5];
+#endregion

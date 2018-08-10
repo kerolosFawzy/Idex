@@ -11,7 +11,7 @@ namespace IDEX.ViewModel
 {
     class MainPageViewModel : BaseViewModel , INotifyPropertyChanged
     {
-        private int flag;
+        private static int flag;
         List<Customer> ts = new List<Customer>();
         readonly Color SelectedButtonColor = Color.FromHex("#008080");
         readonly Color UnSelectedButtonColor = Color.Transparent;
