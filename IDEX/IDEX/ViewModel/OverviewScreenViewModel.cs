@@ -52,6 +52,8 @@ namespace IDEX.ViewModel
         public OverviewScreenViewModel()
         {
             AddDummyData();
+            SetFirstListOfLevels();
+
             ItemTapped = new Command(HandleItemTapped);
         }
 
@@ -129,7 +131,6 @@ namespace IDEX.ViewModel
                 new Level { LevelType = 14, Area = 33.5, DoorNumber = "321", ID = 30001, Name = "university Rooms2", OwnerId = 300, UserId = 3 }
             };
             AllLevels = FakeList;
-            SetFirstListOfLevels();
         }
     }
 }

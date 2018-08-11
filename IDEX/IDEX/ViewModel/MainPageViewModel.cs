@@ -9,7 +9,7 @@ using Xamarin.Forms;
 
 namespace IDEX.ViewModel
 {
-    class MainPageViewModel : BaseViewModel , INotifyPropertyChanged
+    class MainPageViewModel : BaseViewModel, INotifyPropertyChanged
     {
         private static int flag;
         List<Customer> ts = new List<Customer>();
@@ -34,6 +34,8 @@ namespace IDEX.ViewModel
 
         private void HandleBackClicked(object obj)
         {
+            if (flag == 3)
+                flag = 2;
             flag -= 1;
             NavigationHandeler();
 
@@ -41,16 +43,21 @@ namespace IDEX.ViewModel
 
         private void HandleNextItemClicked(object obj)
         {
-            flag += 1;
+            if (flag == 3)
+            { }
+            else
+                flag += 1;
             NavigationHandeler();
         }
 
-        private List<string> _selectedIndexs =new List<string>(){"1"};
+        private List<string> _selectedIndexs = new List<string>() { "1" };
 
         public List<string> SelectedIndexs
         {
             get { return _selectedIndexs; }
-            set { _selectedIndexs = value;
+            set
+            {
+                _selectedIndexs = value;
                 RaisePropertyChanged();
             }
         }
@@ -71,7 +78,7 @@ namespace IDEX.ViewModel
                 AddSelectedIndexs(2);
                 flag = 1;
             }
-            else if(classId.Equals("3"))
+            else if (classId.Equals("3"))
             {
                 AddSelectedIndexs(3);
                 flag = 2;
@@ -117,7 +124,9 @@ namespace IDEX.ViewModel
         public List<Customer> Customers
         {
             get { return _customers; }
-            set { _customers = value;
+            set
+            {
+                _customers = value;
                 RaisePropertyChanged();
             }
         }
@@ -127,7 +136,9 @@ namespace IDEX.ViewModel
         public List<Scheme> Schemes
         {
             get { return _Schemes; }
-            set { _Schemes  = value;
+            set
+            {
+                _Schemes = value;
                 RaisePropertyChanged();
             }
         }
@@ -137,7 +148,9 @@ namespace IDEX.ViewModel
         public List<Inspection> Inspections
         {
             get { return _inspections; }
-            set { _inspections = value;
+            set
+            {
+                _inspections = value;
                 RaisePropertyChanged();
             }
         }
@@ -160,7 +173,9 @@ namespace IDEX.ViewModel
         public List<Scheme> SchemeBindingList
         {
             get { return _schemeBindingList; }
-            set { _schemeBindingList = value;
+            set
+            {
+                _schemeBindingList = value;
                 RaisePropertyChanged();
             }
         }
@@ -169,7 +184,9 @@ namespace IDEX.ViewModel
         public List<Scheme> SelectedSchemes
         {
             get { return _selectedSchemes; }
-            set { _selectedSchemes = value;
+            set
+            {
+                _selectedSchemes = value;
                 RaisePropertyChanged();
             }
         }
@@ -189,7 +206,9 @@ namespace IDEX.ViewModel
         public List<Inspection> SelectedInsepction
         {
             get { return _selectedInsepction; }
-            set { _selectedInsepction = value;
+            set
+            {
+                _selectedInsepction = value;
                 RaisePropertyChanged();
             }
         }
@@ -218,12 +237,14 @@ namespace IDEX.ViewModel
 
             ItemListSource = Customers;
         }
-        
-        private void AddSelectedIndexs(int num) {
+
+        private void AddSelectedIndexs(int num)
+        {
             List<string> vs = new List<string>();
-             
-             
-            for (int i = 1; i <= num; i++) {
+
+
+            for (int i = 1; i <= num; i++)
+            {
                 vs.Add(i.ToString());
             }
             SelectedIndexs = vs;
@@ -233,7 +254,7 @@ namespace IDEX.ViewModel
             SchemeBindingList.Clear();
             InsepctionBindingList.Clear();
             SelectedInsepction.Clear();
-            SelectedSchemes = null; 
+            SelectedSchemes = null;
         }
         private void NavigationHandeler()
         {
@@ -242,9 +263,9 @@ namespace IDEX.ViewModel
                 BackBtnVisibilty = false;
                 ItemListSource = Customers;
                 NextButtonTitle = "Next";
-                ClearAll(); 
+                ClearAll();
 
-                AddSelectedIndexs(1); 
+                AddSelectedIndexs(1);
             }
             else if (flag == 1)
             {
@@ -260,9 +281,9 @@ namespace IDEX.ViewModel
                     {
                         scheme.AddRange(Schemes.Where(x => x.CustomerId == SelectedCustomer[i].ID).ToList());
                     }
-                    
+
                     SchemeBindingList = scheme;
-                    BackBtnVisibilty = true; 
+                    BackBtnVisibilty = true;
                     NextButtonTitle = "Next";
                     ItemListSource = SchemeBindingList;
                 }
@@ -270,7 +291,7 @@ namespace IDEX.ViewModel
                 {
 
                     flag = flag - 1;
-                    AddSelectedIndexs(flag+1);
+                    AddSelectedIndexs(flag + 1);
                     NavigationHandeler();
                     //DisplayAlert("Alert", "Please Select Customer(s) Frist", "ok");
                 }
@@ -296,7 +317,7 @@ namespace IDEX.ViewModel
                 else
                 {
                     flag = flag - 1;
-                    AddSelectedIndexs(flag+1);
+                    AddSelectedIndexs(flag + 1);
                     NavigationHandeler();
                     // DisplayAlert("Alert", "Please Select Scheme(s) Frist", "ok");
                 }
@@ -306,6 +327,6 @@ namespace IDEX.ViewModel
                 Navigation.PushAsync(new OverviewPage());
             }
         }
-       
+
     }
 }
