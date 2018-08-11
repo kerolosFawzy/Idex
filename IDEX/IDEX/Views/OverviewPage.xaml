@@ -6,22 +6,22 @@
              x:Class="IDEX.Views.OverviewPage"
              Title="Site"
              xmlns:Custom="clr-namespace:CustomController;assembly=CustomController"
-             xmlns:local1="clr-namespace:IDEX.ViewModel"
-    xmlns:local="clr-namespace:IDEX.Converters"
-    xmlns:local2="clr-namespace:IDEX.Behavior">
-    
+             xmlns:ViewModel="clr-namespace:IDEX.ViewModel"
+             xmlns:Converters="clr-namespace:IDEX.Converters"
+             xmlns:Behavior="clr-namespace:IDEX.Behavior">
+
     <ContentPage.ToolbarItems>
         <ToolbarItem Name="ShowAll" Order="Secondary" Text="Show All" Priority="0" />
         <ToolbarItem Name="ScanBarcode" Order="Secondary" Text="Scan Barcode"  Priority="1" />
     </ContentPage.ToolbarItems>
-    
+
     <ContentPage.BindingContext>
-        <local1:OverviewScreenViewModel />
+        <ViewModel:OverviewScreenViewModel />
     </ContentPage.BindingContext>
 
     <ContentPage.Resources>
         <ResourceDictionary>
-            <local:SelectedItemEventArgsToSelectedItemConverter x:Key="SelectedItemConverter" />
+            <Converters:SelectedItemEventArgsToSelectedItemConverter x:Key="SelectedItemConverter" />
         </ResourceDictionary>
     </ContentPage.Resources>
 
@@ -34,18 +34,18 @@
                   x:Name="OverviewListView"
                             >
             <ListView.Behaviors>
-                <local2:EventToCommandBehavior EventName="ItemSelected"
+                <Behavior:EventToCommandBehavior EventName="ItemSelected"
                                                Command="{Binding ItemTapped}"
                                                Converter="{StaticResource SelectedItemConverter}" />
             </ListView.Behaviors>
+            
             <ListView.ItemTemplate>
-                
+
                 <DataTemplate>
                     <ViewCell >
                         <StackLayout Orientation="Horizontal" Padding="5"
                                      VerticalOptions="FillAndExpand" 
                                      HorizontalOptions="FillAndExpand">
-                            
                             <Grid HorizontalOptions="StartAndExpand">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="*"/>
@@ -77,12 +77,12 @@
                                               Padding="2" StrokeWidth="1"
                                               StrokeColor="LightGray" Color="Gray"
                                               IndicatorPercentage="70"/>-->
-                            
+
                         </StackLayout>
                     </ViewCell>
                 </DataTemplate>
             </ListView.ItemTemplate>
         </Custom:ExtListView>
-        
+
     </StackLayout>
 </views:BaseContentPage>
