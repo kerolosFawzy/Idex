@@ -58,13 +58,14 @@ namespace IDEX.ViewModel
             AddDummyData();
             SetFirstListOfLevels();
 
-            ItemTapped = new Command(HandleItemTapped);
+            ItemTapped = new Command<Level>(HandleItemTapped);
         }
 
         private void HandleItemTapped(object obj)
         {
             if (obj is Level SelecedLevel)
                 NavigationHandler(SelecedLevel);
+            RaisePropertyChanged();
         }
 
         void NavigationHandler(Level SelecedLevel)
@@ -90,7 +91,6 @@ namespace IDEX.ViewModel
             ItemListSource = Parents;
             SortChildren(AllLevelTypes, allLevels);
         }
-        //fix parent issue for last childern 
         void SortChildren(List<int> AllLevelTypes, List<Level> allLevels)
         {
             for (int i = 0; i < AllLevelTypes.Count() - 1; i++)
@@ -151,34 +151,3 @@ namespace IDEX.ViewModel
         }
     }
 }
-
-
-#region
-//CustomerBuildings[0].Children.Add(Buildings[0]);
-//CustomerBuildings[0].Children.Add(Buildings[1]);
-//CustomerBuildings[1].Children.Add(Buildings[2]);
-
-//Buildings[0].Parent = CustomerBuildings[0];
-//Buildings[1].Parent = CustomerBuildings[0];
-//Buildings[2].Parent = CustomerBuildings[1];
-//Buildings[0].Children.Add(Floor[0]);
-//Buildings[1].Children.Add(Floor[1]);
-//Buildings[2].Children.Add(Floor[2]);
-
-//Floor[0].Parent = Buildings[0];
-//Floor[1].Parent = Buildings[1];
-//Floor[2].Parent = Buildings[2];
-//Floor[0].Children.Add(Rooms[0]);
-//Floor[1].Children.Add(Rooms[1]);
-//Floor[2].Children.Add(Rooms[2]);
-//Floor[0].Children.Add(Rooms[3]);
-//Floor[1].Children.Add(Rooms[4]);
-//Floor[2].Children.Add(Rooms[5]);
-
-//Rooms[0].Parent = Floor[0];
-//Rooms[1].Parent = Floor[1];
-//Rooms[2].Parent = Floor[2];
-//Rooms[3].Parent = Floor[3];
-//Rooms[4].Parent = Floor[4];
-//Rooms[5].Parent = Floor[5];
-#endregion

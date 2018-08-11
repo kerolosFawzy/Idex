@@ -13,8 +13,7 @@ namespace IDEX.ViewModel
     {
         private static int flag;
         List<Customer> ts = new List<Customer>();
-      
-
+     
         #region Commands for the view
         public ICommand ItemSelected { get; set; }
         public ICommand NextItemClicked { get; set; }

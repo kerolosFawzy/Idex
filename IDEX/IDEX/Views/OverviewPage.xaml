@@ -5,23 +5,41 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="IDEX.Views.OverviewPage"
              Title="Site"
-             xmlns:Custom="clr-namespace:CustomController;assembly=CustomController">
+             xmlns:Custom="clr-namespace:CustomController;assembly=CustomController"
+             xmlns:local1="clr-namespace:IDEX.ViewModel"
+    xmlns:local="clr-namespace:IDEX.Converters"
+    xmlns:local2="clr-namespace:IDEX.Behavior">
     
     <ContentPage.ToolbarItems>
         <ToolbarItem Name="ShowAll" Order="Secondary" Text="Show All" Priority="0" />
         <ToolbarItem Name="ScanBarcode" Order="Secondary" Text="Scan Barcode"  Priority="1" />
     </ContentPage.ToolbarItems>
+    
+    <ContentPage.BindingContext>
+        <local1:OverviewScreenViewModel />
+    </ContentPage.BindingContext>
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <local:SelectedItemEventArgsToSelectedItemConverter x:Key="SelectedItemConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
 
     <StackLayout Orientation="Horizontal">
-        
+
         <Custom:ExtListView HasUnevenRows="True" 
                   ItemsSource="{Binding ItemListSource}" 
                   SeparatorColor="Black" VerticalOptions="FillAndExpand" 
                   HorizontalOptions="StartAndExpand"
                   x:Name="OverviewListView"
                             >
-            
+            <ListView.Behaviors>
+                <local2:EventToCommandBehavior EventName="ItemSelected"
+                                               Command="{Binding ItemTapped}"
+                                               Converter="{StaticResource SelectedItemConverter}" />
+            </ListView.Behaviors>
             <ListView.ItemTemplate>
+                
                 <DataTemplate>
                     <ViewCell >
                         <StackLayout Orientation="Horizontal" Padding="5"
