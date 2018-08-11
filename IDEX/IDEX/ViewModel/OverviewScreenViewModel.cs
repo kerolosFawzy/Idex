@@ -19,9 +19,11 @@ namespace IDEX.ViewModel
 
         public IEnumerable AllLevels
         {
-            get { return _allLevels ; }
-            set { _allLevels = value;
-                RaisePropertyChanged(); 
+            get { return _allLevels; }
+            set
+            {
+                _allLevels = value;
+                RaisePropertyChanged();
             }
         }
 
@@ -36,13 +38,15 @@ namespace IDEX.ViewModel
             }
         }
 
-        private List<Level> _levelListWithChildren = new List<Level> ();
+        private List<Level> _levelListWithChildren = new List<Level>();
 
         public List<Level> LevelListWithChildren
         {
             get { return _levelListWithChildren; }
-            set { _levelListWithChildren = value;
-                RaisePropertyChanged(); 
+            set
+            {
+                _levelListWithChildren = value;
+                RaisePropertyChanged();
             }
         }
 
@@ -63,12 +67,12 @@ namespace IDEX.ViewModel
                 NavigationHandler(SelecedLevel);
         }
 
-        void NavigationHandler(Level SelecedLevel) 
+        void NavigationHandler(Level SelecedLevel)
         {
             if (SelecedLevel.Children.Count() != 0)
                 ItemListSource = SelecedLevel.Children;
             else
-                return; 
+                return;
 
         }
 
@@ -84,27 +88,40 @@ namespace IDEX.ViewModel
                 .Where(x => x.LevelType == AllLevelTypes.FirstOrDefault()).ToList();
 
             ItemListSource = Parents;
-            SortChildren(AllLevelTypes , allLevels); 
+            SortChildren(AllLevelTypes, allLevels);
         }
-
-        void SortChildren(List<int> AllLevelTypes,List<Level> allLevels ) {
-            for (int i = 0; i < AllLevelTypes.Count() -1; i++) {
+        //fix parent issue for last childern 
+        void SortChildren(List<int> AllLevelTypes, List<Level> allLevels)
+        {
+            for (int i = 0; i < AllLevelTypes.Count() - 1; i++)
+            {
                 List<Level> searchList = allLevels
-                    .Where(x => x.LevelType == AllLevelTypes[i] || x.LevelType == AllLevelTypes[i+1])
+                    .Where(x => x.LevelType == AllLevelTypes[i] || x.LevelType == AllLevelTypes[i + 1])
                     .ToList();
-                foreach (Level level in searchList) {
-                    if (i != 0) {
+                foreach (Level level in searchList)
+                {
+                    if (i != 0)
+                    {
                         level.Parent = allLevels
-                               .Where(x => x.LevelType == AllLevelTypes[i - 1] && x.ID == level.OwnerId)
-                               .FirstOrDefault();
+                         .Where(x => x.LevelType == AllLevelTypes[i - 1] && x.ID == level.OwnerId)
+                         .FirstOrDefault();
                     }
                     level.Children = allLevels
-                        .Where(x=>x.OwnerId == level.ID)
+                        .Where(x => x.OwnerId == level.ID)
                         .ToList();
                     LevelListWithChildren.Add(level);
                 }
             }
+
             LevelListWithChildren = LevelListWithChildren.Distinct().ToList();
+
+            int lastType = AllLevelTypes.Last();
+            foreach (Level level in LevelListWithChildren.Where(x => x.LevelType == lastType))
+            {
+                level.Parent = LevelListWithChildren
+                    .Where(x => x.LevelType == AllLevelTypes[AllLevelTypes.Count() - 2] && x.ID == level.OwnerId)
+                    .FirstOrDefault();
+            }
 
         }
         void AddDummyData()
@@ -115,20 +132,20 @@ namespace IDEX.ViewModel
                 new Level { LevelType = 5, Area = 32.5, DoorNumber = "322", ID = 2, Name = "School Customer", UserId = 2 },
 
                 new Level { LevelType = 8, Area = 30.5, DoorNumber = "32", ID = 10, Name = "Hosptial", OwnerId = 1 },
-                new Level { LevelType = 8, Area = 32.5, DoorNumber = "322", ID = 20, Name = "School", OwnerId = 2 },
-                new Level { LevelType = 8, Area = 33.5, DoorNumber = "321", ID = 30, Name = "university", OwnerId = 2 },
+                new Level { LevelType = 8, Area = 32.5, DoorNumber = "322", ID = 20, Name = "School building 1 ", OwnerId = 2 },
+                new Level { LevelType = 8, Area = 33.5, DoorNumber = "321", ID = 30, Name = "school building 2 ", OwnerId = 2 },
 
                 new Level { LevelType = 11, Area = 30.5, DoorNumber = "32", ID = 100, Name = "Hosptial floor", OwnerId = 10, UserId = 1 },
                 new Level { LevelType = 11, Area = 32.5, DoorNumber = "322", ID = 200, Name = "School Floor", OwnerId = 20, UserId = 2 },
-                new Level { LevelType = 11, Area = 33.5, DoorNumber = "321", ID = 300, Name = "university Floor", OwnerId = 30, UserId = 3 },
+                new Level { LevelType = 11, Area = 33.5, DoorNumber = "321", ID = 300, Name = "School Floor 2", OwnerId = 30, UserId = 3 },
 
-                new Level { LevelType = 14, Area = 30.5, DoorNumber = "32", ID = 1000, Name = "Hosptial Room ", OwnerId = 100, UserId = 1 },
-                new Level { LevelType = 14, Area = 32.5, DoorNumber = "322", ID = 2000, Name = "School Rooms", OwnerId = 200, UserId = 2 },
-                new Level { LevelType = 14, Area = 33.5, DoorNumber = "321", ID = 3000, Name = "university Rooms", OwnerId = 300, UserId = 3 },
+                new Level { LevelType = 14, Area = 30.5, DoorNumber = "32", ID = 1000, Name = "Hosptial Room 1", OwnerId = 100, UserId = 1 },
+                new Level { LevelType = 14, Area = 32.5, DoorNumber = "322", ID = 2000, Name = "School Rooms1 1", OwnerId = 200, UserId = 2 },
+                new Level { LevelType = 14, Area = 33.5, DoorNumber = "321", ID = 3000, Name = "School Rooms2 1 ", OwnerId = 300, UserId = 3 },
 
                 new Level { LevelType = 14, Area = 30.5, DoorNumber = "32", ID = 10001, Name = "Hosptial Room 2", OwnerId = 100, UserId = 1 },
-                new Level { LevelType = 14, Area = 32.5, DoorNumber = "322", ID = 20001, Name = "School Rooms2", OwnerId = 200, UserId = 2 },
-                new Level { LevelType = 14, Area = 33.5, DoorNumber = "321", ID = 30001, Name = "university Rooms2", OwnerId = 300, UserId = 3 }
+                new Level { LevelType = 14, Area = 32.5, DoorNumber = "322", ID = 20001, Name = "School Rooms1 2", OwnerId = 200, UserId = 2 },
+                new Level { LevelType = 14, Area = 33.5, DoorNumber = "321", ID = 30001, Name = "School Rooms2 2", OwnerId = 300, UserId = 3 }
             };
             AllLevels = FakeList;
         }

@@ -13,8 +13,7 @@ namespace IDEX.ViewModel
     {
         private static int flag;
         List<Customer> ts = new List<Customer>();
-        readonly Color SelectedButtonColor = Color.FromHex("#008080");
-        readonly Color UnSelectedButtonColor = Color.Transparent;
+      
 
         #region Commands for the view
         public ICommand ItemSelected { get; set; }
@@ -215,11 +214,6 @@ namespace IDEX.ViewModel
 
         #endregion
 
-        public override void OnAppearing()
-        {
-            base.OnAppearing();
-        }
-
         private void AddDummyData()
         {
 
@@ -241,8 +235,6 @@ namespace IDEX.ViewModel
         private void AddSelectedIndexs(int num)
         {
             List<string> vs = new List<string>();
-
-
             for (int i = 1; i <= num; i++)
             {
                 vs.Add(i.ToString());
