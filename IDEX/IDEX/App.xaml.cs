@@ -1,5 +1,7 @@
 using IDEX.View;
-using System;
+using Microsoft.AppCenter;
+using Microsoft.AppCenter.Analytics;
+using Microsoft.AppCenter.Crashes;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -17,8 +19,12 @@ namespace IDEX
 
 		protected override void OnStart ()
 		{
-			// Handle when your app starts
-		}
+            AppCenter
+                .Start("ios=35258c53-36f4-4949-9b4c-dc11fd63bb4e;" + "uwp={Your UWP App secret here};"
+                + "android={Your Android App secret here}"
+                , typeof(Analytics), typeof(Crashes));
+
+        }
 
 		protected override void OnSleep ()
 		{

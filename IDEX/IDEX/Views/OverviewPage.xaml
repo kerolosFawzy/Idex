@@ -6,9 +6,10 @@
              x:Class="IDEX.Views.OverviewPage"
              Title="Site"
              xmlns:Custom="clr-namespace:CustomController;assembly=CustomController"
-             xmlns:ViewModel="clr-namespace:IDEX.ViewModel"
+             xmlns:ViewModel="clr-namespace:IDEX.ViewModel "
              xmlns:Converters="clr-namespace:IDEX.Converters"
-             xmlns:Behavior="clr-namespace:IDEX.Behavior">
+             xmlns:Behavior="clr-namespace:IDEX.Behavior"
+             NeedOverrideSoftBackButton="True">
 
     <ContentPage.ToolbarItems>
         <ToolbarItem Name="ShowAll" Order="Secondary" Text="Show All" Priority="0" />

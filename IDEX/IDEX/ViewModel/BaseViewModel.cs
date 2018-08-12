@@ -8,6 +8,7 @@ namespace IDEX.ViewModel
         public  virtual void OnAppearing() {
             
         }
+        public virtual void OnSoftBackButtonPressed() { }
         public virtual void DisAppearing() { }
 
         public INavigation Navigation { get; set; }

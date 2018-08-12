@@ -16,7 +16,7 @@ namespace IDEX.ViewModel
 
         #region ALL Lists Init
         private IEnumerable _allLevels = Enumerable.Empty<Level>();
-
+        
         public IEnumerable AllLevels
         {
             get { return _allLevels; }
@@ -38,7 +38,7 @@ namespace IDEX.ViewModel
             }
         }
 
-        private List<Level> _levelListWithChildren = new List<Level>();
+        List<Level> _levelListWithChildren = new List<Level>();
 
         public List<Level> LevelListWithChildren
         {
@@ -50,6 +50,7 @@ namespace IDEX.ViewModel
             }
         }
 
+        public List<List<Level>> SelectedListStack { get; set; } = new List<List<Level>>();
 
         #endregion
 
@@ -70,13 +71,26 @@ namespace IDEX.ViewModel
 
         void NavigationHandler(Level SelecedLevel)
         {
-            if (SelecedLevel.Children.Count() != 0)
+            if (SelecedLevel.Children.Count() != 0) {
                 ItemListSource = SelecedLevel.Children;
+                SelectedListStack.Add(ItemListSource as List<Level>);
+            }
             else
                 return;
 
         }
 
+        public override void OnSoftBackButtonPressed()
+        {
+            if (SelectedListStack.Count() != 1)
+            {
+                SelectedListStack.Remove(SelectedListStack.Last());
+                ItemListSource = SelectedListStack.Last();
+            }
+            else {
+                Navigation.PopAsync(); 
+            }
+        }
         void SetFirstListOfLevels()
         {
             List<Level> allLevels = new List<Level>();
@@ -89,6 +103,7 @@ namespace IDEX.ViewModel
                 .Where(x => x.LevelType == AllLevelTypes.FirstOrDefault()).ToList();
 
             ItemListSource = Parents;
+            SelectedListStack.Add(Parents);
             SortChildren(AllLevelTypes, allLevels);
         }
         void SortChildren(List<int> AllLevelTypes, List<Level> allLevels)

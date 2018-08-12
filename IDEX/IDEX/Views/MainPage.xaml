@@ -5,8 +5,10 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="IDEX.MainPage" Title="IDEX"
              xmlns:Custom="clr-namespace:CustomController;assembly=CustomController"
-             >
-
+    xmlns:ViewModel="clr-namespace:IDEX.ViewModel">
+    <ContentPage.BindingContext>
+        <ViewModel:MainPageViewModel />
+    </ContentPage.BindingContext>
     <Grid BackgroundColor="White" Padding="10" RowSpacing="5" >
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
