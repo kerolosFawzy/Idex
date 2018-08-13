@@ -1,9 +1,11 @@
-﻿using IDEX.Model;
+﻿using GalaSoft.MvvmLight.Views;
+using IDEX.Model;
 using IDEX.Views;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 
