@@ -1,10 +1,6 @@
-﻿using CustomController;
-using GalaSoft.MvvmLight.Command;
-using IDEX.Model;
-using System;
+﻿using IDEX.Model;
 using System.Collections;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Windows.Input;
@@ -40,17 +36,20 @@ namespace IDEX.ViewModel
                 RaisePropertyChanged();
             }
         }
-        private IList<Segment> _segments = new List<Segment>();
 
-        public IList<Segment> Segments
-        {
-            get { return _segments; }
-            set
-            {
-                _segments = value;
-                RaisePropertyChanged();
-            }
-        }
+        //private IList<Segment> _segments = new List<Segment>();
+
+        //public IList<Segment> Segments
+        //{
+        //    get { return _segments; }
+        //    set
+        //    {
+        //        _segments = value;
+        //        RaisePropertyChanged();
+        //    }
+        //}
+
+
         List<Level> _levelListWithChildren = new List<Level>();
 
         public List<Level> LevelListWithChildren
@@ -89,30 +88,22 @@ namespace IDEX.ViewModel
             }
             else
                 return;
-
         }
 
-        public void CreateSegments(List<int> AllLevelTypes) {
+        public void GetFinishedPercentage(List<int> AllLevelTypes) {
 
-            Segments.Add(new Segment { Color = PieChartColor , Radius= .8F , SweepAngle = 60 } );
-            Segments.Add(new Segment { Color = Color.Gray, Radius = .8F, SweepAngle = 360- 60});
-            int types = AllLevelTypes.Count()-1;
+            
+            int types = AllLevelTypes.Count()-2;
             for (int i = types; i >= 0  ; i--)
             {
                 foreach (Level Parent  in LevelListWithChildren.Where(x => x.LevelType == AllLevelTypes[i]))
                 {
-                    int Counter = 0 ;
-                    if (Parent.LevelType == AllLevelTypes.Last())
+
+                    if (Parent.LevelType == AllLevelTypes[types])
                     {
-                        foreach (Level childern in Parent.Children)
-                        {
-                            if (childern.ControlStatus == 1 || childern.ControlStatus == -1)
-                            {
-                                Counter++;
-                                childern.Finished = 1; 
-                            }
-                        }
-                        Parent.Finished = Counter;
+                        //floor 
+                        Parent.Finished = Parent.Children.Where(x => x.ControlStatus == 1 || x.ControlStatus == -1).Count();
+                        Parent.ChildernCount = Parent.Children.Count();
                     }
                     else
                     {
@@ -121,11 +112,21 @@ namespace IDEX.ViewModel
                             Parent.Finished += childern.Finished;
                             Parent.ChildernCount += childern.ChildernCount; 
                         }
-
                     }
                 }
             }
 
+            foreach (Level level in LevelListWithChildren.Where(x=>x.LevelType != AllLevelTypes.Last())) {
+                double Percentage = (double)level.Finished / level.ChildernCount;
+                level.Segments =  AddSegmentsList(Percentage * 360 );
+            }
+        }
+
+        IList<Segment> AddSegmentsList(double Angle) {
+            IList<Segment> segments = new List<Segment>();
+            segments.Add(new Segment { Color = PieChartColor, Radius = .8F, SweepAngle = (float)Angle });
+            segments.Add(new Segment { Color = Color.LightGray, Radius = .8F, SweepAngle = 360 - (float)Angle });
+            return segments; 
         }
 
         public override void OnSoftBackButtonPressed()
@@ -186,7 +187,7 @@ namespace IDEX.ViewModel
                     .FirstOrDefault();
             }
 
-            CreateSegments(AllLevelTypes); 
+            GetFinishedPercentage(AllLevelTypes); 
 
         }
         void AddDummyData()
@@ -204,17 +205,17 @@ namespace IDEX.ViewModel
                 new Level { LevelType = 11, Area = 32.5, DoorNumber = "322", ID = 200, Name = "School Floor", OwnerId = 20, UserId = 2 },
                 new Level { LevelType = 11, Area = 33.5, DoorNumber = "321", ID = 300, Name = "School Floor 2", OwnerId = 30, UserId = 3 },
 
-                new Level { LevelType = 14, Area = 30.5, DoorNumber = "32", ID = 1000, Name = "Hosptial Room 1", OwnerId = 100, UserId = 1  , Finished = 1},
-                new Level { LevelType = 14, Area = 32.5, DoorNumber = "322", ID = 2000, Name = "School Rooms1 1", OwnerId = 200, UserId = 2 , Finished = 0},
-                new Level { LevelType = 14, Area = 33.5, DoorNumber = "321", ID = 3000, Name = "School Rooms2 1 ", OwnerId = 300, UserId = 3 , Finished = 0},
+                new Level { LevelType = 14, Area = 30.5, DoorNumber = "32", ID = 1000, Name = "Hosptial Room 1", OwnerId = 100, UserId = 1  , ControlStatus = 0},
+                new Level { LevelType = 14, Area = 32.5, DoorNumber = "322", ID = 2000, Name = "School Rooms1 1", OwnerId = 200, UserId = 2 , ControlStatus = 0},
+                new Level { LevelType = 14, Area = 33.5, DoorNumber = "321", ID = 3000, Name = "School Rooms2 1 ", OwnerId = 300, UserId = 3 , ControlStatus = 1},
 
-                new Level { LevelType = 14, Area = 30.5, DoorNumber = "32", ID = 10001, Name = "Hosptial Room 2", OwnerId = 100, UserId = 1 , Finished = -1},
-                new Level { LevelType = 14, Area = 32.5, DoorNumber = "322", ID = 20001, Name = "School Rooms1 2", OwnerId = 200, UserId = 2 , Finished = 1},
-                new Level { LevelType = 14, Area = 33.5, DoorNumber = "321", ID = 30001, Name = "School Rooms2 2", OwnerId = 300, UserId = 3 , Finished = 1},
+                new Level { LevelType = 14, Area = 30.5, DoorNumber = "32", ID = 10001, Name = "Hosptial Room 2", OwnerId = 100, UserId = 1 , ControlStatus = -1},
+                new Level { LevelType = 14, Area = 32.5, DoorNumber = "322", ID = 20001, Name = "School Rooms1 2", OwnerId = 200, UserId = 2 , ControlStatus = 1},
+                new Level { LevelType = 14, Area = 33.5, DoorNumber = "321", ID = 30001, Name = "School Rooms2 2", OwnerId = 300, UserId = 3 , ControlStatus = 1},
 
-                new Level { LevelType = 14, Area = 30.5, DoorNumber = "32", ID = 432, Name = "sub Hosptial Room 2", OwnerId = 100, UserId = 1 , Finished = 0},
-                new Level { LevelType = 14, Area = 32.5, DoorNumber = "322", ID = 4321, Name = "sub School Rooms1 2", OwnerId = 200, UserId = 2 , Finished = -1},
-                new Level { LevelType = 14, Area = 33.5, DoorNumber = "321", ID = 33201, Name = "sub School Rooms2 2", OwnerId = 300, UserId = 3 , Finished = 1}
+                new Level { LevelType = 14, Area = 30.5, DoorNumber = "32", ID = 432, Name = "sub Hosptial Room 2", OwnerId = 100, UserId = 1 , ControlStatus = 0},
+                new Level { LevelType = 14, Area = 32.5, DoorNumber = "322", ID = 4321, Name = "sub School Rooms1 2", OwnerId = 200, UserId = 2 , ControlStatus = -1},
+                new Level { LevelType = 14, Area = 33.5, DoorNumber = "321", ID = 33201, Name = "sub School Rooms2 2", OwnerId = 300, UserId = 3 , ControlStatus = 1}
             };
             AllLevels = FakeList;
         }

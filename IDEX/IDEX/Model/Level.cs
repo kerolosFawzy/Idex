@@ -33,7 +33,7 @@ namespace IDEX.Model
             get { return _childernCount; }
             set
             {
-                _childernCount = Children.Count();
+                _childernCount =value;
                 RaisePropertyChanged();
             }
         }

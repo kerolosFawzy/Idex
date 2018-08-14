@@ -69,7 +69,7 @@
                                     <Custom:ExtLabel Style="{StaticResource secondaryLabels}" 
                                              HorizontalOptions="End" Text="Completed:"/>
                                     <Custom:ExtLabel Style="{StaticResource secondaryLabels}" 
-                                             HorizontalOptions="StartAndExpand" Text="{Binding ControlStatus}"/>
+                                             HorizontalOptions="StartAndExpand" Text="{Binding Finished}"/>
                                 </StackLayout>
 
                             </Grid>
