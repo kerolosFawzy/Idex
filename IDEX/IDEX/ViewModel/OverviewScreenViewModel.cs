@@ -6,7 +6,6 @@ using System.ComponentModel;
 using System.Linq;
 using System.Windows.Input;
 using Xamarin.Forms;
-using static CustomController.CirclePieChart;
 
 namespace IDEX.ViewModel
 {
@@ -14,10 +13,10 @@ namespace IDEX.ViewModel
     {
         public ICommand ItemTapped { get; set; }
         readonly Color PieChartColor = Color.FromHex("#008080");
-        
+
         #region ALL Lists Init
         private IEnumerable _allLevels = Enumerable.Empty<Level>();
-        
+
         public IEnumerable AllLevels
         {
             get { return _allLevels; }
@@ -84,7 +83,8 @@ namespace IDEX.ViewModel
 
         void NavigationHandler(Level SelecedLevel)
         {
-            if (SelecedLevel.Children.Count() != 0) {
+            if (SelecedLevel.Children.Count() != 0)
+            {
                 ItemListSource = SelecedLevel.Children;
                 SelectedListStack.Add(ItemListSource as List<Level>);
             }
@@ -92,13 +92,14 @@ namespace IDEX.ViewModel
                 return;
         }
 
-        public void GetFinishedPercentage(List<int> AllLevelTypes) {
+        public void GetFinishedPercentage(List<int> AllLevelTypes)
+        {
 
-            
-            int types = AllLevelTypes.Count()-2;
-            for (int i = types; i >= 0  ; i--)
+
+            int types = AllLevelTypes.Count() - 2;
+            for (int i = types; i >= 0; i--)
             {
-                foreach (Level Parent  in LevelListWithChildren.Where(x => x.LevelType == AllLevelTypes[i]))
+                foreach (Level Parent in LevelListWithChildren.Where(x => x.LevelType == AllLevelTypes[i]))
                 {
 
                     if (Parent.LevelType == AllLevelTypes[types])
@@ -112,25 +113,39 @@ namespace IDEX.ViewModel
                         foreach (Level childern in Parent.Children)
                         {
                             Parent.Finished += childern.Finished;
-                            Parent.ChildernCount += childern.ChildernCount; 
+                            Parent.ChildernCount += childern.ChildernCount;
                         }
                     }
                 }
             }
 
-            foreach (Level level in LevelListWithChildren.Where(x=>x.LevelType != AllLevelTypes.Last())) {
+            foreach (Level level in LevelListWithChildren.Where(x => x.LevelType == AllLevelTypes.Last()))
+            {
+                level.Segments = AddSegmentsListLastLevel(level.ControlStatus);
+            }
+            foreach (Level level in LevelListWithChildren.Where(x => x.LevelType != AllLevelTypes.Last()))
+            {
                 double Percentage = (double)level.Finished / level.ChildernCount;
-                level.Segments =  AddSegmentsList(Percentage * 360 );
+                level.Segments = AddSegmentsList(Percentage * 360);
             }
         }
 
-        IList<Segment> AddSegmentsList(double Angle) {
+        IList<Segment> AddSegmentsList(double Angle)
+        {
             IList<Segment> segments = new List<Segment>
             {
                 new Segment { Color = PieChartColor, Radius = .8F, SweepAngle = (float)Angle },
                 new Segment { Color = Color.LightGray, Radius = .8F, SweepAngle = 360 - (float)Angle }
             };
-            return segments; 
+            return segments;
+        }
+        IList<Segment> AddSegmentsListLastLevel(int ControlStatus)
+        {
+            IList<Segment> segments = new List<Segment>
+            {
+                new Segment { Color = Color.LightGray, Radius = .8F, SweepAngle = 360 , ControlStatus = ControlStatus}
+            };
+            return segments;
         }
 
         public override void OnSoftBackButtonPressed()
@@ -140,8 +155,9 @@ namespace IDEX.ViewModel
                 SelectedListStack.Remove(SelectedListStack.Last());
                 ItemListSource = SelectedListStack.Last();
             }
-            else {
-                Navigation.PopAsync(); 
+            else
+            {
+                Navigation.PopAsync();
             }
         }
 
@@ -193,7 +209,7 @@ namespace IDEX.ViewModel
                     .FirstOrDefault();
             }
 
-            GetFinishedPercentage(AllLevelTypes); 
+            GetFinishedPercentage(AllLevelTypes);
 
         }
 

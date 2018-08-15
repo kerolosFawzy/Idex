@@ -73,13 +73,11 @@
                                 </StackLayout>
 
                             </Grid>
-                            
+
                             <Custom:CirclePieChart HorizontalOptions="EndAndExpand" 
                                                    VerticalOptions="FillAndExpand" 
                                                    Segments="{Binding Segments}"
                                                    />
-
-
                         </StackLayout>
                     </ViewCell>
                 </DataTemplate>

@@ -14,7 +14,7 @@ namespace IDEX
 		{
 			InitializeComponent();
 
-			MainPage =new IdexMasterDetailPage() ;
+			MainPage = new IdexMasterDetailPage() ;
 		}
 
 		protected override void OnStart ()

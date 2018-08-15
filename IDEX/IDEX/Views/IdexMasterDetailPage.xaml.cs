@@ -15,6 +15,7 @@ namespace IDEX.View
         public IdexMasterDetailPage()
         {
             InitializeComponent();
+            MasterBehavior = MasterBehavior.Popover;
             MasterPage.ListView.ItemSelected += ListView_ItemSelected;
             Detail = new NavigationPage(new MainPage());
         }
