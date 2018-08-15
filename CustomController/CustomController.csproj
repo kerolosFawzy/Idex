@@ -5,8 +5,19 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="SkiaSharp" Version="1.60.2" />
-    <PackageReference Include="SkiaSharp.Views.Forms" Version="1.60.2" />
+    <None Remove="SvgImages\idex_accepted.svg" />
+    <None Remove="SvgImages\idex_rejected.svg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="SvgImages\idex_accepted.svg" />
+    <EmbeddedResource Include="SvgImages\idex_rejected.svg" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="SkiaSharp" Version="1.60.3" />
+    <PackageReference Include="SkiaSharp.Svg" Version="1.60.0" />
+    <PackageReference Include="SkiaSharp.Views.Forms" Version="1.60.3" />
     <PackageReference Include="Xamarin.Forms" Version="3.2.0.637442-pre1" />
   </ItemGroup>
 

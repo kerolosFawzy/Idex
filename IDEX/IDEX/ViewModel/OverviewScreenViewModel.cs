@@ -1,4 +1,5 @@
-﻿using IDEX.Model;
+﻿using CustomController;
+using IDEX.Model;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,6 +14,7 @@ namespace IDEX.ViewModel
     {
         public ICommand ItemTapped { get; set; }
         readonly Color PieChartColor = Color.FromHex("#008080");
+        
         #region ALL Lists Init
         private IEnumerable _allLevels = Enumerable.Empty<Level>();
         
@@ -123,9 +125,11 @@ namespace IDEX.ViewModel
         }
 
         IList<Segment> AddSegmentsList(double Angle) {
-            IList<Segment> segments = new List<Segment>();
-            segments.Add(new Segment { Color = PieChartColor, Radius = .8F, SweepAngle = (float)Angle });
-            segments.Add(new Segment { Color = Color.LightGray, Radius = .8F, SweepAngle = 360 - (float)Angle });
+            IList<Segment> segments = new List<Segment>
+            {
+                new Segment { Color = PieChartColor, Radius = .8F, SweepAngle = (float)Angle },
+                new Segment { Color = Color.LightGray, Radius = .8F, SweepAngle = 360 - (float)Angle }
+            };
             return segments; 
         }
 
@@ -140,6 +144,7 @@ namespace IDEX.ViewModel
                 Navigation.PopAsync(); 
             }
         }
+
         void SetFirstListOfLevels()
         {
             List<Level> allLevels = new List<Level>();
@@ -155,6 +160,7 @@ namespace IDEX.ViewModel
             SelectedListStack.Add(Parents);
             SortChildren(AllLevelTypes, allLevels);
         }
+
         void SortChildren(List<int> AllLevelTypes, List<Level> allLevels)
         {
             for (int i = 0; i < AllLevelTypes.Count() - 1; i++)
@@ -190,6 +196,7 @@ namespace IDEX.ViewModel
             GetFinishedPercentage(AllLevelTypes); 
 
         }
+
         void AddDummyData()
         {
             List<Level> FakeList = new List<Level>
@@ -219,5 +226,6 @@ namespace IDEX.ViewModel
             };
             AllLevels = FakeList;
         }
+
     }
 }

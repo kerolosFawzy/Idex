@@ -26,12 +26,12 @@
         </ResourceDictionary>
     </ContentPage.Resources>
 
-    <StackLayout Orientation="Horizontal">
+    <StackLayout Orientation="Horizontal" HorizontalOptions="Fill">
 
         <Custom:ExtListView HasUnevenRows="True" 
                   ItemsSource="{Binding ItemListSource}" 
                   SeparatorColor="Black" VerticalOptions="FillAndExpand" 
-                  HorizontalOptions="StartAndExpand"
+                  HorizontalOptions="Fill"
                   x:Name="OverviewListView"
                             >
             <ListView.Behaviors>
@@ -76,7 +76,8 @@
                             
                             <Custom:CirclePieChart HorizontalOptions="EndAndExpand" 
                                                    VerticalOptions="FillAndExpand" 
-                                                   Segments="{Binding Segments}" />
+                                                   Segments="{Binding Segments}"
+                                                   />
 
 
                         </StackLayout>
