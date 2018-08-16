@@ -4,15 +4,15 @@
              xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="IDEX.Views.OverviewPage"
-             Title="Site"
+             Title="{Binding FormattedTitle}"
              xmlns:ViewModel="clr-namespace:IDEX.ViewModel "
              xmlns:Converters="clr-namespace:IDEX.Converters"
              xmlns:Behavior="clr-namespace:IDEX.Behavior"
              xmlns:Custom="clr-namespace:CustomController;assembly=CustomController"
              NeedOverrideSoftBackButton="True">
 
-    <ContentPage.ToolbarItems>
-        <ToolbarItem Name="ShowAll" Order="Secondary" Text="Show All" Priority="0" />
+    <ContentPage.ToolbarItems >
+        <ToolbarItem Name="ShowAll" Order="Secondary" Text="Show All" Priority="0"  />
         <ToolbarItem Name="ScanBarcode" Order="Secondary" Text="Scan Barcode"  Priority="1" />
     </ContentPage.ToolbarItems>
 
@@ -67,17 +67,15 @@
                                 </StackLayout>
                                 <StackLayout Orientation="Horizontal" Grid.Row="1" Grid.Column="1" >
                                     <Custom:ExtLabel Style="{StaticResource secondaryLabels}" 
-                                             HorizontalOptions="End" Text="Completed:"/>
+                                             HorizontalOptions="End" Text="{Binding ListViewMode}"/>
                                     <Custom:ExtLabel Style="{StaticResource secondaryLabels}" 
-                                             HorizontalOptions="StartAndExpand" Text="{Binding Finished}"/>
+                                             HorizontalOptions="StartAndExpand" Text="{Binding ListViewModeValue}"/>
                                 </StackLayout>
-
                             </Grid>
 
                             <Custom:CirclePieChart HorizontalOptions="EndAndExpand" 
-                                                   VerticalOptions="FillAndExpand" 
-                                                   Segments="{Binding Segments}"
-                                                   />
+                                                   VerticalOptions="CenterAndExpand" 
+                                                   Segments="{Binding Segments}" />
                         </StackLayout>
                     </ViewCell>
                 </DataTemplate>

@@ -72,14 +72,11 @@ namespace CustomController
         }
 
        
-
         private  Stream GetImageStream(string svgName)
         {
             var assembly = GetType().Assembly.GetManifestResourceStream($"CustomController.SvgImages.{svgName}");
             return assembly;
         }
-
-
 
         private void OnCanvasViewPaintSurface(object sender, SKPaintSurfaceEventArgs args)
         {
@@ -140,7 +137,6 @@ namespace CustomController
             float svgMax = Math.Max(svg.Picture.CullRect.Width, svg.Picture.CullRect.Height);
             float scale = canvasMin / svgMax;
             var matrix = SKMatrix.MakeScale(scale, scale);
-            canvas.Translate(0, info.Height/ 3.5F );
             canvas.DrawPicture(svg.Picture, ref matrix);
 
         }

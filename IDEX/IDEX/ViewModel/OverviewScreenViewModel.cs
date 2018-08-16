@@ -14,7 +14,42 @@ namespace IDEX.ViewModel
         public ICommand ItemTapped { get; set; }
         readonly Color PieChartColor = Color.FromHex("#008080");
 
+        private string _title;
+
+        public string Title
+        {
+            get { return _title ; }
+            set { _title = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        private string _formattedTitle = "Site";
+
+        public string FormattedTitle
+        {
+            get { return _formattedTitle; }
+            set { _formattedTitle = value;
+                RaisePropertyChanged();
+            }
+        }
+
+
         #region ALL Lists Init
+
+        private List<string> _formattedTitlesStack = new List<string>();
+
+        public List<string> FormattedTitlesStack
+        {
+            get { return _formattedTitlesStack ; }
+            set
+            {
+                _formattedTitlesStack = value;
+                RaisePropertyChanged();
+            }
+        }
+
+
         private IEnumerable _allLevels = Enumerable.Empty<Level>();
 
         public IEnumerable AllLevels
@@ -74,6 +109,23 @@ namespace IDEX.ViewModel
             ItemTapped = new Command<Level>(HandleItemTapped);
         }
 
+        void SetTitle(string NewTitle) {
+            if (FormattedTitle.Equals("Site"))
+            {
+                FormattedTitle = "";
+            }
+            var formattedString = new FormattedString();
+            formattedString.Spans.Add
+                (new Span { Text = NewTitle 
+                , FontAttributes = FontAttributes.Bold
+                , FontSize = 20 });
+            formattedString.Spans.Add(new Span { Text = @" "  + Title ,FontSize= 10  });
+            Title += NewTitle;
+
+            FormattedTitle = formattedString.ToString();
+            FormattedTitlesStack.Add(FormattedTitle);
+        }
+
         private void HandleItemTapped(object obj)
         {
             if (obj is Level SelecedLevel)
@@ -85,6 +137,7 @@ namespace IDEX.ViewModel
         {
             if (SelecedLevel.Children.Count() != 0)
             {
+                SetTitle(SelecedLevel.Name);
                 ItemListSource = SelecedLevel.Children;
                 SelectedListStack.Add(ItemListSource as List<Level>);
             }
@@ -121,10 +174,12 @@ namespace IDEX.ViewModel
 
             foreach (Level level in LevelListWithChildren.Where(x => x.LevelType == AllLevelTypes.Last()))
             {
+                level.ListViewModeValue = level.Area.ToString() + " m2"; 
                 level.Segments = AddSegmentsListLastLevel(level.ControlStatus);
             }
             foreach (Level level in LevelListWithChildren.Where(x => x.LevelType != AllLevelTypes.Last()))
             {
+                level.ListViewModeValue = level.Finished.ToString() + "/" + level.ChildernCount;
                 double Percentage = (double)level.Finished / level.ChildernCount;
                 level.Segments = AddSegmentsList(Percentage * 360);
             }
@@ -217,28 +272,28 @@ namespace IDEX.ViewModel
         {
             List<Level> FakeList = new List<Level>
             {
-                new Level { LevelType = 5, Area = 30.5, DoorNumber = "32", ID = 1, Name = "Hosptial Customer", UserId = 1 },
-                new Level { LevelType = 5, Area = 32.5, DoorNumber = "322", ID = 2, Name = "School Customer", UserId = 2 },
+                new Level { LevelType = 5, Area = 30.5, DoorNumber = "32", ID = 1, Name = "Hosptial Customer", UserId = 1 , ListViewMode="Completed :"},
+                new Level { LevelType = 5, Area = 32.5, DoorNumber = "322", ID = 2, Name = "School Customer", UserId = 2, ListViewMode="Completed :" },
 
-                new Level { LevelType = 8, Area = 30.5, DoorNumber = "32", ID = 10, Name = "Hosptial", OwnerId = 1 },
-                new Level { LevelType = 8, Area = 32.5, DoorNumber = "322", ID = 20, Name = "School building 1 ", OwnerId = 2 },
-                new Level { LevelType = 8, Area = 33.5, DoorNumber = "321", ID = 30, Name = "school building 2 ", OwnerId = 2 },
+                new Level { LevelType = 8, Area = 30.5, DoorNumber = "32", ID = 10, Name = "Hosptial", OwnerId = 1 , ListViewMode="Completed :"},
+                new Level { LevelType = 8, Area = 32.5, DoorNumber = "322", ID = 20, Name = "School building 1 ", OwnerId = 2, ListViewMode="Completed :" },
+                new Level { LevelType = 8, Area = 33.5, DoorNumber = "321", ID = 30, Name = "school building 2 ", OwnerId = 2 , ListViewMode="Completed :"},
 
-                new Level { LevelType = 11, Area = 30.5, DoorNumber = "32", ID = 100, Name = "Hosptial floor", OwnerId = 10, UserId = 1 },
-                new Level { LevelType = 11, Area = 32.5, DoorNumber = "322", ID = 200, Name = "School Floor", OwnerId = 20, UserId = 2 },
-                new Level { LevelType = 11, Area = 33.5, DoorNumber = "321", ID = 300, Name = "School Floor 2", OwnerId = 30, UserId = 3 },
+                new Level { LevelType = 11, Area = 30.5, DoorNumber = "32", ID = 100, Name = "Hosptial floor", OwnerId = 10, UserId = 1, ListViewMode="Completed :" },
+                new Level { LevelType = 11, Area = 32.5, DoorNumber = "322", ID = 200, Name = "School Floor", OwnerId = 20, UserId = 2 , ListViewMode="Completed :"},
+                new Level { LevelType = 11, Area = 33.5, DoorNumber = "321", ID = 300, Name = "School Floor 2", OwnerId = 30, UserId = 3 , ListViewMode="Completed :"},
 
-                new Level { LevelType = 14, Area = 30.5, DoorNumber = "32", ID = 1000, Name = "Hosptial Room 1", OwnerId = 100, UserId = 1  , ControlStatus = 0},
-                new Level { LevelType = 14, Area = 32.5, DoorNumber = "322", ID = 2000, Name = "School Rooms1 1", OwnerId = 200, UserId = 2 , ControlStatus = 0},
-                new Level { LevelType = 14, Area = 33.5, DoorNumber = "321", ID = 3000, Name = "School Rooms2 1 ", OwnerId = 300, UserId = 3 , ControlStatus = 1},
+                new Level { LevelType = 14, Area = 30.5, DoorNumber = "32", ID = 1000, Name = "Hosptial Room 1", OwnerId = 100, UserId = 1  , ControlStatus = 0 , ListViewMode="Area :"} ,
+                new Level { LevelType = 14, Area = 32.5, DoorNumber = "322", ID = 2000, Name = "School Rooms1 1", OwnerId = 200, UserId = 2 , ControlStatus = 0, ListViewMode="Area :"},
+                new Level { LevelType = 14, Area = 33.5, DoorNumber = "321", ID = 3000, Name = "School Rooms2 1 ", OwnerId = 300, UserId = 3 , ControlStatus = 1, ListViewMode="Area :"},
 
-                new Level { LevelType = 14, Area = 30.5, DoorNumber = "32", ID = 10001, Name = "Hosptial Room 2", OwnerId = 100, UserId = 1 , ControlStatus = -1},
-                new Level { LevelType = 14, Area = 32.5, DoorNumber = "322", ID = 20001, Name = "School Rooms1 2", OwnerId = 200, UserId = 2 , ControlStatus = 1},
-                new Level { LevelType = 14, Area = 33.5, DoorNumber = "321", ID = 30001, Name = "School Rooms2 2", OwnerId = 300, UserId = 3 , ControlStatus = 1},
+                new Level { LevelType = 14, Area = 30.5, DoorNumber = "32", ID = 10001, Name = "Hosptial Room 2", OwnerId = 100, UserId = 1 , ControlStatus = -1, ListViewMode="Area :"},
+                new Level { LevelType = 14, Area = 32.5, DoorNumber = "322", ID = 20001, Name = "School Rooms1 2", OwnerId = 200, UserId = 2 , ControlStatus = 1, ListViewMode="Area :"},
+                new Level { LevelType = 14, Area = 33.5, DoorNumber = "321", ID = 30001, Name = "School Rooms2 2", OwnerId = 300, UserId = 3 , ControlStatus = 1, ListViewMode="Area :"},
 
-                new Level { LevelType = 14, Area = 30.5, DoorNumber = "32", ID = 432, Name = "sub Hosptial Room 2", OwnerId = 100, UserId = 1 , ControlStatus = 0},
-                new Level { LevelType = 14, Area = 32.5, DoorNumber = "322", ID = 4321, Name = "sub School Rooms1 2", OwnerId = 200, UserId = 2 , ControlStatus = -1},
-                new Level { LevelType = 14, Area = 33.5, DoorNumber = "321", ID = 33201, Name = "sub School Rooms2 2", OwnerId = 300, UserId = 3 , ControlStatus = 1}
+                new Level { LevelType = 14, Area = 30.5, DoorNumber = "32", ID = 432, Name = "sub Hosptial Room 2", OwnerId = 100, UserId = 1 , ControlStatus = 0, ListViewMode="Area :"},
+                new Level { LevelType = 14, Area = 32.5, DoorNumber = "322", ID = 4321, Name = "sub School Rooms1 2", OwnerId = 200, UserId = 2 , ControlStatus = -1, ListViewMode="Area :"},
+                new Level { LevelType = 14, Area = 33.5, DoorNumber = "321", ID = 33201, Name = "sub School Rooms2 2", OwnerId = 300, UserId = 3 , ControlStatus = 1, ListViewMode="Area :"}
             };
             AllLevels = FakeList;
         }

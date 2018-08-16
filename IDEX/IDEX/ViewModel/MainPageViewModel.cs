@@ -1,5 +1,6 @@
 ﻿using GalaSoft.MvvmLight.Views;
 using IDEX.Model;
+using IDEX.View;
 using IDEX.Views;
 using System.Collections;
 using System.Collections.Generic;

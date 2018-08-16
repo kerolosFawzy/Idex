@@ -26,13 +26,10 @@ namespace IDEX.Droid
             set { _toolbarFieldInfo = value; }
         }
 
-
-
+        
         private bool _disposed;
         private AToolbar _toolbar;
-
-
-
+        
         static BackButtonNavigationRenderer()
         {
             ToolbarFieldInfo = typeof(NavigationPageRenderer).GetField("_toolbar",
@@ -48,6 +45,10 @@ namespace IDEX.Droid
             {
                 Element.PopAsync();
             }
+            //else if(Element.RootPages.Contains(Element.CurrentPage.GetType()))
+            //{
+            //    Element.SendBackButtonPressed();
+            //}
             else
             {
                 if (curPage.NeedOverrideSoftBackButton)

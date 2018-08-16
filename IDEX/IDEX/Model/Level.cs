@@ -1,10 +1,6 @@
 ﻿using CustomController;
-using System;
 using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using static CustomController.CirclePieChart;
+
 
 namespace IDEX.Model
 {
@@ -18,7 +14,8 @@ namespace IDEX.Model
         public int ControlStatus { get; set; }
         public Level Parent { get; set; }
         public List<Level> Children { get; set; }
-        // to know how many childern are Finished
+
+        #region to can bind in view using overview viewModel
         private int _finished;
         public int Finished
         {
@@ -50,5 +47,24 @@ namespace IDEX.Model
                 RaisePropertyChanged();
             }
         }
+
+        private string _listViewMode;
+
+        public string ListViewMode
+        {
+            get { return _listViewMode; }
+            set { _listViewMode = value; }
+        }
+
+        private string _listViewModeValue;
+
+        public string ListViewModeValue
+        {
+            get { return _listViewModeValue; }
+            set { _listViewModeValue = value; }
+        }
+
+ 
+        #endregion
     }
 }
