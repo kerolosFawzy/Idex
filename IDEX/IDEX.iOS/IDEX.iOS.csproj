@@ -96,7 +96,7 @@
     <AppExtensionDebugBundleId />
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="BackButtonCustomRenderer.cs" />
+    <Compile Include="Renderers\BackButtonCustomRenderer.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
     <None Include="Entitlements.plist" />
@@ -183,6 +183,10 @@
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
   <ItemGroup>
+    <ProjectReference Include="..\..\CustomController\CustomController.csproj">
+      <Project>{8C0BCEEF-5688-4691-8254-37DE6C246F8C}</Project>
+      <Name>CustomController</Name>
+    </ProjectReference>
     <ProjectReference Include="..\IDEX\IDEX.csproj">
       <Project>{F02194CB-9ED0-4198-B8DD-978CBA37CBDB}</Project>
       <Name>IDEX</Name>

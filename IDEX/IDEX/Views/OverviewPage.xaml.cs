@@ -1,4 +1,6 @@
 ﻿
+using CustomController;
+
 namespace IDEX.Views
 {
     public partial class OverviewPage
@@ -6,6 +8,7 @@ namespace IDEX.Views
         public OverviewPage()
         {
             InitializeComponent();
+
         }
     }
 }

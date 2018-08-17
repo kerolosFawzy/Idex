@@ -4,6 +4,7 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     x:Class="IDEX.MainPage" Title="IDEX"
+    NeedOverrideSoftBackButton="False"
     xmlns:Custom="clr-namespace:CustomController;assembly=CustomController"
     xmlns:ViewModel="clr-namespace:IDEX.ViewModel">
     <ContentPage.BindingContext>

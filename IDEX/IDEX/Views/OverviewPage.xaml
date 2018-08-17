@@ -9,7 +9,9 @@
              xmlns:Converters="clr-namespace:IDEX.Converters"
              xmlns:Behavior="clr-namespace:IDEX.Behavior"
              xmlns:Custom="clr-namespace:CustomController;assembly=CustomController"
-             NeedOverrideSoftBackButton="True">
+             NeedOverrideSoftBackButton="True"
+             
+    >
 
     <ContentPage.ToolbarItems >
         <ToolbarItem Name="ShowAll" Order="Secondary" Text="Show All" Priority="0"  />

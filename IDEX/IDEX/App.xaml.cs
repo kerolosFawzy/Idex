@@ -1,3 +1,4 @@
+using CustomController;
 using IDEX.View;
 using Microsoft.AppCenter;
 using Microsoft.AppCenter.Analytics;
@@ -14,8 +15,9 @@ namespace IDEX
 		{
 			InitializeComponent();
 
-			MainPage = new IdexMasterDetailPage() ;
-		}
+            MainPage = new IdexMasterDetailPage();
+        }
+
 
 		protected override void OnStart ()
 		{

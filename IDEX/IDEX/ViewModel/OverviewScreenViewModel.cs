@@ -116,10 +116,10 @@ namespace IDEX.ViewModel
             }
             var formattedString = new FormattedString();
             formattedString.Spans.Add
-                (new Span { Text = NewTitle 
+                (new Span { Text = NewTitle +@"/r/n"
                 , FontAttributes = FontAttributes.Bold
                 , FontSize = 20 });
-            formattedString.Spans.Add(new Span { Text = @" "  + Title ,FontSize= 10  });
+            formattedString.Spans.Add(new Span { Text =Title ,FontSize= 10  });
             Title += NewTitle;
 
             FormattedTitle = formattedString.ToString();
@@ -139,6 +139,7 @@ namespace IDEX.ViewModel
             {
                 SetTitle(SelecedLevel.Name);
                 ItemListSource = SelecedLevel.Children;
+               
                 SelectedListStack.Add(ItemListSource as List<Level>);
             }
             else
