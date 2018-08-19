@@ -11,6 +11,7 @@ using Android.Util;
 using Android.Views;
 using Android.Widget;
 using CustomController;
+using CustomController.NavigationServices;
 using IDEX.Droid;
 using IDEX.Views;
 using Xamarin.Forms;

@@ -139,7 +139,6 @@ namespace IDEX.ViewModel
             {
                 SetTitle(SelecedLevel.Name);
                 ItemListSource = SelecedLevel.Children;
-               
                 SelectedListStack.Add(ItemListSource as List<Level>);
             }
             else
@@ -213,7 +212,7 @@ namespace IDEX.ViewModel
             }
             else
             {
-                Navigation.PopAsync();
+               // Navigation.PopCustomAsync();
             }
         }
 

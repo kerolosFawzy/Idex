@@ -1,4 +1,5 @@
-﻿using GalaSoft.MvvmLight;
+﻿using CustomController;
+using GalaSoft.MvvmLight;
 using Xamarin.Forms;
 
 namespace IDEX.ViewModel
@@ -9,7 +10,7 @@ namespace IDEX.ViewModel
         public virtual void OnSoftBackButtonPressed() {}
         public virtual void DisAppearing() {}
         public virtual void OnBackButtonPressed() {}
-        public INavigation Navigation { get; set; }
+        public INavigationService Navigation { get; } = App.NavigationService;
 
     }
 }

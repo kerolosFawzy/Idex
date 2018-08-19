@@ -1,4 +1,7 @@
-﻿using GalaSoft.MvvmLight.Views;
+﻿using Autofac;
+using CustomController;
+using CustomController.NavigationServices;
+using GalaSoft.MvvmLight.Views;
 using IDEX.Model;
 using IDEX.View;
 using IDEX.Views;
@@ -6,7 +9,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Input;
 using Xamarin.Forms;
 
@@ -16,7 +18,7 @@ namespace IDEX.ViewModel
     {
         private static int flag;
         List<Customer> ts = new List<Customer>();
-     
+        private CustomController.INavigationService NavigationService { get; } = App.NavigationService;
         #region Commands for the view
         public ICommand ItemSelected { get; set; }
         public ICommand NextItemClicked { get; set; }
@@ -25,10 +27,12 @@ namespace IDEX.ViewModel
 
         public MainPageViewModel()
         {
+            flag = 0;
             AddDummyData();
             ItemSelected = new Command(HandleItemClicked);
             NextItemClicked = new Command(HandleNextItemClicked);
             BackButtonClicked = new Command(HandleBackClicked);
+            //navigationPage = App.contianer.Resolve<ICustomNavigationPage>();
         }
 
         #region Handle all buttons on the view and listviews
@@ -38,7 +42,7 @@ namespace IDEX.ViewModel
             if (flag == 3)
                 flag = 2;
             flag -= 1;
-            NavigationHandeler();
+            NavigationHandelerAsync();
 
         }
 
@@ -48,7 +52,7 @@ namespace IDEX.ViewModel
             { }
             else
                 flag += 1;
-            NavigationHandeler();
+            NavigationHandelerAsync();
         }
 
         private List<string> _selectedIndexs = new List<string>() { "1" };
@@ -84,7 +88,7 @@ namespace IDEX.ViewModel
                 AddSelectedIndexs(3);
                 flag = 2;
             }
-            NavigationHandeler();
+             NavigationHandelerAsync();
         }
 
         private IEnumerable _itemListSource = Enumerable.Empty<BaseModel>();
@@ -215,7 +219,6 @@ namespace IDEX.ViewModel
         }
 
         #endregion
-
         private void AddDummyData()
         {
 
@@ -250,7 +253,7 @@ namespace IDEX.ViewModel
             SelectedInsepction.Clear();
             SelectedSchemes = null;
         }
-        private void NavigationHandeler()
+        private async System.Threading.Tasks.Task NavigationHandelerAsync()
         {
             if (flag == 0)
             {
@@ -286,7 +289,7 @@ namespace IDEX.ViewModel
 
                     flag = flag - 1;
                     AddSelectedIndexs(flag + 1);
-                    NavigationHandeler();
+                    await NavigationHandelerAsync();
                     //DisplayAlert("Alert", "Please Select Customer(s) Frist", "ok");
                 }
             }
@@ -312,13 +315,17 @@ namespace IDEX.ViewModel
                 {
                     flag = flag - 1;
                     AddSelectedIndexs(flag + 1);
-                    NavigationHandeler();
+                    await NavigationHandelerAsync();
                     // DisplayAlert("Alert", "Please Select Scheme(s) Frist", "ok");
                 }
             }
             else if (flag == 3)
             {
-                Navigation.PushAsync(new OverviewPage());
+                if (ItemListSource.GetType() == typeof(List<Inspection>))
+                   await NavigationService.NavigateAsync("OverviewPage");
+                // await new CustomNavigationPage(new OverviewPage()).Navigation.PushAsync(new OverviewPage());
+                else
+                    flag -= 1; 
             }
         }
 

@@ -1,4 +1,6 @@
-﻿using IDEX.ViewModel;
+﻿using Autofac;
+using CustomController;
+using IDEX.ViewModel;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -7,13 +9,13 @@ namespace IDEX.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public class BaseContentPage : ContentPage
     {
+
         protected override void OnAppearing()
         {
+           
             if (BindingContext is BaseViewModel viewAwair)
             {
                 viewAwair.OnAppearing();
-                viewAwair.Navigation = Navigation;
-
             }
             base.OnAppearing();
         }

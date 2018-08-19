@@ -10,5 +10,10 @@ namespace IDEX.Views
             InitializeComponent();
 
         }
+
+        public OverviewPage(string navigationParameter) : this()
+        {
+        }
+
     }
 }

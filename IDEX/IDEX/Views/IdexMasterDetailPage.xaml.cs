@@ -1,4 +1,5 @@
 ﻿using CustomController;
+using CustomController.NavigationServices;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,7 +19,7 @@ namespace IDEX.View
             InitializeComponent();
             MasterBehavior = MasterBehavior.Popover;
             MasterPage.ListView.ItemSelected += ListView_ItemSelected;
-            Detail = new CustomNavigationPage(new MainPage());
+            Detail = new CustomNavigationPage(new IdexMainPage());
         }
 
         private void ListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
@@ -30,12 +31,12 @@ namespace IDEX.View
                 
             if (item.Title.Equals("Home")) {
                 page.Title = "Home";
-                Detail = new CustomNavigationPage(new MainPage());
+                Detail = new CustomNavigationPage(new IdexMainPage());
             }
             else
             {
                 page.Title = item.Title;
-                Detail = new NavigationPage(page);
+                Detail = new CustomNavigationPage(page);
             }
                 
             IsPresented = false;

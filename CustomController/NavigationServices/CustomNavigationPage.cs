@@ -1,10 +1,20 @@
 ﻿using System;
 using Xamarin.Forms;
 
-namespace CustomController
+namespace CustomController.NavigationServices
 {
-    public class CustomNavigationPage : NavigationPage
+    public class CustomNavigationPage : NavigationPage , ICustomNavigationPage
     {
+        public CustomNavigationPage(Page page) : base(page)
+        {
+            
+        }
+
+        public CustomNavigationPage()
+        {
+
+        }
+
 
         public enum TitleAlignment
         {
@@ -250,9 +260,15 @@ namespace CustomController
         {
             view.SetValue(BarBackgroundOpacityProperty, value);
         }
-        public CustomNavigationPage(Page page) : base(page)
-        {
 
+        public void PopCustomAsync()
+        {
+            PopAsync();
+        }
+
+        public void PushCustomAsync(ContentPage page)
+        {
+            PushAsync(page);
         }
     }
 }
