@@ -212,7 +212,7 @@ namespace IDEX.ViewModel
             }
             else
             {
-               // Navigation.PopCustomAsync();
+                App.NavigationService.GoBack();
             }
         }
 

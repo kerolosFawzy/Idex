@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
@@ -35,6 +34,7 @@ namespace CustomController.NavigationServices
         {
             var rootPage = GetPage(rootPageKey);
             _navigationPageStack.Clear();
+
             var mainPage = new CustomNavigationPage(rootPage);
             _navigationPageStack.Push(mainPage);
             return mainPage;
@@ -101,7 +101,7 @@ namespace CustomController.NavigationServices
         public async Task NavigateAsync(string pageKey, object parameter, bool animated = true)
         {
             var page = GetPage(pageKey, parameter);
-            await CurrentNavigationPage.Navigation.PushAsync(page);
+            await CurrentNavigationPage.Navigation.PushAsync(page , animated);
         }
 
         private Page GetPage(string pageKey, object parameter = null)

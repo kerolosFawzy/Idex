@@ -20,23 +20,29 @@ namespace IDEX
         {
             InitializeComponent();
             ExtractDI();
+            RegisterPages();
 
+            SetRootPage(nameof(IdexMasterDetailPage));
 
+        }
+
+        public void RegisterPages()
+        {
             NavigationService.Configure(nameof(IdexMainPage), typeof(IdexMainPage));
+            NavigationService.Configure(nameof(IdexMasterDetailPage), typeof(IdexMasterDetailPage));
             NavigationService.Configure(nameof(OverviewPage), typeof(OverviewPage));
-            var mainPage = ((ViewNavigationService)NavigationService).SetRootPage("IdexMainPage");
+        }
 
-
-
-            MainPage = new IdexMasterDetailPage();
-
+        public void SetRootPage(string rootPageName)
+        {
+            var mainPage = ((ViewNavigationService)NavigationService).SetRootPage(rootPageName);
+            MainPage = mainPage;
         }
 
         private static void ExtractDI()
         {
             ContainerBuilder builder = new ContainerBuilder();
 
-            builder.RegisterType<CustomNavigationPage>().As<ICustomNavigationPage>();
             contianer = builder.Build();
         }
 

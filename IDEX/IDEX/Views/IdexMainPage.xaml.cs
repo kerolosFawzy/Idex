@@ -11,10 +11,7 @@ namespace IDEX
         public IdexMainPage()
         {
             InitializeComponent();
-            
         }
-        public IdexMainPage(string navigationParameter) : this()
-        {
-        }
+      
     }
 }

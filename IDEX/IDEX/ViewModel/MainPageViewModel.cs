@@ -322,8 +322,7 @@ namespace IDEX.ViewModel
             else if (flag == 3)
             {
                 if (ItemListSource.GetType() == typeof(List<Inspection>))
-                   await NavigationService.NavigateAsync("OverviewPage");
-                // await new CustomNavigationPage(new OverviewPage()).Navigation.PushAsync(new OverviewPage());
+                    await App.NavigationService.NavigateAsync(nameof(OverviewPage));
                 else
                     flag -= 1; 
             }

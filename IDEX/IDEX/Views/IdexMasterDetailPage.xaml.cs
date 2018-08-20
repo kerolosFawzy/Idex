@@ -17,6 +17,7 @@ namespace IDEX.View
         public IdexMasterDetailPage()
         {
             InitializeComponent();
+            CustomNavigationPage.SetHasNavigationBar(this, false);
             MasterBehavior = MasterBehavior.Popover;
             MasterPage.ListView.ItemSelected += ListView_ItemSelected;
             Detail = new CustomNavigationPage(new IdexMainPage());

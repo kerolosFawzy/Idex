@@ -3,19 +3,12 @@ using Xamarin.Forms;
 
 namespace CustomController.NavigationServices
 {
-    public class CustomNavigationPage : NavigationPage , ICustomNavigationPage
+    public class CustomNavigationPage : NavigationPage 
     {
         public CustomNavigationPage(Page page) : base(page)
         {
             
         }
-
-        public CustomNavigationPage()
-        {
-
-        }
-
-
         public enum TitleAlignment
         {
             Start,
@@ -259,16 +252,6 @@ namespace CustomController.NavigationServices
         public static void SetBarBackgroundOpacity(BindableObject view, float value)
         {
             view.SetValue(BarBackgroundOpacityProperty, value);
-        }
-
-        public void PopCustomAsync()
-        {
-            PopAsync();
-        }
-
-        public void PushCustomAsync(ContentPage page)
-        {
-            PushAsync(page);
         }
     }
 }
