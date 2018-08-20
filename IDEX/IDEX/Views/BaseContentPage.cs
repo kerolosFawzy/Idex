@@ -27,19 +27,19 @@ namespace IDEX.Views
         }
 
         public bool NeedOverrideSoftBackButton { get; set; } = false;
-        protected override bool OnBackButtonPressed()
-        {
-            // If you want to continue going back
-            //base.OnBackButtonPressed();
+        //protected override bool OnBackButtonPressed()
+        //{
+        //    // If you want to continue going back
+        //    //base.OnBackButtonPressed();
 
-            var viewAwair = BindingContext as BaseViewModel;
-            if (viewAwair != null)
-            {
-                viewAwair.OnBackButtonPressed();
-            }
-            // If you want to stop the back button
-            return true;
-        }
+        //    var viewAwair = BindingContext as BaseViewModel;
+        //    if (viewAwair != null)
+        //    {
+        //        viewAwair.OnBackButtonPressed();
+        //    }
+        //    // If you want to stop the back button
+        //    return true;
+        //}
 
         public static readonly BindableProperty FormattedTitleProperty =
             BindableProperty.Create(nameof(FormattedTitle), typeof(FormattedString), typeof(BaseContentPage), null);

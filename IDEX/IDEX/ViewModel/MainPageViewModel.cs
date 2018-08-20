@@ -18,7 +18,6 @@ namespace IDEX.ViewModel
     {
         private static int flag;
         List<Customer> ts = new List<Customer>();
-        private CustomController.INavigationService NavigationService { get; } = App.NavigationService;
         #region Commands for the view
         public ICommand ItemSelected { get; set; }
         public ICommand NextItemClicked { get; set; }
@@ -42,7 +41,7 @@ namespace IDEX.ViewModel
             if (flag == 3)
                 flag = 2;
             flag -= 1;
-            NavigationHandelerAsync();
+            NavigationHandeler();
 
         }
 
@@ -52,7 +51,7 @@ namespace IDEX.ViewModel
             { }
             else
                 flag += 1;
-            NavigationHandelerAsync();
+            NavigationHandeler();
         }
 
         private List<string> _selectedIndexs = new List<string>() { "1" };
@@ -88,7 +87,7 @@ namespace IDEX.ViewModel
                 AddSelectedIndexs(3);
                 flag = 2;
             }
-             NavigationHandelerAsync();
+             NavigationHandeler();
         }
 
         private IEnumerable _itemListSource = Enumerable.Empty<BaseModel>();
@@ -253,7 +252,7 @@ namespace IDEX.ViewModel
             SelectedInsepction.Clear();
             SelectedSchemes = null;
         }
-        private async System.Threading.Tasks.Task NavigationHandelerAsync()
+        private void NavigationHandeler()
         {
             if (flag == 0)
             {
@@ -289,7 +288,7 @@ namespace IDEX.ViewModel
 
                     flag = flag - 1;
                     AddSelectedIndexs(flag + 1);
-                    await NavigationHandelerAsync();
+                    NavigationHandeler();
                     //DisplayAlert("Alert", "Please Select Customer(s) Frist", "ok");
                 }
             }
@@ -315,14 +314,14 @@ namespace IDEX.ViewModel
                 {
                     flag = flag - 1;
                     AddSelectedIndexs(flag + 1);
-                    await NavigationHandelerAsync();
+                     NavigationHandeler();
                     // DisplayAlert("Alert", "Please Select Scheme(s) Frist", "ok");
                 }
             }
             else if (flag == 3)
             {
                 if (ItemListSource.GetType() == typeof(List<Inspection>))
-                    await App.NavigationService.NavigateAsync(nameof(OverviewPage));
+                     Navigation.NavigateModalAsync(nameof(OverviewPage));
                 else
                     flag -= 1; 
             }

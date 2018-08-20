@@ -19,7 +19,7 @@ namespace IDEX
 		public App ()
         {
             InitializeComponent();
-            ExtractDI();
+           // ExtractDI();
             RegisterPages();
 
             SetRootPage(nameof(IdexMasterDetailPage));

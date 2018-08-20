@@ -1,11 +1,5 @@
-﻿using CustomController;
-using CustomController.NavigationServices;
+﻿using CustomController.NavigationServices;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 

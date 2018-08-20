@@ -87,7 +87,7 @@ namespace CustomController.NavigationServices
         public async Task NavigateModalAsync(string pageKey, object parameter, bool animated = true)
         {
             var page = GetPage(pageKey, parameter);
-            CustomNavigationPage.SetHasNavigationBar(page, false);
+            NavigationPage.SetHasNavigationBar(page, true);
             var modalNavigationPage = new CustomNavigationPage(page);
             await CurrentNavigationPage.Navigation.PushModalAsync(modalNavigationPage, animated);
             _navigationPageStack.Push(modalNavigationPage);
@@ -101,7 +101,7 @@ namespace CustomController.NavigationServices
         public async Task NavigateAsync(string pageKey, object parameter, bool animated = true)
         {
             var page = GetPage(pageKey, parameter);
-            await CurrentNavigationPage.Navigation.PushAsync(page , animated);
+            await CurrentNavigationPage.Navigation.PushAsync(page, animated);
         }
 
         private Page GetPage(string pageKey, object parameter = null)

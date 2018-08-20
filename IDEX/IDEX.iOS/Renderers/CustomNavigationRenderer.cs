@@ -1,6 +1,6 @@
 ﻿using CoreAnimation;
 using CoreGraphics;
-using CustomController;
+using CustomController.NavigationServices;
 using Foundation;
 using IDEX.iOS;
 using IDEX.Views;
@@ -9,7 +9,7 @@ using UIKit;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
 
-[assembly: ExportRenderer(typeof(BaseContentPage), typeof(CustomNavigationRenderer))]
+[assembly: ExportRenderer(typeof(CustomNavigationPage), typeof(CustomNavigationRenderer))]
 
 namespace IDEX.iOS
 {
@@ -29,7 +29,8 @@ namespace IDEX.iOS
 
             var root = NavigationController.TopViewController;
             if (!page.NeedOverrideSoftBackButton) return;
-            var title = NavigationPage.GetBackButtonTitle(Element);
+            //i made change here 
+            var title = CustomNavigationPage.GetBackButtonTitle(Element);
 
             root.NavigationItem.SetLeftBarButtonItem(
                 new UIBarButtonItem(title, UIBarButtonItemStyle.Plain, (sender, args) =>
