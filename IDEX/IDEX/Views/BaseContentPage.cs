@@ -16,6 +16,7 @@ namespace IDEX.Views
             if (BindingContext is BaseViewModel viewAwair)
             {
                 viewAwair.OnAppearing();
+                viewAwair.baseContentPage = this; 
             }
             base.OnAppearing();
         }
@@ -41,6 +42,7 @@ namespace IDEX.Views
         //    return true;
         //}
 
+        
         public static readonly BindableProperty FormattedTitleProperty =
             BindableProperty.Create(nameof(FormattedTitle), typeof(FormattedString), typeof(BaseContentPage), null);
         public FormattedString FormattedTitle

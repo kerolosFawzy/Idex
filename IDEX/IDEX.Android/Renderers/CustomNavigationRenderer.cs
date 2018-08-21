@@ -148,8 +148,6 @@ namespace IDEX.Droid
                     previousPage.PropertyChanged -= LastPage_PropertyChanged;
                 }
 
-
-
                 lastPage = Element?.Navigation?.NavigationStack?.Last();
                 SetupToolbarCustomization(lastPage);
                 lastPage.PropertyChanged += LastPage_PropertyChanged;
@@ -230,10 +228,6 @@ namespace IDEX.Droid
             {
                 UpdateTitleViewLayoutAlignment(_titleViewLayout, _titleTextView, _subTitleTextView, CustomNavigationPage.GetTitlePosition(lastPage));
                 //UpdateTitleViewLayout(lastPage, _titleViewLayout, _titleTextView, _subTitleTextView, _originalDrawable);
-
-
-
-
             }
             else if (e.PropertyName == CustomNavigationPage.TitlePaddingProperty.PropertyName)
             {
@@ -485,12 +479,8 @@ namespace IDEX.Droid
         #region Toolbar 
         void UpdateToolbarStyle(Android.Support.V7.Widget.Toolbar toolbar, Page lastPage, Activity activity, Android.Graphics.Drawables.Drawable defaultBackground, Android.Graphics.Drawables.Drawable windowContent)
         {
-
             UpdateToolbarBackground(toolbar, lastPage, activity, defaultBackground);
             UpdateToolbarShadow(toolbar, CustomNavigationPage.GetHasShadow(lastPage), activity, windowContent);
-
-
-
         }
         void UpdateToolbarBackground(Android.Support.V7.Widget.Toolbar toolbar, Page lastPage, Activity activity, Android.Graphics.Drawables.Drawable defaultBackground)
         {
@@ -651,9 +641,9 @@ namespace IDEX.Droid
             {
                 textView.SetTextColor(titleColor?.ToAndroid() ?? Android.Graphics.Color.White);
             }
-            else
+            else if(defaultColorStateList != null)
             {
-                textView.SetTextColor(defaultColorStateList);
+               textView.SetTextColor(defaultColorStateList);   
             }
         }
         void UpdateToolbarTextFont(AppCompatTextView textView, Font customFont, Typeface originalFont)

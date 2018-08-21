@@ -1,4 +1,5 @@
 ﻿using CustomController;
+using CustomController.NavigationServices;
 using IDEX.Model;
 using System.Collections;
 using System.Collections.Generic;
@@ -18,8 +19,10 @@ namespace IDEX.ViewModel
 
         public string Title
         {
-            get { return _title ; }
-            set { _title = value;
+            get { return _title; }
+            set
+            {
+                _title = value;
                 RaisePropertyChanged();
             }
         }
@@ -29,7 +32,21 @@ namespace IDEX.ViewModel
         public string FormattedTitle
         {
             get { return _formattedTitle; }
-            set { _formattedTitle = value;
+            set
+            {
+                _formattedTitle = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        private string _formattedSubTitle;
+
+        public string FormattedSubTitle
+        {
+            get { return _formattedSubTitle; }
+            set
+            {
+                _formattedSubTitle = value;
                 RaisePropertyChanged();
             }
         }
@@ -37,11 +54,11 @@ namespace IDEX.ViewModel
 
         #region ALL Lists Init
 
-        private List<string> _formattedTitlesStack = new List<string>();
+        private List<Level> _formattedTitlesStack = new List<Level>();
 
-        public List<string> FormattedTitlesStack
+        public List<Level> FormattedTitlesStack
         {
-            get { return _formattedTitlesStack ; }
+            get { return _formattedTitlesStack; }
             set
             {
                 _formattedTitlesStack = value;
@@ -109,27 +126,79 @@ namespace IDEX.ViewModel
             ItemTapped = new Command<Level>(HandleItemTapped);
         }
 
-        void SetTitle(string NewTitle) {
-            if (FormattedTitle.Equals("Site"))
-            {
-                FormattedTitle = "";
-            }
-            var formattedString = new FormattedString();
-            formattedString.Spans.Add
-                (new Span { Text = NewTitle +@"/r/n"
-                , FontAttributes = FontAttributes.Bold
-                , FontSize = 20 });
-            formattedString.Spans.Add(new Span { Text =Title ,FontSize= 10  });
-            Title += NewTitle;
+        #region
+        //void SetTitle(string NewTitle)
+        //{
 
-            FormattedTitle = formattedString.ToString();
-            FormattedTitlesStack.Add(FormattedTitle);
-        }
+        //    var formattedTitle = new FormattedString();
+        //    formattedTitle.Spans.Add
+        //        (new Span
+        //        {
+        //            Text = NewTitle
+        //        ,
+        //            FontAttributes = FontAttributes.Bold
+        //        ,
+        //            FontSize = 20
+        //        });
+
+        //    FormattedTitle = formattedTitle.ToString();
+
+        //    var formattedSubTitle = new FormattedString();
+        //    formattedSubTitle.Spans.Add(new Span
+        //    {
+        //        Text = Title
+        //        ,
+        //        FontSize = 14
+        //        ,
+        //        FontAttributes = FontAttributes.None
+        //    });
+        //    Title = Title + NewTitle + ", ";
+
+        //    baseContentPage.FormattedTitle = formattedTitle;
+        //    baseContentPage.Subtitle = formattedSubTitle == null ? string.Empty : formattedSubTitle.ToString();
+
+        //    FormattedTitlesStack.Add(FormattedTitle);
+        //}
+        //private void HandleSetTitleOnBack() {
+        //    if (FormattedTitlesStack.Count() != 1)
+        //    {
+        //        FormattedTitlesStack.Remove(FormattedTitlesStack.LastOrDefault());
+        //        string lastTitle = FormattedTitlesStack.Last();
+        //        var formattedTitle = new FormattedString();
+        //        formattedTitle.Spans.Add
+        //            (new Span
+        //            {
+        //                Text = lastTitle
+        //            ,
+        //                FontAttributes = FontAttributes.Bold
+        //            ,
+        //                FontSize = 20
+        //            });
+        //        string subTitle = "";
+        //        List<string> vs = FormattedTitlesStack.ToList();
+        //        vs.Remove(lastTitle);
+        //        foreach (string item in vs)
+        //            subTitle = subTitle + item + " ,";
+        //        Title = subTitle;
+        //        baseContentPage.FormattedTitle = formattedTitle;
+        //        baseContentPage.Subtitle = subTitle == null ? string.Empty : subTitle;
+        //    }
+        //    else {
+
+        //        FormattedTitle = "Site";
+        //  //      FormattedTitlesStack.Clear();
+        //        Title = "";
+        //    }
+        //}
+        #endregion
 
         private void HandleItemTapped(object obj)
         {
             if (obj is Level SelecedLevel)
+            {
                 NavigationHandler(SelecedLevel);
+                FormattedTitlesStack.Add(SelecedLevel);
+            }
             RaisePropertyChanged();
         }
 
@@ -137,7 +206,8 @@ namespace IDEX.ViewModel
         {
             if (SelecedLevel.Children.Count() != 0)
             {
-                SetTitle(SelecedLevel.Name);
+                HandleTitleSet(SelecedLevel);
+                //  SetTitle(SelecedLevel.Name);
                 ItemListSource = SelecedLevel.Children;
                 SelectedListStack.Add(ItemListSource as List<Level>);
             }
@@ -145,10 +215,29 @@ namespace IDEX.ViewModel
                 return;
         }
 
+        private void HandleTitleSet(Level level) {
+            var formattedTitle = new FormattedString();
+            formattedTitle.Spans.Add
+                (new Span
+                {
+                    Text = level.Name
+                ,
+                    FontAttributes = FontAttributes.Bold
+                ,
+                    FontSize = 20
+                });
+            baseContentPage.FormattedTitle = formattedTitle;
+            Level newLevel=level;
+            FormattedSubTitle = "";
+            while (newLevel.Parent != null)
+            {
+                newLevel = newLevel.Parent;
+                FormattedSubTitle += newLevel.Name;
+            }
+            baseContentPage.Subtitle = FormattedSubTitle;
+        }
         public void GetFinishedPercentage(List<int> AllLevelTypes)
         {
-
-
             int types = AllLevelTypes.Count() - 2;
             for (int i = types; i >= 0; i--)
             {
@@ -174,7 +263,7 @@ namespace IDEX.ViewModel
 
             foreach (Level level in LevelListWithChildren.Where(x => x.LevelType == AllLevelTypes.Last()))
             {
-                level.ListViewModeValue = level.Area.ToString() + " m2"; 
+                level.ListViewModeValue = level.Area.ToString() + " m2";
                 level.Segments = AddSegmentsListLastLevel(level.ControlStatus);
             }
             foreach (Level level in LevelListWithChildren.Where(x => x.LevelType != AllLevelTypes.Last()))
@@ -208,11 +297,17 @@ namespace IDEX.ViewModel
             if (SelectedListStack.Count() != 1)
             {
                 SelectedListStack.Remove(SelectedListStack.Last());
+                FormattedTitlesStack.Remove(FormattedTitlesStack.Last());
+                if (FormattedTitlesStack.Count() != 0)
+                    HandleTitleSet(FormattedTitlesStack.Last());
+                else {
+                    baseContentPage.FormattedTitle = "Site";
+                }
                 ItemListSource = SelectedListStack.Last();
             }
             else
             {
-                App.NavigationService.GoBack();
+                Navigation.GoBack();
             }
         }
 

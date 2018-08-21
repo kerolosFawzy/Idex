@@ -1,9 +1,5 @@
 ﻿using Autofac;
-using CustomController;
-using CustomController.NavigationServices;
-using GalaSoft.MvvmLight.Views;
 using IDEX.Model;
-using IDEX.View;
 using IDEX.Views;
 using System.Collections;
 using System.Collections.Generic;
@@ -31,7 +27,6 @@ namespace IDEX.ViewModel
             ItemSelected = new Command(HandleItemClicked);
             NextItemClicked = new Command(HandleNextItemClicked);
             BackButtonClicked = new Command(HandleBackClicked);
-            //navigationPage = App.contianer.Resolve<ICustomNavigationPage>();
         }
 
         #region Handle all buttons on the view and listviews
@@ -321,7 +316,13 @@ namespace IDEX.ViewModel
             else if (flag == 3)
             {
                 if (ItemListSource.GetType() == typeof(List<Inspection>))
-                     Navigation.NavigateModalAsync(nameof(OverviewPage));
+                {
+                    Device.BeginInvokeOnMainThread(async () =>
+                    {
+                       await Navigation.NavigateAsync(nameof(OverviewPage));
+                    });
+                }
+
                 else
                     flag -= 1; 
             }

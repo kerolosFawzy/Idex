@@ -1,5 +1,6 @@
 ﻿
-using CustomController;
+using CustomController.NavigationServices;
+using Xamarin.Forms;
 
 namespace IDEX.Views
 {
@@ -8,7 +9,7 @@ namespace IDEX.Views
         public OverviewPage()
         {
             InitializeComponent();
-
+            CustomNavigationPage.SetTitleFont(this, Font.SystemFontOfSize(20));
         }
 
         public OverviewPage(string navigationParameter) : this()
