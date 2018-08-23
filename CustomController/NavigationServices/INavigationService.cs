@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Threading.Tasks;
-
+//https://mallibone.com/post/a-simple-navigation-service-for-xamarinforms
 namespace CustomController
 {
     public interface INavigationService

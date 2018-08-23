@@ -9,7 +9,9 @@
     <ContentPage.BindingContext>
         <ViewModel:MainPageViewModel />
     </ContentPage.BindingContext>
+        
     <Grid BackgroundColor="White" Padding="10" RowSpacing="5" >
+       
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
@@ -103,7 +105,9 @@
                                   Text="{Binding NextButtonTitle}" 
                                   Style="{StaticResource FirstScreenButtons}" 
                                   Command="{Binding NextItemClicked}"
-                                  />
+                                  >
+                
+            </Custom:ExtButton>
         </StackLayout>
         
     </Grid>

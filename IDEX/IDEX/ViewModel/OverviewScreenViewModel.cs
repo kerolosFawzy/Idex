@@ -90,19 +90,6 @@ namespace IDEX.ViewModel
             }
         }
 
-        //private IList<Segment> _segments = new List<Segment>();
-
-        //public IList<Segment> Segments
-        //{
-        //    get { return _segments; }
-        //    set
-        //    {
-        //        _segments = value;
-        //        RaisePropertyChanged();
-        //    }
-        //}
-
-
         List<Level> _levelListWithChildren = new List<Level>();
 
         public List<Level> LevelListWithChildren
@@ -207,7 +194,6 @@ namespace IDEX.ViewModel
             if (SelecedLevel.Children.Count() != 0)
             {
                 HandleTitleSet(SelecedLevel);
-                //  SetTitle(SelecedLevel.Name);
                 ItemListSource = SelecedLevel.Children;
                 SelectedListStack.Add(ItemListSource as List<Level>);
             }

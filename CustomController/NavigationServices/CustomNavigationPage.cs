@@ -1,6 +1,7 @@
 ﻿using System;
 using Xamarin.Forms;
-
+//refrence for this code 
+// http://www.xamboy.com/2017/12/06/navigation-bar-customization-in-xamarin-forms/
 namespace CustomController.NavigationServices
 {
     public class CustomNavigationPage : NavigationPage 
