@@ -209,7 +209,6 @@ namespace IDEX.ViewModel
                 if (!ShowAllFlag)
                 {
                     ItemListSource = SelecedLevel.Children.Where(x => x.Completed == false).ToList();
-
                 }
                 else
                 {
