@@ -1,4 +1,4 @@
-﻿using CustomController;
+﻿using CustomControls;
 using IDEX.Model;
 using System.Collections;
 using System.Collections.Generic;
@@ -65,6 +65,19 @@ namespace IDEX.ViewModel
                 RaisePropertyChanged();
             }
         }
+
+        private bool _listViewIsVisible = true;
+
+        public bool ListViewIsVisible
+        {
+            get { return _listViewIsVisible; }
+            set
+            {
+                _listViewIsVisible = value;
+                RaisePropertyChanged();
+            }
+        }
+
 
         public string FormattedSubTitle
         {
@@ -137,7 +150,6 @@ namespace IDEX.ViewModel
             ItemTapped = new Command<Level>(HandleItemTapped);
             ShowAll = new Command(ShowAllCommand);
             ShowAllFlag = true;
-            IsVisible = false;
         }
 
         private void ShowAllCommand(object obj)
@@ -149,13 +161,27 @@ namespace IDEX.ViewModel
             if (!ShowAllFlag)
             {
                 ItemListSource = ((List<Level>)ItemListSource as List<Level>).Where(x => x.Completed == false).ToList();
+                SetVisiablity();
             }
             else
             {
                 ItemListSource = SelectedListStack.Last();
+                SetVisiablity();
+
             }
         }
-
+        void SetVisiablity()
+        {
+            if((ItemListSource as List<Level>).Count() == 0)
+            {
+                IsVisible = true;
+                ListViewIsVisible = false; 
+            }else
+            {
+                IsVisible = false;
+                ListViewIsVisible = true ;
+            }
+        }
         private void HandleItemTapped(object obj)
         {
             if (obj is Level SelecedLevel)
@@ -183,11 +209,14 @@ namespace IDEX.ViewModel
                 if (!ShowAllFlag)
                 {
                     ItemListSource = SelecedLevel.Children.Where(x => x.Completed == false).ToList();
+
                 }
                 else
                 {
                     ItemListSource = SelecedLevel.Children;
                 }
+                SetVisiablity();
+
                 SelectedListStack.Add(ItemListSource as List<Level>);
             }
             else
@@ -211,6 +240,8 @@ namespace IDEX.ViewModel
                 }
                 else
                     ItemListSource = SelectedListStack.Last();
+                SetVisiablity();
+
             }
             else
             {
@@ -364,7 +395,7 @@ namespace IDEX.ViewModel
                 new Level { LevelType = 11, Area = 32.5, DoorNumber = "322", ID = 200, Name = "School Floor", OwnerId = 20, UserId = 2 , ListViewMode="Completed :"},
                 new Level { LevelType = 11, Area = 33.5, DoorNumber = "321", ID = 300, Name = "School Floor 2", OwnerId = 30, UserId = 3 , ListViewMode="Completed :"},
 
-                new Level { LevelType = 14, Area = 30.5, DoorNumber = "32", ID = 1000, Name = "Hosptial Room 1", OwnerId = 100, UserId = 1  , ControlStatus = 0 , ListViewMode="Area :"} ,
+                new Level { LevelType = 14, Area = 30.5, DoorNumber = "32", ID = 1000, Name = "Hosptial Room 1", OwnerId = 100, UserId = 1  , ControlStatus =1 , ListViewMode="Area :"} ,
                 new Level { LevelType = 14, Area = 32.5, DoorNumber = "322", ID = 2000, Name = "School Rooms1 1", OwnerId = 200, UserId = 2 , ControlStatus = 0, ListViewMode="Area :"},
                 new Level { LevelType = 14, Area = 33.5, DoorNumber = "321", ID = 3000, Name = "School Rooms2 1 ", OwnerId = 300, UserId = 3 , ControlStatus = 1, ListViewMode="Area :"},
 
@@ -372,7 +403,7 @@ namespace IDEX.ViewModel
                 new Level { LevelType = 14, Area = 32.5, DoorNumber = "322", ID = 20001, Name = "School Rooms1 2", OwnerId = 200, UserId = 2 , ControlStatus = 1, ListViewMode="Area :"},
                 new Level { LevelType = 14, Area = 33.5, DoorNumber = "321", ID = 30001, Name = "School Rooms2 2", OwnerId = 300, UserId = 3 , ControlStatus = 1, ListViewMode="Area :"},
 
-                new Level { LevelType = 14, Area = 30.5, DoorNumber = "32", ID = 432, Name = "sub Hosptial Room 2", OwnerId = 100, UserId = 1 , ControlStatus = 0, ListViewMode="Area :"},
+                new Level { LevelType = 14, Area = 30.5, DoorNumber = "32", ID = 432, Name = "sub Hosptial Room 2", OwnerId = 100, UserId = 1 , ControlStatus = 1, ListViewMode="Area :"},
                 new Level { LevelType = 14, Area = 32.5, DoorNumber = "322", ID = 4321, Name = "sub School Rooms1 2", OwnerId = 200, UserId = 2 , ControlStatus = -1, ListViewMode="Area :"},
                 new Level { LevelType = 14, Area = 33.5, DoorNumber = "321", ID = 33201, Name = "sub School Rooms2 2", OwnerId = 300, UserId = 3 , ControlStatus = 1, ListViewMode="Area :"}
             };

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Windows.Input;
 using Xamarin.Forms;
 
-namespace CustomController
+namespace CustomControls
 {
     public class StepProgressBarControl : StackLayout
     {

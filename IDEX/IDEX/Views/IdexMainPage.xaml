@@ -4,7 +4,7 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     x:Class="IDEX.IdexMainPage" Title="IDEX"
-    xmlns:Custom="clr-namespace:CustomController;assembly=CustomController"
+    xmlns:Custom="clr-namespace:CustomControls;assembly=CustomControls"
     xmlns:ViewModel="clr-namespace:IDEX.ViewModel">
     <ContentPage.BindingContext>
         <ViewModel:MainPageViewModel />

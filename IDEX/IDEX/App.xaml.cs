@@ -1,6 +1,6 @@
 using Autofac;
-using CustomController;
-using CustomController.NavigationServices;
+using CustomControls;
+using CustomControls.NavigationServices;
 using IDEX.View;
 using IDEX.Views;
 using Microsoft.AppCenter;

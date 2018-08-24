@@ -27,7 +27,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\CustomController\CustomController.csproj" />
+    <ProjectReference Include="..\..\CustomController\CustomControls.csproj" />
   </ItemGroup>
 
   <ItemGroup>

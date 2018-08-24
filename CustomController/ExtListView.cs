@@ -1,7 +1,7 @@
 ﻿using System.Windows.Input;
 using Xamarin.Forms;
 
-namespace CustomController
+namespace CustomControls
 {
     public class ExtListView : ListView
     {

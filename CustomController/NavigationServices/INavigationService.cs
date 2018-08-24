@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
 //https://mallibone.com/post/a-simple-navigation-service-for-xamarinforms
-namespace CustomController
+namespace CustomControls
 {
     public interface INavigationService
     {

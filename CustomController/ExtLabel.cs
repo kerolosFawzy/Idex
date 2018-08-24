@@ -1,7 +1,7 @@
 ﻿
 using Xamarin.Forms;
 
-namespace CustomController
+namespace CustomControls
 {
     public class ExtLabel : Label
     {

@@ -1,4 +1,4 @@
-﻿using CustomController.NavigationServices;
+﻿using CustomControls.NavigationServices;
 using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;

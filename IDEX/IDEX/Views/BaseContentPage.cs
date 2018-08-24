@@ -1,6 +1,4 @@
-﻿using Autofac;
-using CustomController;
-using IDEX.ViewModel;
+﻿using IDEX.ViewModel;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 

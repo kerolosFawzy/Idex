@@ -1,5 +1,5 @@
 ﻿using Acr.UserDialogs;
-using CustomController;
+using CustomControls;
 using GalaSoft.MvvmLight;
 using IDEX.Views;
 

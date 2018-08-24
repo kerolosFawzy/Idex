@@ -5,10 +5,9 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.IO;
-using System.Reflection;
 using Xamarin.Forms;
 
-namespace CustomController
+namespace CustomControls
 {
     public class CirclePieChart : ContentView
     {
@@ -45,7 +44,6 @@ namespace CustomController
             ((SKCanvasView)circle.Content).InvalidateSurface();
         }
 
-
         private void OnSegmentsCollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
         {
             if (e.NewItems != null)
@@ -71,10 +69,9 @@ namespace CustomController
             Content = canvasView;
         }
 
-       
         private  Stream GetImageStream(string svgName)
         {
-            var assembly = GetType().Assembly.GetManifestResourceStream($"CustomController.SvgImages.{svgName}");
+            var assembly = GetType().Assembly.GetManifestResourceStream($"CustomControls.SvgImages.{svgName}");
             return assembly;
         }
 
@@ -159,13 +156,10 @@ namespace CustomController
 
     }
 
-
-
     public class Segment : BindableObject
     {
 
         public CirclePieChart Parent { get; set; }
-
         public static readonly BindableProperty ColorProperty = BindableProperty.Create(nameof(Color), typeof(Color), typeof(Segment), Color.ForestGreen, propertyChanged: OnSegmentPropertyChanged);
         public static readonly BindableProperty SweepAngleProperty = BindableProperty.Create(nameof(SweepAngle), typeof(float), typeof(Segment), 90F, propertyChanged: OnSegmentPropertyChanged);
         public static readonly BindableProperty RadiusProperty = BindableProperty.Create(nameof(Radius), typeof(float), typeof(Segment), 1F, propertyChanged: OnSegmentPropertyChanged);
@@ -184,7 +178,6 @@ namespace CustomController
             get => (Color)GetValue(ColorProperty);
             set => SetValue(ColorProperty, value);
         }
-
         public float SweepAngle
         {
             get => (float)GetValue(SweepAngleProperty);

@@ -10,8 +10,7 @@ using Android.Support.V7.Widget;
 using Android.Util;
 using Android.Views;
 using Android.Widget;
-using CustomController;
-using CustomController.NavigationServices;
+using CustomControls.NavigationServices;
 using IDEX.Droid;
 using IDEX.Views;
 using Xamarin.Forms;
@@ -105,8 +104,7 @@ namespace IDEX.Droid
 
         private void UpdateToolbarInstance()
         {
-            var curPage = Element.CurrentPage as BaseContentPage;
-            if (curPage == null || !curPage.NeedOverrideSoftBackButton) return;
+            if (!(Element.CurrentPage is BaseContentPage curPage) || !curPage.NeedOverrideSoftBackButton) return;
             RemoveToolbarInstance();
             GetToolbarInstance();
         }

@@ -5,7 +5,7 @@ using Xamarin.Forms;
 
 
 //iam not using this View
-namespace CustomController
+namespace CustomControls
 {
     public class SelectMultipleListView<T> : ContentView
     {

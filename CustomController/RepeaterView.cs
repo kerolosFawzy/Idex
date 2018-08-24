@@ -2,7 +2,7 @@
 using System.Collections;
 using Xamarin.Forms;
 
-namespace CustomController
+namespace CustomControls
 {
     public class RepeaterView : StackLayout
     {
@@ -55,9 +55,8 @@ namespace CustomController
 
         private static void ItemsChanged(BindableObject bindable, object oldValue, object newValue)
         {
-            var control = bindable as RepeaterView;
 
-            if (control == null) return;
+            if (!(bindable is RepeaterView control)) return;
 
             control.Children.Clear();
 

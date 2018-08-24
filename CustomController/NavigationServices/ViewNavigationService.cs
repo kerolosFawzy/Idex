@@ -5,7 +5,7 @@ using System.Reflection;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
-namespace CustomController.NavigationServices
+namespace CustomControls.NavigationServices
 {
     public class ViewNavigationService : INavigationService
     {

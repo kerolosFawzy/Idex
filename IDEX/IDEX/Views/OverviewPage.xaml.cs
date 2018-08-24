@@ -1,4 +1,4 @@
-﻿using CustomController.NavigationServices;
+﻿using CustomControls.NavigationServices;
 using Xamarin.Forms;
 
 namespace IDEX.Views

@@ -130,9 +130,9 @@
     <Folder Include="Resources\drawable-xxxhdpi\" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\CustomController\CustomController.csproj">
+    <ProjectReference Include="..\..\CustomController\CustomControls.csproj">
       <Project>{8c0bceef-5688-4691-8254-37de6c246f8c}</Project>
-      <Name>CustomController</Name>
+      <Name>CustomControls</Name>
     </ProjectReference>
     <ProjectReference Include="..\IDEX\IDEX.csproj">
       <Project>{F02194CB-9ED0-4198-B8DD-978CBA37CBDB}</Project>
