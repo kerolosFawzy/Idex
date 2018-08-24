@@ -9,12 +9,10 @@
              xmlns:Converters="clr-namespace:IDEX.Converters"
              xmlns:Behavior="clr-namespace:IDEX.Behavior"
              xmlns:Custom="clr-namespace:CustomController;assembly=CustomController"
-             NeedOverrideSoftBackButton="True"
-             
-    >
+             NeedOverrideSoftBackButton="True">
 
     <ContentPage.ToolbarItems >
-        <ToolbarItem Name="ShowAll" Order="Secondary" Text="Show All" Priority="0"  />
+        <ToolbarItem Name="ShowAll" Order="Secondary" Text="{Binding ShowAllText}" Priority="0"  Command="{Binding ShowAll}"/>
         <ToolbarItem Name="ScanBarcode" Order="Secondary" Text="Scan Barcode"  Priority="1" />
     </ContentPage.ToolbarItems>
 
@@ -29,7 +27,8 @@
     </ContentPage.Resources>
 
     <StackLayout Orientation="Horizontal" HorizontalOptions="Fill">
-
+        <Label Text="There is Nothing to show" FontSize="Large" IsVisible="{Binding IsVisible}"
+               HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" />
         <Custom:ExtListView HasUnevenRows="True" 
                   ItemsSource="{Binding ItemListSource}" 
                   SeparatorColor="Black" VerticalOptions="FillAndExpand" 

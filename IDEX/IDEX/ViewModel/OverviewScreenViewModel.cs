@@ -1,6 +1,7 @@
 ﻿using CustomController;
 using CustomController.NavigationServices;
 using IDEX.Model;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -12,9 +13,12 @@ namespace IDEX.ViewModel
 {
     class OverviewScreenViewModel : BaseViewModel, INotifyPropertyChanged
     {
+        public ICommand ShowAll { get; set; }
         public ICommand ItemTapped { get; set; }
         readonly Color PieChartColor = Color.FromHex("#008080");
 
+
+        public bool ShowAllFlag { get; set; }
         private string _title;
 
         public string Title
@@ -29,6 +33,18 @@ namespace IDEX.ViewModel
 
         private string _formattedTitle = "Site";
 
+        private string _showAllText = "Show UnCompleted";
+
+        public string ShowAllText
+        {
+            get { return _showAllText; }
+            set
+            {
+                _showAllText = value;
+                RaisePropertyChanged();
+            }
+        }
+
         public string FormattedTitle
         {
             get { return _formattedTitle; }
@@ -40,6 +56,17 @@ namespace IDEX.ViewModel
         }
 
         private string _formattedSubTitle;
+        private bool _isVisible = false;
+
+        public bool IsVisible
+        {
+            get { return _isVisible; }
+            set
+            {
+                _isVisible = value;
+                RaisePropertyChanged();
+            }
+        }
 
         public string FormattedSubTitle
         {
@@ -50,7 +77,6 @@ namespace IDEX.ViewModel
                 RaisePropertyChanged();
             }
         }
-
 
         #region ALL Lists Init
 
@@ -111,82 +137,44 @@ namespace IDEX.ViewModel
             AddDummyData();
             SetFirstListOfLevels();
             ItemTapped = new Command<Level>(HandleItemTapped);
+            ShowAll = new Command(ShowAllCommand);
+            ShowAllFlag = true;
+            IsVisible = false;
         }
 
-        #region
-        //void SetTitle(string NewTitle)
-        //{
+        private void ShowAllCommand(object obj)
+        {
+            var view = obj as MenuItem;
+            ShowAllFlag = !ShowAllFlag;
 
-        //    var formattedTitle = new FormattedString();
-        //    formattedTitle.Spans.Add
-        //        (new Span
-        //        {
-        //            Text = NewTitle
-        //        ,
-        //            FontAttributes = FontAttributes.Bold
-        //        ,
-        //            FontSize = 20
-        //        });
-
-        //    FormattedTitle = formattedTitle.ToString();
-
-        //    var formattedSubTitle = new FormattedString();
-        //    formattedSubTitle.Spans.Add(new Span
-        //    {
-        //        Text = Title
-        //        ,
-        //        FontSize = 14
-        //        ,
-        //        FontAttributes = FontAttributes.None
-        //    });
-        //    Title = Title + NewTitle + ", ";
-
-        //    baseContentPage.FormattedTitle = formattedTitle;
-        //    baseContentPage.Subtitle = formattedSubTitle == null ? string.Empty : formattedSubTitle.ToString();
-
-        //    FormattedTitlesStack.Add(FormattedTitle);
-        //}
-        //private void HandleSetTitleOnBack() {
-        //    if (FormattedTitlesStack.Count() != 1)
-        //    {
-        //        FormattedTitlesStack.Remove(FormattedTitlesStack.LastOrDefault());
-        //        string lastTitle = FormattedTitlesStack.Last();
-        //        var formattedTitle = new FormattedString();
-        //        formattedTitle.Spans.Add
-        //            (new Span
-        //            {
-        //                Text = lastTitle
-        //            ,
-        //                FontAttributes = FontAttributes.Bold
-        //            ,
-        //                FontSize = 20
-        //            });
-        //        string subTitle = "";
-        //        List<string> vs = FormattedTitlesStack.ToList();
-        //        vs.Remove(lastTitle);
-        //        foreach (string item in vs)
-        //            subTitle = subTitle + item + " ,";
-        //        Title = subTitle;
-        //        baseContentPage.FormattedTitle = formattedTitle;
-        //        baseContentPage.Subtitle = subTitle == null ? string.Empty : subTitle;
-        //    }
-        //    else {
-
-        //        FormattedTitle = "Site";
-        //  //      FormattedTitlesStack.Clear();
-        //        Title = "";
-        //    }
-        //}
-        #endregion
+            HandleMenuItemText();
+            if (!ShowAllFlag)
+            {
+                ItemListSource = ((List<Level>)ItemListSource as List<Level>).Where(x => x.Completed == false).ToList();
+            }
+            else
+            {
+                ItemListSource = SelectedListStack.Last();
+            }
+        }
 
         private void HandleItemTapped(object obj)
         {
             if (obj is Level SelecedLevel)
             {
-                NavigationHandler(SelecedLevel);
                 FormattedTitlesStack.Add(SelecedLevel);
+                NavigationHandler(SelecedLevel);
             }
             RaisePropertyChanged();
+        }
+        void HandleMenuItemText()
+        {
+
+            if (ShowAllFlag)
+                ShowAllText = "Show UnCompleted";
+            else
+                ShowAllText = "Show All";
+
         }
 
         void NavigationHandler(Level SelecedLevel)
@@ -194,14 +182,45 @@ namespace IDEX.ViewModel
             if (SelecedLevel.Children.Count() != 0)
             {
                 HandleTitleSet(SelecedLevel);
-                ItemListSource = SelecedLevel.Children;
+                if (!ShowAllFlag)
+                {
+                    ItemListSource = SelecedLevel.Children.Where(x => x.Completed == false).ToList();
+                }
+                else
+                {
+                    ItemListSource = SelecedLevel.Children;
+                }
                 SelectedListStack.Add(ItemListSource as List<Level>);
             }
             else
                 return;
         }
-
-        private void HandleTitleSet(Level level) {
+        public override void OnSoftBackButtonPressed()
+        {
+            if (SelectedListStack.Count() != 1)
+            {
+                SelectedListStack.Remove(SelectedListStack.Last());
+                FormattedTitlesStack.Remove(FormattedTitlesStack.Last());
+                if (FormattedTitlesStack.Count() != 0)
+                    HandleTitleSet(FormattedTitlesStack.Last());
+                else
+                {
+                    baseContentPage.FormattedTitle = "Site";
+                }
+                if (!ShowAllFlag)
+                {
+                    ItemListSource = SelectedListStack.Last().Where(x => x.Completed == false).ToList();
+                }
+                else
+                    ItemListSource = SelectedListStack.Last();
+            }
+            else
+            {
+                Navigation.GoBack();
+            }
+        }
+        private void HandleTitleSet(Level level)
+        {
             var formattedTitle = new FormattedString();
             formattedTitle.Spans.Add
                 (new Span
@@ -213,7 +232,7 @@ namespace IDEX.ViewModel
                     FontSize = 20
                 });
             baseContentPage.FormattedTitle = formattedTitle;
-            Level newLevel=level;
+            Level newLevel = level;
             FormattedSubTitle = "";
             while (newLevel.Parent != null)
             {
@@ -251,12 +270,14 @@ namespace IDEX.ViewModel
             {
                 level.ListViewModeValue = level.Area.ToString() + " m2";
                 level.Segments = AddSegmentsListLastLevel(level.ControlStatus);
+                if (level.ControlStatus == 1 || level.ControlStatus == -1) level.Completed = true;
             }
             foreach (Level level in LevelListWithChildren.Where(x => x.LevelType != AllLevelTypes.Last()))
             {
                 level.ListViewModeValue = level.Finished.ToString() + "/" + level.ChildernCount;
                 double Percentage = (double)level.Finished / level.ChildernCount;
                 level.Segments = AddSegmentsList(Percentage * 360);
+                if (Percentage == 1) level.Completed = true;
             }
         }
 
@@ -276,25 +297,6 @@ namespace IDEX.ViewModel
                 new Segment { Color = Color.LightGray, Radius = .8F, SweepAngle = 360 , ControlStatus = ControlStatus}
             };
             return segments;
-        }
-
-        public override void OnSoftBackButtonPressed()
-        {
-            if (SelectedListStack.Count() != 1)
-            {
-                SelectedListStack.Remove(SelectedListStack.Last());
-                FormattedTitlesStack.Remove(FormattedTitlesStack.Last());
-                if (FormattedTitlesStack.Count() != 0)
-                    HandleTitleSet(FormattedTitlesStack.Last());
-                else {
-                    baseContentPage.FormattedTitle = "Site";
-                }
-                ItemListSource = SelectedListStack.Last();
-            }
-            else
-            {
-                Navigation.GoBack();
-            }
         }
 
         void SetFirstListOfLevels()

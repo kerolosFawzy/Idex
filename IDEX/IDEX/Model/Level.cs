@@ -35,6 +35,13 @@ namespace IDEX.Model
                 RaisePropertyChanged();
             }
         }
+        private bool _completed = false;
+
+        public bool Completed
+        {
+            get { return _completed; }
+            set { _completed = value; }
+        }
 
         private IList<Segment> _segments = new List<Segment>();
 
