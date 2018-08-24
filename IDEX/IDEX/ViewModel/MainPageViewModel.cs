@@ -1,4 +1,5 @@
-﻿using Autofac;
+﻿using Acr.UserDialogs;
+using Autofac;
 using IDEX.Model;
 using IDEX.Views;
 using System.Collections;
@@ -284,7 +285,8 @@ namespace IDEX.ViewModel
                     flag = flag - 1;
                     AddSelectedIndexs(flag + 1);
                     NavigationHandeler();
-                    //DisplayAlert("Alert", "Please Select Customer(s) Frist", "ok");
+                    UserDialogs.Instance.AlertAsync("Please Select Customer(s) Frist", "Alert", "ok");
+                 //   baseContentPage.DisplayAlert("Alert", "Please Select Customer(s) Frist", "ok");
                 }
             }
             else if (flag == 2)
@@ -310,7 +312,9 @@ namespace IDEX.ViewModel
                     flag = flag - 1;
                     AddSelectedIndexs(flag + 1);
                      NavigationHandeler();
-                    // DisplayAlert("Alert", "Please Select Scheme(s) Frist", "ok");
+                    UserDialogs.Instance.AlertAsync("Please Select Scheme(s) Frist", "Alert", "ok");
+
+                   // baseContentPage.DisplayAlert("Alert", "Please Select Scheme(s) Frist", "ok");
                 }
             }
             else if (flag == 3)

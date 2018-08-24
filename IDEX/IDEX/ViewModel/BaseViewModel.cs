@@ -1,7 +1,8 @@
-﻿using CustomController;
+﻿using Acr.UserDialogs;
+using CustomController;
 using GalaSoft.MvvmLight;
 using IDEX.Views;
-using Xamarin.Forms;
+
 
 namespace IDEX.ViewModel
 {
@@ -12,7 +13,7 @@ namespace IDEX.ViewModel
         public virtual void DisAppearing() {}
        // public virtual void OnBackButtonPressed() {}
         public INavigationService Navigation { get; } = App.NavigationService;
-
+        protected IUserDialogs Dialogs { get; }
         public BaseContentPage baseContentPage { get; set; } 
     }
 }

@@ -1,7 +1,5 @@
 ﻿using CustomController;
-using CustomController.NavigationServices;
 using IDEX.Model;
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;

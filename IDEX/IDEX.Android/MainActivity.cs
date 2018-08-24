@@ -1,12 +1,7 @@
-﻿using System;
-using IDEX.ViewModel;
-using Android.App;
+﻿using Android.App;
 using Android.Content.PM;
-using Android.Runtime;
-using Android.Views;
-using Android.Widget;
 using Android.OS;
-using Xamarin.Forms;
+using Acr.UserDialogs;
 
 namespace IDEX.Droid
 {
@@ -17,7 +12,7 @@ namespace IDEX.Droid
         {
             TabLayoutResource = Resource.Layout.Tabbar;
             ToolbarResource = Resource.Layout.Toolbar;
-
+            UserDialogs.Init(this); 
             base.OnCreate(bundle);
 
             global::Xamarin.Forms.Forms.Init(this, bundle);
