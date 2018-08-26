@@ -2,23 +2,26 @@
 using Autofac;
 using IDEX.Model;
 using IDEX.Views;
+using ReactiveUI;
+using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
 using System.Windows.Input;
 using Xamarin.Forms;
 
 namespace IDEX.ViewModel
 {
-    class MainPageViewModel : BaseViewModel, INotifyPropertyChanged
+    class MainPageViewModel : BaseViewModel
     {
         private static int flag;
+
         List<Customer> ts = new List<Customer>();
         #region Commands for the view
         public ICommand ItemSelected { get; set; }
-        public ICommand NextItemClicked { get; set; }
-        public ICommand BackButtonClicked { get; set; }
+        public ReactiveCommand ReactiveBackButtonClicked { get; set; }
+
+        public ReactiveCommand ReactiveNextItemClicked { get; private set; }
         #endregion
 
         public MainPageViewModel()
@@ -26,22 +29,21 @@ namespace IDEX.ViewModel
             flag = 0;
             AddDummyData();
             ItemSelected = new Command(HandleItemClicked);
-            NextItemClicked = new Command(HandleNextItemClicked);
-            BackButtonClicked = new Command(HandleBackClicked);
+            ReactiveBackButtonClicked = ReactiveCommand.Create(HandleReactiveBackButtonClicked);
+            ReactiveNextItemClicked = ReactiveCommand.Create(HandleReactiveNextItemClicked);
         }
 
         #region Handle all buttons on the view and listviews
 
-        private void HandleBackClicked(object obj)
+        private void HandleReactiveBackButtonClicked()
         {
             if (flag == 3)
                 flag = 2;
             flag -= 1;
             NavigationHandeler();
-
         }
 
-        private void HandleNextItemClicked(object obj)
+        private void HandleReactiveNextItemClicked()
         {
             if (flag == 3)
             { }
@@ -54,12 +56,8 @@ namespace IDEX.ViewModel
 
         public List<string> SelectedIndexs
         {
-            get { return _selectedIndexs; }
-            set
-            {
-                _selectedIndexs = value;
-                RaisePropertyChanged();
-            }
+            get => _selectedIndexs;
+            set => this.RaiseAndSetIfChanged(ref _selectedIndexs, value);
         }
 
 
@@ -83,134 +81,90 @@ namespace IDEX.ViewModel
                 AddSelectedIndexs(3);
                 flag = 2;
             }
-             NavigationHandeler();
+            NavigationHandeler();
         }
 
         private IEnumerable _itemListSource = Enumerable.Empty<BaseModel>();
         public IEnumerable ItemListSource
         {
-            get { return _itemListSource; }
-            set
-            {
-                _itemListSource = value;
-                RaisePropertyChanged();
-            }
+            get => _itemListSource;
+            set => this.RaiseAndSetIfChanged(ref _itemListSource, value);
         }
 
         private string _nextButtonTitle = "Next";
         public string NextButtonTitle
         {
-            get { return _nextButtonTitle; }
-            set
-            {
-                _nextButtonTitle = value;
-                RaisePropertyChanged();
-            }
+            get => _nextButtonTitle;
+            set => this.RaiseAndSetIfChanged(ref _nextButtonTitle, value);
         }
         private bool _backBtnVisibilty;
         public bool BackBtnVisibilty
         {
-            get { return _backBtnVisibilty; }
-            set
-            {
-                _backBtnVisibilty = value;
-                RaisePropertyChanged();
-            }
+            get => _backBtnVisibilty;
+            set => this.RaiseAndSetIfChanged(ref _backBtnVisibilty, value);
         }
         #endregion
 
         #region three models List Defination 
-        private List<Customer> _customers = new List<Customer>();
-        public List<Customer> Customers
+        private ReactiveList<Customer> _customers ;
+        public ReactiveList<Customer> Customers
         {
-            get { return _customers; }
-            set
-            {
-                _customers = value;
-                RaisePropertyChanged();
-            }
+            get => _customers;
+            set => this.RaiseAndSetIfChanged(ref _customers, value);
         }
 
-        private List<Scheme> _Schemes = new List<Scheme>();
+        private ReactiveList<Scheme> _Schemes;
 
-        public List<Scheme> Schemes
+        public ReactiveList<Scheme> Schemes
         {
-            get { return _Schemes; }
-            set
-            {
-                _Schemes = value;
-                RaisePropertyChanged();
-            }
+            get => _Schemes;
+            set => this.RaiseAndSetIfChanged(ref _Schemes, value);
         }
 
-        private List<Inspection> _inspections = new List<Inspection>();
+        private ReactiveList<Inspection> _inspections;
 
-        public List<Inspection> Inspections
+        public ReactiveList<Inspection> Inspections
         {
-            get { return _inspections; }
-            set
-            {
-                _inspections = value;
-                RaisePropertyChanged();
-            }
+            get => _inspections;
+            set => this.RaiseAndSetIfChanged(ref _inspections, value);
         }
         #endregion
 
         #region init Selected Lists 
 
-        private List<Customer> _selectCustomers;
-        public List<Customer> SelectedCustomer
+        private ReactiveList<Customer> _selectCustomers;
+        public ReactiveList<Customer> SelectedCustomer
         {
-            get { return _selectCustomers; }
-            set
-            {
-                _selectCustomers = value;
-                RaisePropertyChanged();
-            }
+            get => _selectCustomers;
+            set => this.RaiseAndSetIfChanged(ref _selectCustomers, value);
         }
 
-        private List<Scheme> _schemeBindingList = new List<Scheme>();
-        public List<Scheme> SchemeBindingList
+        private ReactiveList<Scheme> _schemeBindingList ;
+        public ReactiveList<Scheme> SchemeBindingList
         {
-            get { return _schemeBindingList; }
-            set
-            {
-                _schemeBindingList = value;
-                RaisePropertyChanged();
-            }
+            get => _schemeBindingList;
+            set => this.RaiseAndSetIfChanged(ref _schemeBindingList, value);
         }
 
-        private List<Scheme> _selectedSchemes = new List<Scheme>();
-        public List<Scheme> SelectedSchemes
+        private ReactiveList<Scheme> _selectedSchemes ;
+        public ReactiveList<Scheme> SelectedSchemes
         {
-            get { return _selectedSchemes; }
-            set
-            {
-                _selectedSchemes = value;
-                RaisePropertyChanged();
-            }
+            get => _selectedSchemes;
+            set => this.RaiseAndSetIfChanged(ref _selectedSchemes, value);
         }
 
-        private List<Inspection> _insepctionBindingList = new List<Inspection>();
-        public List<Inspection> InsepctionBindingList
+        private ReactiveList<Inspection> _insepctionBindingList ;
+        public ReactiveList<Inspection> InsepctionBindingList
         {
-            get { return _insepctionBindingList; }
-            set
-            {
-                _insepctionBindingList = value;
-                RaisePropertyChanged();
-            }
+            get => _insepctionBindingList;
+            set => this.RaiseAndSetIfChanged(ref _insepctionBindingList, value);
         }
 
-        private List<Inspection> _selectedInsepction = new List<Inspection>();
-        public List<Inspection> SelectedInsepction
+        private ReactiveList<Inspection> _selectedInsepction;
+        public ReactiveList<Inspection> SelectedInsepction
         {
-            get { return _selectedInsepction; }
-            set
-            {
-                _selectedInsepction = value;
-                RaisePropertyChanged();
-            }
+            get => _selectedInsepction;
+            set => this.RaiseAndSetIfChanged(ref _selectedInsepction, value);
         }
 
         #endregion
@@ -286,7 +240,6 @@ namespace IDEX.ViewModel
                     AddSelectedIndexs(flag + 1);
                     NavigationHandeler();
                     UserDialogs.Instance.AlertAsync("Please Select Customer(s) Frist", "Alert", "ok");
-                 //   baseContentPage.DisplayAlert("Alert", "Please Select Customer(s) Frist", "ok");
                 }
             }
             else if (flag == 2)
@@ -311,10 +264,9 @@ namespace IDEX.ViewModel
                 {
                     flag = flag - 1;
                     AddSelectedIndexs(flag + 1);
-                     NavigationHandeler();
+                    NavigationHandeler();
                     UserDialogs.Instance.AlertAsync("Please Select Scheme(s) Frist", "Alert", "ok");
 
-                   // baseContentPage.DisplayAlert("Alert", "Please Select Scheme(s) Frist", "ok");
                 }
             }
             else if (flag == 3)
@@ -323,12 +275,11 @@ namespace IDEX.ViewModel
                 {
                     Device.BeginInvokeOnMainThread(async () =>
                     {
-                       await Navigation.NavigateAsync(nameof(OverviewPage));
+                        await Navigation.NavigateAsync(nameof(OverviewPage));
                     });
                 }
-
                 else
-                    flag -= 1; 
+                    flag -= 1;
             }
         }
 

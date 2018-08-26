@@ -63,6 +63,7 @@ namespace IDEX.Droid
 			global::AndroidHUD.Resource.Styleable.ProgressWheel_ahText = global::IDEX.Droid.Resource.Styleable.ProgressWheel_ahText;
 			global::AndroidHUD.Resource.Styleable.ProgressWheel_ahTextColor = global::IDEX.Droid.Resource.Styleable.ProgressWheel_ahTextColor;
 			global::AndroidHUD.Resource.Styleable.ProgressWheel_ahTextSize = global::IDEX.Droid.Resource.Styleable.ProgressWheel_ahTextSize;
+			global::Splat.Resource.String.library_name = global::IDEX.Droid.Resource.String.library_name;
 			global::Xamarin.Forms.Platform.Android.Resource.Attribute.actionBarSize = global::IDEX.Droid.Resource.Attribute.actionBarSize;
 		}
 		

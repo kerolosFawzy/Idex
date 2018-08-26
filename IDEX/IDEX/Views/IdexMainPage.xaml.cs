@@ -3,13 +3,13 @@ using Xamarin.Forms;
 
 namespace IDEX
 {
-    public partial class IdexMainPage
+    public partial class IdexMainPage 
     {
-        public IdexMainPage()
-        {
+
+        public IdexMainPage(){
             InitializeComponent();
-            CustomNavigationPage.SetTitleFont(this , Font.SystemFontOfSize(22));
+            CustomNavigationPage.SetTitleFont(this, Font.SystemFontOfSize(22));
         }
-      
+        
     }
 }

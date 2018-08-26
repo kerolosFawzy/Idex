@@ -393,8 +393,6 @@ namespace IDEX.Droid
             }
         }
 
-
-
         #region Title View Layout
         void UpdateTitleViewLayout(Page lastPage, Android.Widget.LinearLayout titleViewLayout, AppCompatTextView titleTextView, AppCompatTextView subTitleTextView, Android.Graphics.Drawables.Drawable defaultBackground)
         {
@@ -474,6 +472,7 @@ namespace IDEX.Droid
             titleViewLayout.LayoutParameters = titleViewParams;
         }
         #endregion
+
         #region Toolbar 
         void UpdateToolbarStyle(Android.Support.V7.Widget.Toolbar toolbar, Page lastPage, Activity activity, Android.Graphics.Drawables.Drawable defaultBackground, Android.Graphics.Drawables.Drawable windowContent)
         {
@@ -552,6 +551,7 @@ namespace IDEX.Droid
 
         }
         #endregion
+
         #region Title TextView
         void UpdateToolbarTitle(Page lastPage, AppCompatTextView titleTextView, AppCompatTextView subTitleTextView, Typeface originalFont, ColorStateList defaultColorStateList)
         {
@@ -611,6 +611,7 @@ namespace IDEX.Droid
         }
 
         #endregion
+
         #region Subtitle TextView
         void UpdateToolbarSubtitle(BaseContentPage cPage, AppCompatTextView subTitleTextView, Typeface originalFont, ColorStateList defaultColorStateList)
         {
@@ -632,6 +633,7 @@ namespace IDEX.Droid
             }
         }
         #endregion
+
         #region General TextView
         void UpdateToolbarTextColor(AppCompatTextView textView, Xamarin.Forms.Color? titleColor, ColorStateList defaultColorStateList)
         {

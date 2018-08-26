@@ -6,6 +6,7 @@
     x:Class="IDEX.IdexMainPage" Title="IDEX"
     xmlns:Custom="clr-namespace:CustomControls;assembly=CustomControls"
     xmlns:ViewModel="clr-namespace:IDEX.ViewModel">
+   
     <ContentPage.BindingContext>
         <ViewModel:MainPageViewModel />
     </ContentPage.BindingContext>
@@ -104,7 +105,7 @@
             <Custom:ExtButton x:Name="NextButton" 
                                   Text="{Binding NextButtonTitle}" 
                                   Style="{StaticResource FirstScreenButtons}" 
-                                  Command="{Binding NextItemClicked}"
+                                  Command="{Binding ReactiveNextItemClicked}"
                                   >
                 
             </Custom:ExtButton>

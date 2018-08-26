@@ -1,6 +1,6 @@
 ﻿using CoreAnimation;
 using CoreGraphics;
-using CustomController.NavigationServices;
+using CustomControls.NavigationServices;
 using Foundation;
 using IDEX.iOS;
 using IDEX.Views;

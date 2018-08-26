@@ -1,4 +1,5 @@
 ﻿using CustomControls;
+using ReactiveUI;
 using System.Collections.Generic;
 
 
@@ -19,21 +20,15 @@ namespace IDEX.Model
         private int _finished;
         public int Finished
         {
-            get { return _finished; }
-            set { _finished = value;
-                RaisePropertyChanged();
-            }
+            get => _finished;
+            set => this.RaiseAndSetIfChanged(ref _finished, value);
         }
 
         private int _childernCount;
         public int ChildernCount
         {
-            get { return _childernCount; }
-            set
-            {
-                _childernCount =value;
-                RaisePropertyChanged();
-            }
+            get => _childernCount;
+            set => this.RaiseAndSetIfChanged(ref _childernCount, value);
         }
         private bool _completed = false;
 
@@ -47,28 +42,24 @@ namespace IDEX.Model
 
         public IList<Segment> Segments
         {
-            get { return _segments; }
-            set
-            {
-                _segments = value;
-                RaisePropertyChanged();
-            }
+            get => _segments;
+            set => this.RaiseAndSetIfChanged(ref _segments, value);
         }
 
         private string _listViewMode;
 
         public string ListViewMode
         {
-            get { return _listViewMode; }
-            set { _listViewMode = value; }
+            get => _listViewMode;
+            set => this.RaiseAndSetIfChanged(ref _listViewMode, value);
         }
 
         private string _listViewModeValue;
 
         public string ListViewModeValue
         {
-            get { return _listViewModeValue; }
-            set { _listViewModeValue = value; }
+            get => _listViewModeValue;
+            set => this.RaiseAndSetIfChanged(ref _listViewModeValue, value);
         }
 
  

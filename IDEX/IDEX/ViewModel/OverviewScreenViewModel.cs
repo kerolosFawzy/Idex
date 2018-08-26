@@ -1,15 +1,15 @@
 ﻿using CustomControls;
 using IDEX.Model;
+using ReactiveUI;
 using System.Collections;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
 using System.Windows.Input;
 using Xamarin.Forms;
 
 namespace IDEX.ViewModel
 {
-    class OverviewScreenViewModel : BaseViewModel, INotifyPropertyChanged
+    class OverviewScreenViewModel : BaseViewModel
     {
         public ICommand ShowAll { get; set; }
         public ICommand ItemTapped { get; set; }
@@ -21,36 +21,24 @@ namespace IDEX.ViewModel
 
         public string Title
         {
-            get { return _title; }
-            set
-            {
-                _title = value;
-                RaisePropertyChanged();
-            }
+            get => _title;
+            set => this.RaiseAndSetIfChanged(ref _title, value);
         }
 
         private string _formattedTitle = "Site";
 
         private string _showAllText = "Show UnCompleted";
-
+        //-------------------
         public string ShowAllText
         {
-            get { return _showAllText; }
-            set
-            {
-                _showAllText = value;
-                RaisePropertyChanged();
-            }
+            get => _showAllText;
+            set => this.RaiseAndSetIfChanged(ref _showAllText, value);
         }
 
         public string FormattedTitle
         {
-            get { return _formattedTitle; }
-            set
-            {
-                _formattedTitle = value;
-                RaisePropertyChanged();
-            }
+            get => _formattedTitle;
+            set => this.RaiseAndSetIfChanged(ref _formattedTitle, value);
         }
 
         private string _formattedSubTitle;
@@ -58,35 +46,23 @@ namespace IDEX.ViewModel
 
         public bool IsVisible
         {
-            get { return _isVisible; }
-            set
-            {
-                _isVisible = value;
-                RaisePropertyChanged();
-            }
+            get => _isVisible;
+            set => this.RaiseAndSetIfChanged(ref _isVisible, value);
         }
 
         private bool _listViewIsVisible = true;
 
         public bool ListViewIsVisible
         {
-            get { return _listViewIsVisible; }
-            set
-            {
-                _listViewIsVisible = value;
-                RaisePropertyChanged();
-            }
+            get => _listViewIsVisible;
+            set => this.RaiseAndSetIfChanged(ref _listViewIsVisible, value);
         }
 
 
         public string FormattedSubTitle
         {
-            get { return _formattedSubTitle; }
-            set
-            {
-                _formattedSubTitle = value;
-                RaisePropertyChanged();
-            }
+            get => _formattedSubTitle;
+            set => this.RaiseAndSetIfChanged(ref _formattedSubTitle, value);
         }
 
         #region ALL Lists Init
@@ -95,12 +71,8 @@ namespace IDEX.ViewModel
 
         public List<Level> FormattedTitlesStack
         {
-            get { return _formattedTitlesStack; }
-            set
-            {
-                _formattedTitlesStack = value;
-                RaisePropertyChanged();
-            }
+            get => _formattedTitlesStack;
+            set => this.RaiseAndSetIfChanged(ref _formattedTitlesStack, value);
         }
 
 
@@ -108,35 +80,23 @@ namespace IDEX.ViewModel
 
         public IEnumerable AllLevels
         {
-            get { return _allLevels; }
-            set
-            {
-                _allLevels = value;
-                RaisePropertyChanged();
-            }
+            get => _allLevels;
+            set => this.RaiseAndSetIfChanged(ref _allLevels, value);
         }
 
         private IEnumerable _itemListSource = Enumerable.Empty<Level>();
         public IEnumerable ItemListSource
         {
-            get { return _itemListSource; }
-            set
-            {
-                _itemListSource = value;
-                RaisePropertyChanged();
-            }
+            get => _itemListSource;
+            set => this.RaiseAndSetIfChanged(ref _itemListSource, value);
         }
 
         List<Level> _levelListWithChildren = new List<Level>();
 
         public List<Level> LevelListWithChildren
         {
-            get { return _levelListWithChildren; }
-            set
-            {
-                _levelListWithChildren = value;
-                RaisePropertyChanged();
-            }
+            get => _levelListWithChildren;
+            set => this.RaiseAndSetIfChanged(ref _levelListWithChildren, value);
         }
 
         public List<List<Level>> SelectedListStack { get; set; } = new List<List<Level>>();
@@ -189,7 +149,6 @@ namespace IDEX.ViewModel
                 FormattedTitlesStack.Add(SelecedLevel);
                 NavigationHandler(SelecedLevel);
             }
-            RaisePropertyChanged();
         }
         void HandleMenuItemText()
         {
