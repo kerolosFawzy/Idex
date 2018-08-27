@@ -10,7 +10,7 @@ namespace IDEX.Model
 
         public bool IsChecked
         {
-            get { return _isChecked; }
+            get => _isChecked; 
             set => this.RaiseAndSetIfChanged(ref _isChecked, value);
         }
     }

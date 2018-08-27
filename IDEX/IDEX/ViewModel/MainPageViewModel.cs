@@ -7,6 +7,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reactive.Linq;
 using System.Windows.Input;
 using Xamarin.Forms;
 
@@ -16,11 +17,10 @@ namespace IDEX.ViewModel
     {
         private static int flag;
 
-        List<Customer> ts = new List<Customer>();
+        ReactiveList<Customer> ts ;
         #region Commands for the view
         public ICommand ItemSelected { get; set; }
         public ReactiveCommand ReactiveBackButtonClicked { get; set; }
-
         public ReactiveCommand ReactiveNextItemClicked { get; private set; }
         #endregion
 
@@ -31,6 +31,34 @@ namespace IDEX.ViewModel
             ItemSelected = new Command(HandleItemClicked);
             ReactiveBackButtonClicked = ReactiveCommand.Create(HandleReactiveBackButtonClicked);
             ReactiveNextItemClicked = ReactiveCommand.Create(HandleReactiveNextItemClicked);
+            SetReactiveListListen();
+        }
+
+        private void SetReactiveListListen()
+        {
+            Customers.ItemChanged.Where(x => x.PropertyName == "IsChecked")
+                            .Select(x => x.Sender)
+                            .Subscribe(x =>
+                            {
+                                var tempList = SelectedCustomer.ToList();
+                                if (x.IsChecked == false)
+                                    tempList.Remove(x);
+                                else
+                                    tempList.Add(x);
+
+                                SelectedCustomer = new ReactiveList<Customer>(tempList);
+                            });
+            Schemes.ItemChanged.Where(x => x.PropertyName == "IsChecked")
+                .Select(x => x.Sender)
+                .Subscribe(x =>
+                {
+                    var tempList = SelectedSchemes.ToList();
+                    if (x.IsChecked == false)
+                        tempList.Remove(x);
+                    else
+                        tempList.Add(x);
+                    SelectedSchemes = new ReactiveList<Scheme>(tempList);
+                });
         }
 
         #region Handle all buttons on the view and listviews
@@ -106,7 +134,7 @@ namespace IDEX.ViewModel
         #endregion
 
         #region three models List Defination 
-        private ReactiveList<Customer> _customers ;
+        private ReactiveList<Customer> _customers;
         public ReactiveList<Customer> Customers
         {
             get => _customers;
@@ -132,35 +160,35 @@ namespace IDEX.ViewModel
 
         #region init Selected Lists 
 
-        private ReactiveList<Customer> _selectCustomers;
+        private ReactiveList<Customer> _selectCustomers = new ReactiveList<Customer> ();
         public ReactiveList<Customer> SelectedCustomer
         {
             get => _selectCustomers;
             set => this.RaiseAndSetIfChanged(ref _selectCustomers, value);
         }
 
-        private ReactiveList<Scheme> _schemeBindingList ;
+        private ReactiveList<Scheme> _schemeBindingList = new ReactiveList<Scheme> { ChangeTrackingEnabled = true };
         public ReactiveList<Scheme> SchemeBindingList
         {
             get => _schemeBindingList;
             set => this.RaiseAndSetIfChanged(ref _schemeBindingList, value);
         }
 
-        private ReactiveList<Scheme> _selectedSchemes ;
+        private ReactiveList<Scheme> _selectedSchemes = new ReactiveList<Scheme> { ChangeTrackingEnabled = true };
         public ReactiveList<Scheme> SelectedSchemes
         {
             get => _selectedSchemes;
             set => this.RaiseAndSetIfChanged(ref _selectedSchemes, value);
         }
 
-        private ReactiveList<Inspection> _insepctionBindingList ;
+        private ReactiveList<Inspection> _insepctionBindingList = new ReactiveList<Inspection> { ChangeTrackingEnabled = true };
         public ReactiveList<Inspection> InsepctionBindingList
         {
             get => _insepctionBindingList;
             set => this.RaiseAndSetIfChanged(ref _insepctionBindingList, value);
         }
 
-        private ReactiveList<Inspection> _selectedInsepction;
+        private ReactiveList<Inspection> _selectedInsepction = new ReactiveList<Inspection> { ChangeTrackingEnabled = true };
         public ReactiveList<Inspection> SelectedInsepction
         {
             get => _selectedInsepction;
@@ -170,15 +198,17 @@ namespace IDEX.ViewModel
         #endregion
         private void AddDummyData()
         {
-
+            Customers = new ReactiveList<Customer>() { ChangeTrackingEnabled = true };
             Customers.Add(new Customer { ID = 1, Name = "Hospital" });
             Customers.Add(new Customer { ID = 2, Name = "School" });
             Customers.Add(new Customer { ID = 3, Name = "University" });
 
+            Schemes = new ReactiveList<Scheme>() { ChangeTrackingEnabled = true };
             Schemes.Add(new Scheme { ID = 1, CustomerId = 1, Name = "Hospital scheme" });
             Schemes.Add(new Scheme { ID = 2, CustomerId = 2, Name = "School scheme" });
             Schemes.Add(new Scheme { ID = 3, CustomerId = 3, Name = "University scheme" });
 
+            Inspections = new ReactiveList<Inspection>() { ChangeTrackingEnabled = true };
             Inspections.Add(new Inspection { ID = 1, Name = "Hospital Inspection File", SchemeId = 1 });
             Inspections.Add(new Inspection { ID = 2, Name = "School Inspection File", SchemeId = 2 });
             Inspections.Add(new Inspection { ID = 3, Name = "University Inspection File", SchemeId = 3 });
@@ -200,7 +230,17 @@ namespace IDEX.ViewModel
             SchemeBindingList.Clear();
             InsepctionBindingList.Clear();
             SelectedInsepction.Clear();
-            SelectedSchemes = null;
+            SelectedSchemes.Clear();
+            SelectedCustomer.Clear();
+            foreach (BaseModel customer in Customers) {
+                if(customer.IsChecked)
+                   customer.IsChecked = false;
+            }
+            foreach (BaseModel schemelist in Schemes)
+            {
+                if (schemelist.IsChecked)
+                    schemelist.IsChecked = false;
+            }
         }
         private void NavigationHandeler()
         {
@@ -215,27 +255,28 @@ namespace IDEX.ViewModel
             }
             else if (flag == 1)
             {
-                List<Customer> customers = Customers;
-                ts = customers.Where(x => x.IsChecked == true).ToList();
+                ts  = new ReactiveList<Customer>() { ChangeTrackingEnabled = true };
+                ts.AddRange(Customers.Where(x => x.IsChecked == true) ?? new ReactiveList<Customer>());
                 if (ts.Count != 0)
                 {
                     AddSelectedIndexs(2);
                     SelectedCustomer = ts;
                     BackBtnVisibilty = true;
-                    List<Scheme> scheme = new List<Scheme>();
+                    ReactiveList<Scheme> scheme = new ReactiveList<Scheme>();
                     for (int i = 0; i < ts.Count(); i++)
                     {
                         scheme.AddRange(Schemes.Where(x => x.CustomerId == SelectedCustomer[i].ID).ToList());
                     }
 
                     SchemeBindingList = scheme;
+
+
                     BackBtnVisibilty = true;
                     NextButtonTitle = "Next";
                     ItemListSource = SchemeBindingList;
                 }
                 else
                 {
-
                     flag = flag - 1;
                     AddSelectedIndexs(flag + 1);
                     NavigationHandeler();
@@ -244,12 +285,15 @@ namespace IDEX.ViewModel
             }
             else if (flag == 2)
             {
-                List<Scheme> schemes = SchemeBindingList.Where(x => x.IsChecked == true).ToList();
+                ReactiveList<Scheme> schemes = new ReactiveList<Scheme>();
+                
+                schemes.AddRange(SchemeBindingList.Where(x => x.IsChecked == true)?? new ReactiveList<Scheme>());
+
                 if (schemes.Count != 0)
                 {
                     AddSelectedIndexs(3);
                     SelectedSchemes = schemes;
-                    List<Inspection> inspections = new List<Inspection>();
+                    ReactiveList<Inspection> inspections = new ReactiveList<Inspection>();
                     for (int i = 0; i < schemes.Count(); i++)
                     {
                         inspections.AddRange(Inspections.Where(x => x.SchemeId == SelectedSchemes[i].ID).ToList());
@@ -271,15 +315,10 @@ namespace IDEX.ViewModel
             }
             else if (flag == 3)
             {
-                if (ItemListSource.GetType() == typeof(List<Inspection>))
-                {
                     Device.BeginInvokeOnMainThread(async () =>
                     {
                         await Navigation.NavigateAsync(nameof(OverviewPage));
                     });
-                }
-                else
-                    flag -= 1;
             }
         }
 

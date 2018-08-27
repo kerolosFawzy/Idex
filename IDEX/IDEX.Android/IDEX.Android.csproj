@@ -33,7 +33,7 @@
     <DefineConstants>DEBUG;</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <AndroidLinkMode>None</AndroidLinkMode>
+    <AndroidLinkMode>SdkOnly</AndroidLinkMode>
     <EmbedAssembliesIntoApk>false</EmbedAssembliesIntoApk>
     <AndroidUseSharedRuntime>true</AndroidUseSharedRuntime>
     <AndroidSupportedAbis>
@@ -41,6 +41,9 @@
     <AndroidEnableMultiDex>false</AndroidEnableMultiDex>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <Debugger>Xamarin</Debugger>
+    <AndroidLinkSkip>CustomControls</AndroidLinkSkip>
+    <AotAssemblies>true</AotAssemblies>
+    <EnableLLVM>true</EnableLLVM>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -53,7 +56,10 @@
     <AndroidUseSharedRuntime>false</AndroidUseSharedRuntime>
     <EnableProguard>true</EnableProguard>
     <AndroidEnableMultiDex>false</AndroidEnableMultiDex>
-    <AndroidLinkMode>None</AndroidLinkMode>
+    <AndroidLinkMode>SdkOnly</AndroidLinkMode>
+    <AndroidLinkSkip>CustomControls</AndroidLinkSkip>
+    <AotAssemblies>true</AotAssemblies>
+    <EnableLLVM>true</EnableLLVM>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Mono.Android" />

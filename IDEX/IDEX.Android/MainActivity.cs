@@ -2,6 +2,7 @@
 using Android.Content.PM;
 using Android.OS;
 using Acr.UserDialogs;
+using SVG.Forms.Plugin.Droid;
 
 namespace IDEX.Droid
 {
@@ -16,6 +17,7 @@ namespace IDEX.Droid
             base.OnCreate(bundle);
 
             global::Xamarin.Forms.Forms.Init(this, bundle);
+            SvgImageRenderer.Init();
             LoadApplication(new App());
         }
 

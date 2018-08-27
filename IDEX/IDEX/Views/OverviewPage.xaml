@@ -8,9 +8,8 @@
              xmlns:ViewModel="clr-namespace:IDEX.ViewModel "
              xmlns:Converters="clr-namespace:IDEX.Converters"
              xmlns:Behavior="clr-namespace:IDEX.Behavior"
-        xmlns:Custom="clr-namespace:CustomControls;assembly=CustomControls"
-
-    NeedOverrideSoftBackButton="True">
+             xmlns:Custom="clr-namespace:CustomControls;assembly=CustomControls"
+             NeedOverrideSoftBackButton="True">
 
     <ContentPage.ToolbarItems >
         <ToolbarItem Name="ShowAll" Order="Secondary" Text="{Binding ShowAllText}" Priority="0"  Command="{Binding ShowAll}"/>

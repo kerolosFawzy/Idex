@@ -14,8 +14,16 @@ namespace IDEX.ViewModel
         public ICommand ShowAll { get; set; }
         public ICommand ItemTapped { get; set; }
         readonly Color PieChartColor = Color.FromHex("#008080");
+        public OverviewScreenViewModel()
+        {
+            AddDummyData();
+            SetFirstListOfLevels();
+            ItemTapped = new Command<Level>(HandleItemTapped);
+            ShowAll = new Command(ShowAllCommand);
+            ShowAllFlag = true;
+        }
 
-
+        #region class propfull(s)
         public bool ShowAllFlag { get; set; }
         private string _title;
 
@@ -28,7 +36,7 @@ namespace IDEX.ViewModel
         private string _formattedTitle = "Site";
 
         private string _showAllText = "Show UnCompleted";
-        //-------------------
+        
         public string ShowAllText
         {
             get => _showAllText;
@@ -64,6 +72,7 @@ namespace IDEX.ViewModel
             get => _formattedSubTitle;
             set => this.RaiseAndSetIfChanged(ref _formattedSubTitle, value);
         }
+        #endregion
 
         #region ALL Lists Init
 
@@ -103,15 +112,15 @@ namespace IDEX.ViewModel
 
         #endregion
 
-        public OverviewScreenViewModel()
+        #region Command handle 
+        private void HandleItemTapped(object obj)
         {
-            AddDummyData();
-            SetFirstListOfLevels();
-            ItemTapped = new Command<Level>(HandleItemTapped);
-            ShowAll = new Command(ShowAllCommand);
-            ShowAllFlag = true;
+            if (obj is Level SelecedLevel)
+            {
+                FormattedTitlesStack.Add(SelecedLevel);
+                NavigationHandler(SelecedLevel);
+            }
         }
-
         private void ShowAllCommand(object obj)
         {
             var view = obj as MenuItem;
@@ -130,6 +139,9 @@ namespace IDEX.ViewModel
 
             }
         }
+        #endregion
+
+        #region View handeling 
         void SetVisiablity()
         {
             if((ItemListSource as List<Level>).Count() == 0)
@@ -142,13 +154,27 @@ namespace IDEX.ViewModel
                 ListViewIsVisible = true ;
             }
         }
-        private void HandleItemTapped(object obj)
+        private void HandleTitleSet(Level level)
         {
-            if (obj is Level SelecedLevel)
+            var formattedTitle = new FormattedString();
+            formattedTitle.Spans.Add
+                (new Span
+                {
+                    Text = level.Name
+                ,
+                    FontAttributes = FontAttributes.Bold
+                ,
+                    FontSize = 20
+                });
+            baseContentPage.FormattedTitle = formattedTitle;
+            Level newLevel = level;
+            FormattedSubTitle = "";
+            while (newLevel.Parent != null)
             {
-                FormattedTitlesStack.Add(SelecedLevel);
-                NavigationHandler(SelecedLevel);
+                newLevel = newLevel.Parent;
+                FormattedSubTitle += newLevel.Name;
             }
+            baseContentPage.Subtitle = FormattedSubTitle;
         }
         void HandleMenuItemText()
         {
@@ -159,6 +185,7 @@ namespace IDEX.ViewModel
                 ShowAllText = "Show All";
 
         }
+        #endregion 
 
         void NavigationHandler(Level SelecedLevel)
         {
@@ -206,28 +233,8 @@ namespace IDEX.ViewModel
                 Navigation.GoBack();
             }
         }
-        private void HandleTitleSet(Level level)
-        {
-            var formattedTitle = new FormattedString();
-            formattedTitle.Spans.Add
-                (new Span
-                {
-                    Text = level.Name
-                ,
-                    FontAttributes = FontAttributes.Bold
-                ,
-                    FontSize = 20
-                });
-            baseContentPage.FormattedTitle = formattedTitle;
-            Level newLevel = level;
-            FormattedSubTitle = "";
-            while (newLevel.Parent != null)
-            {
-                newLevel = newLevel.Parent;
-                FormattedSubTitle += newLevel.Name;
-            }
-            baseContentPage.Subtitle = FormattedSubTitle;
-        }
+
+        #region setting level data 
         public void GetFinishedPercentage(List<int> AllLevelTypes)
         {
             int types = AllLevelTypes.Count() - 2;
@@ -301,7 +308,6 @@ namespace IDEX.ViewModel
             SelectedListStack.Add(Parents);
             SortChildren(AllLevelTypes, allLevels);
         }
-
         void SortChildren(List<int> AllLevelTypes, List<Level> allLevels)
         {
             for (int i = 0; i < AllLevelTypes.Count() - 1; i++)
@@ -333,10 +339,9 @@ namespace IDEX.ViewModel
                     .Where(x => x.LevelType == AllLevelTypes[AllLevelTypes.Count() - 2] && x.ID == level.OwnerId)
                     .FirstOrDefault();
             }
-
             GetFinishedPercentage(AllLevelTypes);
-
         }
+        #endregion
 
         void AddDummyData()
         {

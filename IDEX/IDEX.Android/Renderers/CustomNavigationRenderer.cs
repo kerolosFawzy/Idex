@@ -64,15 +64,10 @@ namespace IDEX.Droid
             {
                 Element.PopAsync();
             }
-            //else if(Element.RootPages.Contains(Element.CurrentPage.GetType()))
-            //{
-            //    Element.SendBackButtonPressed();
-            //}
             else
             {
                 if (curPage.NeedOverrideSoftBackButton)
                     curPage.OnSoftBackButtonPressed();
-                //else
             }
         }
 

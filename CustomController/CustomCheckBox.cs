@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using Xamarin.Forms;
 
 namespace CustomControls
@@ -32,6 +30,7 @@ namespace CustomControls
             if (newValue != null && (bool)newValue)
             {
                 ((CustomCheckBox)bindable).Source = ImageChecked;
+               
             }
             else
             {

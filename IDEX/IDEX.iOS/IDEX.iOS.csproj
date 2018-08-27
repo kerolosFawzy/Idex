@@ -213,4 +213,7 @@
   <ItemGroup>
     <BundleResource Include="Resources\checkbox_checked.png" />
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\backbuttonicon.png" />
+  </ItemGroup>
 </Project>

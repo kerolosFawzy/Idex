@@ -7,6 +7,7 @@ using Xamarin.Forms;
 
 namespace CustomControls.NavigationServices
 {
+    [Android.Runtime.Preserve(AllMembers = true)]
     public class ViewNavigationService : INavigationService
     {
         private readonly object _sync = new object();

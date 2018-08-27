@@ -5,14 +5,22 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     x:Class="IDEX.IdexMainPage" Title="IDEX"
     xmlns:Custom="clr-namespace:CustomControls;assembly=CustomControls"
-    xmlns:ViewModel="clr-namespace:IDEX.ViewModel">
-   
+    xmlns:ViewModel="clr-namespace:IDEX.ViewModel"
+    NeedOverrideSoftBackButton="False">
+
     <ContentPage.BindingContext>
         <ViewModel:MainPageViewModel />
     </ContentPage.BindingContext>
-        
+    <views:BaseContentPage.Padding>
+        <OnPlatform iOS="0,10"></OnPlatform>
+    </views:BaseContentPage.Padding>
+    <Page.Resources>
+        <ResourceDictionary>
+            <Color x:Key="StepColor">#008080</Color>
+        </ResourceDictionary>
+    </Page.Resources>
     <Grid BackgroundColor="White" Padding="10" RowSpacing="5" >
-       
+
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
@@ -35,7 +43,7 @@
 
         <Custom:StepProgressBarControl Grid.Row="1" Grid.ColumnSpan="3" 
                                            HorizontalOptions="FillAndExpand" 
-                                           StepColor="#008080" Steps="3" 
+                                           StepColor="{StaticResource StepColor}" Steps="3" 
                                            Margin="10,5,10,5"
                                            ItemClicked="{Binding ItemSelected}"
                                            ItemSelectedIndex ="{Binding SelectedIndexs}"
@@ -43,7 +51,7 @@
 
         <Custom:RepeaterView Grid.Row="2" Grid.Column="0"
                       Grid.ColumnSpan="1" HorizontalOptions="Start"
-                      ItemsSource="{Binding SelectedCustomer}" x:Name="SelectedCustomerListView">
+                      ItemsSource="{Binding SelectedCustomer}" >
             <Custom:RepeaterView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
@@ -56,13 +64,14 @@
             </Custom:RepeaterView.ItemTemplate>
         </Custom:RepeaterView>
 
-        <Custom:RepeaterView x:Name="SelectedSchemesListView"
-                Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="1" 
-                HorizontalOptions="Center" ItemsSource="{Binding SelectedSchemes}">
+        <Custom:RepeaterView 
+                Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" 
+                HorizontalOptions="StartAndExpand" ItemsSource="{Binding SelectedSchemes}">
             <Custom:RepeaterView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
-                        <Label HorizontalOptions="Center" VerticalOptions="Center" 
+                        <Label HorizontalOptions="StartAndExpand" VerticalOptions="Center"
+                                   Margin="5" LineBreakMode="NoWrap" 
                                    Style="{StaticResource FirstScreenLabels}"  
                                    Text="{Binding Name}" FontSize="Small"/>
                     </ViewCell>
@@ -97,19 +106,20 @@
                          HorizontalOptions="End">
 
             <Custom:ExtButton x:Name="BackButton" IsVisible="{Binding BackBtnVisibilty}"
-                                  Text="Back" FontAttributes="Bold" Command="{Binding BackButtonClicked}"
+                                  Text="Back" FontAttributes="Bold" Command="{Binding ReactiveBackButtonClicked}"
                                   TextColor="Black" BackgroundColor="White" 
+                                  WidthRequest="{OnPlatform iOS=100 , Android=100}"                         
                                   Style="{StaticResource FirstScreenButtons}" 
                                   />
 
             <Custom:ExtButton x:Name="NextButton" 
                                   Text="{Binding NextButtonTitle}" 
                                   Style="{StaticResource FirstScreenButtons}" 
+                                  WidthRequest="{OnPlatform iOS=100 , Android=100}"
                                   Command="{Binding ReactiveNextItemClicked}"
-                                  >
-                
-            </Custom:ExtButton>
+                                  />
+
         </StackLayout>
-        
+
     </Grid>
 </views:BaseContentPage>

@@ -9,18 +9,22 @@ using UIKit;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
 
-[assembly: ExportRenderer(typeof(CustomNavigationPage), typeof(CustomNavigationRenderer))]
+[assembly: ExportRenderer(typeof(BaseContentPage), typeof(CustomNavigationRenderer))]
 
 namespace IDEX.iOS
 {
-    class CustomNavigationRenderer : PageRenderer
+    public class CustomNavigationRenderer : PageRenderer
     {
         public override void ViewWillAppear(bool animated)
         {
             base.ViewWillAppear(animated);
-
+            if(!(NavigationController==null))
             SetupNavBar(NavigationController.NavigationBar.Bounds.Size);
-            SetTitlePosition(CustomNavigationPage.GetTitlePosition(Element), CustomNavigationPage.GetTitlePadding(Element), CustomNavigationPage.GetTitleMargin(Element), new CGRect(0, 0, Math.Max(subtitleLabel.IntrinsicContentSize.Width, titleLabel.IntrinsicContentSize.Width), (titleLabel.IntrinsicContentSize.Height + subtitleLabel.IntrinsicContentSize.Height + (subtitleLabel.IntrinsicContentSize.Height > 0.0f ? 3.0f : 0.0f))));
+            SetTitlePosition(CustomNavigationPage.GetTitlePosition(Element)
+                , CustomNavigationPage.GetTitlePadding(Element)
+                , CustomNavigationPage.GetTitleMargin(Element)
+                , new CGRect(0, 0, Math.Max(subtitleLabel.IntrinsicContentSize.Width, titleLabel.IntrinsicContentSize.Width)
+                , (titleLabel.IntrinsicContentSize.Height + subtitleLabel.IntrinsicContentSize.Height + (subtitleLabel.IntrinsicContentSize.Height > 0.0f ? 3.0f : 0.0f))));
 
             var page = Element as BaseContentPage;
             if (page == null) return;
@@ -28,19 +32,103 @@ namespace IDEX.iOS
             #region for soft back button
 
             var root = NavigationController.TopViewController;
-            if (!page.NeedOverrideSoftBackButton) return;
-            //i made change here 
-            var title = CustomNavigationPage.GetBackButtonTitle(Element);
-
-            root.NavigationItem.SetLeftBarButtonItem(
-                new UIBarButtonItem(title, UIBarButtonItemStyle.Plain, (sender, args) =>
-                {
-                    page.OnSoftBackButtonPressed();
-                }), true);
-
+            if (page.NeedOverrideSoftBackButton) {
+                SetCustomBackButton();
+            }
+            //    var title = NavigationPage.GetBackButtonTitle(Element);
+            //    //if (title == null)
+            //    //    title = "Site";
+            // //   root.NavigationItem.SetLeftBarButtonItem(new uibar)
+            //root.NavigationItem.SetLeftBarButtonItem(
+            //    new UIBarButtonItem("", UIBarButtonItemStyle.Plain, (sender, args) =>
+            //    {
+            //        page.OnSoftBackButtonPressed();
+            //    }), true);
+            
             #endregion
         }
 
+        private void SetCustomBackButton()
+        {
+
+            // Load the Back arrow Image
+            var backBtnImage =
+            UIImage.FromBundle("backbuttonicon.png");
+
+            backBtnImage =
+            backBtnImage.ImageWithRenderingMode
+            (UIImageRenderingMode.AlwaysTemplate);
+
+            // Create our Button and set Edge 
+            // Insets for Title and Image
+            var backBtn = new UIButton(UIButtonType.Custom)
+            {
+                HorizontalAlignment =
+                 UIControlContentHorizontalAlignment.Left,
+                TitleEdgeInsets =
+                 new UIEdgeInsets(11.5f, 15f, 10f, 0f),
+                ImageEdgeInsets =
+                 new UIEdgeInsets(1f, 8f, 0f, 0f)
+            };
+
+            // Set the styling for Title
+            // You could set any Text as you wish here
+            backBtn.SetTitle("Back", UIControlState.Normal);
+            // use the white color in ios back button text
+            backBtn.SetTitleColor(UIColor.White,
+            UIControlState.Normal);
+            backBtn.SetTitleColor(UIColor.LightGray,
+            UIControlState.Highlighted);
+            backBtn.Font = UIFont.FromName("HelveticaNeue",
+            (nfloat)17);
+
+            // Set the Image to the button
+            backBtn.SetImage(backBtnImage, UIControlState.Normal);
+
+            // Allow the button to Size itself
+            backBtn.SizeToFit();
+
+            // Add the Custom Click event you would like to 
+            // execute upon the Back button click
+            backBtn.TouchDown += (sender, e) =>
+            {
+                // Whatever your custom back button click handling
+                //page.OnSoftBackButtonPressed.Invoke();
+                ((BaseContentPage)Element)?.OnSoftBackButtonPressed();
+            };
+
+            //Set the frame of the button
+            backBtn.Frame = new CGRect(
+                 0,
+                 0,
+                 UIScreen.MainScreen.Bounds.Width / 4,
+                 NavigationController.NavigationBar.Frame.Height);
+
+            // Add our button to a container
+            var btnContainer = new UIView(
+            new CGRect(0, 0,
+            backBtn.Frame.Width, backBtn.Frame.Height));
+            btnContainer.AddSubview(backBtn);
+
+            // A dummy button item to push our custom  back button to
+            // the edge of screen (sort of a hack)
+            var fixedSpace =
+            new UIBarButtonItem(UIBarButtonSystemItem.FixedSpace)
+            {
+                Width = -16f
+            };
+            // wrap our custom back button with a UIBarButtonItem
+            var backButtonItem = new UIBarButtonItem("",
+            UIBarButtonItemStyle.Plain, null)
+            {
+                CustomView = backBtn
+            };
+
+            // Add it to the ViewController
+            NavigationController.TopViewController.
+            NavigationItem.LeftBarButtonItems
+            = new[] { fixedSpace, backButtonItem };
+        }
 
         UILabel titleLabel;
         UILabel subtitleLabel;

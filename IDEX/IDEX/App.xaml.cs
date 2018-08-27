@@ -1,4 +1,3 @@
-using Autofac;
 using CustomControls;
 using CustomControls.NavigationServices;
 using IDEX.View;
@@ -15,7 +14,6 @@ namespace IDEX
 	public partial class App : Application
 	{
         public static INavigationService NavigationService { get; } = new ViewNavigationService();
-        public static IContainer contianer;
 		public App ()
         {
             InitializeComponent();
@@ -25,6 +23,9 @@ namespace IDEX
             SetRootPage(nameof(IdexMasterDetailPage));
 
         }
+
+        //App support using Svg Images but till now i dont use it 
+        //https://github.com/paulpatarinski/Xamarin.Forms.Plugins/tree/master/SVG
 
         public void RegisterPages()
         {
@@ -39,12 +40,15 @@ namespace IDEX
             MainPage = mainPage;
         }
 
-        private static void ExtractDI()
-        {
-            ContainerBuilder builder = new ContainerBuilder();
 
-            contianer = builder.Build();
-        }
+        //public static IContainer contianer;
+
+        //private static void ExtractDI()
+        //{
+        //    ContainerBuilder builder = new ContainerBuilder();
+
+        //    contianer = builder.Build();
+        //}
 
 
 
