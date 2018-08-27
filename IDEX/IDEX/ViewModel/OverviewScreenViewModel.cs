@@ -1,5 +1,6 @@
 ﻿using CustomControls;
 using IDEX.Model;
+using IDEX.Views;
 using ReactiveUI;
 using System.Collections;
 using System.Collections.Generic;
@@ -117,7 +118,6 @@ namespace IDEX.ViewModel
         {
             if (obj is Level SelecedLevel)
             {
-                FormattedTitlesStack.Add(SelecedLevel);
                 NavigationHandler(SelecedLevel);
             }
         }
@@ -191,6 +191,7 @@ namespace IDEX.ViewModel
         {
             if (SelecedLevel.Children.Count() != 0)
             {
+                FormattedTitlesStack.Add(SelecedLevel);
                 HandleTitleSet(SelecedLevel);
                 if (!ShowAllFlag)
                 {
@@ -205,7 +206,7 @@ namespace IDEX.ViewModel
                 SelectedListStack.Add(ItemListSource as List<Level>);
             }
             else
-                return;
+                Navigation.NavigateAsync(nameof(RoomDetailsScreen));
         }
         public override void OnSoftBackButtonPressed()
         {

@@ -32,6 +32,7 @@ namespace IDEX
             NavigationService.Configure(nameof(IdexMainPage), typeof(IdexMainPage));
             NavigationService.Configure(nameof(IdexMasterDetailPage), typeof(IdexMasterDetailPage));
             NavigationService.Configure(nameof(OverviewPage), typeof(OverviewPage));
+            NavigationService.Configure(nameof(RoomDetailsScreen), typeof(RoomDetailsScreen));
         }
 
         public void SetRootPage(string rootPageName)
