@@ -16,10 +16,11 @@ namespace IDEX.ViewModel
     class MainPageViewModel : BaseViewModel
     {
         private static int flag;
-
         ReactiveList<Customer> ts ;
+
         #region Commands for the view
         public ICommand ItemSelected { get; set; }
+        public ICommand ItemTapped { get; set; }
         public ReactiveCommand ReactiveBackButtonClicked { get; set; }
         public ReactiveCommand ReactiveNextItemClicked { get; private set; }
         #endregion
@@ -29,9 +30,17 @@ namespace IDEX.ViewModel
             flag = 0;
             AddDummyData();
             ItemSelected = new Command(HandleItemClicked);
+            ItemTapped = new Command(HandleItemTapped);
             ReactiveBackButtonClicked = ReactiveCommand.Create(HandleReactiveBackButtonClicked);
             ReactiveNextItemClicked = ReactiveCommand.Create(HandleReactiveNextItemClicked);
             SetReactiveListListen();
+        }
+
+        private void HandleItemTapped(object obj)
+        {
+            var Elemnet = obj as BaseModel;
+            Elemnet.IsChecked = !Elemnet.IsChecked;
+
         }
 
         private void SetReactiveListListen()
@@ -315,10 +324,16 @@ namespace IDEX.ViewModel
             }
             else if (flag == 3)
             {
-                    Device.BeginInvokeOnMainThread(async () =>
+                ReactiveList<Inspection> inspections = new ReactiveList<Inspection>();
+                inspections.AddRange(InsepctionBindingList.Where(x => x.IsChecked == true) ?? new ReactiveList<Inspection>());
+                if(inspections.Count != 0 )
+                Device.BeginInvokeOnMainThread(async () =>
                     {
                         await Navigation.NavigateAsync(nameof(OverviewPage));
                     });
+                else
+                    UserDialogs.Instance.AlertAsync("Please Select Inspection(s) Frist", "Alert", "ok");
+
             }
         }
 
