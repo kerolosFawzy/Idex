@@ -1,5 +1,4 @@
 ﻿using Foundation;
-using SVG.Forms.Plugin.iOS;
 using UIKit;
 
 namespace IDEX.iOS
@@ -20,9 +19,8 @@ namespace IDEX.iOS
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
             global::Xamarin.Forms.Forms.Init();
-            SvgImageRenderer.Init();
             LoadApplication(new App());
-
+            FFImageLoading.Forms.Platform.CachedImageRenderer.Init();
             return base.FinishedLaunching(app, options); 
         }
     }

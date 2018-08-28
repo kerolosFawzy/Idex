@@ -42,8 +42,8 @@
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <Debugger>Xamarin</Debugger>
     <AndroidLinkSkip>CustomControls</AndroidLinkSkip>
-    <AotAssemblies>true</AotAssemblies>
-    <EnableLLVM>true</EnableLLVM>
+    <AotAssemblies>false</AotAssemblies>
+    <EnableLLVM>false</EnableLLVM>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -108,6 +108,9 @@
     <PackageReference Include="Splat">
       <Version>5.0.2</Version>
     </PackageReference>
+    <PackageReference Include="Xamarin.FFImageLoading.Svg.Forms">
+      <Version>2.4.3.840</Version>
+    </PackageReference>
     <PackageReference Include="Xamarin.Forms" Version="3.2.0.637442-pre1" />
     <PackageReference Include="Xamarin.Android.Support.Design" Version="27.0.2.1" />
     <PackageReference Include="Xamarin.Android.Support.v7.AppCompat" Version="27.0.2.1" />
@@ -162,13 +165,16 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\rounded_image.png" />
-  </ItemGroup>
-  <ItemGroup>
     <AndroidResource Include="Resources\drawable\checkbox_unchecked.png" />
   </ItemGroup>
   <ItemGroup>
     <AndroidResource Include="Resources\drawable\checkbox_checked.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\addfile.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <AndroidResource Include="Resources\drawable\camera.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\Android\Xamarin.Android.CSharp.targets" />
 </Project>

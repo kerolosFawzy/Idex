@@ -23,7 +23,7 @@ namespace IDEX.ViewModel
             ShowAll = new Command(ShowAllCommand);
             ShowAllFlag = true;
         }
-
+        public static Level SelectedRoom { get; set; }
         #region class propfull(s)
         public bool ShowAllFlag { get; set; }
         private string _title;
@@ -206,7 +206,11 @@ namespace IDEX.ViewModel
                 SelectedListStack.Add(ItemListSource as List<Level>);
             }
             else
+            {
+                SelectedRoom = SelecedLevel;
+
                 Navigation.NavigateAsync(nameof(RoomDetailsScreen));
+            }
         }
         public override void OnSoftBackButtonPressed()
         {

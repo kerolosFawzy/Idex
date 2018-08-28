@@ -14,7 +14,7 @@
         <ViewModel:MainPageViewModel />
     </ContentPage.BindingContext>
     <views:BaseContentPage.Padding>
-        <OnPlatform iOS="0,10"></OnPlatform>
+        <OnPlatform iOS="0,10"/>
     </views:BaseContentPage.Padding>
     <Page.Resources>
         <ResourceDictionary>

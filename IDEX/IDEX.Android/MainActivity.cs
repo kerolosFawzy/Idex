@@ -2,7 +2,7 @@
 using Android.Content.PM;
 using Android.OS;
 using Acr.UserDialogs;
-using SVG.Forms.Plugin.Droid;
+using FFImageLoading.Forms.Droid;
 
 namespace IDEX.Droid
 {
@@ -15,9 +15,8 @@ namespace IDEX.Droid
             ToolbarResource = Resource.Layout.Toolbar;
             UserDialogs.Init(this); 
             base.OnCreate(bundle);
-
+            FFImageLoading.Forms.Platform.CachedImageRenderer.Init(true);
             global::Xamarin.Forms.Forms.Init(this, bundle);
-            SvgImageRenderer.Init();
             LoadApplication(new App());
         }
 

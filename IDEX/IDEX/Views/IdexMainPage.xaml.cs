@@ -8,6 +8,7 @@ namespace IDEX
         public IdexMainPage(){
             InitializeComponent();
             CustomNavigationPage.SetTitleFont(this, Font.SystemFontOfSize(22));
+            
         }
     }
 }

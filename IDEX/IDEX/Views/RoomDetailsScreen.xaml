@@ -1,18 +1,84 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+<Views:BaseContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="IDEX.Views.RoomDetailsScreen"
              xmlns:ViewModel="clr-namespace:IDEX.ViewModel"
-             >
+             xmlns:Custom="clr-namespace:CustomControls;assembly=CustomControls"
+             xmlns:Views="clr-namespace:IDEX.Views"
+             NeedOverrideSoftBackButton="True"
+             Title="{Binding Title}"
+             xmlns:ffimageloadingsvg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
+                       
+                       >
     <ContentPage.BindingContext>
         <ViewModel:RoomDetailsScreenViewModel/>
     </ContentPage.BindingContext>
+
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Name="EditProperties" Text="Edit Properties" Priority="0" Order="Secondary" Command=""  />
+        <ToolbarItem Name="AcceptAll" Text="Accept All" Priority="1" Order="Secondary" Command=""  />
+        <ToolbarItem Name="camera" Icon="camera.png" Priority="0" Order="Primary" Command=""  />
+        <ToolbarItem Name="addfile" Icon="addfile.png"  Priority="1" Order="Primary" Command=""  />
+    </ContentPage.ToolbarItems>
     
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
+        <ScrollView>
+            <StackLayout Padding="20" Spacing="5" BackgroundColor="White" Orientation="Vertical"  HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+                <StackLayout Spacing="0">
+                    <Label Style="{StaticResource secondaryLabels}" Text="ID" />
+                    <Label Style="{StaticResource BoldLabel}" Text="{Binding ID}" />
+                </StackLayout>
+                <StackLayout Spacing="0">
+                    <Label Text="DOOR NO." Style="{StaticResource secondaryLabels}" />
+                    <Label Text="{Binding DoorNo}" Style="{StaticResource BoldLabel}" />
+                </StackLayout>
+                <StackLayout Spacing="0">
+                    <Label Text="NAME" Style="{StaticResource secondaryLabels}"/>
+                    <Label Text="{Binding Name}" Style="{StaticResource BoldLabel}"/>
+                </StackLayout>
+                <StackLayout Spacing="0">
+                    <Label Text="AREA" Style="{StaticResource secondaryLabels}"/>
+                    <Label Text="{Binding Area}" Style="{StaticResource BoldLabel}"/>
+                </StackLayout>
+                <StackLayout Spacing="0">
+                    <Label Text="HYG.LEVEL" Style="{StaticResource secondaryLabels}"/>
+                    <Label Text="{Binding HygLevel}" Style="{StaticResource BoldLabel}"/>
+                </StackLayout>
+                <StackLayout Spacing="0">
+                    <Label Text="HYG.TYPE" Style="{StaticResource secondaryLabels}"/>
+                    <Label Text="{Binding HygType}" Style="{StaticResource BoldLabel}"/>
+                </StackLayout>
+                <StackLayout Orientation="Horizontal" Margin="0,16">
+                    <Label Text="Use Extra Level" Style="{StaticResource BoldLabel}" VerticalOptions="Center"/>
+                    <Custom:CustomCheckBox Margin="10,0" HeightRequest="24" WidthRequest="24"/>
+                </StackLayout>
+                <StackLayout Orientation="Vertical" HorizontalOptions="Center" VerticalOptions="Center" Spacing="12">
+                    
+                    <Custom:ExtFrameLayout Command="{Binding InstaCommand}" Style="{StaticResource FrameStyle}" >
+                        <StackLayout Orientation="Horizontal">
+                            <ffimageloadingsvg:SvgCachedImage Source="{Binding InstaSvgPath}" Style="SvgStyle" HorizontalOptions="Start" WidthRequest="32" HeightRequest="32" Margin="5"/>
+                            <Label Text="INSTA 800" Style="{StaticResource BoldLabel}" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
+                        </StackLayout>
+                    </Custom:ExtFrameLayout>
+
+                    <Custom:ExtFrameLayout Command="{Binding HygieneCommand}" Style="{StaticResource FrameStyle}">
+                        <StackLayout Orientation="Horizontal">
+                            <ffimageloadingsvg:SvgCachedImage Source="{Binding HygSvgPath}" HorizontalOptions="Start" WidthRequest="32" HeightRequest="32" Margin="5"/>
+                            <Label Text="Hygiene" Style="{StaticResource BoldLabel}" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
+                        </StackLayout>
+                    </Custom:ExtFrameLayout>
+
+                    <Custom:ExtFrameLayout Command="{Binding AdditionalCommand}" Style="{StaticResource FrameStyle}">
+                        <StackLayout Orientation="Horizontal">
+                            <ffimageloadingsvg:SvgCachedImage Source="{Binding AdditionalSvgPath}" HorizontalOptions="Start" WidthRequest="32" HeightRequest="32" Margin="5"/>
+                            <Label Text="Additional Requirements" Style="{StaticResource BoldLabel}" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
+                        </StackLayout>
+                    </Custom:ExtFrameLayout>
+                    
+                </StackLayout>
+                
+            </StackLayout>
+
+        </ScrollView>
     </ContentPage.Content>
-</ContentPage>
+</Views:BaseContentPage>
