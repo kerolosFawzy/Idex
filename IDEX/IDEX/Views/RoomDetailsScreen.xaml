@@ -52,7 +52,7 @@
                     <Label Text="Use Extra Level" Style="{StaticResource BoldLabel}" VerticalOptions="Center"/>
                     <Custom:CustomCheckBox Margin="10,0" HeightRequest="24" WidthRequest="24"/>
                 </StackLayout>
-                <StackLayout Orientation="Vertical" HorizontalOptions="Center" VerticalOptions="Center" Spacing="12">
+                <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="Center" Spacing="12">
                     
                     <Custom:ExtFrameLayout Command="{Binding InstaCommand}" Style="{StaticResource FrameStyle}" >
                         <StackLayout Orientation="Horizontal">
