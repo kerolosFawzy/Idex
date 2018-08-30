@@ -109,7 +109,6 @@ namespace IDEX.Droid
             var curPage = Element.CurrentPage as BaseContentPage;
             try
             {
-                //sai o cho nay nay
                 //how to get toolbar navigation page
                 _toolbar = (AToolbar)ToolbarFieldInfo.GetValue(this);
                 _toolbar.SetNavigationOnClickListener(this);
@@ -487,8 +486,10 @@ namespace IDEX.Droid
                 if (!string.IsNullOrEmpty(CustomNavigationPage.GetBarBackground(lastPage)))
                 {
 
-                    toolbar.SetBackgroundResource(this.Context.Resources.GetIdentifier(CustomNavigationPage.GetBarBackground(lastPage), "drawable", Android.App.Application.Context.PackageName));
-
+                    toolbar
+                        .SetBackgroundResource(this.Context.Resources
+                        .GetIdentifier(CustomNavigationPage.GetBarBackground(lastPage)
+                        , "drawable", Android.App.Application.Context.PackageName));
                 }
 
                 if (CustomNavigationPage.GetGradientColors(lastPage) != null)
@@ -508,7 +509,9 @@ namespace IDEX.Droid
                             break;
                     }
 
-                    GradientDrawable gradient = new GradientDrawable(direction, new int[] { colors.Item1.ToAndroid().ToArgb(), colors.Item2.ToAndroid().ToArgb() });
+                    GradientDrawable gradient = new GradientDrawable(direction
+                        , new int[] { colors.Item1.ToAndroid().ToArgb()
+                        , colors.Item2.ToAndroid().ToArgb() });
                     gradient.SetCornerRadius(0f);
                     toolbar.SetBackground(gradient);
 

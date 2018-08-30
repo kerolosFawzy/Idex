@@ -1,7 +1,6 @@
-﻿
-using IDEX.Model;
+﻿using IDEX.Model;
+using IDEX.Views;
 using ReactiveUI;
-using System.Windows.Input;
 using Xamarin.Forms;
 
 namespace IDEX.ViewModel
@@ -116,6 +115,11 @@ namespace IDEX.ViewModel
         private void InstaCommandHendlre()
         {
             InstaSvgPath = BlackSvg;
+            Device.BeginInvokeOnMainThread(async () =>
+            {
+                await Navigation.NavigateAsync(nameof(InstaPage));
+
+            });
         }
 
         private void SetRoomData() {

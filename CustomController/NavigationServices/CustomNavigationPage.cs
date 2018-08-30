@@ -10,6 +10,7 @@ namespace CustomControls.NavigationServices
         {
             
         }
+       
         public enum TitleAlignment
         {
             Start,
@@ -24,7 +25,6 @@ namespace CustomControls.NavigationServices
             TopToBottom,
             BottomToTop
         }
-
 
         public static readonly BindableProperty TitlePositionProperty = BindableProperty.CreateAttached("TitlePosition", typeof(TitleAlignment), typeof(CustomNavigationPage), Device.RuntimePlatform == Device.iOS ? TitleAlignment.Center : TitleAlignment.Start);
 
@@ -96,7 +96,9 @@ namespace CustomControls.NavigationServices
         }
 
 
-        public static readonly BindableProperty BarBackgroundProperty = BindableProperty.CreateAttached("BarBackground", typeof(string), typeof(CustomNavigationPage), string.Empty);
+        public static readonly BindableProperty BarBackgroundProperty =
+            BindableProperty.CreateAttached("BarBackground", typeof(string),
+                typeof(CustomNavigationPage), "#008080");
 
         public static string GetBarBackground(BindableObject view)
         {
@@ -110,7 +112,9 @@ namespace CustomControls.NavigationServices
         }
 
 
-        public static readonly BindableProperty GradientColorsProperty = BindableProperty.CreateAttached("GradientColors", typeof(Tuple<Color, Color>), typeof(CustomNavigationPage), null);
+        public static readonly BindableProperty GradientColorsProperty 
+            = BindableProperty.CreateAttached("GradientColors", typeof(Tuple<Color, Color>)
+                , typeof(CustomNavigationPage), null);
 
         public static Tuple<Color, Color> GetGradientColors(BindableObject view)
         {

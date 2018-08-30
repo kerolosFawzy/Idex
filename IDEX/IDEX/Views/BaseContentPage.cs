@@ -1,4 +1,6 @@
-﻿using IDEX.ViewModel;
+﻿using CustomControls.NavigationServices;
+using IDEX.ViewModel;
+using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -7,7 +9,12 @@ namespace IDEX.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public class BaseContentPage : ContentPage
     {
+        public BaseContentPage() {
 
+            var startColor = Color.FromHex("#008080");
+            var endColor = Color.FromHex("#008080");
+            CustomNavigationPage.SetGradientColors(this, new Tuple<Color, Color>(startColor, endColor));
+        }
         protected override void OnAppearing()
         {
 

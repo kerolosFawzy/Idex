@@ -33,6 +33,7 @@ namespace IDEX
             NavigationService.Configure(nameof(IdexMasterDetailPage), typeof(IdexMasterDetailPage));
             NavigationService.Configure(nameof(OverviewPage), typeof(OverviewPage));
             NavigationService.Configure(nameof(RoomDetailsScreen), typeof(RoomDetailsScreen));
+            NavigationService.Configure(nameof(InstaPage), typeof(InstaPage));
         }
 
         public void SetRootPage(string rootPageName)
@@ -62,7 +63,7 @@ namespace IDEX
 
         }
 
-		protected override void OnSleep ()
+        protected override void OnSleep ()
 		{
 			// Handle when your app sleeps
 		}

@@ -19,6 +19,17 @@
                 <Setter Property="FontAttributes" Value="Bold"/>
                 <Setter Property="TextColor" Value="Black"/>
             </Style>
+            
+            <Style x:Key="ButtonCreatorStyle" TargetType="Button" >
+                <Setter Property="BackgroundColor" Value="Transparent" />
+                <Setter Property="BorderColor" Value="Black" />
+                <Setter Property="BorderWidth" Value=".5" />
+                <Setter Property="TextColor" Value="LightGray" />
+                <Setter Property="MinimumHeightRequest" Value="32" />
+                <Setter Property="MinimumWidthRequest" Value="28" />
+                <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+                <Setter Property="FontSize" Value="12"/>
+            </Style>
             <Style TargetType="Label" x:Key="FirstScreenLabels">
                 <Setter Property="FontSize" Value="Small"/>
                 <Setter Property="TextColor" Value="Black"/>

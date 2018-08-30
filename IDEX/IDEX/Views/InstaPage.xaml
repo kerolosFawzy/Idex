@@ -6,22 +6,69 @@
     x:Class="IDEX.Views.InstaPage"
     xmlns:ViewModel="clr-namespace:IDEX.ViewModel"
     NeedOverrideSoftBackButton="True"
-    
+    xmlns:Custom="clr-namespace:CustomControls;assembly=CustomControls"
     >
     <ContentPage.BindingContext>
         <ViewModel:InstaPageViewModel/>
     </ContentPage.BindingContext>
-    
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="BigLabels" TargetType="Label">
+                <Setter Property="FontSize" Value="Medium" />
+                <Setter Property="Grid.Column" Value="0" />
+                <Setter Property="HorizontalTextAlignment" Value="Center" />
+                <Setter Property="VerticalTextAlignment" Value="Center" />
+                <Setter Property="Grid.ColumnSpan" Value="1" />
+                <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+                <Setter Property="VerticalOptions" Value="FillAndExpand" />
+                <Setter Property="Grid.RowSpan" Value="2" />
+                
+            </Style>
+
+            <Style x:Key="SmallLabelsStyle" TargetType="Label">
+                <Setter Property="TextColor" Value="Black"/>
+                <Setter Property="HorizontalOptions" Value="CenterAndExpand" />
+                <Setter Property="VerticalOptions" Value="EndAndExpand" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
     <ContentPage.Content>
-        <StackLayout Padding="10">
-            <Grid  >
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
-                </Grid.RowDefinitions>
-            </Grid>
-        </StackLayout>
+        <ScrollView>
+            <StackLayout Padding="10" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand">
+                <Grid ColumnSpacing="0" RowSpacing="0" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1.5*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <Label BackgroundColor="#FBEEA7" Text="WASTE" Grid.Row="1" Style="{StaticResource BigLabels}"  />
+                    <Label BackgroundColor="#F1A4FF" Text="DUST" Grid.Row="3" Style="{StaticResource BigLabels}" />
+                    <Label BackgroundColor="#A8FFC9" Text="STAINE" Grid.Row="5" Style="{StaticResource BigLabels}" />
+                    <Label BackgroundColor="#ACC7F8" Text="SURFACE SOILING" LineBreakMode="WordWrap" Grid.Row="7" Style="{StaticResource BigLabels}" />
+                    <Label Text="INV" Style="{StaticResource SmallLabelsStyle}" Grid.Row="0" Grid.Column="1" />
+                    <Label Text="WALL" Style="{StaticResource SmallLabelsStyle}" Grid.Row="0" Grid.Column="2"/>
+                    <Label Text="FLOOR" Style="{StaticResource SmallLabelsStyle}" Grid.Row="0" Grid.Column="3"/>
+                    <Label Text="CEIL" Style="{StaticResource SmallLabelsStyle}" Grid.Row="0" Grid.Column="4"/>
+
+                    <Custom:ButtonCreator Steps="3" PlaceHolder="Easy" Grid.Row="1" Grid.ColumnSpan="3" Grid.Column="1" />
+                    <Custom:ButtonCreator Steps="4" PlaceHolder="Hard" Grid.Row="2" Grid.ColumnSpan="4" Grid.Column="1"/>
+                    
+                    <Custom:ButtonCreator Steps="3" PlaceHolder="Easy" Grid.Row="3" Grid.ColumnSpan="3" Grid.Column="1" />
+                    <Custom:ButtonCreator Steps="4" PlaceHolder="Hard" Grid.Row="4" Grid.ColumnSpan="4" Grid.Column="1"/>
+                    
+                    <Custom:ButtonCreator Steps="3" PlaceHolder="Easy" Grid.Row="5" Grid.ColumnSpan="3" Grid.Column="1" />
+                    <Custom:ButtonCreator Steps="4" PlaceHolder="Hard" Grid.Row="6" Grid.ColumnSpan="4" Grid.Column="1"/>
+                    
+                    <Custom:ButtonCreator Steps="3" PlaceHolder="Easy" Grid.Row="7" Grid.ColumnSpan="3" Grid.Column="1" />
+                    <Custom:ButtonCreator Steps="4" PlaceHolder="Hard" Grid.Row="8" Grid.ColumnSpan="4" Grid.Column="1"/>
+
+                </Grid>
+            </StackLayout>
+        </ScrollView>
     </ContentPage.Content>
 </Views:BaseContentPage>

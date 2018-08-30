@@ -57,9 +57,7 @@ namespace CustomControls
         public List<string> ItemSelectedIndex
         {
             get { return (List<string>)GetValue(ItemSelectedIndexProperty); }
-            set { SetValue(ItemSelectedIndexProperty, value);
-                
-            }
+            set { SetValue(ItemSelectedIndexProperty, value); }
         }
         #endregion
 
