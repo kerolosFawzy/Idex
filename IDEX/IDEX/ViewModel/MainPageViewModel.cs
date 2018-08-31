@@ -26,6 +26,8 @@ namespace IDEX.ViewModel
         public ReactiveCommand ReactiveNextItemClicked { get; private set; }
         #endregion
 
+
+
         public MainPageViewModel()
         {
             flag = 0;

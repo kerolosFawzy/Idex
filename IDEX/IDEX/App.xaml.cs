@@ -58,6 +58,8 @@ namespace IDEX
                 + "android=058169e8-5915-44d8-a96e-c10a957d3d33;"
                 , typeof(Analytics), typeof(Crashes));
 
+            ViewModel.OverviewScreenViewModel overviewScreenViewModel = new ViewModel.OverviewScreenViewModel(); 
+
         }
 
         protected override void OnSleep ()

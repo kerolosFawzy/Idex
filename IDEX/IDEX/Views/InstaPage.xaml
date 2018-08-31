@@ -23,7 +23,6 @@
                 <Setter Property="HorizontalOptions" Value="FillAndExpand" />
                 <Setter Property="VerticalOptions" Value="FillAndExpand" />
                 <Setter Property="Grid.RowSpan" Value="2" />
-                
             </Style>
 
             <Style x:Key="SmallLabelsStyle" TargetType="Label">
@@ -55,19 +54,20 @@
                     <Label Text="FLOOR" Style="{StaticResource SmallLabelsStyle}" Grid.Row="0" Grid.Column="3"/>
                     <Label Text="CEIL" Style="{StaticResource SmallLabelsStyle}" Grid.Row="0" Grid.Column="4"/>
 
-                    <Custom:ButtonCreator Steps="3" PlaceHolder="Easy" Grid.Row="1" Grid.ColumnSpan="3" Grid.Column="1" />
-                    <Custom:ButtonCreator Steps="4" PlaceHolder="Hard" Grid.Row="2" Grid.ColumnSpan="4" Grid.Column="1"/>
-                    
-                    <Custom:ButtonCreator Steps="3" PlaceHolder="Easy" Grid.Row="3" Grid.ColumnSpan="3" Grid.Column="1" />
-                    <Custom:ButtonCreator Steps="4" PlaceHolder="Hard" Grid.Row="4" Grid.ColumnSpan="4" Grid.Column="1"/>
-                    
-                    <Custom:ButtonCreator Steps="3" PlaceHolder="Easy" Grid.Row="5" Grid.ColumnSpan="3" Grid.Column="1" />
-                    <Custom:ButtonCreator Steps="4" PlaceHolder="Hard" Grid.Row="6" Grid.ColumnSpan="4" Grid.Column="1"/>
-                    
-                    <Custom:ButtonCreator Steps="3" PlaceHolder="Easy" Grid.Row="7" Grid.ColumnSpan="3" Grid.Column="1" />
-                    <Custom:ButtonCreator Steps="4" PlaceHolder="Hard" Grid.Row="8" Grid.ColumnSpan="4" Grid.Column="1"/>
+                    <Custom:ButtonCreator Steps="3" PlaceHolder="Easy" Grid.Row="1" Grid.ColumnSpan="3" Grid.Column="1" InstaCategory="Waste" Data="{Binding ObjectData}"/>
+                    <Custom:ButtonCreator Steps="4" PlaceHolder="Hard" Grid.Row="2" Grid.ColumnSpan="4" Grid.Column="1" InstaCategory="Waste" Data="{Binding ObjectData}"/>
+
+                    <Custom:ButtonCreator Steps="3" PlaceHolder="Easy" Grid.Row="3" Grid.ColumnSpan="3" Grid.Column="1" InstaCategory="Dust"/>
+                    <Custom:ButtonCreator Steps="4" PlaceHolder="Hard" Grid.Row="4" Grid.ColumnSpan="4" Grid.Column="1" InstaCategory="Dust"/>
+
+                    <Custom:ButtonCreator Steps="3" PlaceHolder="Easy" Grid.Row="5" Grid.ColumnSpan="3" Grid.Column="1" InstaCategory="Stains" />
+                    <Custom:ButtonCreator Steps="4" PlaceHolder="Hard" Grid.Row="6" Grid.ColumnSpan="4" Grid.Column="1" InstaCategory="Stains"/>
+
+                    <Custom:ButtonCreator Steps="3" PlaceHolder="Easy" Grid.Row="7" Grid.ColumnSpan="3" Grid.Column="1" InstaCategory="SurfaceSoilings"/>
+                    <Custom:ButtonCreator Steps="4" PlaceHolder="Hard" Grid.Row="8" Grid.ColumnSpan="4" Grid.Column="1" InstaCategory="SurfaceSoilings" />
 
                 </Grid>
+                <Button Text="show" Command="{Binding Show}" /> 
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>

@@ -1,6 +1,6 @@
-﻿using System;
+﻿using Java.Util;
+using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Windows.Input;
 using Xamarin.Forms;
 
@@ -8,12 +8,28 @@ namespace CustomControls
 {
     public class ButtonCreator : StackLayout
     {
+        public enum InstaCategoryEnum
+        {
+            Waste,
+            Dust,
+            Stains,
+            SurfaceSoilings
+        }
+
+        public enum InstaRoomEnum
+        {
+            Inv,
+            Wall,
+            Floor,
+            Ceil
+        }
+
         #region view BindableProperty
         public static readonly BindableProperty StepsProperty = BindableProperty
             .Create(nameof(Steps), typeof(int), typeof(ButtonCreator), 0);
 
-        public static readonly BindableProperty StepSelectedProperty = BindableProperty
-            .Create(nameof(StepSelected), typeof(int), typeof(ButtonCreator), 0, defaultBindingMode: BindingMode.TwoWay);
+        public static readonly BindableProperty InstaCategoryProperty = BindableProperty
+            .Create(nameof(InstaCategory), typeof(InstaCategoryEnum), typeof(ButtonCreator), defaultBindingMode: BindingMode.TwoWay);
 
         public static readonly BindableProperty PlaceHolderProperty = BindableProperty
             .Create(nameof(PlaceHolder), typeof(string), typeof(ButtonCreator), defaultBindingMode: BindingMode.TwoWay);
@@ -21,8 +37,11 @@ namespace CustomControls
         public static readonly BindableProperty ItemClickedProperty = BindableProperty
           .Create(nameof(ItemClicked), typeof(ICommand), typeof(ButtonCreator), null, defaultBindingMode: BindingMode.TwoWay);
 
-        public static readonly BindableProperty ItemSelectedIndexProperty = BindableProperty
-            .Create(nameof(ItemSelectedIndex), typeof(List<string>), typeof(ButtonCreator), null, BindingMode.OneWay);
+        public static readonly BindableProperty InstaRoomEnumProperty = BindableProperty
+            .Create(nameof(InstaRoom), typeof(InstaRoomEnum), typeof(ButtonCreator), null, BindingMode.OneWay);
+
+        public static readonly BindableProperty DataProperty = BindableProperty
+            .Create(nameof(Data), typeof(IDictionary<string , string>), typeof(ButtonCreator), null, BindingMode.OneWayToSource);
         #endregion
 
         #region setter and getter for class properties
@@ -32,16 +51,26 @@ namespace CustomControls
             set { SetValue(PlaceHolderProperty, value); }
         }
 
+        public Dictionary<string, string> Data
+        {
+            get { return (Dictionary<string, string>)GetValue(DataProperty); }
+            set { SetValue(DataProperty, value); }
+        }
+
         public int Steps
         {
             get { return (int)GetValue(StepsProperty); }
             set { SetValue(StepsProperty, value); }
         }
-
-        public int StepSelected
+        public InstaCategoryEnum InstaCategory
         {
-            get { return (int)GetValue(StepSelectedProperty); }
-            set { SetValue(StepSelectedProperty, value); }
+            get { return (InstaCategoryEnum)GetValue(StepsProperty); }
+            set { SetValue(StepsProperty, value); }
+        }
+        public InstaRoomEnum InstaRoom
+        {
+            get { return (InstaRoomEnum)GetValue(StepsProperty); }
+            set { SetValue(StepsProperty, value); }
         }
 
         public Command ItemClicked
@@ -50,11 +79,6 @@ namespace CustomControls
             set { SetValue(ItemClickedProperty, value); }
         }
 
-        public List<string> ItemSelectedIndex
-        {
-            get { return (List<string>)GetValue(ItemSelectedIndexProperty); }
-            set { SetValue(ItemSelectedIndexProperty, value); }
-        }
         #endregion
 
         public ButtonCreator()
@@ -81,10 +105,7 @@ namespace CustomControls
                 }
 
             }
-            else if (propertyName.Equals(StepSelectedProperty.PropertyName) || propertyName.Equals(ItemSelectedIndexProperty.PropertyName))
-            {
-                SelectElement();
-            }
+
             else if (propertyName.Equals(PlaceHolderProperty.PropertyName))
             {
                 foreach (var child in Children)
@@ -96,20 +117,60 @@ namespace CustomControls
         void Handle_Clicked(object sender, EventArgs e)
         {
             ItemClicked?.Execute(sender);
-
-            SelectElement();
-        }
-
-        private void SelectElement()
-        {
-           
-            if (ItemSelectedIndex != null)
+            //SelectElement(ref (sender as Button));
+            int count = 0;
+            try
             {
-                var selectChildList = from x1 in Children
-                                      join x2 in ItemSelectedIndex on x1.ClassId equals x2
-                                      select x1;
-                
+                Int32.TryParse(((Button)sender).Text, out count);
+                count = count + 1;
             }
+            catch
+            {
+                count = 1;
+            }
+            ((Button)sender).Text = count.ToString();
+            ((Button)sender).TextColor = Color.Black;
+            getData(sender as Button);
+
+        }
+        void getData(Button sender )
+        {
+
+            IDictionary<string, string> dict = new Dictionary<string, string>();
+            dict.Add("Count", sender.Text);
+
+            if (sender.ClassId.Equals("1"))
+            {
+                dict.Add(nameof(InstaRoomEnum), InstaRoomEnum.Inv.ToString());
+            }
+            else if (sender.ClassId.Equals("2")) {
+                dict.Add(nameof(InstaRoomEnum), InstaRoomEnum.Wall.ToString());
+            }
+            else if (sender.ClassId.Equals("3")) {
+                dict.Add(nameof(InstaRoomEnum), InstaRoomEnum.Floor.ToString());
+            }
+            else if (sender.ClassId.Equals("4"))
+            {
+                dict.Add(nameof(InstaRoomEnum), InstaRoomEnum.Ceil.ToString());
+            }
+            dict.Add("State" , PlaceHolder);
+            Data = (Dictionary<string , string>)dict; 
+        }
+        private void SelectElement(Button sender )
+        {
+                //var selectChildList = from x1 in Children
+                //                      join x2 in ItemSelectedIndex on x1.ClassId equals x2
+                //                      select x1;
+
+                int count=0;
+                try {
+                    Int32.TryParse(sender.Text, out count);
+                    count = count + 1; 
+                } catch {
+                    count = 1; 
+                }
+             sender.Text = count.ToString();
+            
         }
 
     }
