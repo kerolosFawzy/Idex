@@ -518,8 +518,13 @@ namespace IDEX.Droid
 
                 }
             }
+            if(toolbar.Background !=null)
             toolbar.Background.SetAlpha((int)(CustomNavigationPage.GetBarBackgroundOpacity(lastPage) * 255));
-
+            else
+            {
+                toolbar.SetBackground(defaultBackground);
+                toolbar.Background.SetAlpha((int)(CustomNavigationPage.GetBarBackgroundOpacity(lastPage) * 255));
+            }
         }
 
         void UpdateToolbarShadow(Android.Support.V7.Widget.Toolbar toolbar, bool hasShadow, Activity activity, Android.Graphics.Drawables.Drawable windowContent)

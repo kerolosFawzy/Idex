@@ -24,9 +24,6 @@ namespace IDEX
 
         }
 
-        //App support using Svg Images but till now i dont use it 
-        //https://github.com/paulpatarinski/Xamarin.Forms.Plugins/tree/master/SVG
-
         public void RegisterPages()
         {
             NavigationService.Configure(nameof(IdexMainPage), typeof(IdexMainPage));
@@ -58,7 +55,7 @@ namespace IDEX
 		{
             AppCenter
                 .Start("ios=35258c53-36f4-4949-9b4c-dc11fd63bb4e;" + "uwp={Your UWP App secret here};"
-                + "android={Your Android App secret here}"
+                + "android=058169e8-5915-44d8-a96e-c10a957d3d33;"
                 , typeof(Analytics), typeof(Crashes));
 
         }

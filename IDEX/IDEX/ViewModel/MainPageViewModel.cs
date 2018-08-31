@@ -2,6 +2,7 @@
 using Autofac;
 using IDEX.Model;
 using IDEX.Views;
+using Microsoft.AppCenter.Crashes;
 using ReactiveUI;
 using System;
 using System.Collections;
@@ -16,7 +17,7 @@ namespace IDEX.ViewModel
     class MainPageViewModel : BaseViewModel
     {
         private static int flag;
-        ReactiveList<Customer> ts ;
+        ReactiveList<Customer> ts;
 
         #region Commands for the view
         public ICommand ItemSelected { get; set; }
@@ -35,7 +36,6 @@ namespace IDEX.ViewModel
             ReactiveNextItemClicked = ReactiveCommand.Create(HandleReactiveNextItemClicked);
             SetReactiveListListen();
         }
-
         private void HandleItemTapped(object obj)
         {
             var Elemnet = obj as BaseModel;
@@ -169,7 +169,7 @@ namespace IDEX.ViewModel
 
         #region init Selected Lists 
 
-        private ReactiveList<Customer> _selectCustomers = new ReactiveList<Customer> ();
+        private ReactiveList<Customer> _selectCustomers = new ReactiveList<Customer>();
         public ReactiveList<Customer> SelectedCustomer
         {
             get => _selectCustomers;
@@ -241,9 +241,10 @@ namespace IDEX.ViewModel
             SelectedInsepction.Clear();
             SelectedSchemes.Clear();
             SelectedCustomer.Clear();
-            foreach (BaseModel customer in Customers) {
-                if(customer.IsChecked)
-                   customer.IsChecked = false;
+            foreach (BaseModel customer in Customers)
+            {
+                if (customer.IsChecked)
+                    customer.IsChecked = false;
             }
             foreach (BaseModel schemelist in Schemes)
             {
@@ -264,7 +265,7 @@ namespace IDEX.ViewModel
             }
             else if (flag == 1)
             {
-                ts  = new ReactiveList<Customer>() { ChangeTrackingEnabled = true };
+                ts = new ReactiveList<Customer>() { ChangeTrackingEnabled = true };
                 ts.AddRange(Customers.Where(x => x.IsChecked == true) ?? new ReactiveList<Customer>());
                 if (ts.Count != 0)
                 {
@@ -295,8 +296,8 @@ namespace IDEX.ViewModel
             else if (flag == 2)
             {
                 ReactiveList<Scheme> schemes = new ReactiveList<Scheme>();
-                
-                schemes.AddRange(SchemeBindingList.Where(x => x.IsChecked == true)?? new ReactiveList<Scheme>());
+
+                schemes.AddRange(SchemeBindingList.Where(x => x.IsChecked == true) ?? new ReactiveList<Scheme>());
 
                 if (schemes.Count != 0)
                 {
@@ -326,11 +327,18 @@ namespace IDEX.ViewModel
             {
                 ReactiveList<Inspection> inspections = new ReactiveList<Inspection>();
                 inspections.AddRange(InsepctionBindingList.Where(x => x.IsChecked == true) ?? new ReactiveList<Inspection>());
-                if(inspections.Count != 0 )
-                Device.BeginInvokeOnMainThread(async () =>
+                if (inspections.Count != 0)
+                    try
                     {
-                        await Navigation.NavigateAsync(nameof(OverviewPage));
-                    });
+                        Device.BeginInvokeOnMainThread(async () =>
+                        {
+                            await Navigation.NavigateAsync(nameof(OverviewPage));
+                        });
+                    }
+                    catch (Exception exception)
+                    {
+                        Crashes.TrackError(exception);
+                    }
                 else
                     UserDialogs.Instance.AlertAsync("Please Select Inspection(s) Frist", "Alert", "ok");
 

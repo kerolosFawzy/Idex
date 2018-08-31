@@ -12,6 +12,7 @@ namespace IDEX.ViewModel
         public  virtual void OnAppearing() {}
         public virtual void OnSoftBackButtonPressed() {}
         public virtual void DisAppearing() {}
+
        // public virtual void OnBackButtonPressed() {}
         public INavigationService Navigation { get; } = App.NavigationService;
         protected IUserDialogs Dialogs { get; }

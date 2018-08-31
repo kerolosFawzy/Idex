@@ -9,15 +9,13 @@ namespace IDEX.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public class BaseContentPage : ContentPage
     {
-        public BaseContentPage() {
-
+ 
+        protected override void OnAppearing()
+        {
             var startColor = Color.FromHex("#008080");
             var endColor = Color.FromHex("#008080");
             CustomNavigationPage.SetGradientColors(this, new Tuple<Color, Color>(startColor, endColor));
-        }
-        protected override void OnAppearing()
-        {
-
+            CustomNavigationPage.SetTitleFont(this, Font.SystemFontOfSize(20));
             if (BindingContext is BaseViewModel viewAwair)
             {
                 viewAwair.OnAppearing();

@@ -21,11 +21,8 @@ namespace CustomControls
         public static readonly BindableProperty ItemClickedProperty = BindableProperty
           .Create(nameof(ItemClicked), typeof(ICommand), typeof(ButtonCreator), null, defaultBindingMode: BindingMode.TwoWay);
 
-
         public static readonly BindableProperty ItemSelectedIndexProperty = BindableProperty
             .Create(nameof(ItemSelectedIndex), typeof(List<string>), typeof(ButtonCreator), null, BindingMode.OneWay);
-
-
         #endregion
 
         #region setter and getter for class properties
@@ -105,18 +102,13 @@ namespace CustomControls
 
         private void SelectElement()
         {
-            var ButtonStyle = Application.Current.Resources["ButtonCreatorStyle"] as Style;
-
-            foreach (var item in Children.Where(x => x.GetType() == typeof(Button)))
-            {
-                ((Button)item).Style = ButtonStyle;
-            }
+           
             if (ItemSelectedIndex != null)
             {
                 var selectChildList = from x1 in Children
                                       join x2 in ItemSelectedIndex on x1.ClassId equals x2
                                       select x1;
-
+                
             }
         }
 

@@ -1,19 +1,19 @@
 ﻿using CustomControls.NavigationServices;
+using System;
 using Xamarin.Forms;
+using Xamarin.Forms.Xaml;
 
 namespace IDEX.Views
 {
-    public partial class OverviewPage
+    [XamlCompilation(XamlCompilationOptions.Compile)]
+    public partial class OverviewPage : BaseContentPage
     {
         public OverviewPage()
         {
             InitializeComponent();
-            CustomNavigationPage.SetTitleFont(this, Font.SystemFontOfSize(20));
+          //  CustomNavigationPage.SetTitleFont(this, Font.SystemFontOfSize(20));
         }
 
-        public OverviewPage(string navigationParameter) : this()
-        {
-        }
-
+        
     }
 }

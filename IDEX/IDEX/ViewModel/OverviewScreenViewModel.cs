@@ -208,8 +208,10 @@ namespace IDEX.ViewModel
             else
             {
                 SelectedRoom = SelecedLevel;
-
-                Navigation.NavigateAsync(nameof(RoomDetailsScreen));
+                Device.BeginInvokeOnMainThread(async () =>
+                {
+                    await Navigation.NavigateAsync(nameof(RoomDetailsScreen));
+                });
             }
         }
         public override void OnSoftBackButtonPressed()
@@ -222,7 +224,13 @@ namespace IDEX.ViewModel
                     HandleTitleSet(FormattedTitlesStack.Last());
                 else
                 {
-                    baseContentPage.FormattedTitle = "Site";
+                    var formattedTitle = new FormattedString();
+                    formattedTitle.Spans.Add(new Span
+                    {
+                        Text = "Site",
+                        FontSize = 20 
+                    });
+                    baseContentPage.FormattedTitle = formattedTitle;
                 }
                 if (!ShowAllFlag)
                 {
@@ -235,7 +243,11 @@ namespace IDEX.ViewModel
             }
             else
             {
-                Navigation.GoBack();
+                Device.BeginInvokeOnMainThread(async () =>
+                {
+                    await Navigation.GoBack();
+                });
+               
             }
         }
 
