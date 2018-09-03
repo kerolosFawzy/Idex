@@ -7,7 +7,7 @@ namespace IDEX.ViewModel
 {
     class RoomDetailsScreenViewModel : BaseViewModel
     {
-        public Level SelectedLevel { get; set; } = OverviewScreenViewModel.SelectedRoom;
+        public static Level SelectedLevel { get; set; } = OverviewScreenViewModel.SelectedRoom;
 
         public ReactiveCommand InstaCommand { get; set; }
         public ReactiveCommand HygieneCommand { get; set; }

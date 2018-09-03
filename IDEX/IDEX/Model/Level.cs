@@ -16,6 +16,8 @@ namespace IDEX.Model
         public Level Parent { get; set; }
         public List<Level> Children { get; set; }
 
+        public Insta800InseptionResult insta800InseptionResult { get; set; }
+
         #region to can bind in view using overview viewModel
         private int _finished;
         public int Finished

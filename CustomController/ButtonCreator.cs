@@ -64,12 +64,12 @@ namespace CustomControls
         }
         public InstaCategoryEnum InstaCategory
         {
-            get { return (InstaCategoryEnum)GetValue(StepsProperty); }
+            get { return (InstaCategoryEnum)GetValue(InstaCategoryProperty); }
             set { SetValue(StepsProperty, value); }
         }
         public InstaRoomEnum InstaRoom
         {
-            get { return (InstaRoomEnum)GetValue(StepsProperty); }
+            get { return (InstaRoomEnum)GetValue(InstaCategoryProperty); }
             set { SetValue(StepsProperty, value); }
         }
 
@@ -105,7 +105,6 @@ namespace CustomControls
                 }
 
             }
-
             else if (propertyName.Equals(PlaceHolderProperty.PropertyName))
             {
                 foreach (var child in Children)
@@ -117,7 +116,6 @@ namespace CustomControls
         void Handle_Clicked(object sender, EventArgs e)
         {
             ItemClicked?.Execute(sender);
-            //SelectElement(ref (sender as Button));
             int count = 0;
             try
             {
@@ -130,10 +128,10 @@ namespace CustomControls
             }
             ((Button)sender).Text = count.ToString();
             ((Button)sender).TextColor = Color.Black;
-            getData(sender as Button);
+            GetData(sender as Button);
 
         }
-        void getData(Button sender )
+        void GetData(Button sender)
         {
 
             IDictionary<string, string> dict = new Dictionary<string, string>();
@@ -153,6 +151,29 @@ namespace CustomControls
             {
                 dict.Add(nameof(InstaRoomEnum), InstaRoomEnum.Ceil.ToString());
             }
+
+
+            //if (InstaCategory.ToString().Equals("1"))
+            //{
+            //    dict.Add(nameof(InstaCategoryEnum), InstaCategoryEnum.Waste.ToString());
+
+            //}
+            //else if (InstaCategory.ToString().Equals("2"))
+            //{
+            //    dict.Add(nameof(InstaCategoryEnum), InstaCategoryEnum.Dust.ToString());
+
+            //}
+            //else if (InstaCategory.ToString().Equals("3"))
+            //{
+            //    dict.Add(nameof(InstaCategoryEnum), InstaCategoryEnum.Stains.ToString());
+
+            //}
+            //else if (InstaCategory.ToString().Equals("4"))
+            //{
+            //    dict.Add(nameof(InstaCategoryEnum), InstaCategoryEnum.SurfaceSoilings.ToString());
+
+            //}
+            dict.Add(nameof(InstaCategoryEnum), InstaCategory.ToString());
             dict.Add("State" , PlaceHolder);
             Data = (Dictionary<string , string>)dict; 
         }
