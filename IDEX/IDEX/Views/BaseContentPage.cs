@@ -9,7 +9,7 @@ namespace IDEX.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public class BaseContentPage : ContentPage
     {
- 
+
         protected override void OnAppearing()
         {
             var startColor = Color.FromHex("#008080");
@@ -48,8 +48,10 @@ namespace IDEX.Views
         //}
 
 
+        #region Title and subTitle
+
         public static readonly BindableProperty FormattedTitleProperty =
-            BindableProperty.Create(nameof(FormattedTitle), typeof(FormattedString), typeof(BaseContentPage), null);
+             BindableProperty.Create(nameof(FormattedTitle), typeof(FormattedString), typeof(BaseContentPage), null);
         public FormattedString FormattedTitle
         {
             get { return (FormattedString)GetValue(FormattedTitleProperty); }
@@ -85,6 +87,7 @@ namespace IDEX.Views
 
             }
         }
+        #endregion
 
     }
 }

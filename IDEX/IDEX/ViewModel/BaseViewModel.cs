@@ -1,6 +1,5 @@
 ﻿using Acr.UserDialogs;
 using CustomControls;
-using GalaSoft.MvvmLight;
 using IDEX.Views;
 using ReactiveUI;
 using Splat;
@@ -16,7 +15,7 @@ namespace IDEX.ViewModel
        // public virtual void OnBackButtonPressed() {}
         public INavigationService Navigation { get; } = App.NavigationService;
         protected IUserDialogs Dialogs { get; }
-        public BaseContentPage baseContentPage { get; set; }
+        public BaseContentPage baseContentPage { get; set; } = new BaseContentPage() ;
 
         public string UrlPathSegment
         {
