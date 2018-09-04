@@ -94,12 +94,12 @@ namespace CustomControls.NavigationServices
             _navigationPageStack.Push(modalNavigationPage);
         }
 
-        public async Task NavigateAsync(string pageKey, bool animated = true)
+        public async Task NavigateAsync(string pageKey, bool animated = false)
         {
             await NavigateAsync(pageKey, null, animated);
         }
 
-        public async Task NavigateAsync(string pageKey, object parameter, bool animated = true)
+        public async Task NavigateAsync(string pageKey, object parameter, bool animated = false)
         {
             var page = GetPage(pageKey, parameter);
             await CurrentNavigationPage.Navigation.PushAsync(page, animated);

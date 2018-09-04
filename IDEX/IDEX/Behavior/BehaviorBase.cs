@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Windows.Interactivity;
 using Xamarin.Forms;
 
 namespace IDEX.Behavior

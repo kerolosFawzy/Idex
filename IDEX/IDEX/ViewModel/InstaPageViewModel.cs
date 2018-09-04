@@ -23,6 +23,13 @@ namespace IDEX.ViewModel
                 SetInstaData();
             }
         }
+        private List<int> _numberPicker = new List<int>();
+
+        public List<int> NumberPicker   
+        {
+            get => _numberPicker;
+            set => this.RaiseAndSetIfChanged(ref _numberPicker, value);
+        }
 
         private string _instaCategoryEnum;
         public string InstaCategoryEnum
@@ -106,9 +113,11 @@ namespace IDEX.ViewModel
 
         public InstaPageViewModel()
         {
-
+            for (int i =0; i<=30;i++) {
+                NumberPicker.Add(i);
+            }
         }
-        private void setTtile()
+        private void setTitle()
         {
             try
             {
@@ -131,7 +140,7 @@ namespace IDEX.ViewModel
         {
             Task.Run(async () =>
             {
-                setTtile();
+                setTitle();
             });
             base.OnAppearing();
 

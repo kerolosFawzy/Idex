@@ -26,8 +26,7 @@ namespace IDEX.iOS
                 , new CGRect(0, 0, Math.Max(subtitleLabel.IntrinsicContentSize.Width, titleLabel.IntrinsicContentSize.Width)
                 , (titleLabel.IntrinsicContentSize.Height + subtitleLabel.IntrinsicContentSize.Height + (subtitleLabel.IntrinsicContentSize.Height > 0.0f ? 3.0f : 0.0f))));
 
-            var page = Element as BaseContentPage;
-            if (page == null) return;
+            if (!(Element is BaseContentPage page)) return;
 
             #region for soft back button
 
