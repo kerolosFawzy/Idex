@@ -25,6 +25,15 @@ namespace IDEX.ViewModel
         }
         private List<int> _numberPicker = new List<int>();
 
+        private int _selected;
+
+        public int Selected
+        {
+            get => _selected;
+            set => this.RaiseAndSetIfChanged(ref _selected, value);
+        }
+
+
         public List<int> NumberPicker   
         {
             get => _numberPicker;
@@ -117,7 +126,7 @@ namespace IDEX.ViewModel
                 NumberPicker.Add(i);
             }
         }
-        private void setTitle()
+        private async Task setTitle()
         {
             try
             {
@@ -140,7 +149,7 @@ namespace IDEX.ViewModel
         {
             Task.Run(async () =>
             {
-                setTitle();
+               await setTitle();
             });
             base.OnAppearing();
 

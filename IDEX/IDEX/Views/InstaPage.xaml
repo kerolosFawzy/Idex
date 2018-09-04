@@ -74,8 +74,9 @@
                         <Label Text="{Binding InstaRoomEnum}" />
                         <Label Text="{Binding State}" />
                     </StackLayout>
-                    <Picker ItemsSource="{Binding NumberPicker}"  VerticalOptions="FillAndExpand" MinimumWidthRequest="100" />
+                    <Custom:PickerView ItemsSource="{Binding NumberPicker}" HeightRequest="60" SelectedIndex="{Binding Selected , Mode=TwoWay}"/>
                 </StackLayout>
+                <Label Text="{Binding Selected}"/>
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>
