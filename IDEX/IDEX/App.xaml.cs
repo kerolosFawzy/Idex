@@ -57,9 +57,6 @@ namespace IDEX
                 .Start("ios=35258c53-36f4-4949-9b4c-dc11fd63bb4e;" + "uwp={Your UWP App secret here};"
                 + "android=058169e8-5915-44d8-a96e-c10a957d3d33;"
                 , typeof(Analytics), typeof(Crashes));
-
-            ViewModel.OverviewScreenViewModel overviewScreenViewModel = new ViewModel.OverviewScreenViewModel(); 
-
         }
 
         protected override void OnSleep ()

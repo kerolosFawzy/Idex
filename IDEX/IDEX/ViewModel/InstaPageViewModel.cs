@@ -1,11 +1,11 @@
-﻿using Acr.UserDialogs;
-using IDEX.Model;
+﻿using IDEX.Model;
 using Microsoft.AppCenter.Crashes;
 using ReactiveUI;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reactive.Linq;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace IDEX.ViewModel
@@ -106,14 +106,12 @@ namespace IDEX.ViewModel
 
         public InstaPageViewModel()
         {
+
+        }
+        private void setTtile()
+        {
             try
             {
-                FormattedString SubTitle = new FormattedString();
-                SubTitle.Spans.Add(new Span()
-                {
-                    Text = SelectedLevel.DoorNumber + " ," + SelectedLevel.Name,
-                    FontSize = 12
-                });
 
                 FormattedString Title = new FormattedString();
                 Title.Spans.Add(new Span()
@@ -121,20 +119,23 @@ namespace IDEX.ViewModel
                     Text = "INSTA 800",
                     FontSize = 18
                 });
-                baseContentPage.FormattedTitle = Title;
-                baseContentPage.Subtitle = SubTitle.ToString();
 
+                baseContentPage.FormattedTitle = Title;
+                baseContentPage.Subtitle = SelectedLevel.DoorNumber + " ," + SelectedLevel.Name;
             }
             catch (Exception exception) { Crashes.TrackError(exception); }
 
         }
 
-        private void HandleShow(object obj)
+        public override  void OnAppearing()
         {
-            string s = ButtonData["State"];
-            UserDialogs.Instance.AlertAsync(s + " " + ButtonData["InstaRoomEnum"].ToString(), "Info ", "ok");
-        }
+            Task.Run(async () =>
+            {
+                setTtile();
+            });
+            base.OnAppearing();
 
+        }
         public string Easy { get; set; } = "Easy";
         public string Hard { get; set; } = "Hard";
         public override void OnSoftBackButtonPressed()

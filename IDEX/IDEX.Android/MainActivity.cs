@@ -2,7 +2,6 @@
 using Android.Content.PM;
 using Android.OS;
 using Acr.UserDialogs;
-using FFImageLoading.Forms.Droid;
 
 namespace IDEX.Droid
 {

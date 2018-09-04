@@ -1,11 +1,12 @@
-﻿
+﻿using IDEX.ViewModel;
+
 namespace IDEX.Views
 {
-	public partial class InstaPage : BaseContentPage 
+	public partial class InstaPage  
 	{
 		public InstaPage()
 		{
-			InitializeComponent ();
+            InitializeComponent();
 		}
 	}
 }

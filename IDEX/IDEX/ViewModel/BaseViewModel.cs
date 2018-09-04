@@ -3,6 +3,7 @@ using CustomControls;
 using IDEX.Views;
 using ReactiveUI;
 using Splat;
+using Xamarin.Forms;
 
 namespace IDEX.ViewModel
 {
@@ -11,11 +12,13 @@ namespace IDEX.ViewModel
         public  virtual void OnAppearing() {}
         public virtual void OnSoftBackButtonPressed() {}
         public virtual void DisAppearing() {}
-
-       // public virtual void OnBackButtonPressed() {}
+        //public virtual FormattedString FormattedTitle { get; set; }
+        //public virtual FormattedString FormattedSubtitle { get; set; }
+        //public virtual string Subtitle { get; set; }
+        // public virtual void OnBackButtonPressed() {}
         public INavigationService Navigation { get; } = App.NavigationService;
         protected IUserDialogs Dialogs { get; }
-        public BaseContentPage baseContentPage { get; set; } = new BaseContentPage() ;
+        public BaseContentPage baseContentPage { get; set; }
 
         public string UrlPathSegment
         {

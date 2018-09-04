@@ -1,5 +1,6 @@
 ﻿using CustomControls.NavigationServices;
 using IDEX.ViewModel;
+using Microsoft.AppCenter.Crashes;
 using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -9,7 +10,6 @@ namespace IDEX.Views
     [XamlCompilation(XamlCompilationOptions.Compile)]
     public class BaseContentPage : ContentPage
     {
-
         protected override void OnAppearing()
         {
             var startColor = Color.FromHex("#008080");
@@ -84,7 +84,6 @@ namespace IDEX.Views
             set
             {
                 SetValue(SubtitleProperty, value);
-
             }
         }
         #endregion

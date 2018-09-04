@@ -36,6 +36,11 @@ namespace IDEX.ViewModel
 
         private string _formattedTitle = "Site";
 
+        public string FormattedTitle
+        {
+            get => _formattedTitle;
+            set => this.RaiseAndSetIfChanged(ref _formattedTitle, value);
+        }
         private string _showAllText = "Show UnCompleted";
         
         public string ShowAllText
@@ -44,12 +49,7 @@ namespace IDEX.ViewModel
             set => this.RaiseAndSetIfChanged(ref _showAllText, value);
         }
 
-        public string FormattedTitle
-        {
-            get => _formattedTitle;
-            set => this.RaiseAndSetIfChanged(ref _formattedTitle, value);
-        }
-
+      
         private string _formattedSubTitle;
         private bool _isVisible = false;
 

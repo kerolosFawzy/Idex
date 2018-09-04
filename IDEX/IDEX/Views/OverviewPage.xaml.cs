@@ -11,7 +11,6 @@ namespace IDEX.Views
         public OverviewPage()
         {
             InitializeComponent();
-          //  CustomNavigationPage.SetTitleFont(this, Font.SystemFontOfSize(20));
         }
 
         

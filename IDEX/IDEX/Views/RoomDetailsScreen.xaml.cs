@@ -10,7 +10,7 @@ namespace IDEX.Views
 		public RoomDetailsScreen ()
 		{
 			InitializeComponent ();
-            CustomNavigationPage.SetTitleFont( this , Font.SystemFontOfSize(18));
+            
         }
     }
 }
