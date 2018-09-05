@@ -1,4 +1,5 @@
 ﻿using Java.Util;
+using Microsoft.AppCenter.Crashes;
 using System;
 using System.Collections.Generic;
 using System.Windows.Input;
@@ -24,6 +25,9 @@ namespace CustomControls
             Ceil
         }
 
+        static Button LastSelectedButton;
+        static string LastStackId;
+
         #region view BindableProperty
         public static readonly BindableProperty StepsProperty = BindableProperty
             .Create(nameof(Steps), typeof(int), typeof(ButtonCreator), 0);
@@ -41,7 +45,13 @@ namespace CustomControls
             .Create(nameof(InstaRoom), typeof(InstaRoomEnum), typeof(ButtonCreator), null, BindingMode.OneWay);
 
         public static readonly BindableProperty DataProperty = BindableProperty
-            .Create(nameof(Data), typeof(IDictionary<string , string>), typeof(ButtonCreator), null, BindingMode.OneWayToSource);
+            .Create(nameof(Data), typeof(IDictionary<string, string>), typeof(ButtonCreator), null, BindingMode.OneWayToSource);
+
+        public static readonly BindableProperty PickerValueProperty = BindableProperty
+             .Create(nameof(PickerValue), typeof(int), typeof(ButtonCreator), null, BindingMode.TwoWay);
+
+        public static readonly BindableProperty LayoutNameProperty = BindableProperty
+             .Create(nameof(LayoutName), typeof(string), typeof(ButtonCreator), null, BindingMode.TwoWay);
         #endregion
 
         #region setter and getter for class properties
@@ -49,6 +59,17 @@ namespace CustomControls
         {
             get { return (string)GetValue(PlaceHolderProperty); }
             set { SetValue(PlaceHolderProperty, value); }
+        }
+        public string LayoutName
+        {
+            get { return (string)GetValue(LayoutNameProperty); }
+            set { SetValue(LayoutNameProperty, value); }
+        }
+
+        public int PickerValue
+        {
+            get { return (int)GetValue(PickerValueProperty); }
+            set { SetValue(PickerValueProperty, value); }
         }
 
         public Dictionary<string, string> Data
@@ -101,8 +122,10 @@ namespace CustomControls
                         Style = Application.Current.Resources["ButtonCreatorStyle"] as Style
                     };
                     button.Clicked += Handle_Clicked;
+
                     Children.Add(button);
                 }
+
 
             }
             else if (propertyName.Equals(PlaceHolderProperty.PropertyName))
@@ -111,6 +134,24 @@ namespace CustomControls
                 {
                     (child as Button).Text = PlaceHolder;
                 }
+            }
+            else if (propertyName.Equals(PickerValueProperty.PropertyName) && Data != null && LastStackId == Data[nameof(LastStackId)])
+            {
+                if (PickerValue == 0)
+                {
+                    LastSelectedButton.Text = PlaceHolder;
+                }
+                else
+                {
+                    try
+                    {
+                        Data["Count"] = PickerValue.ToString();
+                        LastSelectedButton.Text = Data["Count"];
+                        GetData(LastSelectedButton);
+                    }
+                    catch (Exception exception) { Crashes.TrackError(exception); }
+                }
+
             }
         }
         void Handle_Clicked(object sender, EventArgs e)
@@ -141,57 +182,49 @@ namespace CustomControls
             {
                 dict.Add(nameof(InstaRoomEnum), InstaRoomEnum.Inv.ToString());
             }
-            else if (sender.ClassId.Equals("2")) {
+            else if (sender.ClassId.Equals("2"))
+            {
                 dict.Add(nameof(InstaRoomEnum), InstaRoomEnum.Wall.ToString());
             }
-            else if (sender.ClassId.Equals("3")) {
+            else if (sender.ClassId.Equals("3"))
+            {
                 dict.Add(nameof(InstaRoomEnum), InstaRoomEnum.Floor.ToString());
             }
             else if (sender.ClassId.Equals("4"))
             {
                 dict.Add(nameof(InstaRoomEnum), InstaRoomEnum.Ceil.ToString());
             }
+            try
+            {
+                dict.Add(nameof(InstaCategoryEnum), InstaCategory.ToString());
+                dict.Add("State", PlaceHolder);
+                dict.Add(nameof(LastStackId), LayoutName);
+                LastStackId = dict[nameof(LastStackId)];
+                Data = (Dictionary<string, string>)dict;
 
+                LastSelectedButton = sender;
+            }
+            catch (Exception exception) { Crashes.TrackError(exception); }
 
-            //if (InstaCategory.ToString().Equals("1"))
-            //{
-            //    dict.Add(nameof(InstaCategoryEnum), InstaCategoryEnum.Waste.ToString());
-
-            //}
-            //else if (InstaCategory.ToString().Equals("2"))
-            //{
-            //    dict.Add(nameof(InstaCategoryEnum), InstaCategoryEnum.Dust.ToString());
-
-            //}
-            //else if (InstaCategory.ToString().Equals("3"))
-            //{
-            //    dict.Add(nameof(InstaCategoryEnum), InstaCategoryEnum.Stains.ToString());
-
-            //}
-            //else if (InstaCategory.ToString().Equals("4"))
-            //{
-            //    dict.Add(nameof(InstaCategoryEnum), InstaCategoryEnum.SurfaceSoilings.ToString());
-
-            //}
-            dict.Add(nameof(InstaCategoryEnum), InstaCategory.ToString());
-            dict.Add("State" , PlaceHolder);
-            Data = (Dictionary<string , string>)dict; 
         }
-        private void SelectElement(Button sender )
+        private void SelectElement(Button sender)
         {
-                //var selectChildList = from x1 in Children
-                //                      join x2 in ItemSelectedIndex on x1.ClassId equals x2
-                //                      select x1;
+            //var selectChildList = from x1 in Children
+            //                      join x2 in ItemSelectedIndex on x1.ClassId equals x2
+            //                      select x1;
 
-                int count=0;
-                try {
-                    Int32.TryParse(sender.Text, out count);
-                    count = count + 1; 
-                } catch {
-                    count = 1; 
-                }
-             sender.Text = count.ToString();
-            
+            int count = 0;
+            try
+            {
+                Int32.TryParse(sender.Text, out count);
+                count = count + 1;
+            }
+            catch
+            {
+                count = 1;
+            }
+            sender.Text = count.ToString();
+
         }
 
     }

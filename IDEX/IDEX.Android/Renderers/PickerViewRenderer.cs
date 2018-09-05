@@ -122,9 +122,7 @@ namespace IDEX.Droid.Renderers
             Element.SelectedIndex = e.NewVal;
         }
 
-        /// <summary>
-        /// NumberPicker の文字サイズを変更するハック
-        /// </summary>
+       
         /// <see cref="http://stackoverflow.com/questions/22962075/change-the-text-color-of-numberpicker"/>
         /// <param name="numberPicker">Number picker.</param>
         /// <param name="textSizeInSp">Text size in pixel.</param>

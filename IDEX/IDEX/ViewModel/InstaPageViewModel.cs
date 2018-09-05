@@ -24,7 +24,7 @@ namespace IDEX.ViewModel
             }
         }
         private List<int> _numberPicker = new List<int>();
-
+        public int ButtonCount { get; set; }
         private int _selected;
 
         public int Selected
@@ -84,8 +84,9 @@ namespace IDEX.ViewModel
                         data += ButtonData["InstaRoomEnum"];
                         InstaRoomEnum = ButtonData["InstaRoomEnum"];
                         string s = ButtonData["Count"];
-                        int.TryParse(s, out int value);
-                        PublicInstancePropertiesEqual(data, InstasResults, value);
+                        int.TryParse(s, out int ButtonCount);
+                        Selected = ButtonCount; 
+                        PublicInstancePropertiesEqual(data, InstasResults, ButtonCount);
                     }
                 });
 
@@ -162,8 +163,8 @@ namespace IDEX.ViewModel
         }
         public override void DisAppearing()
         {
-            base.DisAppearing();
             SelectedLevel.insta800InseptionResult = InstasResults;
+            base.DisAppearing();
         }
     }
 }

@@ -121,10 +121,12 @@ namespace IDEX.iOS.Renderers
 
         public override UIView GetView(UIPickerView pickerView, nint row, nint component, UIView view)
         {
-            UILabel label = new UILabel(pickerView.Bounds);
-            label.Font = _nativeFont;
-            label.Text = _list[(int)row];
-            label.TextAlignment = UITextAlignment.Center;
+            UILabel label = new UILabel(pickerView.Bounds)
+            {
+                Font = _nativeFont,
+                Text = _list[(int)row],
+                TextAlignment = UITextAlignment.Center
+            };
             return label;
 
             //return base.GetView(pickerView, row, component, view);
