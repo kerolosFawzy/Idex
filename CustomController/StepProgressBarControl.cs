@@ -22,7 +22,6 @@ namespace CustomControls
         public static readonly BindableProperty ItemClickedProperty = BindableProperty
           .Create(nameof(ItemClicked), typeof(ICommand), typeof(StepProgressBarControl), null, defaultBindingMode: BindingMode.TwoWay);
 
-
         public static readonly BindableProperty ItemSelectedIndexProperty = BindableProperty
             .Create(nameof(ItemSelectedIndex), typeof(List<string>), typeof(StepProgressBarControl), null , BindingMode.OneWay );
 

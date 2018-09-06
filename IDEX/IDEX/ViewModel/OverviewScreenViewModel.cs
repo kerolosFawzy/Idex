@@ -29,6 +29,8 @@ namespace IDEX.ViewModel
         }
         public OverviewScreenViewModel()
         {
+            //Note remove singleton if you use real data 
+            //note please read commit commments it is importane 
             AddDummyData();
             SetFirstListOfLevels();
             ItemTapped = new Command<Level>(HandleItemTapped);

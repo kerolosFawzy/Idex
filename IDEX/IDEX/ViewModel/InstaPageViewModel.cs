@@ -15,7 +15,6 @@ namespace IDEX.ViewModel
         private Dictionary<string, string> _buttonData = new Dictionary<string, string>();
         public Level SelectedLevel { get; set; } = OverviewScreenViewModel.SelectedRoom;
 
-
         public Dictionary<string, string> ButtonData
         {
             get => _buttonData;
@@ -32,7 +31,14 @@ namespace IDEX.ViewModel
         }
 
         private List<int> _numberPicker = new List<int>();
-        public int ButtonCount { get; set; }
+        private bool _isVisible;
+
+        public bool IsVisible
+        {
+            get => _isVisible;
+            set => this.RaiseAndSetIfChanged(ref _isVisible, value);
+        }
+
         private int _selected;
         public int Selected
         {
@@ -73,6 +79,9 @@ namespace IDEX.ViewModel
 
         private void SetInstaData()
         {
+            if(!IsVisible)
+            IsVisible = true;
+
             try
             {
                 this.WhenAnyValue(x => x.ButtonData)
@@ -125,8 +134,10 @@ namespace IDEX.ViewModel
 
         public InstaPageViewModel()
         {
+            IsVisible = false;
             for (int i = 0; i <= 30; i++)
             {
+
                 NumberPicker.Add(i);
             }
         }

@@ -140,6 +140,7 @@ namespace CustomControls
                 if (PickerValue == 0)
                 {
                     LastSelectedButton.Text = PlaceHolder;
+                    LastSelectedButton.Style = Application.Current.Resources["ButtonCreatorStyle"] as Style;
                 }
                 else
                 {
