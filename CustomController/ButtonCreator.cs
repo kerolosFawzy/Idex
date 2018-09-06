@@ -52,6 +52,8 @@ namespace CustomControls
 
         public static readonly BindableProperty LayoutNameProperty = BindableProperty
              .Create(nameof(LayoutName), typeof(string), typeof(ButtonCreator), null, BindingMode.TwoWay);
+
+       
         #endregion
 
         #region setter and getter for class properties
@@ -59,6 +61,11 @@ namespace CustomControls
         {
             get { return (string)GetValue(PlaceHolderProperty); }
             set { SetValue(PlaceHolderProperty, value); }
+        }
+        public Command ItemClicked
+        {
+            get { return (Command)GetValue(ItemClickedProperty); }
+            set { SetValue(ItemClickedProperty, value); }
         }
         public string LayoutName
         {
@@ -94,11 +101,7 @@ namespace CustomControls
             set { SetValue(StepsProperty, value); }
         }
 
-        public Command ItemClicked
-        {
-            get { return (Command)GetValue(ItemClickedProperty); }
-            set { SetValue(ItemClickedProperty, value); }
-        }
+       
 
         #endregion
 
@@ -135,12 +138,12 @@ namespace CustomControls
                     (child as Button).Text = PlaceHolder;
                 }
             }
-            else if (propertyName.Equals(PickerValueProperty.PropertyName) && Data != null && LastStackId == Data[nameof(LastStackId)])
+            else if (propertyName.Equals(PickerValueProperty.PropertyName) && Data != null && LastStackId == Data[nameof(LastStackId)] && LastSelectedButton.Text != PickerValue.ToString())
             {
                 if (PickerValue == 0)
                 {
                     LastSelectedButton.Text = PlaceHolder;
-                    LastSelectedButton.Style = Application.Current.Resources["ButtonCreatorStyle"] as Style;
+                    LastSelectedButton.TextColor = Color.LightGray;
                 }
                 else
                 {
@@ -148,6 +151,7 @@ namespace CustomControls
                     {
                         Data["Count"] = PickerValue.ToString();
                         LastSelectedButton.Text = Data["Count"];
+                        LastSelectedButton.TextColor = Color.Black;
                         GetData(LastSelectedButton);
                     }
                     catch (Exception exception) { Crashes.TrackError(exception); }
@@ -202,7 +206,6 @@ namespace CustomControls
                 dict.Add(nameof(LastStackId), LayoutName);
                 LastStackId = dict[nameof(LastStackId)];
                 Data = (Dictionary<string, string>)dict;
-
                 LastSelectedButton = sender;
             }
             catch (Exception exception) { Crashes.TrackError(exception); }

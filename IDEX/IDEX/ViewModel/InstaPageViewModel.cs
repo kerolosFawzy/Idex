@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reactive.Linq;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using Xamarin.Forms;
 
 namespace IDEX.ViewModel
@@ -14,6 +15,7 @@ namespace IDEX.ViewModel
     {
         private Dictionary<string, string> _buttonData = new Dictionary<string, string>();
         public Level SelectedLevel { get; set; } = OverviewScreenViewModel.SelectedRoom;
+        public ICommand ItemClicked { get; set; }
 
         public Dictionary<string, string> ButtonData
         {
@@ -23,7 +25,8 @@ namespace IDEX.ViewModel
                 try
                 {
                     this.RaiseAndSetIfChanged(ref _buttonData, value);
-                    SetInstaData();
+                    if (ButtonData != null)
+                        SetInstaData();
                 }
                 catch (Exception exception) { Crashes.TrackError(exception); }
 
@@ -79,35 +82,24 @@ namespace IDEX.ViewModel
 
         private void SetInstaData()
         {
-            if(!IsVisible)
-            IsVisible = true;
-
             try
             {
-                this.WhenAnyValue(x => x.ButtonData)
-                .Where(x => x.Count() != 0)
-                .Select(x => x)
-                .Subscribe(x =>
+                string data;
+                if (ButtonData.Count != 0)
                 {
-                    string data;
-                    if (ButtonData.Count != 0)
-                    {
-                        data = ButtonData["State"];
-                        State = ButtonData["State"];
-                        data += ButtonData["InstaCategoryEnum"];
-                        InstaCategoryEnum = ButtonData["InstaCategoryEnum"];
-                        data += ButtonData["InstaRoomEnum"];
-                        InstaRoomEnum = ButtonData["InstaRoomEnum"];
-                        string s = ButtonData["Count"];
-                        int.TryParse(s, out int ButtonCount);
-                        Selected = ButtonCount;
-                        PublicInstancePropertiesEqual(data, InstasResults, ButtonCount);
-                    }
-                });
-
+                    data = ButtonData["State"];
+                    State = ButtonData["State"];
+                    data += ButtonData["InstaCategoryEnum"];
+                    InstaCategoryEnum = ButtonData["InstaCategoryEnum"];
+                    data += ButtonData["InstaRoomEnum"];
+                    InstaRoomEnum = ButtonData["InstaRoomEnum"];
+                    string s = ButtonData["Count"];
+                    int.TryParse(s, out int ButtonCount);
+                    Selected = ButtonCount;
+                    PublicInstancePropertiesEqual(data, InstasResults, ButtonCount);
+                }
             }
             catch (Exception exception) { Crashes.TrackError(exception); }
-
         }
 
         public static void PublicInstancePropertiesEqual<T>(string self, T to, int value) where T : class
@@ -134,6 +126,7 @@ namespace IDEX.ViewModel
 
         public InstaPageViewModel()
         {
+            ItemClicked = new Command(ItemeClilckHandler);
             IsVisible = false;
             for (int i = 0; i <= 30; i++)
             {
@@ -141,6 +134,13 @@ namespace IDEX.ViewModel
                 NumberPicker.Add(i);
             }
         }
+
+        private void ItemeClilckHandler(object sender)
+        {
+            if (!IsVisible)
+                IsVisible = true;
+        }
+
         private async Task setTitle()
         {
             try

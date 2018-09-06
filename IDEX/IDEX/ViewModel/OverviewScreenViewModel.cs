@@ -50,7 +50,7 @@ namespace IDEX.ViewModel
 
         private string _formattedTitle = "Site";
 
-        public string FormattedTitle
+        public string LocalFormattedTitle
         {
             get => _formattedTitle;
             set => this.RaiseAndSetIfChanged(ref _formattedTitle, value);

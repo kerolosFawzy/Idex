@@ -1,5 +1,7 @@
 ﻿using CustomControls.NavigationServices;
 using IDEX.ViewModel;
+using Microsoft.AppCenter.Crashes;
+using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -17,6 +19,7 @@ namespace IDEX.Views
                 viewAwair.OnAppearing();
                 viewAwair.baseContentPage = this;
             }
+
             base.OnAppearing();
         }
         protected override void OnDisappearing()
@@ -36,6 +39,7 @@ namespace IDEX.Views
         public bool NeedOverrideSoftBackButton { get; set; } = false;
 
 
+
         //protected override bool OnBackButtonPressed()
         //{
         //    // If you want to continue going back
@@ -49,6 +53,7 @@ namespace IDEX.Views
         //    // If you want to stop the back button
         //    return true;
         //}
+        
 
 
         #region Title and subTitle

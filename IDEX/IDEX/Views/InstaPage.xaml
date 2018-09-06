@@ -31,8 +31,8 @@
 
     <ContentPage.Content>
         <ScrollView>
-            <StackLayout Margin="0,0,0,10" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand">
-                <Grid Padding="10" ColumnSpacing="0" RowSpacing="0" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand">
+            <StackLayout BackgroundColor="White"  Margin="0,0,0,10" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand">
+                <Grid  BackgroundColor="#F9F9F9" Padding="10" ColumnSpacing="0" RowSpacing="0" HorizontalOptions="FillAndExpand" VerticalOptions="StartAndExpand">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="1.5*"/>
                         <ColumnDefinition Width="*"/>
@@ -50,21 +50,21 @@
                     <Label Text="FLOOR" Style="{StaticResource SmallLabelsStyle}" Grid.Row="0" Grid.Column="3"/>
                     <Label Text="CEIL" Style="{StaticResource SmallLabelsStyle}" Grid.Row="0" Grid.Column="4"/>
 
-                    <Custom:ButtonCreator Steps="3" PlaceHolder="{Binding Easy}" Grid.Row="1" Grid.ColumnSpan="3" Grid.Column="1" InstaCategory="Waste" PickerValue="{Binding Selected}"  Data="{Binding ButtonData}" LayoutName="First" />
-                    <Custom:ButtonCreator Steps="4" PlaceHolder="{Binding Hard}" Grid.Row="2" Grid.ColumnSpan="4" Grid.Column="1" InstaCategory="Waste" PickerValue="{Binding Selected}"  Data="{Binding ButtonData}" LayoutName="Second"/>
+                    <Custom:ButtonCreator Steps="3" PlaceHolder="{Binding Easy}" Grid.Row="1" Grid.ColumnSpan="3" Grid.Column="1" InstaCategory="Waste" ItemClicked="{Binding ItemClicked}" PickerValue="{Binding Selected}"  Data="{Binding ButtonData}" LayoutName="First" />
+                    <Custom:ButtonCreator Steps="4" PlaceHolder="{Binding Hard}" Grid.Row="2" Grid.ColumnSpan="4" Grid.Column="1" InstaCategory="Waste" ItemClicked="{Binding ItemClicked}" PickerValue="{Binding Selected}"  Data="{Binding ButtonData}" LayoutName="Second"/>
 
-                    <Custom:ButtonCreator Steps="3" PlaceHolder="{Binding Easy}" Grid.Row="3" Grid.ColumnSpan="3" Grid.Column="1" InstaCategory="Dust" PickerValue="{Binding Selected}"  Data="{Binding ButtonData}" LayoutName="Thrid"/>
-                    <Custom:ButtonCreator Steps="4" PlaceHolder="{Binding Hard}" Grid.Row="4" Grid.ColumnSpan="4" Grid.Column="1" InstaCategory="Dust" PickerValue="{Binding Selected}"  Data="{Binding ButtonData}" LayoutName="Forth"/>
+                    <Custom:ButtonCreator Steps="3" PlaceHolder="{Binding Easy}" Grid.Row="3" Grid.ColumnSpan="3" Grid.Column="1" InstaCategory="Dust" ItemClicked="{Binding ItemClicked}" PickerValue="{Binding Selected}"  Data="{Binding ButtonData}" LayoutName="Thrid"/>
+                    <Custom:ButtonCreator Steps="4" PlaceHolder="{Binding Hard}" Grid.Row="4" Grid.ColumnSpan="4" Grid.Column="1" InstaCategory="Dust" ItemClicked="{Binding ItemClicked}" PickerValue="{Binding Selected}"  Data="{Binding ButtonData}" LayoutName="Forth"/>
 
-                    <Custom:ButtonCreator Steps="3" PlaceHolder="{Binding Easy}" Grid.Row="5" Grid.ColumnSpan="3" Grid.Column="1" InstaCategory="Stains" PickerValue="{Binding Selected}"  Data="{Binding ButtonData}" LayoutName="Fifth"/>
-                    <Custom:ButtonCreator Steps="4" PlaceHolder="{Binding Hard}" Grid.Row="6" Grid.ColumnSpan="4" Grid.Column="1" InstaCategory="Stains" PickerValue="{Binding Selected}" Data="{Binding ButtonData}" LayoutName="Sixth"/>
-                    
-                    <Custom:ButtonCreator Steps="3" PlaceHolder="{Binding Easy}" Grid.Row="7" Grid.ColumnSpan="3" Grid.Column="1" InstaCategory="SurfaceSoilings" PickerValue="{Binding Selected}" Data="{Binding ButtonData}" LayoutName="Seventh"/>
-                    <Custom:ButtonCreator Steps="4" PlaceHolder="{Binding Hard}" Grid.Row="8" Grid.ColumnSpan="4" Grid.Column="1" InstaCategory="SurfaceSoilings" PickerValue="{Binding Selected}"  Data="{Binding ButtonData}" LayoutName="Eight"/>
+                    <Custom:ButtonCreator Steps="3" PlaceHolder="{Binding Easy}" Grid.Row="5" Grid.ColumnSpan="3" Grid.Column="1" InstaCategory="Stains" ItemClicked="{Binding ItemClicked}" PickerValue="{Binding Selected}"  Data="{Binding ButtonData}" LayoutName="Fifth"/>
+                    <Custom:ButtonCreator Steps="4" PlaceHolder="{Binding Hard}" Grid.Row="6" Grid.ColumnSpan="4" Grid.Column="1" InstaCategory="Stains" ItemClicked="{Binding ItemClicked}" PickerValue="{Binding Selected}" Data="{Binding ButtonData}" LayoutName="Sixth"/>
+
+                    <Custom:ButtonCreator Steps="3" PlaceHolder="{Binding Easy}" Grid.Row="7" Grid.ColumnSpan="3" Grid.Column="1" InstaCategory="SurfaceSoilings" ItemClicked="{Binding ItemClicked}" PickerValue="{Binding Selected}" Data="{Binding ButtonData}" LayoutName="Seventh"/>
+                    <Custom:ButtonCreator Steps="4" PlaceHolder="{Binding Hard}" Grid.Row="8" Grid.ColumnSpan="4" Grid.Column="1" InstaCategory="SurfaceSoilings" ItemClicked="{Binding ItemClicked}" PickerValue="{Binding Selected}"  Data="{Binding ButtonData}" LayoutName="Eight"/>
 
                 </Grid>
                 <StackLayout HeightRequest="2" HorizontalOptions="FillAndExpand" BackgroundColor="Black"/>
-                <StackLayout Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Margin="20,10,20,20">
+                <StackLayout  Orientation="Horizontal" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Margin="20,10,20,20">
                     <StackLayout VerticalOptions="CenterAndExpand" Spacing="4" HorizontalOptions="StartAndExpand">
                         <Label FontSize="Medium" Text="{Binding InstaCategoryEnum}" FontAttributes="Bold" />
                         <Label FontSize="Medium" Text="{Binding InstaRoomEnum}" />
