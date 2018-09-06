@@ -2,17 +2,12 @@
 <Views:BaseContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="IDEX.Views.RoomDetailsScreen"
-             xmlns:ViewModel="clr-namespace:IDEX.ViewModel"
              xmlns:Custom="clr-namespace:CustomControls;assembly=CustomControls"
              xmlns:Views="clr-namespace:IDEX.Views"
              NeedOverrideSoftBackButton="True"
              Title="{Binding Title}"
              xmlns:ffimageloadingsvg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
-                       
                        >
-    <ContentPage.BindingContext>
-        <ViewModel:RoomDetailsScreenViewModel/>
-    </ContentPage.BindingContext>
 
     <ContentPage.ToolbarItems>
         <ToolbarItem Name="EditProperties" Text="Edit Properties" Priority="0" Order="Secondary" Command=""  />

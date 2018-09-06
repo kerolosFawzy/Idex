@@ -1,13 +1,12 @@
-﻿using CustomControls.NavigationServices;
-using System;
-using Xamarin.Forms;
+﻿using IDEX.ViewModel;
 
 namespace IDEX
 {
     public partial class IdexMainPage 
     {
         public IdexMainPage(){
-            InitializeComponent();
+            InitializeComponent();            
+            BindingContext =  MainPageViewModel.Instance;
         }
     }
 }

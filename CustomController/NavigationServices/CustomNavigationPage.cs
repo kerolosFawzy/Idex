@@ -97,16 +97,16 @@ namespace CustomControls.NavigationServices
 
 
         public static readonly BindableProperty BarBackgroundProperty =
-            BindableProperty.CreateAttached("BarBackground", typeof(string),
-                typeof(CustomNavigationPage), "#008080");
+            BindableProperty.CreateAttached("BarBackground", typeof(Color),
+                typeof(CustomNavigationPage), Color.FromHex("#008080"));
 
-        public static string GetBarBackground(BindableObject view)
+        public static Color? GetBarBackground(BindableObject view)
         {
 
-            return (string)view.GetValue(BarBackgroundProperty);
+            return (Color?)view.GetValue(BarBackgroundProperty);
         }
 
-        public static void SetBarBackground(BindableObject view, string value)
+        public static void SetBarBackground(BindableObject view, Color value)
         {
             view.SetValue(BarBackgroundProperty, value);
         }

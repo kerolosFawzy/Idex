@@ -18,8 +18,8 @@ namespace IDEX.iOS
         public override void ViewWillAppear(bool animated)
         {
             base.ViewWillAppear(animated);
-            if(!(NavigationController==null))
-            SetupNavBar(NavigationController.NavigationBar.Bounds.Size);
+            if (!(NavigationController == null))
+                SetupNavBar(NavigationController.NavigationBar.Bounds.Size);
             SetTitlePosition(CustomNavigationPage.GetTitlePosition(Element)
                 , CustomNavigationPage.GetTitlePadding(Element)
                 , CustomNavigationPage.GetTitleMargin(Element)
@@ -31,7 +31,8 @@ namespace IDEX.iOS
             #region for soft back button
 
             var root = NavigationController.TopViewController;
-            if (page.NeedOverrideSoftBackButton) {
+            if (page.NeedOverrideSoftBackButton)
+            {
                 SetCustomBackButton();
             }
             //    var title = NavigationPage.GetBackButtonTitle(Element);
@@ -43,7 +44,7 @@ namespace IDEX.iOS
             //    {
             //        page.OnSoftBackButtonPressed();
             //    }), true);
-            
+
             #endregion
         }
 
@@ -407,20 +408,23 @@ namespace IDEX.iOS
         }
         void SetupBackground()
         {
-            if (string.IsNullOrEmpty(CustomNavigationPage.GetBarBackground(Element)) && CustomNavigationPage.GetGradientColors(Element) == null)
+            if (CustomNavigationPage.GetBarBackground(Element) == null && CustomNavigationPage.GetGradientColors(Element) == null)
             {
 
                 SetupBackground(null, CustomNavigationPage.GetBarBackgroundOpacity(Element));
             }
             else
             {
-                if (!string.IsNullOrEmpty(CustomNavigationPage.GetBarBackground(Element)))
+                if (CustomNavigationPage.GetBarBackground(Element) != null)
                 {
-                    SetupBackground(UIImage.FromBundle(CustomNavigationPage.GetBarBackground(Element)), CustomNavigationPage.GetBarBackgroundOpacity(Element));
+                    NavigationController.NavigationBar.BackgroundColor = (CustomNavigationPage.GetBarBackground(Element).Value.ToUIColor());
                 }
                 else if (CustomNavigationPage.GetGradientColors(Element) != null)
                 {
-                    SetupBackground(CreateGradientBackground(CustomNavigationPage.GetGradientColors(Element).Item1, CustomNavigationPage.GetGradientColors(Element).Item2, CustomNavigationPage.GetGradientDirection(Element)), CustomNavigationPage.GetBarBackgroundOpacity(Element));
+                    SetupBackground(CreateGradientBackground(CustomNavigationPage.GetGradientColors(Element).Item1,
+                        CustomNavigationPage.GetGradientColors(Element).Item2,
+                        CustomNavigationPage.GetGradientDirection(Element)),
+                        CustomNavigationPage.GetBarBackgroundOpacity(Element));
 
                 }
             }

@@ -1,7 +1,5 @@
 ﻿using CustomControls.NavigationServices;
 using IDEX.ViewModel;
-using Microsoft.AppCenter.Crashes;
-using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -12,9 +10,7 @@ namespace IDEX.Views
     {
         protected override void OnAppearing()
         {
-            var startColor = Color.FromHex("#008080");
-            var endColor = Color.FromHex("#008080");
-            CustomNavigationPage.SetGradientColors(this, new Tuple<Color, Color>(startColor, endColor));
+            CustomNavigationPage.SetBarBackground(this, Color.FromHex("#008080"));
             CustomNavigationPage.SetTitleFont(this, Font.SystemFontOfSize(20));
             if (BindingContext is BaseViewModel viewAwair)
             {

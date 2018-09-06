@@ -26,7 +26,16 @@ namespace IDEX.ViewModel
         public ReactiveCommand ReactiveNextItemClicked { get; private set; }
         #endregion
 
+        private static readonly Lazy<MainPageViewModel> _lazyMainPageViewModelInstance 
+            = new Lazy<MainPageViewModel>(() => new MainPageViewModel());
 
+        public static MainPageViewModel Instance
+        {
+            get
+            {
+                return _lazyMainPageViewModelInstance.Value;
+            }
+        }
 
         public MainPageViewModel()
         {

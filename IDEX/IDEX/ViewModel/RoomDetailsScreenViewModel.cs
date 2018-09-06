@@ -1,6 +1,7 @@
 ﻿using IDEX.Model;
 using IDEX.Views;
 using ReactiveUI;
+using System;
 using Xamarin.Forms;
 
 namespace IDEX.ViewModel
@@ -12,7 +13,16 @@ namespace IDEX.ViewModel
         public ReactiveCommand InstaCommand { get; set; }
         public ReactiveCommand HygieneCommand { get; set; }
         public ReactiveCommand AdditionalCommand { get; set; }
+        private static readonly Lazy<RoomDetailsScreenViewModel> _lazyMainPageViewModelInstance
+           = new Lazy<RoomDetailsScreenViewModel>(() => new RoomDetailsScreenViewModel());
 
+        public static RoomDetailsScreenViewModel Instance
+        {
+            get
+            {
+                return _lazyMainPageViewModelInstance.Value;
+            }
+        }
         #region
         string GraySvg = "resource://IDEX.SvgImages.check_detials_room_gray.svg";
         string BlackSvg = "resource://IDEX.SvgImages.check_detials_room_black.svg";

@@ -476,20 +476,16 @@ namespace IDEX.Droid
         void UpdateToolbarBackground(Android.Support.V7.Widget.Toolbar toolbar, Page lastPage, Activity activity, Android.Graphics.Drawables.Drawable defaultBackground)
         {
 
-            if (string.IsNullOrEmpty(CustomNavigationPage.GetBarBackground(lastPage)) && CustomNavigationPage.GetGradientColors(lastPage) == null)
+            if (CustomNavigationPage.GetBarBackground(lastPage) == null && CustomNavigationPage.GetGradientColors(lastPage) == null)
             {
 
                 toolbar.SetBackground(defaultBackground);
             }
             else
             {
-                if (!string.IsNullOrEmpty(CustomNavigationPage.GetBarBackground(lastPage)))
+                if (CustomNavigationPage.GetBarBackground(lastPage) != null)
                 {
-
-                    toolbar
-                        .SetBackgroundResource(this.Context.Resources
-                        .GetIdentifier(CustomNavigationPage.GetBarBackground(lastPage)
-                        , "drawable", Android.App.Application.Context.PackageName));
+                    toolbar.SetBackgroundColor(CustomNavigationPage.GetBarBackground(lastPage).Value.ToAndroid());
                 }
 
                 if (CustomNavigationPage.GetGradientColors(lastPage) != null)

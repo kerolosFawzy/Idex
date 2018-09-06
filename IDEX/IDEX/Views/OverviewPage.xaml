@@ -5,7 +5,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="IDEX.Views.OverviewPage"
              Title="{Binding FormattedTitle}"
-             xmlns:ViewModel="clr-namespace:IDEX.ViewModel"
              xmlns:Converters="clr-namespace:IDEX.Converters"
              xmlns:Behavior="clr-namespace:IDEX.Behavior"
              xmlns:Custom="clr-namespace:CustomControls;assembly=CustomControls"
@@ -15,10 +14,6 @@
         <ToolbarItem Name="ShowAll" Order="Secondary" Text="{Binding ShowAllText}" Priority="0"  Command="{Binding ShowAll}"/>
         <ToolbarItem Name="ScanBarcode" Order="Secondary" Text="Scan Barcode"  Priority="1" />
     </ContentPage.ToolbarItems>
-
-    <ContentPage.BindingContext>
-        <ViewModel:OverviewScreenViewModel />
-    </ContentPage.BindingContext>
 
     <ContentPage.Resources>
         <ResourceDictionary>

@@ -2,6 +2,7 @@
 using IDEX.Model;
 using IDEX.Views;
 using ReactiveUI;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,6 +16,17 @@ namespace IDEX.ViewModel
         public ICommand ShowAll { get; set; }
         public ICommand ItemTapped { get; set; }
         readonly Color PieChartColor = Color.FromHex("#008080");
+
+        private static readonly Lazy<OverviewScreenViewModel> _lazyMainPageViewModelInstance
+           = new Lazy<OverviewScreenViewModel>(() => new OverviewScreenViewModel());
+
+        public static OverviewScreenViewModel Instance
+        {
+            get
+            {
+                return _lazyMainPageViewModelInstance.Value;
+            }
+        }
         public OverviewScreenViewModel()
         {
             AddDummyData();

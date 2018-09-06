@@ -1,5 +1,4 @@
-﻿using CustomControls.NavigationServices;
-using Xamarin.Forms;
+﻿using IDEX.ViewModel;
 using Xamarin.Forms.Xaml;
 
 namespace IDEX.Views
@@ -10,7 +9,7 @@ namespace IDEX.Views
 		public RoomDetailsScreen ()
 		{
 			InitializeComponent ();
-            
+            BindingContext = RoomDetailsScreenViewModel.Instance;
         }
     }
 }
