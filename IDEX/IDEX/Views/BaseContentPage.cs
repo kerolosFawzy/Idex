@@ -19,7 +19,14 @@ namespace IDEX.Views
             }
             base.OnAppearing();
         }
-
+        protected override void OnDisappearing()
+        {
+            if (BindingContext is BaseViewModel viewAwair)
+            {
+                viewAwair.DisAppearing();
+            }
+            base.OnDisappearing();
+        }
         public void OnSoftBackButtonPressed()
         {
             var bindingContext = BindingContext as BaseViewModel;

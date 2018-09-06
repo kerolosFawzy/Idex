@@ -13,39 +13,34 @@ namespace IDEX.ViewModel
     class InstaPageViewModel : BaseViewModel
     {
         private Dictionary<string, string> _buttonData = new Dictionary<string, string>();
-        public Level SelectedLevel { get; set; } = RoomDetailsScreenViewModel.SelectedLevel;
+        public Level SelectedLevel { get; set; } = OverviewScreenViewModel.SelectedRoom;
 
-        private static readonly Lazy<InstaPageViewModel> _lazyMainPageViewModelInstance
-           = new Lazy<InstaPageViewModel>(() => new InstaPageViewModel());
 
-        public static InstaPageViewModel Instance
-        {
-            get
-            {
-                return _lazyMainPageViewModelInstance.Value;
-            }
-        }
         public Dictionary<string, string> ButtonData
         {
             get => _buttonData;
             set
             {
-                this.RaiseAndSetIfChanged(ref _buttonData, value);
-                SetInstaData();
+                try
+                {
+                    this.RaiseAndSetIfChanged(ref _buttonData, value);
+                    SetInstaData();
+                }
+                catch (Exception exception) { Crashes.TrackError(exception); }
+
             }
         }
 
         private List<int> _numberPicker = new List<int>();
         public int ButtonCount { get; set; }
         private int _selected;
-        //Lazy<int> ButtonCount { get; set; }
         public int Selected
         {
             get => _selected;
             set => this.RaiseAndSetIfChanged(ref _selected, value);
         }
 
-        public List<int> NumberPicker   
+        public List<int> NumberPicker
         {
             get => _numberPicker;
             set => this.RaiseAndSetIfChanged(ref _numberPicker, value);
@@ -96,7 +91,7 @@ namespace IDEX.ViewModel
                         InstaRoomEnum = ButtonData["InstaRoomEnum"];
                         string s = ButtonData["Count"];
                         int.TryParse(s, out int ButtonCount);
-                        Selected=ButtonCount; 
+                        Selected = ButtonCount;
                         PublicInstancePropertiesEqual(data, InstasResults, ButtonCount);
                     }
                 });
@@ -120,12 +115,8 @@ namespace IDEX.ViewModel
                     string s = toValue.ToString().Replace("Int32 ", "");
                     if (selfValue.ToString().Equals(s))
                     {
-                        try
-                        {
-                            InstasResults.GetType().GetProperty(pi.Name).SetValue(pi.Name, value);
-                            return;
-                        }
-                        catch (Exception exception) { Crashes.TrackError(exception); }
+                        InstasResults.GetType().GetProperty(pi.Name).SetValue(InstasResults, value);
+                        return;
                     }
 
                 }
@@ -134,7 +125,8 @@ namespace IDEX.ViewModel
 
         public InstaPageViewModel()
         {
-            for (int i =0; i<=30;i++) {
+            for (int i = 0; i <= 30; i++)
+            {
                 NumberPicker.Add(i);
             }
         }
@@ -157,11 +149,11 @@ namespace IDEX.ViewModel
 
         }
 
-        public override  void OnAppearing()
+        public override void OnAppearing()
         {
             Task.Run(async () =>
             {
-               await setTitle();
+                await setTitle();
             });
             base.OnAppearing();
 

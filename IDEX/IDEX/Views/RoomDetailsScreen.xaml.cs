@@ -9,7 +9,7 @@ namespace IDEX.Views
 		public RoomDetailsScreen ()
 		{
 			InitializeComponent ();
-            BindingContext = RoomDetailsScreenViewModel.Instance;
+            BindingContext =new RoomDetailsScreenViewModel();
         }
     }
 }

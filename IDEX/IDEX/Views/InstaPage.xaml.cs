@@ -7,7 +7,7 @@ namespace IDEX.Views
 		public InstaPage()
 		{
             InitializeComponent();
-            BindingContext = InstaPageViewModel.Instance; 
+            BindingContext =new InstaPageViewModel(); 
 
         }
 	}

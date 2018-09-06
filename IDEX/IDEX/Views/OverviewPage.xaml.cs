@@ -1,7 +1,4 @@
-﻿using CustomControls.NavigationServices;
-using IDEX.ViewModel;
-using System;
-using Xamarin.Forms;
+﻿using IDEX.ViewModel;
 using Xamarin.Forms.Xaml;
 
 namespace IDEX.Views

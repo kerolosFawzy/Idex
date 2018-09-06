@@ -50,17 +50,17 @@
                     <Label Text="FLOOR" Style="{StaticResource SmallLabelsStyle}" Grid.Row="0" Grid.Column="3"/>
                     <Label Text="CEIL" Style="{StaticResource SmallLabelsStyle}" Grid.Row="0" Grid.Column="4"/>
 
-                    <Custom:ButtonCreator Steps="3" PlaceHolder="Easy" Grid.Row="1" Grid.ColumnSpan="3" Grid.Column="1" InstaCategory="Waste" PickerValue="{Binding Selected}"  Data="{Binding ButtonData}" LayoutName="First" />
-                    <Custom:ButtonCreator Steps="4" PlaceHolder="Hard" Grid.Row="2" Grid.ColumnSpan="4" Grid.Column="1" InstaCategory="Waste" PickerValue="{Binding Selected}"  Data="{Binding ButtonData}" LayoutName="Second"/>
+                    <Custom:ButtonCreator Steps="3" PlaceHolder="{Binding Easy}" Grid.Row="1" Grid.ColumnSpan="3" Grid.Column="1" InstaCategory="Waste" PickerValue="{Binding Selected}"  Data="{Binding ButtonData}" LayoutName="First" />
+                    <Custom:ButtonCreator Steps="4" PlaceHolder="{Binding Hard}" Grid.Row="2" Grid.ColumnSpan="4" Grid.Column="1" InstaCategory="Waste" PickerValue="{Binding Selected}"  Data="{Binding ButtonData}" LayoutName="Second"/>
 
-                    <Custom:ButtonCreator Steps="3" PlaceHolder="Easy" Grid.Row="3" Grid.ColumnSpan="3" Grid.Column="1" InstaCategory="Dust" PickerValue="{Binding Selected}"  Data="{Binding ButtonData}" LayoutName="Thrid"/>
-                    <Custom:ButtonCreator Steps="4" PlaceHolder="Hard" Grid.Row="4" Grid.ColumnSpan="4" Grid.Column="1" InstaCategory="Dust" PickerValue="{Binding Selected}"  Data="{Binding ButtonData}" LayoutName="Forth"/>
+                    <Custom:ButtonCreator Steps="3" PlaceHolder="{Binding Easy}" Grid.Row="3" Grid.ColumnSpan="3" Grid.Column="1" InstaCategory="Dust" PickerValue="{Binding Selected}"  Data="{Binding ButtonData}" LayoutName="Thrid"/>
+                    <Custom:ButtonCreator Steps="4" PlaceHolder="{Binding Hard}" Grid.Row="4" Grid.ColumnSpan="4" Grid.Column="1" InstaCategory="Dust" PickerValue="{Binding Selected}"  Data="{Binding ButtonData}" LayoutName="Forth"/>
 
-                    <Custom:ButtonCreator Steps="3" PlaceHolder="Easy" Grid.Row="5" Grid.ColumnSpan="3" Grid.Column="1" InstaCategory="Stains" PickerValue="{Binding Selected}"  Data="{Binding ButtonData}" LayoutName="Fifth"/>
-                    <Custom:ButtonCreator Steps="4" PlaceHolder="Hard" Grid.Row="6" Grid.ColumnSpan="4" Grid.Column="1" InstaCategory="Stains" PickerValue="{Binding Selected}" Data="{Binding ButtonData}" LayoutName="Sixth"/>
-
-                    <Custom:ButtonCreator Steps="3" PlaceHolder="Easy" Grid.Row="7" Grid.ColumnSpan="3" Grid.Column="1" InstaCategory="SurfaceSoilings" PickerValue="{Binding Selected}" Data="{Binding ButtonData}" LayoutName="Seventh"/>
-                    <Custom:ButtonCreator Steps="4" PlaceHolder="Hard" Grid.Row="8" Grid.ColumnSpan="4" Grid.Column="1" InstaCategory="SurfaceSoilings" PickerValue="{Binding Selected}"  Data="{Binding ButtonData}" LayoutName="Eight"/>
+                    <Custom:ButtonCreator Steps="3" PlaceHolder="{Binding Easy}" Grid.Row="5" Grid.ColumnSpan="3" Grid.Column="1" InstaCategory="Stains" PickerValue="{Binding Selected}"  Data="{Binding ButtonData}" LayoutName="Fifth"/>
+                    <Custom:ButtonCreator Steps="4" PlaceHolder="{Binding Hard}" Grid.Row="6" Grid.ColumnSpan="4" Grid.Column="1" InstaCategory="Stains" PickerValue="{Binding Selected}" Data="{Binding ButtonData}" LayoutName="Sixth"/>
+                    
+                    <Custom:ButtonCreator Steps="3" PlaceHolder="{Binding Easy}" Grid.Row="7" Grid.ColumnSpan="3" Grid.Column="1" InstaCategory="SurfaceSoilings" PickerValue="{Binding Selected}" Data="{Binding ButtonData}" LayoutName="Seventh"/>
+                    <Custom:ButtonCreator Steps="4" PlaceHolder="{Binding Hard}" Grid.Row="8" Grid.ColumnSpan="4" Grid.Column="1" InstaCategory="SurfaceSoilings" PickerValue="{Binding Selected}"  Data="{Binding ButtonData}" LayoutName="Eight"/>
 
                 </Grid>
                 <StackLayout HeightRequest="2" HorizontalOptions="FillAndExpand" BackgroundColor="Black"/>

@@ -8,21 +8,12 @@ namespace IDEX.ViewModel
 {
     class RoomDetailsScreenViewModel : BaseViewModel
     {
-        public static Level SelectedLevel { get; set; } = OverviewScreenViewModel.SelectedRoom;
+        public Level SelectedLevel { get; set; } = OverviewScreenViewModel.SelectedRoom;
 
         public ReactiveCommand InstaCommand { get; set; }
         public ReactiveCommand HygieneCommand { get; set; }
         public ReactiveCommand AdditionalCommand { get; set; }
-        private static readonly Lazy<RoomDetailsScreenViewModel> _lazyMainPageViewModelInstance
-           = new Lazy<RoomDetailsScreenViewModel>(() => new RoomDetailsScreenViewModel());
-
-        public static RoomDetailsScreenViewModel Instance
-        {
-            get
-            {
-                return _lazyMainPageViewModelInstance.Value;
-            }
-        }
+        
         #region
         string GraySvg = "resource://IDEX.SvgImages.check_detials_room_gray.svg";
         string BlackSvg = "resource://IDEX.SvgImages.check_detials_room_black.svg";
