@@ -24,11 +24,13 @@
                 <ListView HasUnevenRows="True"
                           SeparatorVisibility="None" 
                           FlexLayout.Order="1" Margin="10" 
+                          SelectionMode="None"
+                          BackgroundColor="#F9F9F9"
                           ItemsSource="{Binding CategoryList}">
                     <ListView.ItemTemplate>
-                        <DataTemplate>
+                        <DataTemplate >
                             <ViewCell>
-                                <StackLayout>
+                                <StackLayout Padding="0,10">
                                     <Label Text="{Binding Path=.}" FontSize="Medium"/>
                                     <Custom:ButtonCreatorHygiene Steps="2"/>
                                 </StackLayout>
