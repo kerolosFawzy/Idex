@@ -111,18 +111,21 @@ namespace IDEX.ViewModel
         private void HygieneCommandHendlre()
         {
             HygSvgPath = BlackSvg;
+            PageNavigate(nameof(HygieneScreen));
         }
 
         private void InstaCommandHendlre()
         {
             InstaSvgPath = BlackSvg;
+            PageNavigate(nameof(InstaPage));
+        }
+        private void PageNavigate(string PageName) {
             Device.BeginInvokeOnMainThread(async () =>
             {
-                await Navigation.NavigateAsync(nameof(InstaPage));
+                await Navigation.NavigateAsync(PageName);
 
             });
         }
-
         private void SetRoomData() {
             Title = SelectedLevel.DoorNumber + ", " + SelectedLevel.Name;
             ID = SelectedLevel.ID.ToString();

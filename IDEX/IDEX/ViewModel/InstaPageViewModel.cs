@@ -141,7 +141,7 @@ namespace IDEX.ViewModel
                 IsVisible = true;
         }
 
-        private async Task setTitle()
+        private async Task SetTitle()
         {
             try
             {
@@ -164,7 +164,7 @@ namespace IDEX.ViewModel
         {
             Task.Run(async () =>
             {
-                await setTitle();
+                await SetTitle();
             });
             base.OnAppearing();
 

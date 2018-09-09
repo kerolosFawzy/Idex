@@ -56,7 +56,7 @@
     <AndroidUseSharedRuntime>false</AndroidUseSharedRuntime>
     <EnableProguard>false</EnableProguard>
     <AndroidEnableMultiDex>false</AndroidEnableMultiDex>
-    <AndroidLinkMode>Full</AndroidLinkMode>
+    <AndroidLinkMode>SdkOnly</AndroidLinkMode>
     <AndroidLinkSkip>CustomControls</AndroidLinkSkip>
     <AotAssemblies>false</AotAssemblies>
     <EnableLLVM>false</EnableLLVM>

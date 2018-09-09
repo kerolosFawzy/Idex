@@ -93,6 +93,9 @@
     <None Update="App.xaml">
       <Generator>MSBuild:Compile</Generator>
     </None>
+    <None Update="Views\HygieneScreen.xaml">
+      <Generator>MSBuild:Compile</Generator>
+    </None>
     <None Update="Views\IdexMainPage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </None>

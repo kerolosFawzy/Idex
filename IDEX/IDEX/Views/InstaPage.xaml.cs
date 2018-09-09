@@ -8,7 +8,6 @@ namespace IDEX.Views
 		{
             InitializeComponent();
             BindingContext =new InstaPageViewModel(); 
-
         }
 	}
 }

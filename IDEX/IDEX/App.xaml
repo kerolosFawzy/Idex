@@ -13,13 +13,12 @@
                 <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
                 <Setter Property="VerticalOptions" Value="FillAndExpand"/>
             </Style>
-            
+
             <Style x:Key="BoldLabel" TargetType="Label">
                 <Setter Property="Font" Value="18"/>
                 <Setter Property="FontAttributes" Value="Bold"/>
                 <Setter Property="TextColor" Value="Black"/>
             </Style>
-            
             <Style x:Key="ButtonCreatorStyle" TargetType="Button" >
                 <Setter Property="BackgroundColor" Value="White" />
                 <Setter Property="BorderColor" Value="Black" />
@@ -29,6 +28,9 @@
                 <Setter Property="MinimumWidthRequest" Value="28" />
                 <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
                 <Setter Property="FontSize" Value="12"/>
+            </Style>
+            <Style x:Key="ButtonCreatorHygienStyle" TargetType="Button" BasedOn="{StaticResource  ButtonCreatorStyle}" >
+                <Setter Property="Margin" Value="0,0,10,0"/>
             </Style>
             <Style TargetType="Label" x:Key="FirstScreenLabels">
                 <Setter Property="FontSize" Value="Small"/>

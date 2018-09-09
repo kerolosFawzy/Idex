@@ -4,11 +4,52 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:views="clr-namespace:IDEX.Views"
     x:Class="IDEX.Views.HygieneScreen"
-    
+    NeedOverrideSoftBackButton="True" 
+    xmlns:Custom="clr-namespace:CustomControls;assembly=CustomControls"
     >
     <ContentPage.Content>
-        <StackLayout>
-            
-        </StackLayout>
+        <ScrollView BackgroundColor="White">
+            <FlexLayout Direction="Column" >
+                <FlexLayout HeightRequest="32" BackgroundColor="#F9F9F9" Padding="10" Direction="Row" FlexLayout.Order="0">
+                    <Label Text="Hum Biol" HorizontalOptions="Start"
+                           FlexLayout.Grow="1"  HorizontalTextAlignment="Start"/>
+
+                    <Label Text="Dust" HorizontalOptions="CenterAndExpand" 
+                           FlexLayout.Grow="2" HorizontalTextAlignment="Center"/>
+
+                    <Label Text="Waste" HorizontalOptions="EndAndExpand"
+                           FlexLayout.Grow="2" HorizontalTextAlignment="Center"/>
+                </FlexLayout>
+
+                <ListView HasUnevenRows="True"
+                          SeparatorVisibility="None" 
+                          FlexLayout.Order="1" Margin="10" 
+                          ItemsSource="{Binding CategoryList}">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <ViewCell>
+                                <StackLayout>
+                                    <Label Text="{Binding Path=.}" FontSize="Medium"/>
+                                    <Custom:ButtonCreatorHygiene Steps="2"/>
+                                </StackLayout>
+                            </ViewCell>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                </ListView>
+                <StackLayout FlexLayout.Order="2" HeightRequest="2" HorizontalOptions="FillAndExpand" BackgroundColor="Black"/>
+                <FlexLayout BackgroundColor="White" Direction="Row" Margin="20,10,20,20" FlexLayout.Order="3">
+                    <StackLayout VerticalOptions="CenterAndExpand" Spacing="4" HorizontalOptions="StartAndExpand">
+                        <Label FontSize="Medium" Text="{Binding InstaCategoryEnum}" FontAttributes="Bold" />
+                        <Label FontSize="Medium" Text="{Binding InstaRoomEnum}" />
+                        <Label FontSize="Medium" Text="{Binding State}" />
+                    </StackLayout>
+                    <Custom:PickerView IsVisible="{Binding IsVisible}" 
+                                       ItemsSource="{Binding NumberPicker}" 
+                                       HeightRequest="72" 
+                                       SelectedIndex="{Binding Selected , Mode=TwoWay}" 
+                                       />
+                </FlexLayout>
+            </FlexLayout>
+        </ScrollView>      
     </ContentPage.Content>
 </views:BaseContentPage>
