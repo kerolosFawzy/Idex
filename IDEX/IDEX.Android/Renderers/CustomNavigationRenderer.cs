@@ -242,7 +242,6 @@ namespace IDEX.Droid
             else if (e.PropertyName == Page.TitleProperty.PropertyName)
             {
                 UpdateTitleText(_titleTextView, lastPage.Title);
-
             }
             else if (e.PropertyName == BaseContentPage.FormattedTitleProperty.PropertyName && (lastPage is BaseContentPage))
             {
@@ -364,11 +363,7 @@ namespace IDEX.Droid
 
                 _toolbar.ChildViewAdded += OnToolbarChildViewAdded;
 
-
-
-
                 lastPage.PropertyChanged += LastPage_PropertyChanged;
-
 
             }
         }
@@ -703,7 +698,6 @@ namespace IDEX.Droid
 
             if (e.Child.GetType() == typeof(AppCompatTextView))
             {
-
                 var textView = (AppCompatTextView)e.Child;
                 textView.Visibility = ViewStates.Gone;
                 _originalDrawable = textView.Background;
@@ -712,9 +706,6 @@ namespace IDEX.Droid
 
                 var lastPage = Element?.Navigation?.NavigationStack?.Last();
                 SetupToolbarCustomization(lastPage);
-
-
-
             }
         }
 

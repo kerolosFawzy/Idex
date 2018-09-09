@@ -186,8 +186,10 @@ namespace IDEX.ViewModel
             while (newLevel.Parent != null)
             {
                 newLevel = newLevel.Parent;
-                FormattedSubTitle += newLevel.Name;
+                FormattedSubTitle += newLevel.Name +" ,";
             }
+            if(!string.IsNullOrEmpty(FormattedSubTitle))
+            FormattedSubTitle=FormattedSubTitle.Remove(FormattedSubTitle.Length-1);
             baseContentPage.Subtitle = FormattedSubTitle;
         }
         void HandleMenuItemText()
