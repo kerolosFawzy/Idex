@@ -3,7 +3,6 @@ using Microsoft.AppCenter.Crashes;
 using ReactiveUI;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -136,13 +135,6 @@ namespace IDEX.ViewModel
                     HygieneInsepectionList.Remove(InsepectionResult); 
                     PublicInstancePropertiesEqual(data, InsepectionResult, ButtonCount);
                     HygieneInsepectionList.Add(InsepectionResult);
-                    //foreach (HygieneInsepectionResult result in HygieneInsepectionList.Where(x => x.CategoryName.Equals(Category)).FirstOrDefault()) {
-                    //    result.HardDust = InsepectionResult.HardDust;
-                    //    result.HardHumBio = InsepectionResult.HardHumBio;
-                    //    result.HardWast = InsepectionResult.HardWast;
-                    //    result.EasyDust = InsepectionResult.EasyDust;
-                    //    result.EasyWast = InsepectionResult.EasyWast;
-                    //}
                 }
             }
             catch (Exception exception) { Crashes.TrackError(exception); }
@@ -186,6 +178,13 @@ namespace IDEX.ViewModel
             }
             catch (Exception exception) { Crashes.TrackError(exception); }
         }
+
+        public override void DisAppearing()
+        {
+            OverviewScreenViewModel.SelectedRoom.HygieneInsepectionResults = HygieneInsepectionList; 
+            base.DisAppearing();
+        }
+
         public override void OnAppearing()
         {
             Task.Run(async () =>
@@ -197,7 +196,7 @@ namespace IDEX.ViewModel
         private void SetDummyData()
         {
             for (int i = 1; i <= 4; i++)
-                CategoryList.Add("PATIENTLIGHT" + i);
+                CategoryList.Add("PATIENTLIGHT " + i);
             for (int i = 0; i <= 30; i++)
                 NumberPicker.Add(i);
         }

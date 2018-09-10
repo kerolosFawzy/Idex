@@ -184,7 +184,7 @@ namespace CustomControls
                 switch (sender.ClassId)
                 {
                     case "1":
-                        AddData(State.Hard.ToString(), "Hum Bio");
+                        AddData(State.Hard.ToString(), "HumBio");
                         break;
                     case "2":
                         AddData(State.Easy.ToString(), "Dust");
@@ -193,10 +193,10 @@ namespace CustomControls
                         AddData(State.Hard.ToString(), "Dust");
                         break;
                     case "5":
-                        AddData(State.Easy.ToString(), "Waste");
+                        AddData(State.Easy.ToString(), "Wast");
                         break;
                     case "6":
-                        AddData(State.Hard.ToString(), "Waste");
+                        AddData(State.Hard.ToString(), "Wast");
                         break;
                 }
 

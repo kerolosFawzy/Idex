@@ -171,15 +171,13 @@ namespace IDEX.ViewModel
             base.OnAppearing();
 
         }
-        public string Easy { get; set; } = "Easy";
-        public string Hard { get; set; } = "Hard";
         public override void OnSoftBackButtonPressed()
         {
             Navigation.GoBack();
         }
         public override void DisAppearing()
         {
-            SelectedLevel.insta800InseptionResult = InstasResults;
+            OverviewScreenViewModel.SelectedRoom.insta800InseptionResult = InstasResults;
             base.DisAppearing();
         }
     }

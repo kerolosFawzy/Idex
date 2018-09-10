@@ -23,13 +23,13 @@
             <ListView x:Name="CategoriesListView" 
                           HasUnevenRows="True"
                           SeparatorVisibility="None" 
-                          FlexLayout.Order="1" Margin="10" 
+                          FlexLayout.Order="1" Margin="10,5" 
                           SelectionMode="None"
                           FlexLayout.Shrink="0" ItemsSource="{Binding CategoryList}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
-                            <StackLayout Padding="0,10">
+                            <StackLayout Padding="0,5">
                                 <Label Text="{Binding .}" FontSize="Medium"/>
                                 <Custom:ButtonCreatorHygiene   
                                     ButtonClickedCommand ="{Binding BindingContext.ItemClicked, Source={x:Reference CategoriesListView}}" 
@@ -54,6 +54,7 @@
                                    ItemsSource="{Binding NumberPicker}" 
                                    HeightRequest="72" 
                                    FlexLayout.AlignSelf="End"
+                                   VerticalOptions="Center"
                                    SelectedIndex="{Binding Selected , Mode=TwoWay}" 
                                    />
             </FlexLayout>
