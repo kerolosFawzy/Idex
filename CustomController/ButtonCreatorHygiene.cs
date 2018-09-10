@@ -1,5 +1,4 @@
-﻿
-using Microsoft.AppCenter.Crashes;
+﻿using Microsoft.AppCenter.Crashes;
 using System;
 using System.Collections.Generic;
 using System.Windows.Input;
@@ -11,36 +10,37 @@ namespace CustomControls
     {
         #region view BindableProperty
         public static readonly BindableProperty StepsProperty = BindableProperty
-            .Create(nameof(Steps), typeof(int), typeof(ButtonCreator), 0);
+            .Create(nameof(Steps), typeof(int), typeof(ButtonCreatorHygiene), 0);
 
-        public static readonly BindableProperty PlaceHolderProperty = BindableProperty
-            .Create(nameof(PlaceHolder), typeof(string), typeof(ButtonCreator), defaultBindingMode: BindingMode.TwoWay);
-
-        public static readonly BindableProperty ItemClickedProperty = BindableProperty
-          .Create(nameof(ItemClicked), typeof(ICommand), typeof(ButtonCreator), null, defaultBindingMode: BindingMode.TwoWay);
+        public static readonly BindableProperty ButtonClickedCommandProperty = BindableProperty
+            .Create(nameof(ButtonClickedCommand), typeof(ICommand), typeof(ButtonCreatorHygiene), null, defaultBindingMode: BindingMode.TwoWay);
 
         public static readonly BindableProperty DataProperty = BindableProperty
-            .Create(nameof(Data), typeof(IDictionary<string, string>), typeof(ButtonCreator), null, BindingMode.OneWayToSource);
+            .Create(nameof(Data), typeof(IDictionary<string, string>), typeof(ButtonCreatorHygiene), null, BindingMode.OneWayToSource);
 
         public static readonly BindableProperty PickerValueProperty = BindableProperty
-             .Create(nameof(PickerValue), typeof(int), typeof(ButtonCreator), null, BindingMode.TwoWay);
+             .Create(nameof(PickerValue), typeof(int), typeof(ButtonCreatorHygiene), null, BindingMode.TwoWay);
 
         public static readonly BindableProperty LayoutNameProperty = BindableProperty
-             .Create(nameof(LayoutName), typeof(string), typeof(ButtonCreator), null, BindingMode.TwoWay);
+             .Create(nameof(LayoutName), typeof(string), typeof(ButtonCreatorHygiene), null, BindingMode.TwoWay);
 
 
         #endregion
 
-        #region setter and getter for class properties
-        public string PlaceHolder
+        public enum State
         {
-            get { return (string)GetValue(PlaceHolderProperty); }
-            set { SetValue(PlaceHolderProperty, value); }
+            Easy, Hard
         }
-        public Command ItemClicked
+
+        IDictionary<string, string> dict;
+        Button LastSelectedButton;
+        static string LastLayoutId;
+
+        #region setter and getter for class properties
+        public Command ButtonClickedCommand
         {
-            get { return (Command)GetValue(ItemClickedProperty); }
-            set { SetValue(ItemClickedProperty, value); }
+            get { return (Command)GetValue(ButtonClickedCommandProperty); }
+            set { SetValue(ButtonClickedCommandProperty, value); }
         }
         public string LayoutName
         {
@@ -84,7 +84,7 @@ namespace CustomControls
                 var FirstHardButton = new Button
                 {
                     ClassId = "1",
-                    Text = "Hard",
+                    Text = State.Hard.ToString(),
                     Style = Application.Current.Resources["ButtonCreatorHygienStyle"] as Style
                 };
                 FirstHardButton.Clicked += Handle_Clicked;
@@ -94,42 +94,71 @@ namespace CustomControls
                 {
                     var EasyButton = new Button
                     {
-                        Text="Easy",
+                        Text = State.Easy.ToString(),
                         ClassId = $"{i * i + 1}",
                         Style = Application.Current.Resources["ButtonCreatorStyle"] as Style
                     };
-                    EasyButton.Clicked += Handle_Clicked;
 
-                    Children.Add(EasyButton);
+                    EasyButton.Clicked += Handle_Clicked;
                     var HardButton = new Button
                     {
-                        Text = "Hard",
+                        Text = State.Hard.ToString(),
                         ClassId = $"{i * i + 2}",
-                        Style = Application.Current.Resources["ButtonCreatorHygienStyle"] as Style
                     };
+                    Children.Add(EasyButton);
+
+                    if (i == Steps)
+                        HardButton.Style = Application.Current.Resources["ButtonCreatorStyle"] as Style;
+                    else
+                        HardButton.Style = Application.Current.Resources["ButtonCreatorHygienStyle"] as Style;
+
                     HardButton.Clicked += Handle_Clicked;
 
                     Children.Add(HardButton);
+
                 }
-
-
             }
-            else if (propertyName.Equals(PlaceHolderProperty.PropertyName))
+            else if (propertyName.Equals(PickerValueProperty.PropertyName) && Data != null && LastLayoutId == Data["Category"] && LastSelectedButton.Text != PickerValue.ToString())
             {
-                foreach (var child in Children)
+                if (PickerValue == 0)
                 {
-                    (child as Button).Text = PlaceHolder;
+                    LastSelectedButton.TextColor = Color.LightGray;
+                    switch (LastSelectedButton.ClassId)
+                    {
+                        case "1":
+                            LastSelectedButton.Text = State.Hard.ToString();
+                            break;
+                        case "2":
+                            LastSelectedButton.Text = State.Easy.ToString();
+                            break;
+                        case "3":
+                            LastSelectedButton.Text = State.Hard.ToString();
+                            break;
+                        case "5":
+                            LastSelectedButton.Text = State.Easy.ToString();
+                            break;
+                        case "6":
+                            LastSelectedButton.Text = State.Hard.ToString();
+                            break;
+                    }
                 }
-            }
-            else if (propertyName.Equals(PickerValueProperty.PropertyName) && Data != null)
-            {
-
+                else
+                {
+                    try
+                    {
+                        Data["Count"] = PickerValue.ToString();
+                        LastSelectedButton.Text = Data["Count"];
+                        LastSelectedButton.TextColor = Color.Black;
+                        GetData(LastSelectedButton);
+                    }
+                    catch (Exception exception) { Crashes.TrackError(exception); }
+                }
 
             }
         }
         void Handle_Clicked(object sender, EventArgs e)
         {
-            ItemClicked?.Execute(sender);
+            ButtonClickedCommand?.Execute(sender);
             int count = 0;
             try
             {
@@ -147,33 +176,47 @@ namespace CustomControls
         }
         void GetData(Button sender)
         {
-            IDictionary<string, string> dict = new Dictionary<string, string>();
+            dict = new Dictionary<string, string>();
             dict.Add("Count", sender.Text);
+            dict.Add("Category", LayoutName);
             try
             {
+                switch (sender.ClassId)
+                {
+                    case "1":
+                        AddData(State.Hard.ToString(), "Hum Bio");
+                        break;
+                    case "2":
+                        AddData(State.Easy.ToString(), "Dust");
+                        break;
+                    case "3":
+                        AddData(State.Hard.ToString(), "Dust");
+                        break;
+                    case "5":
+                        AddData(State.Easy.ToString(), "Waste");
+                        break;
+                    case "6":
+                        AddData(State.Hard.ToString(), "Waste");
+                        break;
+                }
 
+                Data = (Dictionary<string, string>)dict;
+                LastLayoutId = dict["Category"];
+                LastSelectedButton = sender;
             }
             catch (Exception exception) { Crashes.TrackError(exception); }
 
+        }
+        private void AddData(string State, string CleaningCategory)
+        {
+            dict.Add("State", State);
+            dict.Add("CleaningCategory", CleaningCategory);
         }
         private void SelectElement(Button sender)
         {
             //var selectChildList = from x1 in Children
             //                      join x2 in ItemSelectedIndex on x1.ClassId equals x2
             //                      select x1;
-
-            int count = 0;
-            try
-            {
-                Int32.TryParse(sender.Text, out count);
-                count = count + 1;
-            }
-            catch
-            {
-                count = 1;
-            }
-            sender.Text = count.ToString();
-
         }
     }
 }

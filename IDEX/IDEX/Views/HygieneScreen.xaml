@@ -8,50 +8,55 @@
     xmlns:Custom="clr-namespace:CustomControls;assembly=CustomControls"
     >
     <ContentPage.Content>
-        <ScrollView BackgroundColor="White">
-            <FlexLayout Direction="Column" >
-                <FlexLayout HeightRequest="32" BackgroundColor="#F9F9F9" Padding="10" Direction="Row" FlexLayout.Order="0">
-                    <Label Text="Hum Biol" HorizontalOptions="Start"
+        <FlexLayout Direction="Column" BackgroundColor="White">
+            <FlexLayout HeightRequest="32" Padding="10" Direction="Row" FlexLayout.Order="0">
+                <Label Text="Hum Biol" HorizontalOptions="Start"
                            FlexLayout.Grow="1"  HorizontalTextAlignment="Start"/>
 
-                    <Label Text="Dust" HorizontalOptions="CenterAndExpand" 
+                <Label Text="Dust" HorizontalOptions="CenterAndExpand" 
                            FlexLayout.Grow="2" HorizontalTextAlignment="Center"/>
 
-                    <Label Text="Waste" HorizontalOptions="EndAndExpand"
+                <Label Text="Waste" HorizontalOptions="EndAndExpand"
                            FlexLayout.Grow="2" HorizontalTextAlignment="Center"/>
-                </FlexLayout>
+            </FlexLayout>
 
-                <ListView HasUnevenRows="True"
+            <ListView x:Name="CategoriesListView" 
+                          HasUnevenRows="True"
                           SeparatorVisibility="None" 
                           FlexLayout.Order="1" Margin="10" 
                           SelectionMode="None"
-                          BackgroundColor="#F9F9F9"
-                          ItemsSource="{Binding CategoryList}">
-                    <ListView.ItemTemplate>
-                        <DataTemplate >
-                            <ViewCell>
-                                <StackLayout Padding="0,10">
-                                    <Label Text="{Binding Path=.}" FontSize="Medium"/>
-                                    <Custom:ButtonCreatorHygiene Steps="2"/>
-                                </StackLayout>
-                            </ViewCell>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
-                <StackLayout FlexLayout.Order="2" HeightRequest="2" HorizontalOptions="FillAndExpand" BackgroundColor="Black"/>
-                <FlexLayout BackgroundColor="White" Direction="Row" Margin="20,10,20,20" FlexLayout.Order="3">
-                    <StackLayout VerticalOptions="CenterAndExpand" Spacing="4" HorizontalOptions="StartAndExpand">
-                        <Label FontSize="Medium" Text="{Binding InstaCategoryEnum}" FontAttributes="Bold" />
-                        <Label FontSize="Medium" Text="{Binding InstaRoomEnum}" />
-                        <Label FontSize="Medium" Text="{Binding State}" />
-                    </StackLayout>
-                    <Custom:PickerView IsVisible="{Binding IsVisible}" 
-                                       ItemsSource="{Binding NumberPicker}" 
-                                       HeightRequest="72" 
-                                       SelectedIndex="{Binding Selected , Mode=TwoWay}" 
-                                       />
-                </FlexLayout>
+                          FlexLayout.Shrink="0" ItemsSource="{Binding CategoryList}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout Padding="0,10">
+                                <Label Text="{Binding .}" FontSize="Medium"/>
+                                <Custom:ButtonCreatorHygiene   
+                                    ButtonClickedCommand ="{Binding BindingContext.ItemClicked, Source={x:Reference CategoriesListView}}" 
+                                    Data="{Binding BindingContext.ButtonData,Source={x:Reference CategoriesListView}}"
+                                    Steps="2" LayoutName="{Binding .}" 
+                                    PickerValue="{Binding BindingContext.Selected , Source={x:Reference CategoriesListView}}"
+                                    />
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <StackLayout FlexLayout.Order="2" HeightRequest="2" HorizontalOptions="FillAndExpand" BackgroundColor="Black"/>
+
+            <FlexLayout HeightRequest="72" FlexLayout.Grow="1" Direction="Row" Margin="20,10,20,20" FlexLayout.Order="3">
+                <StackLayout FlexLayout.Grow="1" VerticalOptions="CenterAndExpand" Spacing="4" HorizontalOptions="FillAndExpand">
+                    <Label FontSize="Small" Text="{Binding CleaningCategory}" FontAttributes="Bold" />
+                    <Label FontSize="Small" Text="{Binding Category}" />
+                    <Label FontSize="Small" Text="{Binding State}" />
+                </StackLayout>
+                <Custom:PickerView IsVisible="{Binding IsVisible}" 
+                                   ItemsSource="{Binding NumberPicker}" 
+                                   HeightRequest="72" 
+                                   FlexLayout.AlignSelf="End"
+                                   SelectedIndex="{Binding Selected , Mode=TwoWay}" 
+                                   />
             </FlexLayout>
-        </ScrollView>      
+        </FlexLayout>
     </ContentPage.Content>
 </views:BaseContentPage>

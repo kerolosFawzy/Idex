@@ -32,6 +32,7 @@ namespace IDEX.ViewModel
 
             }
         }
+      
 
         private List<int> _numberPicker = new List<int>();
         private bool _isVisible;
@@ -133,6 +134,7 @@ namespace IDEX.ViewModel
 
                 NumberPicker.Add(i);
             }
+
         }
 
         private void ItemeClilckHandler(object sender)
