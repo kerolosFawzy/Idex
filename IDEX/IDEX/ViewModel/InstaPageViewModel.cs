@@ -18,6 +18,36 @@ namespace IDEX.ViewModel
         public ICommand ItemClicked { get; set; }
         public string Easy { get; set; } = "Easy";
         public string Hard { get; set; } = "Hard";
+        private string _subtitle;
+
+        public string Subtitle
+        {
+            get { return _subtitle; }
+            set { _subtitle = value; }
+        }
+        private FormattedString _FormattedTitle;
+
+        public FormattedString FormattedTitle
+        {
+            get { return _FormattedTitle; }
+            set { _FormattedTitle = value; }
+        }
+        private void SetTitle()
+        {
+            try
+            {
+                FormattedString Title = new FormattedString();
+                Title.Spans.Add(new Span()
+                {
+                    Text = "INSTA 800",
+                    FontSize = 18
+                });
+
+                FormattedTitle = Title;
+                Subtitle = SelectedLevel.DoorNumber + " ," + SelectedLevel.Name;
+            }
+            catch (Exception exception) { Crashes.TrackError(exception); }
+        }
         public Dictionary<string, string> ButtonData
         {
             get => _buttonData;
@@ -130,6 +160,7 @@ namespace IDEX.ViewModel
         {
             ItemClicked = new Command(ItemeClilckHandler);
             IsVisible = false;
+            SetTitle(); 
             for (int i = 0; i <= 30; i++)
             {
                 NumberPicker.Add(i);
@@ -143,34 +174,8 @@ namespace IDEX.ViewModel
                 IsVisible = true;
         }
 
-        private async Task SetTitle()
-        {
-            try
-            {
+        
 
-                FormattedString Title = new FormattedString();
-                Title.Spans.Add(new Span()
-                {
-                    Text = "INSTA 800",
-                    FontSize = 18
-                });
-
-                baseContentPage.FormattedTitle = Title;
-                baseContentPage.Subtitle = SelectedLevel.DoorNumber + " ," + SelectedLevel.Name;
-            }
-            catch (Exception exception) { Crashes.TrackError(exception); }
-
-        }
-
-        public override void OnAppearing()
-        {
-            Task.Run(async () =>
-            {
-                await SetTitle();
-            });
-            base.OnAppearing();
-
-        }
         public override void OnSoftBackButtonPressed()
         {
             Navigation.GoBack();

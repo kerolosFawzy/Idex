@@ -5,6 +5,8 @@
     x:Class="IDEX.Views.AdditionalRequirementsPage"
     NeedOverrideSoftBackButton="True" 
     xmlns:views="clr-namespace:IDEX.Views"
+    FormattedTitle="{Binding FormattedTitle}"
+    Subtitle="{Binding Subtitle}"
     >
     <ContentPage.Content>
         <StackLayout>

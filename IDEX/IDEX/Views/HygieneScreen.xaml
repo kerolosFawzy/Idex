@@ -6,6 +6,8 @@
     x:Class="IDEX.Views.HygieneScreen"
     NeedOverrideSoftBackButton="True" 
     xmlns:Custom="clr-namespace:CustomControls;assembly=CustomControls"
+    FormattedTitle="{Binding FormattedTitle}"
+    Subtitle="{Binding Subtitle}"
     >
     <ContentPage.Content>
         <FlexLayout Direction="Column" BackgroundColor="White">

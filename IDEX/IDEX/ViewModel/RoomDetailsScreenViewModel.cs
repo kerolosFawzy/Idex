@@ -106,6 +106,7 @@ namespace IDEX.ViewModel
         private void AdditionalCommandHendlre()
         {
             AdditionalSvgPath = BlackSvg;
+            PageNavigate(nameof(AdditionalRequirementsPage));
         }
 
         private void HygieneCommandHendlre()
@@ -134,7 +135,6 @@ namespace IDEX.ViewModel
             Area = SelectedLevel.Area.ToString() + " m2";
             HygLevel = "2";
             HygType = "Bath/Toilet";
-
             InstaSvgPath = GraySvg;
             HygSvgPath = GraySvg;
             AdditionalSvgPath = GraySvg;

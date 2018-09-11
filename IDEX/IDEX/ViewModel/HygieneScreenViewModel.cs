@@ -25,6 +25,20 @@ namespace IDEX.ViewModel
             get => _hygieneInsepectionList;
             set => this.RaiseAndSetIfChanged(ref _hygieneInsepectionList, value);
         }
+        private string _subtitle;
+
+        public string Subtitle
+        {
+            get { return _subtitle; }
+            set { _subtitle = value; }
+        }
+        private FormattedString _FormattedTitle;
+
+        public FormattedString FormattedTitle
+        {
+            get { return _FormattedTitle; }
+            set { _FormattedTitle = value; }
+        }
 
         public Dictionary<string, string> ButtonData
         {
@@ -102,6 +116,7 @@ namespace IDEX.ViewModel
                 HygieneInsepectionList.Add(new HygieneInsepectionResult {
                     CategoryName = CategoryList[i]
                 });
+            SetTitle();
         }
 
         public override void OnSoftBackButtonPressed()
@@ -161,11 +176,10 @@ namespace IDEX.ViewModel
             }
         }
 
-        private async Task SetTitle()
+        private void SetTitle()
         {
             try
             {
-
                 FormattedString Title = new FormattedString();
                 Title.Spans.Add(new Span()
                 {
@@ -173,8 +187,8 @@ namespace IDEX.ViewModel
                     FontSize = 18
                 });
 
-                baseContentPage.FormattedTitle = Title;
-                baseContentPage.Subtitle = SelectedLevel.DoorNumber + " ," + SelectedLevel.Name;
+                FormattedTitle = Title;
+                Subtitle = SelectedLevel.DoorNumber + " ," + SelectedLevel.Name;
             }
             catch (Exception exception) { Crashes.TrackError(exception); }
         }
@@ -187,10 +201,6 @@ namespace IDEX.ViewModel
 
         public override void OnAppearing()
         {
-            Task.Run(async () =>
-            {
-                await SetTitle();
-            });
             base.OnAppearing();
         }
         private void SetDummyData()

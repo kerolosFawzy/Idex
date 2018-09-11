@@ -33,6 +33,7 @@ namespace IDEX.ViewModel
             //note please read commit commments it is importane 
             AddDummyData();
             SetFirstListOfLevels();
+
             ItemTapped = new Command<Level>(HandleItemTapped);
             ShowAll = new Command(ShowAllCommand);
             ShowAllFlag = true;
@@ -40,31 +41,29 @@ namespace IDEX.ViewModel
         public static Level SelectedRoom { get; set; }
         #region class propfull(s)
         public bool ShowAllFlag { get; set; }
-        private string _title;
+        
 
-        public string Title
-        {
-            get => _title;
-            set => this.RaiseAndSetIfChanged(ref _title, value);
-        }
+        private FormattedString _formattedTitle = "Site";
 
-        private string _formattedTitle = "Site";
-
-        public string LocalFormattedTitle
+        public FormattedString FormattedTitle
         {
             get => _formattedTitle;
             set => this.RaiseAndSetIfChanged(ref _formattedTitle, value);
         }
         private string _showAllText = "Show UnCompleted";
-        
+
         public string ShowAllText
         {
             get => _showAllText;
             set => this.RaiseAndSetIfChanged(ref _showAllText, value);
         }
 
-      
-        private string _formattedSubTitle;
+        private string _subtitle;
+        public string Subtitle
+        {
+            get => _subtitle;
+            set => this.RaiseAndSetIfChanged(ref _subtitle, value);
+        }
         private bool _isVisible = false;
 
         public bool IsVisible
@@ -81,7 +80,7 @@ namespace IDEX.ViewModel
             set => this.RaiseAndSetIfChanged(ref _listViewIsVisible, value);
         }
 
-
+        private string _formattedSubTitle;
         public string FormattedSubTitle
         {
             get => _formattedSubTitle;
@@ -158,14 +157,15 @@ namespace IDEX.ViewModel
         #region View handeling 
         void SetVisiablity()
         {
-            if((ItemListSource as List<Level>).Count() == 0)
+            if ((ItemListSource as List<Level>).Count() == 0)
             {
                 IsVisible = true;
-                ListViewIsVisible = false; 
-            }else
+                ListViewIsVisible = false;
+            }
+            else
             {
                 IsVisible = false;
-                ListViewIsVisible = true ;
+                ListViewIsVisible = true;
             }
         }
         private void HandleTitleSet(Level level)
@@ -179,18 +179,19 @@ namespace IDEX.ViewModel
                     FontAttributes = FontAttributes.Bold
                 ,
                     FontSize = 20
+                    , TextColor = Color.White 
                 });
-            baseContentPage.FormattedTitle = formattedTitle;
+            FormattedTitle = formattedTitle;
             Level newLevel = level;
             FormattedSubTitle = "";
             while (newLevel.Parent != null)
             {
                 newLevel = newLevel.Parent;
-                FormattedSubTitle += newLevel.Name +" ,";
+                FormattedSubTitle += newLevel.Name + " ,";
             }
-            if(!string.IsNullOrEmpty(FormattedSubTitle))
-            FormattedSubTitle=FormattedSubTitle.Remove(FormattedSubTitle.Length-1);
-            baseContentPage.Subtitle = FormattedSubTitle;
+            if (!string.IsNullOrEmpty(FormattedSubTitle))
+                FormattedSubTitle = FormattedSubTitle.Remove(FormattedSubTitle.Length - 1);
+            Subtitle = FormattedSubTitle;
         }
         void HandleMenuItemText()
         {
@@ -244,9 +245,9 @@ namespace IDEX.ViewModel
                     formattedTitle.Spans.Add(new Span
                     {
                         Text = "Site",
-                        FontSize = 20 
+                        FontSize = 20
                     });
-                    baseContentPage.FormattedTitle = formattedTitle;
+                    FormattedTitle = formattedTitle;
                 }
                 if (!ShowAllFlag)
                 {
@@ -263,7 +264,7 @@ namespace IDEX.ViewModel
                 {
                     await Navigation.GoBack();
                 });
-               
+
             }
         }
 
