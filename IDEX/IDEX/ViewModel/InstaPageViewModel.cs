@@ -16,7 +16,8 @@ namespace IDEX.ViewModel
         private Dictionary<string, string> _buttonData = new Dictionary<string, string>();
         public Level SelectedLevel { get; set; } = OverviewScreenViewModel.SelectedRoom;
         public ICommand ItemClicked { get; set; }
-
+        public string Easy { get; set; } = "Easy";
+        public string Hard { get; set; } = "Hard";
         public Dictionary<string, string> ButtonData
         {
             get => _buttonData;
@@ -131,7 +132,6 @@ namespace IDEX.ViewModel
             IsVisible = false;
             for (int i = 0; i <= 30; i++)
             {
-
                 NumberPicker.Add(i);
             }
 

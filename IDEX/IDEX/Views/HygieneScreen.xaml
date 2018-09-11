@@ -44,8 +44,8 @@
             </ListView>
             <StackLayout FlexLayout.Order="2" HeightRequest="2" HorizontalOptions="FillAndExpand" BackgroundColor="Black"/>
 
-            <FlexLayout HeightRequest="72" FlexLayout.Grow="1" Direction="Row" Margin="20,10,20,20" FlexLayout.Order="3">
-                <StackLayout FlexLayout.Grow="1" VerticalOptions="CenterAndExpand" Spacing="4" HorizontalOptions="FillAndExpand">
+            <FlexLayout HeightRequest="72" FlexLayout.Grow="1" Direction="Row" Margin="20,10,20,20" FlexLayout.Order="3" AlignItems="Center">
+                <StackLayout FlexLayout.Grow="1" VerticalOptions="Center" Spacing="4" HorizontalOptions="FillAndExpand">
                     <Label FontSize="Small" Text="{Binding CleaningCategory}" FontAttributes="Bold" />
                     <Label FontSize="Small" Text="{Binding Category}" />
                     <Label FontSize="Small" Text="{Binding State}" />
@@ -53,8 +53,8 @@
                 <Custom:PickerView IsVisible="{Binding IsVisible}" 
                                    ItemsSource="{Binding NumberPicker}" 
                                    HeightRequest="72" 
-                                   FlexLayout.AlignSelf="End"
-                                   VerticalOptions="Center"
+                                   FlexLayout.AlignSelf="Center"
+                                   VerticalOptions="CenterAndExpand"
                                    SelectedIndex="{Binding Selected , Mode=TwoWay}" 
                                    />
             </FlexLayout>

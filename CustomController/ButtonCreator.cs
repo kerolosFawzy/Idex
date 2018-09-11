@@ -1,5 +1,4 @@
-﻿using Java.Util;
-using Microsoft.AppCenter.Crashes;
+﻿using Microsoft.AppCenter.Crashes;
 using System;
 using System.Collections.Generic;
 using System.Windows.Input;
@@ -7,7 +6,7 @@ using Xamarin.Forms;
 
 namespace CustomControls
 {
-    public class ButtonCreator : StackLayout
+    public class ButtonCreator : Grid
     {
         public enum InstaCategoryEnum
         {
@@ -107,9 +106,13 @@ namespace CustomControls
 
         public ButtonCreator()
         {
-            Orientation = StackOrientation.Horizontal;
             HorizontalOptions = LayoutOptions.FillAndExpand;
-            Spacing = 0;
+            RowDefinition row = new RowDefinition();
+            row.Height = new GridLength(1 , GridUnitType.Star);
+            ColumnDefinition column = new ColumnDefinition(); 
+            column.Width = new GridLength(1, GridUnitType.Star);
+            ColumnSpacing = 0;
+            RowSpacing = 0; 
         }
 
         protected override void OnPropertyChanged(string propertyName = null)
@@ -123,10 +126,12 @@ namespace CustomControls
                     {
                         ClassId = $"{i + 1}",
                         Style = Application.Current.Resources["ButtonCreatorStyle"] as Style
+                        
                     };
+                    
                     button.Clicked += Handle_Clicked;
 
-                    Children.Add(button);
+                    Children.AddHorizontal(button);
                 }
 
 
