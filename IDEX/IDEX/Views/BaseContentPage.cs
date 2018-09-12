@@ -1,7 +1,5 @@
 ﻿using CustomControls.NavigationServices;
 using IDEX.ViewModel;
-using Microsoft.AppCenter.Crashes;
-using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -17,7 +15,6 @@ namespace IDEX.Views
             if (BindingContext is BaseViewModel viewAwair)
             {
                 viewAwair.OnAppearing();
-                viewAwair.baseContentPage = this;
             }
 
             base.OnAppearing();
@@ -54,8 +51,6 @@ namespace IDEX.Views
         //    return true;
         //}
         
-
-
         #region Title and subTitle
 
         public static readonly BindableProperty FormattedTitleProperty =

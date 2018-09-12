@@ -5,14 +5,58 @@
     x:Class="IDEX.Views.AdditionalRequirementsPage"
     NeedOverrideSoftBackButton="True" 
     xmlns:views="clr-namespace:IDEX.Views"
-    FormattedTitle="{Binding FormattedTitle}"
+    xmlns:input="clr-namespace:Plugin.InputKit.Shared.Controls;assembly=Plugin.InputKit"
+    FormattedTitle="{Binding FormattedTitle}" 
     Subtitle="{Binding Subtitle}"
     >
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style TargetType="Frame" x:Key="FrameStyle">
+                <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+                <Setter Property="BorderColor" Value="Black" />
+                <Setter Property="HasShadow" Value="True" />
+                <Setter Property="Margin" Value="20,10" />
+                <Setter Property="BackgroundColor" Value="White" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Welcome to Xamarin.Forms!"
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
-        </StackLayout>
+        <ScrollView>
+            <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" >
+                <Frame Style="{StaticResource FrameStyle}">
+                    <StackLayout Orientation="Vertical" HorizontalOptions="StartAndExpand" >
+                        <Label Text="Name of add req, select one" FontSize="Medium" TextColor="Black" FontAttributes="Bold" />
+                        <input:SelectionView ColumnNumber="1" ItemsSource="{Binding RadioButtonItemsList}" SelectionType="RadioButton" SelectedItem="{Binding SelectedItem}" />
+                        <!--<input:RadioButtonGroupView  HorizontalOptions="StartAndExpand">
+                            <input:RadioButton Text="Option 1" Value="{Binding SelectedItem}"/>
+                            <input:RadioButton Text="Option 2" Value="{Binding SelectedItem}"/>
+                            <input:RadioButton Text="Option 3" Value="{Binding SelectedItem}"/>
+                            <input:RadioButton Text="Option 4" Value="{Binding SelectedItem}"/>
+                        </input:RadioButtonGroupView>-->
+                    </StackLayout>
+                </Frame>
+                <Frame Style="{StaticResource FrameStyle}">
+                    <StackLayout Orientation="Vertical"  HorizontalOptions="StartAndExpand">
+                        <Label Text="Name of add req, select Many" FontSize="Medium" TextColor="Black" FontAttributes="Bold" />
+                        <ListView HorizontalOptions="FillAndExpand" MinimumHeightRequest="30" ItemsSource="{Binding CheckBoxList}" SeparatorVisibility="None">
+                            <ListView.ItemTemplate>
+                                <DataTemplate>
+                                    <ViewCell>
+                                        <input:CheckBox Text="{Binding Title}" IsChecked="{Binding IsChecked , Mode=TwoWay}" Type="Check" />
+                                    </ViewCell>
+                                </DataTemplate>
+                            </ListView.ItemTemplate>
+                        </ListView>
+
+                    </StackLayout>
+                </Frame>
+                <Frame Style="{StaticResource FrameStyle}">
+
+                </Frame>
+                <Frame  Style="{StaticResource FrameStyle}">
+
+                </Frame>
+            </StackLayout>
+        </ScrollView>
     </ContentPage.Content>
 </views:BaseContentPage>
