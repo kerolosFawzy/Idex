@@ -27,12 +27,6 @@
                     <StackLayout Orientation="Vertical" HorizontalOptions="StartAndExpand" >
                         <Label Text="Name of add req, select one" FontSize="Medium" TextColor="Black" FontAttributes="Bold" />
                         <input:SelectionView ColumnNumber="1" ItemsSource="{Binding RadioButtonItemsList}" SelectionType="RadioButton" SelectedItem="{Binding SelectedItem}" />
-                        <!--<input:RadioButtonGroupView  HorizontalOptions="StartAndExpand">
-                            <input:RadioButton Text="Option 1" Value="{Binding SelectedItem}"/>
-                            <input:RadioButton Text="Option 2" Value="{Binding SelectedItem}"/>
-                            <input:RadioButton Text="Option 3" Value="{Binding SelectedItem}"/>
-                            <input:RadioButton Text="Option 4" Value="{Binding SelectedItem}"/>
-                        </input:RadioButtonGroupView>-->
                     </StackLayout>
                 </Frame>
                 <Frame Style="{StaticResource FrameStyle}">
@@ -51,7 +45,13 @@
                     </StackLayout>
                 </Frame>
                 <Frame Style="{StaticResource FrameStyle}">
-
+                    <StackLayout Orientation="Vertical"  HorizontalOptions="StartAndExpand">
+                        <Label Text="Name of add req, Large Range" FontSize="Medium" TextColor="Black" FontAttributes="Bold" />
+                        <Label Text="Enter Value between (&lt;Min&gt;-&lt;Max&gt;)" TextColor="Black" />
+                        <StackLayout Orientation="Horizontal">
+                            <Entry Placeholder="0.0" Text="{Binding }" HorizontalOptions="StartAndExpand" HorizontalTextAlignment="Center"/>
+                        </StackLayout>
+                    </StackLayout>
                 </Frame>
                 <Frame  Style="{StaticResource FrameStyle}">
 
