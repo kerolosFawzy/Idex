@@ -9,7 +9,7 @@ namespace IDEX.Views
         public OverviewPage()
         {
             InitializeComponent();
-            BindingContext = OverviewScreenViewModel.Instance; 
+            BindingContext = new OverviewScreenViewModel(); 
         }
 
         

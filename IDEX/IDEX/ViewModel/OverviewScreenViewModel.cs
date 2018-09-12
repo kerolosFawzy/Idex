@@ -2,7 +2,6 @@
 using IDEX.Model;
 using IDEX.Views;
 using ReactiveUI;
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,23 +16,12 @@ namespace IDEX.ViewModel
         public ICommand ItemTapped { get; set; }
         readonly Color PieChartColor = Color.FromHex("#008080");
 
-        private static readonly Lazy<OverviewScreenViewModel> _lazyMainPageViewModelInstance
-           = new Lazy<OverviewScreenViewModel>(() => new OverviewScreenViewModel());
 
-        public static OverviewScreenViewModel Instance
-        {
-            get
-            {
-                return _lazyMainPageViewModelInstance.Value;
-            }
-        }
         public OverviewScreenViewModel()
         {
-            //Note remove singleton if you use real data 
-            //note please read commit commments it is importane 
             AddDummyData();
             SetFirstListOfLevels();
-
+            SetFirstTitle();
             ItemTapped = new Command<Level>(HandleItemTapped);
             ShowAll = new Command(ShowAllCommand);
             ShowAllFlag = true;
@@ -41,9 +29,7 @@ namespace IDEX.ViewModel
         public static Level SelectedRoom { get; set; }
         #region class propfull(s)
         public bool ShowAllFlag { get; set; }
-        
-
-        private FormattedString _formattedTitle = "Site";
+        private FormattedString _formattedTitle;
 
         public FormattedString FormattedTitle
         {
@@ -179,7 +165,8 @@ namespace IDEX.ViewModel
                     FontAttributes = FontAttributes.Bold
                 ,
                     FontSize = 20
-                    , TextColor = Color.White 
+                ,
+                    TextColor = Color.White
                 });
             FormattedTitle = formattedTitle;
             Level newLevel = level;
@@ -241,13 +228,7 @@ namespace IDEX.ViewModel
                     HandleTitleSet(FormattedTitlesStack.Last());
                 else
                 {
-                    var formattedTitle = new FormattedString();
-                    formattedTitle.Spans.Add(new Span
-                    {
-                        Text = "Site",
-                        FontSize = 20
-                    });
-                    FormattedTitle = formattedTitle;
+                    SetFirstTitle();
                 }
                 if (!ShowAllFlag)
                 {
@@ -267,7 +248,18 @@ namespace IDEX.ViewModel
 
             }
         }
-
+        void SetFirstTitle()
+        {
+            var formattedTitle = new FormattedString();
+            formattedTitle.Spans.Add(new Span
+            {
+                Text = "Site",
+                FontSize = 20,
+                TextColor = Color.White,
+                FontAttributes = FontAttributes.Bold
+            });
+            FormattedTitle = formattedTitle;
+        }
         #region setting level data 
         public void GetFinishedPercentage(List<int> AllLevelTypes)
         {

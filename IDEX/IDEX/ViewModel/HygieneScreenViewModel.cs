@@ -207,7 +207,7 @@ namespace IDEX.ViewModel
         {
             for (int i = 1; i <= 4; i++)
                 CategoryList.Add("PATIENTLIGHT " + i);
-            for (int i = 0; i <= 30; i++)
+            for (int i = 0; i <= 100; i++)
                 NumberPicker.Add(i);
         }
     }

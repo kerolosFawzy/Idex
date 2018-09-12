@@ -161,7 +161,7 @@ namespace IDEX.ViewModel
             ItemClicked = new Command(ItemeClilckHandler);
             IsVisible = false;
             SetTitle(); 
-            for (int i = 0; i <= 30; i++)
+            for (int i = 0; i <= 100; i++)
             {
                 NumberPicker.Add(i);
             }
