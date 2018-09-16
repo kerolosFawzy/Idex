@@ -96,6 +96,7 @@
     <AppExtensionDebugBundleId />
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Effects\CapitalizeKeyboardEffect.cs" />
     <Compile Include="Renderers\CustomNavigationRenderer.cs" />
     <Compile Include="Main.cs" />
     <Compile Include="AppDelegate.cs" />
@@ -223,4 +224,5 @@
   <ItemGroup>
     <BundleResource Include="Resources\camera.png" />
   </ItemGroup>
+  <ItemGroup />
 </Project>

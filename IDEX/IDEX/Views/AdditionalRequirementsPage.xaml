@@ -8,6 +8,8 @@
     xmlns:input="clr-namespace:Plugin.InputKit.Shared.Controls;assembly=Plugin.InputKit"
     FormattedTitle="{Binding FormattedTitle}" 
     Subtitle="{Binding Subtitle}"
+    xmlns:effects="clr-namespace:IDEX.Effects"
+    xmlns:Behavior="clr-namespace:IDEX.Behavior"
     >
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -49,11 +51,24 @@
                         <Label Text="Name of add req, Large Range" FontSize="Medium" TextColor="Black" FontAttributes="Bold" />
                         <Label Text="Enter Value between (&lt;Min&gt;-&lt;Max&gt;)" TextColor="Black" />
                         <StackLayout Orientation="Horizontal">
-                            <Entry Placeholder="0.0" Text="{Binding }" HorizontalOptions="StartAndExpand" HorizontalTextAlignment="Center"/>
+                            <Entry Placeholder="0.0" Text="{Binding }" 
+                                   VerticalOptions="CenterAndExpand"
+                                   HorizontalOptions="FillAndExpand" 
+                                   HorizontalTextAlignment="Center">
+                                <Entry.Behaviors>
+                                    <Behavior:LargeRangeBehavior 
+                                        Behavior:LargeRangeBehavior.IsValid="{Binding LargeRangeValidation}"
+                                        />
+                                </Entry.Behaviors>
+                                <Entry.Effects>
+                                    <effects:CapitalizeKeyboardEffect/>
+                                </Entry.Effects>
+                            </Entry>
+                            <Button Text="Button" HorizontalOptions="End" />
                         </StackLayout>
                     </StackLayout>
                 </Frame>
-                <Frame  Style="{StaticResource FrameStyle}">
+                <Frame Style="{StaticResource FrameStyle}">
 
                 </Frame>
             </StackLayout>

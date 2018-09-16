@@ -37,15 +37,23 @@ namespace IDEX.ViewModel
             }
         }
 
-        public IList<string> RadioButtonItemsList { get; set; } = new List<string>() ;
+        public IList<string> RadioButtonItemsList { get; set; } = new List<string>();
 
         private string _selectedItem;
         public string SelectedItem
         {
             get => _selectedItem;
+            set => this.RaiseAndSetIfChanged(ref _selectedItem, value);
+        }
+
+        private bool _largeRangeValidation;
+
+        public bool LargeRangeValidation
+        {
+            get => _largeRangeValidation;
             set
             {
-                this.RaiseAndSetIfChanged(ref _selectedItem, value);
+                this.RaiseAndSetIfChanged(ref _largeRangeValidation, value);
             }
         }
 
@@ -82,8 +90,8 @@ namespace IDEX.ViewModel
         public override void DisAppearing()
         {
             RequirementsData.SelectedItem = SelectedItem;
-            RequirementsData.checkBoxesList = CheckBoxList.Where(x => x.IsChecked == true).ToList(); 
-            base.DisAppearing(); 
+            RequirementsData.checkBoxesList = CheckBoxList.Where(x => x.IsChecked == true).ToList();
+            base.DisAppearing();
         }
     }
 
