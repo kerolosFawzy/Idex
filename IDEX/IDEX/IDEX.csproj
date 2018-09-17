@@ -16,6 +16,7 @@
   <ItemGroup>
     <None Remove="SvgImages\check_detials_room_black.svg" />
     <None Remove="SvgImages\check_detials_room_gray.svg" />
+    <None Remove="SvgImages\circle.svg" />
   </ItemGroup>
 
   <ItemGroup>

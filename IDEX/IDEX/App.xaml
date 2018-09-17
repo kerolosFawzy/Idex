@@ -48,7 +48,10 @@
                 <Setter Property="BackgroundColor" Value="#008080"/>
                 <Setter Property="BorderRadius" Value="8"/>
             </Style>
-          
+            <Style x:Key="RangeLabel" TargetType="Label" >
+                <Setter Property="HorizontalOptions" Value="CenterAndExpand" />
+                <Setter Property="VerticalOptions" Value="EndAndExpand" />
+            </Style>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

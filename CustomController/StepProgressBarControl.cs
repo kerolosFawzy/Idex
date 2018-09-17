@@ -3,7 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Input;
 using Xamarin.Forms;
-
+//ref 
+//https://xamgirl.com/step-bar-in-xamarin-forms/
 namespace CustomControls
 {
     public class StepProgressBarControl : StackLayout
@@ -20,11 +21,10 @@ namespace CustomControls
             .Create(nameof(StepColor), typeof(Color), typeof(StepProgressBarControl), Color.LightGreen, defaultBindingMode: BindingMode.TwoWay);
 
         public static readonly BindableProperty ItemClickedProperty = BindableProperty
-          .Create(nameof(ItemClicked), typeof(ICommand), typeof(StepProgressBarControl), null, defaultBindingMode: BindingMode.TwoWay);
+            .Create(nameof(ItemClicked), typeof(ICommand), typeof(StepProgressBarControl), null, defaultBindingMode: BindingMode.TwoWay);
 
         public static readonly BindableProperty ItemSelectedIndexProperty = BindableProperty
             .Create(nameof(ItemSelectedIndex), typeof(List<string>), typeof(StepProgressBarControl), null , BindingMode.OneWay );
-
 
         #endregion
 

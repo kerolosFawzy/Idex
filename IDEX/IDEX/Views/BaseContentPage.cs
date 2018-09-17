@@ -35,7 +35,7 @@ namespace IDEX.Views
 
         public bool NeedOverrideSoftBackButton { get; set; } = false;
 
-
+       
 
         //protected override bool OnBackButtonPressed()
         //{
