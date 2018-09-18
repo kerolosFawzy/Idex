@@ -48,9 +48,23 @@
                 <Setter Property="BackgroundColor" Value="#008080"/>
                 <Setter Property="BorderRadius" Value="8"/>
             </Style>
-            <Style x:Key="RangeLabel" TargetType="Label" >
+            <Style x:Key="RangeLabel" TargetType="Label" 
+                   BasedOn="{StaticResource FirstScreenLabels}">
                 <Setter Property="HorizontalOptions" Value="CenterAndExpand" />
                 <Setter Property="VerticalOptions" Value="EndAndExpand" />
+                <Setter Property="FontAttributes" Value="Bold"/>
+            </Style>
+            <Style x:Key="DotButtonStyle" TargetType="Button">
+                <Setter Property="WidthRequest" Value="20" />
+                <Setter Property="HeightRequest" Value="20" />
+                <Setter Property="CornerRadius" Value="10" />
+                <Setter Property="BackgroundColor" Value="Black" />
+            </Style>
+            <Style x:Key="BigButtonStyle" TargetType="Button">
+                <Setter Property="WidthRequest" Value="20" />
+                <Setter Property="HeightRequest" Value="20" />
+                <Setter Property="CornerRadius" Value="10" />
+                <Setter Property="BackgroundColor" Value="#008080" />
             </Style>
         </ResourceDictionary>
     </Application.Resources>

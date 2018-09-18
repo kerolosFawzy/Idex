@@ -60,7 +60,6 @@ namespace IDEX.Behavior
             }
             else
             {
-                
                 if (int.TryParse(splitInput[0], out int n) && int.TryParse(splitInput[1], out int x))
                 {
                     isValid = NumberValidation(splitInput);

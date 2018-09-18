@@ -51,7 +51,6 @@ namespace IDEX.ViewModel
         {
             var Elemnet = obj as BaseModel;
             Elemnet.IsChecked = !Elemnet.IsChecked;
-
         }
 
         private void SetReactiveListListen()

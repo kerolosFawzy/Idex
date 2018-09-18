@@ -1,6 +1,5 @@
 ﻿using Microsoft.AppCenter.Crashes;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using Xamarin.Forms;
@@ -16,7 +15,6 @@ namespace CustomControls
             = BindableProperty.Create(nameof(StepSelected), typeof(int), typeof(RangeSlider), 0, defaultBindingMode: BindingMode.TwoWay);
         public static readonly BindableProperty StepColorProperty
             = BindableProperty.Create(nameof(StepColor), typeof(Color), typeof(RangeSlider), Color.Black, defaultBindingMode: BindingMode.TwoWay);
-
         public static readonly BindableProperty RangListProperty
             = BindableProperty.Create(nameof(RangList), typeof(IList<string>), typeof(RangeSlider), defaultBindingMode: BindingMode.OneWay);
 
@@ -60,7 +58,7 @@ namespace CustomControls
                 Width = new GridLength(1, GridUnitType.Star)
             };
 
-            AddStyles();
+           // AddStyles();
 
         }
 
@@ -92,9 +90,9 @@ namespace CustomControls
                     {
                         ClassId = $"{i + 1}",
                         VerticalOptions = LayoutOptions.Center,
-                        Style = Resources["unSelectedStyle"] as Style
+                        Style = Application.Current.Resources["DotButtonStyle"] as Style
                     };
-
+                    
                     button.Clicked += Handle_Clicked;
 
                     Children.Add(button, i, 1);
@@ -105,7 +103,7 @@ namespace CustomControls
                         {
                             BackgroundColor = Color.Black,
                             HeightRequest = 2,
-                            MinimumWidthRequest = 10,
+                            WidthRequest = 15,
                             VerticalOptions = LayoutOptions.Center,
                             HorizontalOptions = LayoutOptions.FillAndExpand
                         };
@@ -134,9 +132,9 @@ namespace CustomControls
         void SelectElement(Button elementSelected)
         {
 
-            if (_lastStepSelected != null) _lastStepSelected.Style = Resources["unSelectedStyle"] as Style;
+            if (_lastStepSelected != null) _lastStepSelected.Style = Application.Current.Resources["DotButtonStyle"] as Style;
 
-            elementSelected.Style = Resources["selectedStyle"] as Style;
+            elementSelected.Style = Application.Current.Resources["BigButtonStyle"] as Style;
 
             StepSelected = Convert.ToInt32(elementSelected.Text);
             _lastStepSelected = elementSelected;

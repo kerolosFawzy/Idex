@@ -25,6 +25,7 @@
                 <Setter Property="Orientation" Value="Vertical" />
                 <Setter Property="HorizontalOptions" Value="StartAndExpand" />
             </Style>
+            
         </ResourceDictionary>
     </ContentPage.Resources>
     <ContentPage.Content>
@@ -32,13 +33,13 @@
             <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" >
                 <Frame Style="{StaticResource FrameStyle}">
                     <StackLayout Style="{StaticResource StackStyle}" >
-                        <Label Text="Name of add req, select one" FontSize="Medium" TextColor="Black" FontAttributes="Bold" />
+                        <Label Text="Name of add req, select one" Style="{StaticResource BoldLabel}" />
                         <input:SelectionView ColumnNumber="1" ItemsSource="{Binding RadioButtonItemsList}" SelectionType="RadioButton" SelectedItem="{Binding SelectedItem}" />
                     </StackLayout>
                 </Frame>
                 <Frame Style="{StaticResource FrameStyle}">
                     <StackLayout Style="{StaticResource StackStyle}">
-                        <Label Text="Name of add req, select Many" FontSize="Medium" TextColor="Black" FontAttributes="Bold" />
+                        <Label Text="Name of add req, select Many" Style="{StaticResource BoldLabel}" />
                         <ListView HorizontalOptions="FillAndExpand" MinimumHeightRequest="30" ItemsSource="{Binding CheckBoxList}" SeparatorVisibility="None">
                             <ListView.ItemTemplate>
                                 <DataTemplate>
@@ -48,39 +49,40 @@
                                 </DataTemplate>
                             </ListView.ItemTemplate>
                         </ListView>
-
                     </StackLayout>
                 </Frame>
                 <Frame Style="{StaticResource FrameStyle}">
                     <StackLayout Style="{StaticResource StackStyle}">
-                        <Label Text="Name of add req, Large Range" FontSize="Medium" TextColor="Black" FontAttributes="Bold" />
-                        <Label Text="Enter Value between (&lt;Min&gt;-&lt;Max&gt;)" TextColor="Black" />
+                        <custom:ExtLabel Text="Name of add req, Large Range" Style="{StaticResource BoldLabel}"/>
+                        <custom:ExtLabel Text="Enter Value between (&lt;Min&gt;-&lt;Max&gt;)" TextColor="Black" />
                         <StackLayout Orientation="Horizontal">
-                            <Entry Placeholder="0.0" Text="{Binding }" 
+                            <Entry Placeholder="0.0" Text="{Binding EnteredRangeData}" 
+                                   Behavior:LargeRangeBehavior.IsValid="{Binding LargeRangeValidation}"
                                    VerticalOptions="CenterAndExpand"
                                    HorizontalOptions="FillAndExpand" 
                                    HorizontalTextAlignment="Center">
                                 <Entry.Behaviors>
-                                    <Behavior:LargeRangeBehavior 
-                                        Behavior:LargeRangeBehavior.IsValid="{Binding LargeRangeValidation}"
-                                        />
+                                    <Behavior:LargeRangeBehavior />
                                 </Entry.Behaviors>
                                 <Entry.Effects>
                                     <effects:CapitalizeKeyboardEffect/>
                                 </Entry.Effects>
                             </Entry>
-                            <Button Text="Button" HorizontalOptions="End" />
+                            <custom:ExtButton Text="Button" HorizontalOptions="End" />
                         </StackLayout>
                     </StackLayout>
                 </Frame>
                 <Frame Style="{StaticResource FrameStyle}">
                     <StackLayout Style="{StaticResource StackStyle}">
-                        <Label Text="Name of add req, small Range" />
-                        <ScrollView Orientation="Horizontal">
-                            <custom:RangeSlider Steps="15"  StepColor="#008080" MinimumHeightRequest="60" VerticalOptions="FillAndExpand" HorizontalOptions="StartAndExpand"/>
-                        </ScrollView>
+                        <Label Text="Name of add req, small Range" Style="{StaticResource BoldLabel}"/>
+                        <custom:PickerView HeightRequest="72"
+                                           IsVisible="{Binding PickerVisible}"
+                                           ItemsSource="{Binding RangeList}" 
+                                           SelectedIndex="{Binding SelectedRangeItem}"
+                                           />
+                        <custom:ExtLabel Text="{Binding TextBox}" HorizontalOptions="CenterAndExpand" VerticalTextAlignment="Center" IsVisible="{Binding TextBoxVisibility}"/>
                     </StackLayout>
-                    </Frame>
+                </Frame>
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>
