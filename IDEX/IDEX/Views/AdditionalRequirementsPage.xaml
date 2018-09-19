@@ -24,11 +24,13 @@
                 <Setter Property="Orientation" Value="Vertical" />
                 <Setter Property="HorizontalOptions" Value="StartAndExpand" />
             </Style>
-            
         </ResourceDictionary>
+
+     
     </ContentPage.Resources>
     <ContentPage.Content>
         <ScrollView>
+            
             <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" >
                 <Frame Style="{StaticResource FrameStyle}">
                     <StackLayout Style="{StaticResource StackStyle}" >
@@ -58,7 +60,7 @@
                             <Entry Placeholder="0.0" Text="{Binding EnteredRangeData}" 
                                    Behavior:LargeRangeBehavior.IsValid="{Binding LargeRangeValidation}"
                                    VerticalOptions="CenterAndExpand"
-                                   HorizontalOptions="FillAndExpand" 
+                                   HorizontalOptions="FillAndExpand"
                                    HorizontalTextAlignment="Center">
                                 <Entry.Behaviors>
                                     <Behavior:LargeRangeBehavior />
@@ -79,11 +81,16 @@
                                            VerticalOptions="CenterAndExpand"
                                            IsVisible="{Binding PickerVisible}"
                                            ItemsSource="{Binding RangeList}" 
-                                           SelectedIndex="{Binding PickerSelectedItem , Mode=TwoWay}"
+                                           SelectedIndex="{Binding PickerSelectedItem , Mode=OneWayToSource}"
                                            />
                         <Entry Text="{Binding TextBox}" Placeholder="Enter your Value Here"
                                HorizontalOptions="CenterAndExpand" 
-                               IsVisible="{Binding TextBoxVisibility}">
+                               IsVisible="{Binding TextBoxVisibility}"
+                               Behavior:SmallRangeBehavior.IsValid="{Binding ChoosedValueValidation}"
+                               >
+                            <Entry.Behaviors>
+                                <Behavior:SmallRangeBehavior Max="{Binding Max}" Min="{Binding Min }"/>
+                            </Entry.Behaviors>
                             <Entry.Effects>
                                 <effects:CapitalizeKeyboardEffect/>
                             </Entry.Effects>

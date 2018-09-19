@@ -95,6 +95,20 @@ namespace IDEX.ViewModel
             }
         }
 
+        private bool _choosedValueValidation;
+
+        public bool ChoosedValueValidation
+        {
+            get => _choosedValueValidation;
+            set
+            {
+                this.RaiseAndSetIfChanged(ref _choosedValueValidation, value);
+                if (ChoosedValueValidation) {
+                        
+                }
+            }
+        }
+
         private string _enteredRangeData;
 
         public string EnteredRangeData
@@ -123,6 +137,28 @@ namespace IDEX.ViewModel
             set
             {
                 this.RaiseAndSetIfChanged(ref _textBox, value);
+            }
+        }
+
+        private string _max;
+
+        public string Max
+        {
+            get => _max;
+            set
+            {
+                this.RaiseAndSetIfChanged(ref _max, value);
+            }
+        }
+
+        private string _min;
+
+        public string Min
+        {
+            get => _min;
+            set
+            {
+                this.RaiseAndSetIfChanged(ref _min, value);
             }
         }
 
@@ -173,6 +209,8 @@ namespace IDEX.ViewModel
                 {
                     PickerVisible = false;
                     TextBoxVisibility = true;
+                    Min = min.ToString();
+                    Max = max.ToString();
                 }
             }
             else {
@@ -198,6 +236,8 @@ namespace IDEX.ViewModel
                 else {
                     PickerVisible = false;
                     TextBoxVisibility = true;
+                    Min = firstChar[0].ToString();
+                    Max = secondChar[0].ToString();
                 }
 
 

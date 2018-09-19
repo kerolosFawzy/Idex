@@ -50,10 +50,7 @@ namespace IDEX.Droid.Renderers
             }
             else if (e.PropertyName == PickerView.SelectedIndexProperty.PropertyName)
             {
-                Task.Run(async()=> {
-                await UpdateSelectedIndex();
-                });
-                UpdateSelectedIndex();
+                UpdateSelectedIndex();                
             }
             else if (e.PropertyName == PickerView.FontFamilyProperty.PropertyName)
             {
@@ -93,7 +90,7 @@ namespace IDEX.Droid.Renderers
                 }
 
                 Control.MaxValue = newMax;
-                Control.MinValue = 1;
+                Control.MinValue = 0;
                 Control.WrapSelectorWheel = false;
                 if (!extend)
                 {
@@ -102,15 +99,14 @@ namespace IDEX.Droid.Renderers
             }
         }
 
-        private Task UpdateSelectedIndex()
+        private void UpdateSelectedIndex()
         {
             if (Element.SelectedIndex < Control.MinValue || Element.SelectedIndex >= Control.MaxValue)
             {
-                return null;
+                return ;
             }
 
             Control.Value = Element.SelectedIndex;
-            return null;
         }
 
         void UpdateFont()
