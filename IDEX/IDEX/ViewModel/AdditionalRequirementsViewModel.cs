@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reactive.Linq;
+using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Internals;
 
@@ -73,6 +74,13 @@ namespace IDEX.ViewModel
             set => this.RaiseAndSetIfChanged(ref _selectedItem, value);
         }
 
+        private int _pickerSelectedItem;
+        public int PickerSelectedItem
+        {
+            get => _pickerSelectedItem;
+            set => this.RaiseAndSetIfChanged(ref _pickerSelectedItem, value);
+        }
+
         private bool _largeRangeValidation;
 
         public bool LargeRangeValidation
@@ -82,7 +90,7 @@ namespace IDEX.ViewModel
             {
                 this.RaiseAndSetIfChanged(ref _largeRangeValidation, value);
                 if (LargeRangeValidation) {
-                    FliteringIncomeData();
+                        FliteringIncomeData();
                 }
             }
         }
@@ -97,9 +105,9 @@ namespace IDEX.ViewModel
                 this.RaiseAndSetIfChanged(ref _enteredRangeData, value);
             }
         }
-        private List<string> _rangeList;
+        private IList<string> _rangeList = new List<string>();
 
-        public List<string> RangeList
+        public IList<string> RangeList
         {
             get => _rangeList;
             set
@@ -146,22 +154,53 @@ namespace IDEX.ViewModel
             }
         }
 
-        void FliteringIncomeData() {
+       void FliteringIncomeData() {
+            List<string> result = new List<string>();
             string[] splitInput = EnteredRangeData.ToString().Split('.');
-            if (int.TryParse(splitInput[0], out int min) 
+            if (int.TryParse(splitInput[0], out int min)
                 && int.TryParse(splitInput[1], out int max))
             {
                 int range = max - min;
                 if (range <= 10)
                 {
-                    for (int i = 0; i < range; i++)
-                        RangeList.Add(i.ToString());
+                    for (int i = min; i <= max; i++)
+                        result.Add(i.ToString());
                     PickerVisible = true;
+                    TextBoxVisibility = false;
+                    RangeList = result;
                 }
                 else
                 {
-
+                    PickerVisible = false;
+                    TextBoxVisibility = true;
                 }
+            }
+            else {
+                char[] firstChar = splitInput[0].ToCharArray();
+                int minChar = Convert.ToInt32(firstChar[0]);
+
+                char[] secondChar = splitInput[1].ToCharArray();
+                int maxChar = Convert.ToInt32(secondChar[0]);
+                int rangeChar = maxChar - minChar;
+                if (rangeChar <= 10)
+                {
+                    char[] alphabet = Enumerable.Range(firstChar[0], rangeChar+1)
+                        .Select(x => (char)x).ToArray();
+                    PickerVisible = true;
+                    TextBoxVisibility = false;
+                    
+                    foreach (char c in alphabet)
+                    {
+                        result.Add(c.ToString());
+                    }
+                    RangeList = result;
+                }
+                else {
+                    PickerVisible = false;
+                    TextBoxVisibility = true;
+                }
+
+
             }
         }
 

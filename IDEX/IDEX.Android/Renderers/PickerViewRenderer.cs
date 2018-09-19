@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel;
+using System.Threading.Tasks;
 using Android.Graphics;
 using Android.Util;
 using Android.Widget;
@@ -49,6 +50,9 @@ namespace IDEX.Droid.Renderers
             }
             else if (e.PropertyName == PickerView.SelectedIndexProperty.PropertyName)
             {
+                Task.Run(async()=> {
+                await UpdateSelectedIndex();
+                });
                 UpdateSelectedIndex();
             }
             else if (e.PropertyName == PickerView.FontFamilyProperty.PropertyName)
@@ -75,7 +79,7 @@ namespace IDEX.Droid.Renderers
 
             if (arr.Count > 0)
             {
-                int newMax = arr.Count - 1;
+                int newMax = arr.Count -1 ;
                 if (newMax < Control.Value)
                 {
                     Element.SelectedIndex = newMax;
@@ -89,8 +93,8 @@ namespace IDEX.Droid.Renderers
                 }
 
                 Control.MaxValue = newMax;
-                Control.MinValue = 0;
-
+                Control.MinValue = 1;
+                Control.WrapSelectorWheel = false;
                 if (!extend)
                 {
                     Control.SetDisplayedValues(arr.ToArray());
@@ -98,14 +102,15 @@ namespace IDEX.Droid.Renderers
             }
         }
 
-        private void UpdateSelectedIndex()
+        private Task UpdateSelectedIndex()
         {
             if (Element.SelectedIndex < Control.MinValue || Element.SelectedIndex >= Control.MaxValue)
             {
-                return;
+                return null;
             }
 
             Control.Value = Element.SelectedIndex;
+            return null;
         }
 
         void UpdateFont()
@@ -132,9 +137,8 @@ namespace IDEX.Droid.Renderers
             for (int i = 0; i < count; i++)
             {
                 var child = numberPicker.GetChildAt(i);
-                var editText = child as EditText;
 
-                if (editText != null)
+                if (child is EditText editText)
                 {
                     try
                     {

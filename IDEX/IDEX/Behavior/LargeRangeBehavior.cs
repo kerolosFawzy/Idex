@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AppCenter.Crashes;
+using System;
 using Xamarin.Forms;
 
 namespace IDEX.Behavior
@@ -20,10 +21,15 @@ namespace IDEX.Behavior
         }
         public static void SetIsValid(BindableObject view, bool value)
         {
-            view.SetValue(IsValidProperty, value);
+            try
+            {
+                view.SetValue(IsValidProperty, value);
+            }
+            catch (Exception exception) { Crashes.TrackError(exception); }
         }
 
-        void Register(Entry view) {
+        void Register(Entry view)
+        {
             if (!(view is Entry entry))
             {
                 return;
@@ -49,7 +55,7 @@ namespace IDEX.Behavior
             Detaching(bindable as Entry);
             base.OnDetachingFrom(bindable);
         }
-       
+
         private static void OnTextChanged(object sender, TextChangedEventArgs e)
         {
             string[] splitInput = e.NewTextValue.ToString().Split('.');
@@ -83,7 +89,7 @@ namespace IDEX.Behavior
             int.TryParse(Input[0], out int min);
             int.TryParse(Input[1], out int max);
 
-            return min <= max; 
+            return min <= max;
         }
         static bool CharValidation(string[] Input)
         {
@@ -92,7 +98,8 @@ namespace IDEX.Behavior
 
             char[] secondChar = Input[1].ToUpper().ToCharArray();
             int max = Convert.ToInt32(secondChar[0]);
-            if (char.IsLetter(firstChar[0]) && char.IsLetter(secondChar[0])) {
+            if (char.IsLetter(firstChar[0]) && char.IsLetter(secondChar[0]))
+            {
                 return min <= max;
             }
             return false;

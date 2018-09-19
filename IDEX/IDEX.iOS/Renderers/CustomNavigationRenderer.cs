@@ -197,7 +197,7 @@ namespace IDEX.iOS
                         titleView.BackgroundColor = UIColor.FromPatternImage(image);
 
                     }
-                    catch (Exception ex)
+                    catch (Exception )
                     {
                         titleView.BackgroundColor = CustomNavigationPage.GetTitleFillColor(Element)?.ToUIColor() ?? UIColor.Clear;
 

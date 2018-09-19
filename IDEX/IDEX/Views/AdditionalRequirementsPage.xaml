@@ -10,8 +10,7 @@
     Subtitle="{Binding Subtitle}"
     xmlns:effects="clr-namespace:IDEX.Effects"
     xmlns:Behavior="clr-namespace:IDEX.Behavior"
-    xmlns:custom="clr-namespace:CustomControls;assembly=CustomControls"
-    >
+    xmlns:custom="clr-namespace:CustomControls;assembly=CustomControls" >
     <ContentPage.Resources>
         <ResourceDictionary>
             <Style TargetType="Frame" x:Key="FrameStyle">
@@ -76,11 +75,19 @@
                     <StackLayout Style="{StaticResource StackStyle}">
                         <Label Text="Name of add req, small Range" Style="{StaticResource BoldLabel}"/>
                         <custom:PickerView HeightRequest="72"
+                                           HorizontalOptions="CenterAndExpand"
+                                           VerticalOptions="CenterAndExpand"
                                            IsVisible="{Binding PickerVisible}"
                                            ItemsSource="{Binding RangeList}" 
-                                           SelectedIndex="{Binding SelectedRangeItem}"
+                                           SelectedIndex="{Binding PickerSelectedItem , Mode=TwoWay}"
                                            />
-                        <custom:ExtLabel Text="{Binding TextBox}" HorizontalOptions="CenterAndExpand" VerticalTextAlignment="Center" IsVisible="{Binding TextBoxVisibility}"/>
+                        <Entry Text="{Binding TextBox}" Placeholder="Enter your Value Here"
+                               HorizontalOptions="CenterAndExpand" 
+                               IsVisible="{Binding TextBoxVisibility}">
+                            <Entry.Effects>
+                                <effects:CapitalizeKeyboardEffect/>
+                            </Entry.Effects>
+                        </Entry>
                     </StackLayout>
                 </Frame>
             </StackLayout>

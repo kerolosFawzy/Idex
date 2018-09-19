@@ -66,6 +66,7 @@ namespace IDEX.iOS.Renderers
             {
                 Element.SelectedIndex = row;
             }, nativeFont);
+            
         }
 
         private void UpdateSelectedIndex()
