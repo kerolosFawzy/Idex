@@ -25,8 +25,6 @@
                 <Setter Property="HorizontalOptions" Value="StartAndExpand" />
             </Style>
         </ResourceDictionary>
-
-     
     </ContentPage.Resources>
     <ContentPage.Content>
         <ScrollView>
@@ -60,25 +58,28 @@
                             <Entry Placeholder="0.0" Text="{Binding EnteredRangeData}" 
                                    Behavior:LargeRangeBehavior.IsValid="{Binding LargeRangeValidation}"
                                    VerticalOptions="CenterAndExpand"
+                                   Keyboard="Numeric"
                                    HorizontalOptions="FillAndExpand"
                                    HorizontalTextAlignment="Center">
                                 <Entry.Behaviors>
                                     <Behavior:LargeRangeBehavior />
                                 </Entry.Behaviors>
-                                <Entry.Effects>
-                                    <effects:CapitalizeKeyboardEffect/>
-                                </Entry.Effects>
+                                
                             </Entry>
-                            <custom:ExtButton Text="Button" HorizontalOptions="End" />
-                        </StackLayout>
+                            <Image Source="three_dots_mark.png" HorizontalOptions="End" VerticalOptions="Center" WidthRequest="80" HeightRequest="40">
+                                <Image.GestureRecognizers>
+                                    <TapGestureRecognizer Command="{Binding ThreeDotButtonCommand}" />
+                                </Image.GestureRecognizers>
+                            </Image>
+                            </StackLayout>
                     </StackLayout>
                 </Frame>
                 <Frame Style="{StaticResource FrameStyle}">
                     <StackLayout Style="{StaticResource StackStyle}">
                         <Label Text="Name of add req, small Range" Style="{StaticResource BoldLabel}"/>
-                        <custom:PickerView HeightRequest="72"
+                        <custom:PickerView 
                                            HorizontalOptions="CenterAndExpand"
-                                           VerticalOptions="CenterAndExpand"
+                                           VerticalOptions="FillAndExpand"
                                            IsVisible="{Binding PickerVisible}"
                                            ItemsSource="{Binding RangeList}" 
                                            SelectedIndex="{Binding PickerSelectedItem , Mode=OneWayToSource}"
@@ -87,7 +88,7 @@
                                HorizontalOptions="CenterAndExpand" 
                                IsVisible="{Binding TextBoxVisibility}"
                                Behavior:SmallRangeBehavior.IsValid="{Binding ChoosedValueValidation}"
-                               >
+                               HorizontalTextAlignment="Center">
                             <Entry.Behaviors>
                                 <Behavior:SmallRangeBehavior Max="{Binding Max}" Min="{Binding Min }"/>
                             </Entry.Behaviors>

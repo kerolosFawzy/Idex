@@ -18,7 +18,8 @@ namespace IDEX.iOS
         //
         public override bool FinishedLaunching(UIApplication app, NSDictionary options)
         {
-            global::Xamarin.Forms.Forms.Init();
+            Rg.Plugins.Popup.Popup.Init();
+            Xamarin.Forms.Forms.Init();
             LoadApplication(new App());
             FFImageLoading.Forms.Platform.CachedImageRenderer.Init();
             return base.FinishedLaunching(app, options); 

@@ -91,11 +91,13 @@ namespace IDEX.Droid.Renderers
 
                 Control.MaxValue = newMax;
                 Control.MinValue = 0;
-                Control.WrapSelectorWheel = false;
+
                 if (!extend)
                 {
                     Control.SetDisplayedValues(arr.ToArray());
                 }
+                Control.WrapSelectorWheel = false;
+
             }
         }
 

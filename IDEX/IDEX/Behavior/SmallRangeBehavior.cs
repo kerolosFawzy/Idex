@@ -1,7 +1,5 @@
 ﻿using Microsoft.AppCenter.Crashes;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using Xamarin.Forms;
 
 namespace IDEX.Behavior
@@ -99,6 +97,8 @@ namespace IDEX.Behavior
             {
                 isValid = false;
             }
+            if (GetIsValid(sender as Entry))
+                SetIsValid(sender as Entry, false);
             SetIsValid(sender as Entry, isValid);
             ((Entry)sender).TextColor = isValid ? Color.Default : Color.Red;
         }

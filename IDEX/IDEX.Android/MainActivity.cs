@@ -12,14 +12,21 @@ namespace IDEX.Droid
         {
             TabLayoutResource = Resource.Layout.Tabbar;
             ToolbarResource = Resource.Layout.Toolbar;
-            UserDialogs.Init(this); 
+            UserDialogs.Init(this);
+            Rg.Plugins.Popup.Popup.Init(this, bundle);
+
             base.OnCreate(bundle);
             FFImageLoading.Forms.Platform.CachedImageRenderer.Init(true);
             global::Xamarin.Forms.Forms.Init(this, bundle);
             LoadApplication(new App());
         }
-
-        
+        public override void OnBackPressed()
+        {
+            if (Rg.Plugins.Popup.Popup.SendBackPressed(base.OnBackPressed))
+            {
+              
+            }
+        }
 
     }
 

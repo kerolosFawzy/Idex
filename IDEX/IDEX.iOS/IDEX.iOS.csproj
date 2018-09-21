@@ -178,6 +178,9 @@
     <PackageReference Include="ReactiveUI.XamForms">
       <Version>8.7.2</Version>
     </PackageReference>
+    <PackageReference Include="Rg.Plugins.Popup">
+      <Version>1.1.4.168</Version>
+    </PackageReference>
     <PackageReference Include="SkiaSharp">
       <Version>1.60.3</Version>
     </PackageReference>
@@ -224,5 +227,7 @@
   <ItemGroup>
     <BundleResource Include="Resources\camera.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <BundleResource Include="Resources\three_dots_mark.png" />
+  </ItemGroup>
 </Project>

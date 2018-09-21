@@ -1,11 +1,14 @@
 ﻿using IDEX.Model;
+using IDEX.Views;
 using Microsoft.AppCenter.Crashes;
 using ReactiveUI;
+using Rg.Plugins.Popup.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reactive.Linq;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using Xamarin.Forms;
 using Xamarin.Forms.Internals;
 
@@ -13,7 +16,8 @@ namespace IDEX.ViewModel
 {
     class AdditionalRequirementsViewModel : BaseViewModel
     {
-        public ReactiveCommand GetDataCommand { get; set; }
+        public ICommand ThreeDotButtonCommand { get; set; }
+        public ICommand OkButtonCommand { get; set; }
         public Level SelectedLevel { get; set; } = OverviewScreenViewModel.SelectedRoom;
         AdditionalRequirementsData RequirementsData { get; set; } = new AdditionalRequirementsData();
         #region title and subtitle
@@ -30,6 +34,7 @@ namespace IDEX.ViewModel
             set { _FormattedTitle = value; }
         }
         #endregion
+
         #region 
         private List<AdditionalRequirementsCheckBox> _checkBoxList = new List<AdditionalRequirementsCheckBox>();
 
@@ -74,7 +79,7 @@ namespace IDEX.ViewModel
             set => this.RaiseAndSetIfChanged(ref _selectedItem, value);
         }
 
-        private int _pickerSelectedItem;
+        private int _pickerSelectedItem =1;
         public int PickerSelectedItem
         {
             get => _pickerSelectedItem;
@@ -163,13 +168,25 @@ namespace IDEX.ViewModel
         }
 
         #endregion
+
         public AdditionalRequirementsViewModel()
         {
             SetDummyData();
             SetTitle();
-            
-
+            ThreeDotButtonCommand = new Command(HandleThreeDotButton);
+            OkButtonCommand = new Command(HandleOkButtonCommand);
         }
+
+        private void HandleOkButtonCommand(object obj)
+        {
+            PopupNavigation.Instance.PopAsync();
+        }
+
+        private async void HandleThreeDotButton(object obj)
+        {
+            await PopupNavigation.Instance.PushAsync(new PopUpPickerView());
+        }
+
         void SetTitle()
         {
             FormattedString Title = new FormattedString();
@@ -243,6 +260,7 @@ namespace IDEX.ViewModel
 
             }
         }
+
 
         public override void OnSoftBackButtonPressed()
         {
