@@ -5,9 +5,13 @@ using System.Text;
 
 namespace IDEX.ViewModel
 {
-    public class AdditionalRequirementsData : BaseViewModel
+    public class AdditionalRequirementsData : BaseModel
     {
+        public string SmallRangeValue { get; set; }
+        public double LargeRangeValue { get; set; }
         public string SelectedItem { get; set; }
-        public List<AdditionalRequirementsCheckBox> checkBoxesList { get; set; } 
-            = new List<AdditionalRequirementsCheckBox>();    }
+        public List<AdditionalRequirementsCheckBox> checkBoxesList { get; set; }
+            = new List<AdditionalRequirementsCheckBox>();
+
+    }
 }

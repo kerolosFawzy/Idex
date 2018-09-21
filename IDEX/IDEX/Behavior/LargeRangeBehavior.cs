@@ -4,16 +4,41 @@ using Xamarin.Forms;
 
 namespace IDEX.Behavior
 {
-    public class LargeRangeBehavior : BehaviorBase<Xamarin.Forms.View>
+    public class LargeRangeBehavior : BehaviorBase<Entry>
     {
-        public static readonly BindableProperty IsValidProperty =
-        BindableProperty.Create(
+        public static readonly BindableProperty IsValidProperty = BindableProperty.Create(
            "IsValid",
            typeof(bool),
            typeof(LargeRangeBehavior),
            false,
            defaultBindingMode: BindingMode.OneWayToSource
            );
+
+        public static readonly BindableProperty MaxProperty = BindableProperty.Create(
+         nameof(Max),
+         typeof(double),
+         typeof(SmallRangeBehavior),
+         defaultBindingMode: BindingMode.OneWay
+         );
+
+
+        public static readonly BindableProperty MinProperty = BindableProperty.Create(
+         nameof(Min),
+         typeof(double),
+         typeof(SmallRangeBehavior),
+         defaultBindingMode: BindingMode.OneWay
+         );
+
+        public double Max
+        {
+            get { return (double)GetValue(MaxProperty); }
+            set { SetValue(MaxProperty, value); }
+        }
+        public double Min
+        {
+            get { return (double)GetValue(MinProperty); }
+            set { SetValue(MinProperty, value); }
+        }
 
         public static bool GetIsValid(BindableObject view)
         {
@@ -56,54 +81,18 @@ namespace IDEX.Behavior
             base.OnDetachingFrom(bindable);
         }
 
-        private static void OnTextChanged(object sender, TextChangedEventArgs e)
+        private void OnTextChanged(object sender, TextChangedEventArgs e)
         {
-            string[] splitInput = e.NewTextValue.ToString().Split('.');
             bool isValid = false;
-            if (splitInput.Length != 2)
-            {
-                isValid = false;
-            }
-            else
-            {
-                if (int.TryParse(splitInput[0], out int n) && int.TryParse(splitInput[1], out int x))
-                {
-                    isValid = NumberValidation(splitInput);
-                }
-                else if (splitInput[0].Length == 1 && splitInput[1].Length == 1)
-                {
-                    isValid = CharValidation(splitInput);
-                }
-                else
-                {
-                    isValid = false;
-                }
-            }
-            if(GetIsValid(sender as Entry))
+            double.TryParse(e.NewTextValue, out double inputNumber);
+            
+            if (inputNumber <= Max && inputNumber >= Min)
+                isValid = true; 
+            if (GetIsValid(sender as Entry))
                 SetIsValid(sender as Entry, false);
             SetIsValid(sender as Entry, isValid);
             ((Entry)sender).TextColor = isValid ? Color.Default : Color.Red;
         }
 
-        static bool NumberValidation(string[] Input)
-        {
-            int.TryParse(Input[0], out int min);
-            int.TryParse(Input[1], out int max);
-
-            return min <= max;
-        }
-        static bool CharValidation(string[] Input)
-        {
-            char[] firstChar = Input[0].ToUpper().ToCharArray();
-            int min = Convert.ToInt32(firstChar[0]);
-
-            char[] secondChar = Input[1].ToUpper().ToCharArray();
-            int max = Convert.ToInt32(secondChar[0]);
-            if (char.IsLetter(firstChar[0]) && char.IsLetter(secondChar[0]))
-            {
-                return min <= max;
-            }
-            return false;
-        }
     }
 }

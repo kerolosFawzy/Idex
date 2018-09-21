@@ -30,9 +30,24 @@
                  HorizontalOptions="Center"
                  VerticalOptions="Center">
         <StackLayout Orientation="Horizontal" >
-            <Custom:PickerView ItemsSource="{Binding RadioButtonItemsList}" SelectedIndex="{Binding }" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand"/>
-            <Label Text="." FontSize="40" HorizontalOptions="Center" VerticalOptions="Center"/>
-            <Custom:PickerView ItemsSource="{Binding RadioButtonItemsList}" SelectedIndex="{Binding }" HorizontalOptions="EndAndExpand" VerticalOptions="CenterAndExpand"/>
+            <Custom:PickerView ItemsSource="{Binding PopUpPickerList}" SelectedIndex="{Binding SelectedIntegerNum}" HorizontalOptions="StartAndExpand" VerticalOptions="CenterAndExpand"/>
+            <Label Text="." FontSize="50" HorizontalOptions="Center" VerticalOptions="Center"/>
+            <Custom:PickerView  SelectedIndex="{Binding SelectedDecimalNum}" HorizontalOptions="EndAndExpand" VerticalOptions="CenterAndExpand">
+                <Custom:PickerView.ItemsSource >
+                    <x:Array Type="{x:Type x:Int32}">
+                        <x:Int32>0</x:Int32>
+                        <x:Int32>1</x:Int32>
+                        <x:Int32>2</x:Int32>
+                        <x:Int32>3</x:Int32>
+                        <x:Int32>4</x:Int32>
+                        <x:Int32>5</x:Int32>
+                        <x:Int32>6</x:Int32>
+                        <x:Int32>7</x:Int32>
+                        <x:Int32>8</x:Int32>
+                        <x:Int32>9</x:Int32>
+                    </x:Array>
+                </Custom:PickerView.ItemsSource>
+            </Custom:PickerView>
         </StackLayout>
         <Button Text="Ok" Command="{Binding OkButtonCommand}" HorizontalOptions="CenterAndExpand" VerticalOptions="Center" />
     </StackLayout>

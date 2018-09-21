@@ -20,6 +20,7 @@ namespace IDEX.ViewModel
         public ICommand OkButtonCommand { get; set; }
         public Level SelectedLevel { get; set; } = OverviewScreenViewModel.SelectedRoom;
         AdditionalRequirementsData RequirementsData { get; set; } = new AdditionalRequirementsData();
+
         #region title and subtitle
         private string _subtitle;
         public string Subtitle
@@ -35,7 +36,63 @@ namespace IDEX.ViewModel
         }
         #endregion
 
-        #region 
+        #region
+        private double _largeRangeMax = 100.0;
+
+        public double LargeRangeMax
+        {
+            get => _largeRangeMax;
+            set
+            {
+                this.RaiseAndSetIfChanged(ref _largeRangeMax, value);
+            }
+        }
+        private double _largeRangeMin = 0.0;
+
+        public double LargeRangeMin
+        {
+            get => _largeRangeMin;
+            set
+            {
+                this.RaiseAndSetIfChanged(ref _largeRangeMin, value);
+            }
+        }
+
+        private List<int> _popUpPickerList = new List<int>();
+
+        public List<int> PopUpPickerList
+        {
+            get => _popUpPickerList;
+            set
+            {
+                this.RaiseAndSetIfChanged(ref _popUpPickerList, value);
+            }
+        }
+
+
+        private int _selectedDecimalNum;
+
+        public int SelectedDecimalNum
+        {
+
+            get => _selectedDecimalNum;
+            set
+            {
+                this.RaiseAndSetIfChanged(ref _selectedDecimalNum, value);
+            }
+        }
+        private int _selectedIntegerNum;
+
+        public int SelectedIntegerNum
+        {
+
+            get => _selectedIntegerNum;
+            set
+            {
+                this.RaiseAndSetIfChanged(ref _selectedIntegerNum, value);
+            }
+        }
+
         private List<AdditionalRequirementsCheckBox> _checkBoxList = new List<AdditionalRequirementsCheckBox>();
 
         public List<AdditionalRequirementsCheckBox> CheckBoxList
@@ -48,19 +105,19 @@ namespace IDEX.ViewModel
         }
 
         private bool _pickerVisible = false;
-                    
+
         public bool PickerVisible
         {
             get => _pickerVisible;
             set
             {
                 this.RaiseAndSetIfChanged(ref _pickerVisible, value);
-                
+
             }
         }
 
         private bool _textBoxVisibility = false;
-                    
+
         public bool TextBoxVisibility
         {
             get => _textBoxVisibility;
@@ -79,7 +136,7 @@ namespace IDEX.ViewModel
             set => this.RaiseAndSetIfChanged(ref _selectedItem, value);
         }
 
-        private int _pickerSelectedItem =1;
+        private int _pickerSelectedItem = 1;
         public int PickerSelectedItem
         {
             get => _pickerSelectedItem;
@@ -94,8 +151,10 @@ namespace IDEX.ViewModel
             set
             {
                 this.RaiseAndSetIfChanged(ref _largeRangeValidation, value);
-                if (LargeRangeValidation) {
-                        FliteringIncomeData();
+                if (LargeRangeValidation)
+                {
+                    double.TryParse(EnteredRangeData, out double mValue);
+                    RequirementsData.LargeRangeValue = mValue;
                 }
             }
         }
@@ -108,8 +167,9 @@ namespace IDEX.ViewModel
             set
             {
                 this.RaiseAndSetIfChanged(ref _choosedValueValidation, value);
-                if (ChoosedValueValidation) {
-                        
+                if (ChoosedValueValidation)
+                {
+
                 }
             }
         }
@@ -202,12 +262,18 @@ namespace IDEX.ViewModel
         {
             for (int i = 0; i <= 5; i++)
             {
+
                 RadioButtonItemsList.Add("Option " + i);
                 CheckBoxList.Add(new AdditionalRequirementsCheckBox { Title = "Option " + i });
             }
+            for (double i = LargeRangeMin; i <= LargeRangeMax; i++)
+            {
+
+            }
         }
 
-       void FliteringIncomeData() {
+        void FliteringIncomeData()
+        {
             List<string> result = new List<string>();
             string[] splitInput = EnteredRangeData.ToString().Split('.');
             if (int.TryParse(splitInput[0], out int min)
@@ -230,7 +296,8 @@ namespace IDEX.ViewModel
                     Max = max.ToString();
                 }
             }
-            else {
+            else
+            {
                 char[] firstChar = splitInput[0].ToCharArray();
                 int minChar = Convert.ToInt32(firstChar[0]);
 
@@ -239,18 +306,19 @@ namespace IDEX.ViewModel
                 int rangeChar = maxChar - minChar;
                 if (rangeChar <= 10)
                 {
-                    char[] alphabet = Enumerable.Range(firstChar[0], rangeChar+1)
+                    char[] alphabet = Enumerable.Range(firstChar[0], rangeChar + 1)
                         .Select(x => (char)x).ToArray();
                     PickerVisible = true;
                     TextBoxVisibility = false;
-                    
+
                     foreach (char c in alphabet)
                     {
                         result.Add(c.ToString());
                     }
                     RangeList = result;
                 }
-                else {
+                else
+                {
                     PickerVisible = false;
                     TextBoxVisibility = true;
                     Min = firstChar[0].ToString();
@@ -260,7 +328,6 @@ namespace IDEX.ViewModel
 
             }
         }
-
 
         public override void OnSoftBackButtonPressed()
         {

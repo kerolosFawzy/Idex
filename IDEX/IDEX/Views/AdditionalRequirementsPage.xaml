@@ -62,9 +62,8 @@
                                    HorizontalOptions="FillAndExpand"
                                    HorizontalTextAlignment="Center">
                                 <Entry.Behaviors>
-                                    <Behavior:LargeRangeBehavior />
+                                    <Behavior:LargeRangeBehavior Max="{Binding LargeRangeMax}" Min="{Binding LargeRangeMin}"  />
                                 </Entry.Behaviors>
-                                
                             </Entry>
                             <Image Source="three_dots_mark.png" HorizontalOptions="End" VerticalOptions="Center" WidthRequest="80" HeightRequest="40">
                                 <Image.GestureRecognizers>
@@ -98,6 +97,16 @@
                         </Entry>
                     </StackLayout>
                 </Frame>
+                
+                <Label Text="This for enter dummy data " />
+                <Entry Placeholder="Enter min for 4rd Card "
+                       VerticalOptions="CenterAndExpand"
+                                   HorizontalOptions="FillAndExpand"
+                                   HorizontalTextAlignment="Center" />
+                <Entry Placeholder="Enter max for 4rd Card"
+                       VerticalOptions="CenterAndExpand"
+                                   HorizontalOptions="FillAndExpand"
+                                   HorizontalTextAlignment="Center" />
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>
