@@ -87,7 +87,9 @@ namespace IDEX.Behavior
             double.TryParse(e.NewTextValue, out double inputNumber);
             
             if (inputNumber <= Max && inputNumber >= Min)
-                isValid = true; 
+                isValid = true;
+            if (e.NewTextValue.Contains("+"))
+                isValid = false;
             if (GetIsValid(sender as Entry))
                 SetIsValid(sender as Entry, false);
             SetIsValid(sender as Entry, isValid);

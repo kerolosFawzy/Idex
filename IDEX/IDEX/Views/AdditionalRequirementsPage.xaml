@@ -53,9 +53,9 @@
                 <Frame Style="{StaticResource FrameStyle}">
                     <StackLayout Style="{StaticResource StackStyle}">
                         <custom:ExtLabel Text="Name of add req, Large Range" Style="{StaticResource BoldLabel}"/>
-                        <custom:ExtLabel Text="Enter Value between (&lt;Min&gt;-&lt;Max&gt;)" TextColor="Black" />
+                        <custom:ExtLabel Text="Enter Value between (&lt;Min&gt;-&lt;Max&gt;) (0-100.5)" TextColor="Black" />
                         <StackLayout Orientation="Horizontal">
-                            <Entry Placeholder="0.0" Text="{Binding EnteredRangeData}" 
+                            <Entry Placeholder="0.0" Text="{Binding EnteredRangeData , Mode= TwoWay}" 
                                    Behavior:LargeRangeBehavior.IsValid="{Binding LargeRangeValidation}"
                                    VerticalOptions="CenterAndExpand"
                                    Keyboard="Numeric"
@@ -100,13 +100,23 @@
                 
                 <Label Text="This for enter dummy data " />
                 <Entry Placeholder="Enter min for 4rd Card "
+                       Text="{Binding TestMin}"
                        VerticalOptions="CenterAndExpand"
                                    HorizontalOptions="FillAndExpand"
-                                   HorizontalTextAlignment="Center" />
-                <Entry Placeholder="Enter max for 4rd Card"
+                                   HorizontalTextAlignment="Center" >
+                    <Entry.Effects>
+                        <effects:CapitalizeKeyboardEffect/>
+                    </Entry.Effects>
+                </Entry>
+                    <Entry Placeholder="Enter max for 4rd Card"
+                       Text="{Binding TestMax}"
                        VerticalOptions="CenterAndExpand"
                                    HorizontalOptions="FillAndExpand"
-                                   HorizontalTextAlignment="Center" />
+                                   HorizontalTextAlignment="Center" >
+                    <Entry.Effects>
+                        <effects:CapitalizeKeyboardEffect/>
+                    </Entry.Effects>
+                </Entry>
             </StackLayout>
         </ScrollView>
     </ContentPage.Content>

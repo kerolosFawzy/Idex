@@ -333,6 +333,8 @@ namespace IDEX.ViewModel
             ItemListSource = Parents;
             SelectedListStack.Add(Parents);
             SortChildren(AllLevelTypes, allLevels);
+            allLevels = null;
+            Parents = null;
         }
         void SortChildren(List<int> AllLevelTypes, List<Level> allLevels)
         {
@@ -397,6 +399,7 @@ namespace IDEX.ViewModel
                 new Level { LevelType = 14, Area = 33.5, DoorNumber = "321", ID = 33201, Name = "sub School Rooms2 2", OwnerId = 300, UserId = 3 , ControlStatus = 1, ListViewMode="Area :"}
             };
             AllLevels = FakeList;
+            FakeList = null;
         }
 
     }

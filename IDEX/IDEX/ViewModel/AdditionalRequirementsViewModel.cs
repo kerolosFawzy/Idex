@@ -35,9 +35,35 @@ namespace IDEX.ViewModel
             set { _FormattedTitle = value; }
         }
         #endregion
+        #region test 
+        private string _testMin;
 
+        public string TestMin
+        {
+
+            get => _testMin;
+            set
+            {
+                this.RaiseAndSetIfChanged(ref _testMin, value);
+                Min = TestMin.ToString();
+            }
+        }
+        private string _testMax;
+
+        public string TestMax
+        {
+
+            get => _testMax;
+            set
+            {
+                this.RaiseAndSetIfChanged(ref _testMax, value);
+                Max = TestMax.ToString();
+            }
+        }
+
+        #endregion
         #region
-        private double _largeRangeMax = 100.0;
+        private double _largeRangeMax = 100.5;
 
         public double LargeRangeMax
         {
@@ -112,7 +138,6 @@ namespace IDEX.ViewModel
             set
             {
                 this.RaiseAndSetIfChanged(ref _pickerVisible, value);
-
             }
         }
 
@@ -153,8 +178,8 @@ namespace IDEX.ViewModel
                 this.RaiseAndSetIfChanged(ref _largeRangeValidation, value);
                 if (LargeRangeValidation)
                 {
-                    double.TryParse(EnteredRangeData, out double mValue);
-                    RequirementsData.LargeRangeValue = mValue;
+
+                    RequirementsData.LargeRangeValue = EnteredRangeData;
                 }
             }
         }
@@ -169,14 +194,14 @@ namespace IDEX.ViewModel
                 this.RaiseAndSetIfChanged(ref _choosedValueValidation, value);
                 if (ChoosedValueValidation)
                 {
-
+                    RequirementsData.SmallRangeValue = TextBox;
                 }
             }
         }
 
-        private string _enteredRangeData;
+        private double _enteredRangeData;
 
-        public string EnteredRangeData
+        public double EnteredRangeData
         {
             get => _enteredRangeData;
             set
@@ -205,7 +230,7 @@ namespace IDEX.ViewModel
             }
         }
 
-        private string _max;
+        private string _max= "V";
 
         public string Max
         {
@@ -213,10 +238,11 @@ namespace IDEX.ViewModel
             set
             {
                 this.RaiseAndSetIfChanged(ref _max, value);
+                SetSmallRageData();
             }
         }
 
-        private string _min;
+        private string _min =  "A" ;
 
         public string Min
         {
@@ -224,7 +250,10 @@ namespace IDEX.ViewModel
             set
             {
                 this.RaiseAndSetIfChanged(ref _min, value);
+                SetSmallRageData();
+
             }
+
         }
 
         #endregion
@@ -233,6 +262,7 @@ namespace IDEX.ViewModel
         {
             SetDummyData();
             SetTitle();
+            SetSmallRageData();
             ThreeDotButtonCommand = new Command(HandleThreeDotButton);
             OkButtonCommand = new Command(HandleOkButtonCommand);
         }
@@ -240,6 +270,7 @@ namespace IDEX.ViewModel
         private void HandleOkButtonCommand(object obj)
         {
             PopupNavigation.Instance.PopAsync();
+            SetLargeRangeData();
         }
 
         private async void HandleThreeDotButton(object obj)
@@ -268,45 +299,98 @@ namespace IDEX.ViewModel
             }
             for (double i = LargeRangeMin; i <= LargeRangeMax; i++)
             {
-
+                PopUpPickerList.Add((int)i);
             }
         }
 
-        void FliteringIncomeData()
+        //void FliteringIncomeData()
+        //{
+        //    List<string> result = new List<string>();
+        //    string[] splitInput = EnteredRangeData.ToString().Split('.');
+        //    if (int.TryParse(splitInput[0], out int min)
+        //        && int.TryParse(splitInput[1], out int max))
+        //    {
+        //        int range = max - min;
+        //        if (range <= 10)
+        //        {
+        //            for (int i = min; i <= max; i++)
+        //                result.Add(i.ToString());
+        //            PickerVisible = true;
+        //            TextBoxVisibility = false;
+        //            RangeList = result;
+        //        }
+        //        else
+        //        {
+        //            PickerVisible = false;
+        //            TextBoxVisibility = true;
+        //            Min = min.ToString();
+        //            Max = max.ToString();
+        //        }
+        //    }
+        //    else
+        //    {
+        //        char[] firstChar = splitInput[0].ToCharArray();
+        //        int minChar = Convert.ToInt32(firstChar[0]);
+
+        //        char[] secondChar = splitInput[1].ToCharArray();
+        //        int maxChar = Convert.ToInt32(secondChar[0]);
+        //        int rangeChar = maxChar - minChar;
+        //        if (rangeChar <= 10)
+        //        {
+        //            char[] alphabet = Enumerable.Range(firstChar[0], rangeChar + 1)
+        //                .Select(x => (char)x).ToArray();
+        //            PickerVisible = true;
+        //            TextBoxVisibility = false;
+
+        //            foreach (char c in alphabet)
+        //            {
+        //                result.Add(c.ToString());
+        //            }
+        //            RangeList = result;
+        //        }
+        //        else
+        //        {
+        //            PickerVisible = false;
+        //            TextBoxVisibility = true;
+        //            Min = firstChar[0].ToString();
+        //            Max = secondChar[0].ToString();
+        //        }
+
+
+        //    }
+        //}
+        void SetSmallRageData()
         {
             List<string> result = new List<string>();
-            string[] splitInput = EnteredRangeData.ToString().Split('.');
-            if (int.TryParse(splitInput[0], out int min)
-                && int.TryParse(splitInput[1], out int max))
+            if (string.IsNullOrEmpty(Max) || string.IsNullOrEmpty(Min))
+                return;
+
+            if (int.TryParse(Max, out int max) && int.TryParse(Min, out int min))
             {
                 int range = max - min;
                 if (range <= 10)
                 {
-                    for (int i = min; i <= max; i++)
-                        result.Add(i.ToString());
                     PickerVisible = true;
                     TextBoxVisibility = false;
+                    for (int i = min; i <= max; i++) { result.Add(i.ToString()); }
                     RangeList = result;
                 }
                 else
                 {
                     PickerVisible = false;
                     TextBoxVisibility = true;
-                    Min = min.ToString();
-                    Max = max.ToString();
                 }
             }
             else
             {
-                char[] firstChar = splitInput[0].ToCharArray();
-                int minChar = Convert.ToInt32(firstChar[0]);
-
-                char[] secondChar = splitInput[1].ToCharArray();
-                int maxChar = Convert.ToInt32(secondChar[0]);
+                char firstChar = Min.ToCharArray()[0];
+                int minChar = Convert.ToInt32(firstChar);
+                char secondChar = Max.ToCharArray()[0];
+                int maxChar = Convert.ToInt32(secondChar);
                 int rangeChar = maxChar - minChar;
                 if (rangeChar <= 10)
                 {
-                    char[] alphabet = Enumerable.Range(firstChar[0], rangeChar + 1)
+                    char[] alphabet = Enumerable.Range(firstChar, rangeChar + 1)
                         .Select(x => (char)x).ToArray();
                     PickerVisible = true;
                     TextBoxVisibility = false;
@@ -321,19 +405,20 @@ namespace IDEX.ViewModel
                 {
                     PickerVisible = false;
                     TextBoxVisibility = true;
-                    Min = firstChar[0].ToString();
-                    Max = secondChar[0].ToString();
                 }
-
-
             }
-        }
 
+
+        }
         public override void OnSoftBackButtonPressed()
         {
             Navigation.GoBack();
         }
-
+        void SetLargeRangeData()
+        {
+            double.TryParse(SelectedIntegerNum.ToString() + "." + SelectedDecimalNum.ToString(), out double value);
+            EnteredRangeData = value;
+        }
         public override void DisAppearing()
         {
             RequirementsData.SelectedItem = SelectedItem;

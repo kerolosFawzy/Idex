@@ -59,6 +59,7 @@ namespace IDEX.ViewModel
                             .Select(x => x.Sender)
                             .Subscribe(x =>
                             {
+                               
                                 var tempList = SelectedCustomer.ToList();
                                 if (x.IsChecked == false)
                                     tempList.Remove(x);
@@ -66,6 +67,8 @@ namespace IDEX.ViewModel
                                     tempList.Add(x);
 
                                 SelectedCustomer = new ReactiveList<Customer>(tempList);
+                                tempList = null; 
+                                
                             });
             Schemes.ItemChanged.Where(x => x.PropertyName == "IsChecked")
                 .Select(x => x.Sender)
@@ -77,6 +80,7 @@ namespace IDEX.ViewModel
                     else
                         tempList.Add(x);
                     SelectedSchemes = new ReactiveList<Scheme>(tempList);
+                    tempList = null; 
                 });
         }
 
@@ -262,6 +266,7 @@ namespace IDEX.ViewModel
                     schemelist.IsChecked = false;
             }
         }
+        
         private void NavigationHandeler()
         {
             if (flag == 0)
