@@ -9,9 +9,7 @@
                  xmlns:viewModel="clr-namespace:IDEX.ViewModel"
                  CloseWhenBackgroundIsClicked="True"
                  IsAnimationEnabled="True">
-    <pages:PopupPage.BindingContext>
-        <viewModel:AdditionalRequirementsData /> 
-    </pages:PopupPage.BindingContext>
+
     <pages:PopupPage.Animation>
         <animations:ScaleAnimation DurationIn="400"
                                    DurationOut="300"

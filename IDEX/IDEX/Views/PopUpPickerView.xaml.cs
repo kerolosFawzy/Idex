@@ -1,6 +1,6 @@
 ﻿using IDEX.ViewModel;
 using Xamarin.Forms.Xaml;
-
+//https://github.com/rotorgames/Rg.Plugins.Popup
 namespace IDEX.Views
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
@@ -9,7 +9,7 @@ namespace IDEX.Views
 		public PopUpPickerView ()
 		{
 			InitializeComponent ();
-            BindingContext = new AdditionalRequirementsViewModel();
+            BindingContext = AdditionalRequirementsViewModel.Instance;
 		}
 	}
 }

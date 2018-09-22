@@ -9,7 +9,7 @@ namespace IDEX.Views
 		public AdditionalRequirementsPage ()
 		{
 			InitializeComponent ();
-            BindingContext = new AdditionalRequirementsViewModel();  
+            BindingContext = AdditionalRequirementsViewModel.Instance;  
 		}
 	}
 }

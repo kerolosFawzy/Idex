@@ -178,8 +178,8 @@ namespace IDEX.ViewModel
                 this.RaiseAndSetIfChanged(ref _largeRangeValidation, value);
                 if (LargeRangeValidation)
                 {
-
-                    RequirementsData.LargeRangeValue = EnteredRangeData;
+                    double.TryParse(EnteredRangeData, out double mValue); 
+                    RequirementsData.LargeRangeValue = mValue;
                 }
             }
         }
@@ -199,9 +199,9 @@ namespace IDEX.ViewModel
             }
         }
 
-        private double _enteredRangeData;
+        private string _enteredRangeData = "";
 
-        public double EnteredRangeData
+        public string EnteredRangeData
         {
             get => _enteredRangeData;
             set
@@ -257,7 +257,16 @@ namespace IDEX.ViewModel
         }
 
         #endregion
+        private static readonly Lazy<AdditionalRequirementsViewModel> _lazyAdditionalRequirementsViewModelInstance
+            = new Lazy<AdditionalRequirementsViewModel>(() => new AdditionalRequirementsViewModel());
 
+        public static AdditionalRequirementsViewModel Instance
+        {
+            get
+            {
+                return _lazyAdditionalRequirementsViewModelInstance.Value;
+            }
+        }
         public AdditionalRequirementsViewModel()
         {
             SetDummyData();
@@ -269,8 +278,8 @@ namespace IDEX.ViewModel
 
         private void HandleOkButtonCommand(object obj)
         {
-            PopupNavigation.Instance.PopAsync();
             SetLargeRangeData();
+            PopupNavigation.Instance.PopAsync();
         }
 
         private async void HandleThreeDotButton(object obj)
@@ -303,62 +312,7 @@ namespace IDEX.ViewModel
             }
         }
 
-        //void FliteringIncomeData()
-        //{
-        //    List<string> result = new List<string>();
-        //    string[] splitInput = EnteredRangeData.ToString().Split('.');
-        //    if (int.TryParse(splitInput[0], out int min)
-        //        && int.TryParse(splitInput[1], out int max))
-        //    {
-        //        int range = max - min;
-        //        if (range <= 10)
-        //        {
-        //            for (int i = min; i <= max; i++)
-        //                result.Add(i.ToString());
-        //            PickerVisible = true;
-        //            TextBoxVisibility = false;
-        //            RangeList = result;
-        //        }
-        //        else
-        //        {
-        //            PickerVisible = false;
-        //            TextBoxVisibility = true;
-        //            Min = min.ToString();
-        //            Max = max.ToString();
-        //        }
-        //    }
-        //    else
-        //    {
-        //        char[] firstChar = splitInput[0].ToCharArray();
-        //        int minChar = Convert.ToInt32(firstChar[0]);
-
-        //        char[] secondChar = splitInput[1].ToCharArray();
-        //        int maxChar = Convert.ToInt32(secondChar[0]);
-        //        int rangeChar = maxChar - minChar;
-        //        if (rangeChar <= 10)
-        //        {
-        //            char[] alphabet = Enumerable.Range(firstChar[0], rangeChar + 1)
-        //                .Select(x => (char)x).ToArray();
-        //            PickerVisible = true;
-        //            TextBoxVisibility = false;
-
-        //            foreach (char c in alphabet)
-        //            {
-        //                result.Add(c.ToString());
-        //            }
-        //            RangeList = result;
-        //        }
-        //        else
-        //        {
-        //            PickerVisible = false;
-        //            TextBoxVisibility = true;
-        //            Min = firstChar[0].ToString();
-        //            Max = secondChar[0].ToString();
-        //        }
-
-
-        //    }
-        //}
+       
         void SetSmallRageData()
         {
             List<string> result = new List<string>();
@@ -417,7 +371,8 @@ namespace IDEX.ViewModel
         void SetLargeRangeData()
         {
             double.TryParse(SelectedIntegerNum.ToString() + "." + SelectedDecimalNum.ToString(), out double value);
-            EnteredRangeData = value;
+            EnteredRangeData = string.Empty;
+            EnteredRangeData = value.ToString();
         }
         public override void DisAppearing()
         {
