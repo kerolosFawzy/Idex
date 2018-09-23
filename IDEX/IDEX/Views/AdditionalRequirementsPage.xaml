@@ -99,7 +99,7 @@
                         </Entry>
                     </StackLayout>
                 </Frame>
-                <!--#region --> 
+                <!--#region test --> 
                 <Label Text="This for enter dummy data as testing Only  " />
                 <Entry Placeholder="Enter min for 4rd Card "
                        Text="{Binding TestMin}"

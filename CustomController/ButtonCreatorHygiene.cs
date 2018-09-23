@@ -8,6 +8,7 @@ namespace CustomControls
 {
     public class ButtonCreatorHygiene : StackLayout
     {
+        //this looks like ButtonCreator for insta 
         #region view BindableProperty
         public static readonly BindableProperty StepsProperty = BindableProperty
             .Create(nameof(Steps), typeof(int), typeof(ButtonCreatorHygiene), 0);
@@ -159,16 +160,11 @@ namespace CustomControls
         void Handle_Clicked(object sender, EventArgs e)
         {
             ButtonClickedCommand?.Execute(sender);
-            int count = 0;
-            try
-            {
-                Int32.TryParse(((Button)sender).Text, out count);
+            if (int.TryParse(((Button)sender).Text, out int count))
                 count = count + 1;
-            }
-            catch
-            {
+            else
                 count = 1;
-            }
+
             ((Button)sender).Text = count.ToString();
             ((Button)sender).TextColor = Color.Black;
             GetData(sender as Button);
@@ -212,11 +208,6 @@ namespace CustomControls
             dict.Add("State", State);
             dict.Add("CleaningCategory", CleaningCategory);
         }
-        private void SelectElement(Button sender)
-        {
-            //var selectChildList = from x1 in Children
-            //                      join x2 in ItemSelectedIndex on x1.ClassId equals x2
-            //                      select x1;
-        }
+    
     }
 }

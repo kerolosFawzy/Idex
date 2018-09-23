@@ -8,6 +8,19 @@ namespace CustomControls
 {
     public class ButtonCreator : Grid
     {
+        /*
+         * this used in insta to create buttons 
+         * using grid is impotant if you used stack the view will be massed up in small screens 
+         * it also handle data and send it as Dictionary  to be key - value 
+         * it also handle picker view change the if coditions are very important dont change it 
+         * the viewModel take Dictionary and set incomming data in insta object 
+         * the button "state" means its Easy Or hard 
+         * 
+         * Note iam using app center to report for any crashes on my presonal account so you need to create 
+         * new  app center account and change the key in App.cs 
+         */
+
+
         public enum InstaCategoryEnum
         {
             Waste,
@@ -15,7 +28,6 @@ namespace CustomControls
             Stains,
             SurfaceSoilings
         }
-
 
         public enum InstaRoomEnum
         {
@@ -148,9 +160,9 @@ namespace CustomControls
                 }
             }
             else if (propertyName.Equals(PickerValueProperty.PropertyName)
-                && Data != null 
-                && LastStackId == Data[nameof(LastStackId)] 
-                && LastSelectedButton.Text != (PickerValue*5).ToString())
+                && Data != null
+                && LastStackId == Data[nameof(LastStackId)]
+                && LastSelectedButton.Text != (PickerValue * 5).ToString())
             {
                 if (PickerValue == 0)
                 {
@@ -193,7 +205,7 @@ namespace CustomControls
                 if (int.TryParse(((Button)sender).Text, out count))
                 {
                     if (count < 100)
-                        count = count +1;
+                        count = count + 1;
                 }
                 else
                     count = 1;

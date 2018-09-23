@@ -35,6 +35,7 @@ namespace IDEX.ViewModel
             set { _FormattedTitle = value; }
         }
         #endregion
+
         #region test 
         private string _testMin;
 
@@ -62,6 +63,7 @@ namespace IDEX.ViewModel
         }
 
         #endregion
+
         #region
         private double _largeRangeMax = 100.5;
 
@@ -259,6 +261,7 @@ namespace IDEX.ViewModel
         }
 
         #endregion
+
         private static Lazy<AdditionalRequirementsViewModel> _lazyAdditionalRequirementsViewModelInstance
             = new Lazy<AdditionalRequirementsViewModel>(() => new AdditionalRequirementsViewModel());
 

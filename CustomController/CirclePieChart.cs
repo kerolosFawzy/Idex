@@ -16,10 +16,9 @@ namespace CustomControls
                 , typeof(IEnumerable<Segment>)
                 , typeof(CirclePieChart)
                 , propertyChanged: OnSegmentsPropertyChanged);
-#pragma warning disable IDE0044 // Add readonly modifier
-        SKSvg svg = new SKSvg();
+
+        readonly SkiaSharp.Extended.Svg.SKSvg svg = new SkiaSharp.Extended.Svg.SKSvg();
         float startAngle; 
-#pragma warning restore IDE0044 // Add readonly modifier
         private static void OnSegmentsPropertyChanged(BindableObject bindable, object oldvalue, object newvalue)
         {
             var circle = (CirclePieChart)bindable;

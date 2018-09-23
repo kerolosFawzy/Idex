@@ -6,6 +6,7 @@ namespace CustomControls.NavigationServices
 {
     public class CustomNavigationPage : NavigationPage 
     {
+
         public CustomNavigationPage(Page page) : base(page)
         {
             
@@ -25,6 +26,23 @@ namespace CustomControls.NavigationServices
             TopToBottom,
             BottomToTop
         }
+
+        /*
+         * this code can set
+         * 1- title postion 
+         * 2- tile Title Background
+         * 3- Title Font
+         * 4- Title Padding and margin
+         * 5- Bar Background
+         * 5- Set Gradient for bar 
+         * 6- Set Subtitle Font
+         * 7- set title color 
+         * 8- subtitle color 
+         * 9- Title Border Corner Radius
+         * 10 -Bar Background Opacity
+         * Note the orginal code can set image as bar background 
+         * Note to set title and subtitle just use binding as shownen in all pages 
+         */
 
         public static readonly BindableProperty TitlePositionProperty = BindableProperty.CreateAttached("TitlePosition", typeof(TitleAlignment), typeof(CustomNavigationPage), Device.RuntimePlatform == Device.iOS ? TitleAlignment.Center : TitleAlignment.Start);
 

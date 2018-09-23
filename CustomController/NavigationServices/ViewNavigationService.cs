@@ -11,6 +11,9 @@ namespace CustomControls.NavigationServices
     [Android.Runtime.Preserve(AllMembers = true)]
     public class ViewNavigationService : INavigationService
     {
+        //this used to navigate in viewModel you have to use register new pages in app.cs
+        //and use NavigateAsync and goback 
+        //param page name (key)
         private readonly object _sync = new object();
         private readonly Dictionary<string, Type> _pagesByKey = new Dictionary<string, Type>();
         private readonly Stack<CustomNavigationPage> _navigationPageStack =
