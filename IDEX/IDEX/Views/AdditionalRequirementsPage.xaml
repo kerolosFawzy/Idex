@@ -65,7 +65,9 @@
                                     <Behavior:LargeRangeBehavior Max="{Binding LargeRangeMax}" Min="{Binding LargeRangeMin}"  />
                                 </Entry.Behaviors>
                             </Entry>
-                            <Image Source="three_dots_mark.png" HorizontalOptions="End" VerticalOptions="Center" WidthRequest="80" HeightRequest="40">
+                            <Image Source="three_dots_mark.png" HorizontalOptions="End"
+                                   VerticalOptions="Center" WidthRequest="80" 
+                                   HeightRequest="40">
                                 <Image.GestureRecognizers>
                                     <TapGestureRecognizer Command="{Binding ThreeDotButtonCommand}" />
                                 </Image.GestureRecognizers>

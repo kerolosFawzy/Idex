@@ -107,6 +107,8 @@ namespace IDEX.ViewModel
                 this.RaiseAndSetIfChanged(ref _selectedDecimalNum, value);
             }
         }
+       
+
         private int _selectedIntegerNum;
 
         public int SelectedIntegerNum
@@ -257,7 +259,7 @@ namespace IDEX.ViewModel
         }
 
         #endregion
-        private static readonly Lazy<AdditionalRequirementsViewModel> _lazyAdditionalRequirementsViewModelInstance
+        private static Lazy<AdditionalRequirementsViewModel> _lazyAdditionalRequirementsViewModelInstance
             = new Lazy<AdditionalRequirementsViewModel>(() => new AdditionalRequirementsViewModel());
 
         public static AdditionalRequirementsViewModel Instance
@@ -265,6 +267,10 @@ namespace IDEX.ViewModel
             get
             {
                 return _lazyAdditionalRequirementsViewModelInstance.Value;
+            }
+        private set
+            {
+                _lazyAdditionalRequirementsViewModelInstance = new Lazy<AdditionalRequirementsViewModel>(() => value); 
             }
         }
         public AdditionalRequirementsViewModel()
@@ -361,8 +367,7 @@ namespace IDEX.ViewModel
                     TextBoxVisibility = true;
                 }
             }
-
-
+            result = null;
         }
         public override void OnSoftBackButtonPressed()
         {
@@ -378,6 +383,7 @@ namespace IDEX.ViewModel
         {
             RequirementsData.SelectedItem = SelectedItem;
             RequirementsData.checkBoxesList = CheckBoxList.Where(x => x.IsChecked == true).ToList();
+            Instance = new AdditionalRequirementsViewModel();
             base.DisAppearing();
         }
     }

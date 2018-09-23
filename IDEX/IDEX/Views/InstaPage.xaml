@@ -72,7 +72,9 @@
                         <Label FontSize="Medium" Text="{Binding InstaRoomEnum}" />
                         <Label FontSize="Medium" Text="{Binding State}" />
                     </StackLayout>
-                    <Custom:PickerView IsVisible="{Binding IsVisible}" ItemsSource="{Binding NumberPicker}" HeightRequest="72" SelectedIndex="{Binding Selected , Mode=TwoWay}" x:Name="PickerView"/>
+                    <Custom:PickerView IsVisible="{Binding IsVisible}" ItemsSource="{Binding NumberPicker}" 
+                                       HeightRequest="80" SelectedIndex="{Binding Selected , Mode=TwoWay}" 
+                                       x:Name="PickerView"/>
                 </StackLayout>
             </StackLayout>
         </ScrollView>

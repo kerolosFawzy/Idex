@@ -80,7 +80,7 @@ namespace CustomControls
                     var button = new Button
                     {
                         ClassId = $"{i + 1}",
-                        Style = Resources["unSelectedStyle"] as Style
+                        Style = Resources["unselectedStyle"] as Style
                     };
                     button.Clicked += Handle_Clicked;
                     Children.Add(button);
@@ -122,7 +122,7 @@ namespace CustomControls
         private void SelectElement()
         {
             var selectedStyle = Resources["selectedStyle"] as Style;
-            var unSelectedStyle = Resources["unSelectedStyle"] as Style;
+            var unSelectedStyle = Resources["unselectedStyle"] as Style;
             foreach (var item in Children.Where(x => x.GetType() == typeof(Button)))
             {
                 ((Button)item).Style = unSelectedStyle;
@@ -146,9 +146,7 @@ namespace CustomControls
                     new Setter { Property = BackgroundColorProperty,   Value = Color.Transparent },
                     new Setter { Property = Button.BorderColorProperty,   Value = StepColor },
                     new Setter { Property = Button.BorderWidthProperty,   Value = 0.5 },
-#pragma warning disable CS0618 // Type or member is obsolete
-                    new Setter { Property = Button.BorderRadiusProperty,   Value = 15 },
-#pragma warning restore CS0618 // Type or member is obsolete
+                    new Setter { Property = Button.CornerRadiusProperty,   Value = 30 },
                     new Setter { Property = HeightRequestProperty,   Value = 30 },
                     new Setter { Property = WidthRequestProperty,   Value = 30 }
             }
@@ -160,18 +158,16 @@ namespace CustomControls
                     new Setter { Property = BackgroundColorProperty, Value = StepColor },
                     new Setter { Property = Button.BorderColorProperty, Value = StepColor },
                     new Setter { Property = Button.BorderWidthProperty,   Value = 0.5 },
-#pragma warning disable CS0618 // Type or member is obsolete
-                    new Setter { Property = Button.BorderRadiusProperty,   Value = 15 },
-#pragma warning restore CS0618 // Type or member is obsolete
+                    new Setter { Property = Button.CornerRadiusProperty,   Value = 30 },
                     new Setter { Property = HeightRequestProperty,   Value = 30 },
-                    new Setter { Property = WidthRequestProperty,   Value = 30 },
+                    new Setter { Property = WidthRequestProperty,   Value = 30 }
             }
             };
 
             Resources = new ResourceDictionary
             {
-                { "unSelectedStyle", unselectedStyle },
-                { "selectedStyle", selectedStyle }
+                {nameof(unselectedStyle), unselectedStyle },
+                { nameof(selectedStyle) , selectedStyle }
             };
         }
     }

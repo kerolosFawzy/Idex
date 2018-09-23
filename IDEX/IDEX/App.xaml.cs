@@ -33,6 +33,7 @@ namespace IDEX
             NavigationService.Configure(nameof(InstaPage), typeof(InstaPage));
             NavigationService.Configure(nameof(HygieneScreen), typeof(HygieneScreen));
             NavigationService.Configure(nameof(AdditionalRequirementsPage), typeof(AdditionalRequirementsPage));
+            NavigationService.Configure(nameof(PopUpPickerView), typeof(PopUpPickerView));
         }
 
         public void SetRootPage(string rootPageName)

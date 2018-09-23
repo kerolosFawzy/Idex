@@ -16,6 +16,7 @@ namespace CustomControls
             SurfaceSoilings
         }
 
+
         public enum InstaRoomEnum
         {
             Inv,
@@ -52,7 +53,7 @@ namespace CustomControls
         public static readonly BindableProperty LayoutNameProperty = BindableProperty
              .Create(nameof(LayoutName), typeof(string), typeof(ButtonCreator), null, BindingMode.TwoWay);
 
-       
+
         #endregion
 
         #region setter and getter for class properties
@@ -100,19 +101,23 @@ namespace CustomControls
             set { SetValue(StepsProperty, value); }
         }
 
-       
+
 
         #endregion
 
         public ButtonCreator()
         {
             HorizontalOptions = LayoutOptions.FillAndExpand;
-            RowDefinition row = new RowDefinition();
-            row.Height = new GridLength(1 , GridUnitType.Star);
-            ColumnDefinition column = new ColumnDefinition(); 
-            column.Width = new GridLength(1, GridUnitType.Star);
+            RowDefinition row = new RowDefinition
+            {
+                Height = new GridLength(1, GridUnitType.Star)
+            };
+            ColumnDefinition column = new ColumnDefinition
+            {
+                Width = new GridLength(1, GridUnitType.Star)
+            };
             ColumnSpacing = 0;
-            RowSpacing = 0; 
+            RowSpacing = 0;
         }
 
         protected override void OnPropertyChanged(string propertyName = null)
@@ -126,9 +131,8 @@ namespace CustomControls
                     {
                         ClassId = $"{i + 1}",
                         Style = Application.Current.Resources["ButtonCreatorStyle"] as Style
-                        
                     };
-                    
+
                     button.Clicked += Handle_Clicked;
 
                     Children.AddHorizontal(button);
@@ -143,7 +147,10 @@ namespace CustomControls
                     (child as Button).Text = PlaceHolder;
                 }
             }
-            else if (propertyName.Equals(PickerValueProperty.PropertyName) && Data != null && LastStackId == Data[nameof(LastStackId)] && LastSelectedButton.Text != PickerValue.ToString())
+            else if (propertyName.Equals(PickerValueProperty.PropertyName)
+                && Data != null 
+                && LastStackId == Data[nameof(LastStackId)] 
+                && LastSelectedButton.Text != (PickerValue*5).ToString())
             {
                 if (PickerValue == 0)
                 {
@@ -154,7 +161,10 @@ namespace CustomControls
                 {
                     try
                     {
-                        Data["Count"] = PickerValue.ToString();
+                        if (InstaCategoryEnum.SurfaceSoilings.ToString().Equals(InstaCategory.ToString()))
+                            Data["Count"] = (PickerValue * 5).ToString();
+                        else
+                            Data["Count"] = PickerValue.ToString();
                         LastSelectedButton.Text = Data["Count"];
                         LastSelectedButton.TextColor = Color.Black;
                         GetData(LastSelectedButton);
@@ -168,15 +178,27 @@ namespace CustomControls
         {
             ItemClicked?.Execute(sender);
             int count = 0;
-            try
+            if (InstaCategoryEnum.SurfaceSoilings.ToString().Equals(InstaCategory.ToString()))
             {
-                Int32.TryParse(((Button)sender).Text, out count);
-                count = count + 1;
+                if (int.TryParse(((Button)sender).Text, out count))
+                {
+                    if (count < 100)
+                        count = count + 5;
+                }
+                else
+                    count = 5;
             }
-            catch
+            else
             {
-                count = 1;
+                if (int.TryParse(((Button)sender).Text, out count))
+                {
+                    if (count < 100)
+                        count = count +1;
+                }
+                else
+                    count = 1;
             }
+
             ((Button)sender).Text = count.ToString();
             ((Button)sender).TextColor = Color.Black;
             GetData(sender as Button);
@@ -216,6 +238,6 @@ namespace CustomControls
             catch (Exception exception) { Crashes.TrackError(exception); }
 
         }
-       
+
     }
 }

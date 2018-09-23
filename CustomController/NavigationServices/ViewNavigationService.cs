@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.AppCenter.Crashes;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -153,9 +154,15 @@ namespace CustomControls.NavigationServices
                     throw new InvalidOperationException(
                         "No suitable constructor found for page " + pageKey);
                 }
+                Page page;
+                try
+                {
+                    page = constructor.Invoke(parameters) as Page;
+                    return page;
+                }
+                catch (Exception exception) { Crashes.TrackError(exception); }
 
-                var page = constructor.Invoke(parameters) as Page;
-                return page;
+                return null ;
             }
         }
     }

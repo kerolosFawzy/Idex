@@ -60,7 +60,20 @@ namespace IDEX.ViewModel
 
             }
         }
-      
+        private List<int> _soilingList = new List<int>();
+
+        public List<int> SoilingList
+        {
+            get => _soilingList;
+            set => this.RaiseAndSetIfChanged(ref _soilingList, value);
+        }
+        private List<int> _normalList = new List<int>();
+
+        public List<int> NormalList
+        {
+            get => _normalList;
+            set => this.RaiseAndSetIfChanged(ref _normalList, value);
+        }
 
         private List<int> _numberPicker = new List<int>();
         private bool _isVisible;
@@ -121,10 +134,29 @@ namespace IDEX.ViewModel
                     data += ButtonData["InstaCategoryEnum"];
                     InstaCategoryEnum = ButtonData["InstaCategoryEnum"];
                     data += ButtonData["InstaRoomEnum"];
+                    if (InstaCategoryEnum.Equals("SurfaceSoilings"))
+                    {
+                        if (NumberPicker != SoilingList)
+                            NumberPicker = SoilingList;
+                    }
+                    else
+                    {
+                        if (NumberPicker != NormalList)
+                            NumberPicker = NormalList;
+                    }
+
                     InstaRoomEnum = ButtonData["InstaRoomEnum"];
                     string s = ButtonData["Count"];
                     int.TryParse(s, out int ButtonCount);
-                    Selected = ButtonCount;
+                    if (InstaCategoryEnum.Equals("SurfaceSoilings"))
+                    {
+                        //if (ButtonCount == 100)
+                        //    Selected = 21;
+                        //else
+                        Selected = ButtonCount / 5;
+                    }
+                    else
+                        Selected = ButtonCount;
                     PublicInstancePropertiesEqual(data, InstasResults, ButtonCount);
                 }
             }
@@ -157,11 +189,13 @@ namespace IDEX.ViewModel
         {
             ItemClicked = new Command(ItemeClilckHandler);
             IsVisible = false;
-            SetTitle(); 
+            SetTitle();
             for (int i = 0; i <= 100; i++)
             {
-                NumberPicker.Add(i);
+                NormalList.Add(i);
             }
+            for (int x = 0; x <= 100; x = x + 5)
+                SoilingList.Add(x);
 
         }
 
@@ -171,7 +205,7 @@ namespace IDEX.ViewModel
                 IsVisible = true;
         }
 
-        
+
 
         public override void OnSoftBackButtonPressed()
         {

@@ -66,6 +66,7 @@
                 <Setter Property="CornerRadius" Value="10" />
                 <Setter Property="BackgroundColor" Value="#008080" />
             </Style>
+           
         </ResourceDictionary>
     </Application.Resources>
 </Application>
