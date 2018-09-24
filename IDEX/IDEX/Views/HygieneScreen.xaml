@@ -11,11 +11,11 @@
     >
     <ContentPage.Content>
         <FlexLayout Direction="Column" BackgroundColor="White">
-            <FlexLayout HeightRequest="32" Padding="10" Direction="Row" FlexLayout.Order="0">
-                <Label Text="Hum Biol" HorizontalOptions="Start"
+            <FlexLayout HeightRequest="32" Margin="10,10,10,5" Direction="Row" FlexLayout.Order="0">
+                <Label Text="Hum Biol" HorizontalOptions="Start" VerticalOptions="Center"
                            FlexLayout.Grow="1"  HorizontalTextAlignment="Start"/>
 
-                <Label Text="Dust" HorizontalOptions="CenterAndExpand" 
+                <Label Text="Dust" HorizontalOptions="CenterAndExpand" Margin="10,0" 
                            FlexLayout.Grow="2" HorizontalTextAlignment="Center"/>
 
                 <Label Text="Waste" HorizontalOptions="EndAndExpand"
@@ -25,7 +25,7 @@
             <ListView x:Name="CategoriesListView" 
                           HasUnevenRows="True"
                           SeparatorVisibility="None" 
-                          FlexLayout.Order="1" Margin="10,5" 
+                          FlexLayout.Order="1" Margin="10,0" 
                           SelectionMode="None"
                           FlexLayout.Shrink="0" ItemsSource="{Binding CategoryList}">
                 <ListView.ItemTemplate>
