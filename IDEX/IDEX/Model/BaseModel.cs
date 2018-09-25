@@ -1,17 +1,9 @@
 ﻿using ReactiveUI;
 namespace IDEX.Model
 {
+    //put here commen properties between all models  
     public class BaseModel : ReactiveObject
     { 
-        public int ID { get; set; }
-        public string Name { get; set; }
-
-        private bool _isChecked;
-
-        public bool IsChecked
-        {
-            get => _isChecked; 
-            set => this.RaiseAndSetIfChanged(ref _isChecked, value);
-        }
+        
     }
 }

@@ -1,10 +1,9 @@
 ﻿using IDEX.Model;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace IDEX.ViewModel
 {
+    //this for make sure data save onDisAppearing in ViewModel 
     public class AdditionalRequirementsData : BaseModel
     {
         public string SmallRangeValue { get; set; }

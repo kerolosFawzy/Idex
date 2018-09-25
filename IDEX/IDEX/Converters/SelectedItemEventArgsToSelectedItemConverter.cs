@@ -4,6 +4,9 @@ using Xamarin.Forms;
 
 namespace IDEX.Converters
 {
+    //i used itemTapped beacuse its better than itemSelected 
+    //itemSelected could be clicked once but itemTapped could be clicked many time 
+    //Note if you used itemSelected app will not work good if you navigate back 
     public class SelectedItemEventArgsToSelectedItemConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)

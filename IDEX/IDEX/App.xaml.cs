@@ -17,9 +17,7 @@ namespace IDEX
 		public App ()
         {
             InitializeComponent();
-           // ExtractDI();
             RegisterPages();
-
             SetRootPage(nameof(IdexMasterDetailPage));
 
         }
@@ -41,17 +39,6 @@ namespace IDEX
             var mainPage = ((ViewNavigationService)NavigationService).SetRootPage(rootPageName);
             MainPage = mainPage;
         }
-
-
-        //public static IContainer contianer;
-
-        //private static void ExtractDI()
-        //{
-        //    ContainerBuilder builder = new ContainerBuilder();
-
-        //    contianer = builder.Build();
-        //}
-
 
 
         protected override void OnStart ()

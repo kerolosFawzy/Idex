@@ -14,6 +14,17 @@ using Xamarin.Forms;
 
 namespace IDEX.ViewModel
 {
+    /*****
+     * flag here is so important in navigation 
+     * if flag = 0 means he is first list 
+     * if flag = 1 means he is in second list 
+     * if flag = 2 means he is in last list 
+     * more he will navigate to next page 
+     * i had to do it beacause i also use it in step progress bar 
+     * NavigationHandeler() will handle every thing 
+     * 
+     * i used hear UserDialogs NuGet to make alarts  
+     * * ***/
     class MainPageViewModel : BaseViewModel
     {
         private static int flag;
@@ -26,7 +37,7 @@ namespace IDEX.ViewModel
         public ReactiveCommand ReactiveNextItemClicked { get; private set; }
         #endregion
 
-        private static readonly Lazy<MainPageViewModel> _lazyMainPageViewModelInstance 
+        private static readonly Lazy<MainPageViewModel> _lazyMainPageViewModelInstance
             = new Lazy<MainPageViewModel>(() => new MainPageViewModel());
 
         public static MainPageViewModel Instance
@@ -47,19 +58,24 @@ namespace IDEX.ViewModel
             ReactiveNextItemClicked = ReactiveCommand.Create(HandleReactiveNextItemClicked);
             SetReactiveListListen();
         }
+
         private void HandleItemTapped(object obj)
         {
-            var Elemnet = obj as BaseModel;
+            var Elemnet = obj as InitialModel;
             Elemnet.IsChecked = !Elemnet.IsChecked;
         }
 
+        /*
+         * this is reactive ui listener on Reactive list 
+         * there are listing for any change on isCheck prop
+         * **/
         private void SetReactiveListListen()
         {
             Customers.ItemChanged.Where(x => x.PropertyName == "IsChecked")
                             .Select(x => x.Sender)
                             .Subscribe(x =>
                             {
-                               
+
                                 var tempList = SelectedCustomer.ToList();
                                 if (x.IsChecked == false)
                                     tempList.Remove(x);
@@ -67,9 +83,10 @@ namespace IDEX.ViewModel
                                     tempList.Add(x);
 
                                 SelectedCustomer = new ReactiveList<Customer>(tempList);
-                                tempList = null; 
-                                
+                                tempList = null;
+
                             });
+
             Schemes.ItemChanged.Where(x => x.PropertyName == "IsChecked")
                 .Select(x => x.Sender)
                 .Subscribe(x =>
@@ -80,7 +97,7 @@ namespace IDEX.ViewModel
                     else
                         tempList.Add(x);
                     SelectedSchemes = new ReactiveList<Scheme>(tempList);
-                    tempList = null; 
+                    tempList = null;
                 });
         }
 
@@ -135,7 +152,7 @@ namespace IDEX.ViewModel
             NavigationHandeler();
         }
 
-        private IEnumerable _itemListSource = Enumerable.Empty<BaseModel>();
+        private IEnumerable _itemListSource = Enumerable.Empty<InitialModel>();
         public IEnumerable ItemListSource
         {
             get => _itemListSource;
@@ -255,18 +272,18 @@ namespace IDEX.ViewModel
             SelectedInsepction.Clear();
             SelectedSchemes.Clear();
             SelectedCustomer.Clear();
-            foreach (BaseModel customer in Customers)
+            foreach (InitialModel customer in Customers)
             {
                 if (customer.IsChecked)
                     customer.IsChecked = false;
             }
-            foreach (BaseModel schemelist in Schemes)
+            foreach (InitialModel schemelist in Schemes)
             {
                 if (schemelist.IsChecked)
                     schemelist.IsChecked = false;
             }
         }
-        
+
         private void NavigationHandeler()
         {
             if (flag == 0)
@@ -295,10 +312,12 @@ namespace IDEX.ViewModel
 
                     SchemeBindingList = scheme;
 
-
                     BackBtnVisibilty = true;
                     NextButtonTitle = "Next";
                     ItemListSource = SchemeBindingList;
+
+                    scheme = null;
+                    ts = null;
                 }
                 else
                 {
@@ -328,6 +347,9 @@ namespace IDEX.ViewModel
                     InsepctionBindingList = inspections;
                     NextButtonTitle = "START";
                     ItemListSource = InsepctionBindingList;
+
+                    schemes = null;
+                    inspections = null;
                 }
                 else
                 {
@@ -356,9 +378,7 @@ namespace IDEX.ViewModel
                     }
                 else
                     UserDialogs.Instance.AlertAsync("Please Select Inspection(s) Frist", "Alert", "ok");
-
             }
         }
-
     }
 }

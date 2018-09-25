@@ -3,7 +3,7 @@ using System.ComponentModel;
 
 namespace IDEX.Model
 {
-    class Scheme : BaseModel 
+    class Scheme : InitialModel
     {
         public Customer customer { get; set; }
         public int CustomerId { get; set; }

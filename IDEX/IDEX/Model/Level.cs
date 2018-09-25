@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace IDEX.Model
 {
-    class Level : BaseModel
+    class Level : InitialModel
     {
         public int UserId { get; set; }
         public string DoorNumber { get; set; }
@@ -20,6 +20,7 @@ namespace IDEX.Model
         public List<HygieneInsepectionResult> HygieneInsepectionResults { get; set; }
 
         #region to can bind in view using overview viewModel
+        //Note you can put all this in anthor model and use the second method 
         private int _finished;
         public int Finished
         {

@@ -23,13 +23,12 @@
     </ContentPage.Resources>
 
     <StackLayout Orientation="Horizontal" HorizontalOptions="Fill">
-        <Label Text="There is Nothing to show" FontSize="Large" IsVisible="{Binding IsVisible}"
+        <Label Text="All Rooms Are Completed" FontSize="Large" IsVisible="{Binding IsVisible}"
                HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" />
         <Custom:ExtListView HasUnevenRows="True" 
                   ItemsSource="{Binding ItemListSource}" 
                   SeparatorColor="Black" VerticalOptions="FillAndExpand" 
                   HorizontalOptions="Fill"
-                  x:Name="OverviewListView"
                   SelectionMode="None"
                   IsVisible="{Binding ListViewIsVisible}"
                   >

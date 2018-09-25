@@ -14,7 +14,6 @@
     </views:BaseContentPage.Padding>
     <Page.Resources>
         <ResourceDictionary>
-            <Color x:Key="StepColor">#008080</Color>
             <Converters:SelectedItemEventArgsToSelectedItemConverter x:Key="SelectedItemConverter"/>
         </ResourceDictionary>
     </Page.Resources>
@@ -40,15 +39,15 @@
         <Custom:ExtLabel Grid.Row="0" Grid.Column="2" Margin="5,0,0,0" Style="{StaticResource FirstScreenLabels}" 
                          HorizontalOptions="End">Inspection(s)</Custom:ExtLabel>
 
-        <Custom:StepProgressBarControl Grid.Row="1" Grid.ColumnSpan="3" 
+        <Custom:StepProgressBarControl     Grid.Row="1" Grid.ColumnSpan="3" 
                                            HorizontalOptions="FillAndExpand" 
-                                           StepColor="{StaticResource StepColor}" Steps="3" 
+                                           StepColor="{StaticResource DarkBlueColor}" Steps="3" 
                                            Margin="10,5,10,5"
                                            ItemClicked="{Binding ItemSelected}"
                                            ItemSelectedIndex ="{Binding SelectedIndexs}"
                                            />
 
-
+        <!--#region this is the two hidden lists -->
         <Custom:RepeaterView Grid.Row="2" Grid.Column="0"
                       Grid.ColumnSpan="1" HorizontalOptions="Start"
                       ItemsSource="{Binding SelectedCustomer}" >
@@ -78,6 +77,7 @@
                 </DataTemplate>
             </Custom:RepeaterView.ItemTemplate>
         </Custom:RepeaterView>
+        <!--#endregion-->
 
         <Frame Grid.Row="3" Grid.ColumnSpan="3" BorderColor="#ECECEC"
                    Margin="10" VerticalOptions="Start" MinimumHeightRequest="100" >
@@ -104,6 +104,7 @@
                 </ListView.ItemTemplate>
             </ListView>
         </Frame>
+
 
         <StackLayout Grid.Row="4" Grid.Column="1"  
                          Margin="10"

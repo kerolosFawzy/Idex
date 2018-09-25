@@ -27,6 +27,7 @@ namespace IDEX.ViewModel
             ShowAllFlag = true;
         }
         public static Level SelectedRoom { get; set; }
+
         #region class propfull(s)
         public bool ShowAllFlag { get; set; }
         private FormattedString _formattedTitle;
@@ -122,7 +123,7 @@ namespace IDEX.ViewModel
         }
         private void ShowAllCommand(object obj)
         {
-            var view = obj as MenuItem;
+        //    var view = obj as MenuItem;
             ShowAllFlag = !ShowAllFlag;
 
             HandleMenuItemText();
@@ -333,8 +334,10 @@ namespace IDEX.ViewModel
             ItemListSource = Parents;
             SelectedListStack.Add(Parents);
             SortChildren(AllLevelTypes, allLevels);
+
             allLevels = null;
             Parents = null;
+            AllLevelTypes = null;
         }
         void SortChildren(List<int> AllLevelTypes, List<Level> allLevels)
         {
@@ -356,6 +359,7 @@ namespace IDEX.ViewModel
                         .ToList();
                     LevelListWithChildren.Add(level);
                 }
+                searchList = null;
             }
 
             LevelListWithChildren = LevelListWithChildren.Distinct().ToList();

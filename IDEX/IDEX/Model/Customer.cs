@@ -3,9 +3,8 @@
 
 namespace IDEX.Model
 {
-    class Customer : BaseModel
+    class Customer : InitialModel
     {
         public List<Scheme> Schemes { get; set; }
-
     }
 }
