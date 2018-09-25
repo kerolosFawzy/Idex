@@ -3,6 +3,7 @@ using Xamarin.Forms;
 
 namespace CustomControls
 {
+    // iam using behavior to make item tapped event to command 
     public class ExtListView : ListView
     {
         //public ExtListView() : base(ListViewCachingStrategy.RecycleElement)

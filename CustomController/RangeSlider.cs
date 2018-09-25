@@ -6,6 +6,8 @@ using Xamarin.Forms;
 
 namespace CustomControls
 {
+    //its not used code and uncompleted yet 
+    //you need to set item source and change color for click char 
     public class RangeSlider : Grid
     {
         Button _lastStepSelected;

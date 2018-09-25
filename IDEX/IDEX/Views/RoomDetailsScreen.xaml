@@ -14,6 +14,7 @@
         <ToolbarItem Name="AcceptAll" Text="Accept All" Priority="1" Order="Secondary" Command=""  />
         <ToolbarItem Name="camera" Icon="camera.png" Priority="0" Order="Primary" Command=""  />
         <ToolbarItem Name="addfile" Icon="addfile.png"  Priority="1" Order="Primary" Command=""  />
+        <ToolbarItem Name="UseExtra" Text="{Binding UseExtra}"  Priority="0" Order="Secondary" Command="{Binding ChangePageCommand}"  />
     </ContentPage.ToolbarItems>
     
     <ContentPage.Content>
@@ -43,10 +44,10 @@
                     <Label Text="HYG.TYPE" Style="{StaticResource secondaryLabels}"/>
                     <Label Text="{Binding HygType}" Style="{StaticResource BoldLabel}"/>
                 </StackLayout>
-                <StackLayout Orientation="Horizontal" Margin="0,16">
+                <!--<StackLayout Orientation="Horizontal" Margin="0,16">
                     <Label Text="Use Extra Level" Style="{StaticResource BoldLabel}" VerticalOptions="Center"/>
                     <Custom:CustomCheckBox Margin="10,0" HeightRequest="24" WidthRequest="24"/>
-                </StackLayout>
+                </StackLayout>-->
                 <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="Center" Spacing="12">
                     
                     <Custom:ExtFrameLayout Command="{Binding InstaCommand}" Style="{StaticResource FrameStyle}" >

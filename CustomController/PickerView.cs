@@ -4,6 +4,7 @@ using Xamarin.Forms;
 //https://github.com/amay077/Xamarin_Forms_PickerViewSample
 namespace CustomControls
 {
+    //its custom renderrer you can check android and ios projects 
     public class PickerView : View
     {
         #region ItemsSource

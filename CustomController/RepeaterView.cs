@@ -4,6 +4,9 @@ using Xamarin.Forms;
 
 namespace CustomControls
 {
+   /*
+    * it used in first page to repeat any text into list without any extra spacing 
+    * **/
     public class RepeaterView : StackLayout
     {
         public static readonly BindableProperty ItemTemplateProperty = BindableProperty.Create(

@@ -4,6 +4,22 @@ using Xamarin.Forms;
 // http://www.xamboy.com/2017/12/06/navigation-bar-customization-in-xamarin-forms/
 namespace CustomControls.NavigationServices
 {
+    /*
+     * this code can set
+     * 1- title postion 
+     * 2- tile Title Background
+     * 3- Title Font
+     * 4- Title Padding and margin
+     * 5- Bar Background
+     * 5- Set Gradient for bar 
+     * 6- Set Subtitle Font
+     * 7- set title color 
+     * 8- subtitle color 
+     * 9- Title Border Corner Radius
+     * 10 -Bar Background Opacity
+     * Note the orginal code can set image as bar background 
+     * Note to set title and subtitle just use binding as shownen in all pages 
+     */
     public class CustomNavigationPage : NavigationPage 
     {
 
@@ -27,22 +43,7 @@ namespace CustomControls.NavigationServices
             BottomToTop
         }
 
-        /*
-         * this code can set
-         * 1- title postion 
-         * 2- tile Title Background
-         * 3- Title Font
-         * 4- Title Padding and margin
-         * 5- Bar Background
-         * 5- Set Gradient for bar 
-         * 6- Set Subtitle Font
-         * 7- set title color 
-         * 8- subtitle color 
-         * 9- Title Border Corner Radius
-         * 10 -Bar Background Opacity
-         * Note the orginal code can set image as bar background 
-         * Note to set title and subtitle just use binding as shownen in all pages 
-         */
+        #region BindableProperties 
 
         public static readonly BindableProperty TitlePositionProperty = BindableProperty.CreateAttached("TitlePosition", typeof(TitleAlignment), typeof(CustomNavigationPage), Device.RuntimePlatform == Device.iOS ? TitleAlignment.Center : TitleAlignment.Start);
 
@@ -276,5 +277,6 @@ namespace CustomControls.NavigationServices
         {
             view.SetValue(BarBackgroundOpacityProperty, value);
         }
+        #endregion
     }
 }

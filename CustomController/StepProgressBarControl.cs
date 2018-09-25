@@ -9,7 +9,8 @@ namespace CustomControls
 {
     public class StepProgressBarControl : StackLayout
     {
-        //Button _lastButtonSelcted;
+        //it work for any number of buttons (steps) 
+        //send button color from the view 
         #region view BindableProperty
         public static readonly BindableProperty StepsProperty = BindableProperty
             .Create(nameof(Steps), typeof(int), typeof(StepProgressBarControl), 0);

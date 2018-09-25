@@ -8,6 +8,7 @@ namespace CustomControls
         private static readonly string ImageChecked = "checkbox_checked.png";
         private static readonly string ImageUnchecked = "checkbox_unchecked.png";
 
+        #region bindable 
         public static BindableProperty CheckedProperty = BindableProperty
             .Create(propertyName: "Checked",returnType : typeof(bool?)
             , declaringType: typeof(CustomCheckBox) , defaultValue: null 
@@ -26,11 +27,12 @@ namespace CustomControls
                 OnPropertyChanged();
             }
         }
+        #endregion
+
         private static void CheckedValueChanged(BindableObject bindable , Object oldVlave , object newValue) {
             if (newValue != null && (bool)newValue)
             {
                 ((CustomCheckBox)bindable).Source = ImageChecked;
-               
             }
             else
             {
@@ -47,22 +49,22 @@ namespace CustomControls
             GestureRecognizers.Add(tap);
             BackgroundColor = Color.White;
         }
-        private bool _isEnabled = true;
-        public new bool IsEnabled
-        {
-            get => _isEnabled;
-            set
-            {
-                _isEnabled = value;
-                OnPropertyChanged();
-                Opacity = value ? 1 : .5;
-                base.IsEnabled = value;
-            }
-        }
-        public void OnClicked(object sender, EventArgs e)
-        {
-            
-            Checked = !Checked;
-        }
+
+        //private bool _isEnabled = true;
+        //public new bool IsEnabled
+        //{
+        //    get => _isEnabled;
+        //    set
+        //    {
+        //        _isEnabled = value;
+        //        OnPropertyChanged();
+        //        Opacity = value ? 1 : .5;
+        //        base.IsEnabled = value;
+        //    }
+        //}
+        //public void OnClicked(object sender, EventArgs e)
+        //{
+        //    Checked = !Checked;
+        //}
     }
 }

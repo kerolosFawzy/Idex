@@ -4,6 +4,12 @@ using Xamarin.Forms;
 
 namespace IDEX.Behavior
 {
+    /*
+     * you must send min and max values and make sure min <= max or app will crash 
+     * it will take the entry value and return valid or not valid 
+     * as boolean if not valid text will be red 
+     * Note: the viewmodel code will not fire till isVaild = true 
+     */
     public class LargeRangeBehavior : BehaviorBase<Entry>
     {
         public static readonly BindableProperty IsValidProperty = BindableProperty.Create(

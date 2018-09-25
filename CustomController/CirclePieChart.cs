@@ -11,6 +11,17 @@ namespace CustomControls
 {
     public class CirclePieChart : ContentView
     {
+        /*
+         * this class for drawing pie chart using skia sharp 
+         * you mast send to it segment at least 1 segment 
+         * segments contain angel , color  and radious and one last thing is controlstate
+         * controlstate used to know if this level is room or not 
+         * if null means that not null 
+         * this also used to draw svg iamges 
+         * if controlstate = 1 means he will draw accepted svg controlstate = -1 draw reject svg controlstate = 0 draw gray circle 
+         * Note the start angel is -90 not 0 
+         * 
+         */
         public static readonly BindableProperty SegmentsProperty =
             BindableProperty.Create(nameof(Segments)
                 , typeof(IEnumerable<Segment>)
@@ -18,13 +29,12 @@ namespace CustomControls
                 , propertyChanged: OnSegmentsPropertyChanged);
 
         readonly SkiaSharp.Extended.Svg.SKSvg svg = new SkiaSharp.Extended.Svg.SKSvg();
-        float startAngle; 
+        float startAngle;
         private static void OnSegmentsPropertyChanged(BindableObject bindable, object oldvalue, object newvalue)
         {
             var circle = (CirclePieChart)bindable;
 
-            var observableCollection = newvalue as ObservableCollection<Segment>;
-            if (observableCollection != null)
+            if (newvalue is ObservableCollection<Segment> observableCollection)
             {
                 observableCollection.CollectionChanged += circle.OnSegmentsCollectionChanged;
             }
@@ -68,7 +78,7 @@ namespace CustomControls
             Content = canvasView;
         }
 
-        private  Stream GetImageStream(string svgName)
+        private Stream GetImageStream(string svgName)
         {
             var assembly = GetType().Assembly.GetManifestResourceStream($"CustomControls.SvgImages.{svgName}");
             return assembly;
@@ -84,7 +94,7 @@ namespace CustomControls
             canvas.Clear();
 
             SKPoint center = new SKPoint(info.Width / 2F, info.Height / 2F);
-            startAngle = -90F; 
+            startAngle = -90F;
             if (Segments == null)
                 return;
             foreach (var segment in Segments)
@@ -93,6 +103,7 @@ namespace CustomControls
                 SKRect rect = new SKRect(center.X - radius, center.Y - radius,
                     center.X + radius, center.Y + radius);
 
+                //this part to draw svg 
                 if (segment.ControlStatus != null)
                 {
                     switch (segment.ControlStatus)
@@ -112,31 +123,34 @@ namespace CustomControls
                 {
                     if (segment.SweepAngle == 360)
                     {
-                        DrawSvgIcon(canvas , info , accepted); 
+                        DrawSvgIcon(canvas, info, accepted);
                     }
                     else
                     {
-                        DrawSegment(segment , center , rect , canvas);
+                        DrawSegment(segment, center, rect, canvas);
                     }
                 }
 
             }
         }
-        private void DrawSvgIcon(SKCanvas canvas, SKImageInfo info , string SvgName)
+        private void DrawSvgIcon(SKCanvas canvas, SKImageInfo info, string SvgName)
         {
             using (var stream = GetImageStream(SvgName))
             {
                 if (stream != null)
                     svg.Load(stream);
             }
+
             float canvasMin = Math.Min(info.Width, info.Height);
             float svgMax = Math.Max(svg.Picture.CullRect.Width, svg.Picture.CullRect.Height);
             float scale = canvasMin / svgMax;
             var matrix = SKMatrix.MakeScale(scale, scale);
             canvas.DrawPicture(svg.Picture, ref matrix);
 
+
+
         }
-        private void DrawSegment(Segment segment, SKPoint center, SKRect rect,  SKCanvas canvas)
+        private void DrawSegment(Segment segment, SKPoint center, SKRect rect, SKCanvas canvas)
         {
             using (var path = new SKPath())
             using (var fillPaint = new SKPaint())

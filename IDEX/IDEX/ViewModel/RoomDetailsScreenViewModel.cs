@@ -11,9 +11,10 @@ namespace IDEX.ViewModel
         public Level SelectedLevel { get; set; } = OverviewScreenViewModel.SelectedRoom;
 
         public ReactiveCommand InstaCommand { get; set; }
+        public ReactiveCommand ChangePageCommand { get; set; }
         public ReactiveCommand HygieneCommand { get; set; }
         public ReactiveCommand AdditionalCommand { get; set; }
-        
+        bool flag = true;
         #region
         string GraySvg = "resource://IDEX.SvgImages.check_detials_room_gray.svg";
         string BlackSvg = "resource://IDEX.SvgImages.check_detials_room_black.svg";
@@ -32,13 +33,20 @@ namespace IDEX.ViewModel
             set => this.RaiseAndSetIfChanged(ref _hygSvgPath, value);
         }
 
+        private string _useExtra = "Use Extra Level";
+        public string UseExtra
+        {
+            get => _useExtra;
+            set => this.RaiseAndSetIfChanged(ref _useExtra, value);
+        }
+
         private string _additionalSvgPath;
         public string AdditionalSvgPath
         {
             get => _additionalSvgPath;
             set => this.RaiseAndSetIfChanged(ref _additionalSvgPath, value);
         }
-        
+
 
         private string _title;
         public string Title
@@ -94,40 +102,53 @@ namespace IDEX.ViewModel
         public RoomDetailsScreenViewModel()
         {
             SetRoomData();
-            InstaCommand =  ReactiveCommand.Create(InstaCommandHendlre);
-            HygieneCommand = ReactiveCommand.Create(HygieneCommandHendlre);
-            AdditionalCommand = ReactiveCommand.Create(AdditionalCommandHendlre);
+            InstaCommand = ReactiveCommand.Create(InstaCommandHendler);
+            HygieneCommand = ReactiveCommand.Create(HygieneCommandHendler);
+            AdditionalCommand = ReactiveCommand.Create(AdditionalCommandHendler);
+            ChangePageCommand = ReactiveCommand.Create(ChangePageCommandHendler);
         }
+
+        private void ChangePageCommandHendler()
+        {
+            if (flag)
+                UseExtra = "Use original level";
+            else
+                UseExtra = "Use Extra level";
+            flag = !flag;
+        }
+
         public override void OnSoftBackButtonPressed()
         {
             Navigation.GoBack();
         }
 
-        private void AdditionalCommandHendlre()
+        private void AdditionalCommandHendler()
         {
             AdditionalSvgPath = BlackSvg;
             PageNavigate(nameof(AdditionalRequirementsPage));
         }
 
-        private void HygieneCommandHendlre()
+        private void HygieneCommandHendler()
         {
             HygSvgPath = BlackSvg;
             PageNavigate(nameof(HygieneScreen));
         }
 
-        private void InstaCommandHendlre()
+        private void InstaCommandHendler()
         {
             InstaSvgPath = BlackSvg;
             PageNavigate(nameof(InstaPage));
         }
-        private void PageNavigate(string PageName) {
+        private void PageNavigate(string PageName)
+        {
             Device.BeginInvokeOnMainThread(async () =>
             {
                 await Navigation.NavigateAsync(PageName);
 
             });
         }
-        private void SetRoomData() {
+        private void SetRoomData()
+        {
             Title = SelectedLevel.DoorNumber + ", " + SelectedLevel.Name;
             ID = SelectedLevel.ID.ToString();
             DoorNo = SelectedLevel.DoorNumber;
@@ -138,7 +159,7 @@ namespace IDEX.ViewModel
             InstaSvgPath = GraySvg;
             HygSvgPath = GraySvg;
             AdditionalSvgPath = GraySvg;
-            
+
         }
 
     }

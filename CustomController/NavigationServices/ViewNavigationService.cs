@@ -14,10 +14,13 @@ namespace CustomControls.NavigationServices
         //this used to navigate in viewModel you have to use register new pages in app.cs
         //and use NavigateAsync and goback 
         //param page name (key)
+
+
         private readonly object _sync = new object();
         private readonly Dictionary<string, Type> _pagesByKey = new Dictionary<string, Type>();
         private readonly Stack<CustomNavigationPage> _navigationPageStack =
             new Stack<CustomNavigationPage>();
+
         private CustomNavigationPage CurrentNavigationPage => _navigationPageStack.Peek();
 
         public void Configure(string pageKey, Type pageType)
@@ -63,50 +66,6 @@ namespace CustomControls.NavigationServices
                         : null;
                 }
             }
-        }
-
-        public async Task GoBack()
-        {
-            var navigationStack = CurrentNavigationPage.Navigation;
-            if (navigationStack.NavigationStack.Count > 1)
-            {
-                await CurrentNavigationPage.PopAsync();
-                return;
-            }
-
-            if (_navigationPageStack.Count > 1)
-            {
-                _navigationPageStack.Pop();
-                await CurrentNavigationPage.Navigation.PopModalAsync();
-                return;
-            }
-
-            await CurrentNavigationPage.PopAsync();
-        }
-
-        public async Task NavigateModalAsync(string pageKey, bool animated = true)
-        {
-            await NavigateModalAsync(pageKey, null, animated);
-        }
-
-        public async Task NavigateModalAsync(string pageKey, object parameter, bool animated = true)
-        {
-            var page = GetPage(pageKey, parameter);
-            NavigationPage.SetHasNavigationBar(page, true);
-            var modalNavigationPage = new CustomNavigationPage(page);
-            await CurrentNavigationPage.Navigation.PushModalAsync(modalNavigationPage, animated);
-            _navigationPageStack.Push(modalNavigationPage);
-        }
-
-        public async Task NavigateAsync(string pageKey, bool animated = false)
-        {
-            await NavigateAsync(pageKey, null, animated);
-        }
-
-        public async Task NavigateAsync(string pageKey, object parameter, bool animated = false)
-        {
-            var page = GetPage(pageKey, parameter);
-            await CurrentNavigationPage.Navigation.PushAsync(page, animated);
         }
 
         private Page GetPage(string pageKey, object parameter = null)
@@ -165,8 +124,56 @@ namespace CustomControls.NavigationServices
                 }
                 catch (Exception exception) { Crashes.TrackError(exception); }
 
-                return null ;
+                return null;
             }
         }
+
+
+        #region Navigation methods 
+        public async Task GoBack()
+        {
+            var navigationStack = CurrentNavigationPage.Navigation;
+            if (navigationStack.NavigationStack.Count > 1)
+            {
+                await CurrentNavigationPage.PopAsync();
+                return;
+            }
+
+            if (_navigationPageStack.Count > 1)
+            {
+                _navigationPageStack.Pop();
+                await CurrentNavigationPage.Navigation.PopModalAsync();
+                return;
+            }
+
+            await CurrentNavigationPage.PopAsync();
+        }
+
+        public async Task NavigateModalAsync(string pageKey, bool animated = true)
+        {
+            await NavigateModalAsync(pageKey, null, animated);
+        }
+
+        public async Task NavigateModalAsync(string pageKey, object parameter, bool animated = true)
+        {
+            var page = GetPage(pageKey, parameter);
+            NavigationPage.SetHasNavigationBar(page, true);
+            var modalNavigationPage = new CustomNavigationPage(page);
+            await CurrentNavigationPage.Navigation.PushModalAsync(modalNavigationPage, animated);
+            _navigationPageStack.Push(modalNavigationPage);
+        }
+
+        public async Task NavigateAsync(string pageKey, bool animated = false)
+        {
+            await NavigateAsync(pageKey, null, animated);
+        }
+
+        public async Task NavigateAsync(string pageKey, object parameter, bool animated = false)
+        {
+            var page = GetPage(pageKey, parameter);
+            await CurrentNavigationPage.Navigation.PushAsync(page, animated);
+        }
+        #endregion 
+
     }
 }

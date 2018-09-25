@@ -4,6 +4,8 @@ using Xamarin.Forms;
 
 namespace CustomControls
 {
+    //this just to enable frame to be clickable 
+    // you must unregister the event handler 
     public class ExtFrameLayout : Frame
     {
         public static readonly BindableProperty CommandProperty 
@@ -52,7 +54,7 @@ namespace CustomControls
             else
                 IsEnabledCore = true;
         }
-
+        
         void CommandCanExecuteChanged(object sender, EventArgs eventArgs)
         {
             ICommand cmd = Command;
