@@ -7,6 +7,7 @@ namespace CustomControls
     //its custom renderrer you can check android and ios projects 
     public class PickerView : View
     {
+
         #region ItemsSource
         public static readonly BindableProperty ItemsSourceProperty = BindableProperty.Create(nameof(ItemsSource),
             typeof(IEnumerable), typeof(PickerView), null);

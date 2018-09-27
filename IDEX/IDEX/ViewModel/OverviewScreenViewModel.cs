@@ -136,7 +136,6 @@ namespace IDEX.ViewModel
             {
                 ItemListSource = SelectedListStack.Last();
                 SetVisiablity();
-
             }
         }
         #endregion
@@ -261,9 +260,13 @@ namespace IDEX.ViewModel
             });
             FormattedTitle = formattedTitle;
         }
+
         #region setting level data 
         public void GetFinishedPercentage(List<int> AllLevelTypes)
         {
+            //this code get first floor levels (level before last level) and get finished rooms out of it 
+            //then set how many childern in this level and how many finsished (ControlStatus = 1 or ControlStatus = -1)
+            
             int types = AllLevelTypes.Count() - 2;
             for (int i = types; i >= 0; i--)
             {
@@ -272,12 +275,15 @@ namespace IDEX.ViewModel
 
                     if (Parent.LevelType == AllLevelTypes[types])
                     {
+                        //this sorting depend on ControlStatus so i check if he in floor or not 
+
                         //floor 
                         Parent.Finished = Parent.Children.Where(x => x.ControlStatus == 1 || x.ControlStatus == -1).Count();
                         Parent.ChildernCount = Parent.Children.Count();
                     }
                     else
                     {
+                        //here sorting depond on Finished and ChildernCount
                         foreach (Level childern in Parent.Children)
                         {
                             Parent.Finished += childern.Finished;
@@ -289,13 +295,16 @@ namespace IDEX.ViewModel
 
             foreach (Level level in LevelListWithChildren.Where(x => x.LevelType == AllLevelTypes.Last()))
             {
+                //this to set binding label depond on level type and data 
                 level.ListViewModeValue = level.Area.ToString() + " m2";
+                //this code to set segments list to draw svg images or empty circle 
                 level.Segments = AddSegmentsListLastLevel(level.ControlStatus);
                 if (level.ControlStatus == 1 || level.ControlStatus == -1) level.Completed = true;
             }
             foreach (Level level in LevelListWithChildren.Where(x => x.LevelType != AllLevelTypes.Last()))
             {
                 level.ListViewModeValue = level.Finished.ToString() + "/" + level.ChildernCount;
+                //this get percentage to convert it to angle for dawing 
                 double Percentage = (double)level.Finished / level.ChildernCount;
                 level.Segments = AddSegmentsList(Percentage * 360);
                 if (Percentage == 1) level.Completed = true;
@@ -304,6 +313,8 @@ namespace IDEX.ViewModel
 
         IList<Segment> AddSegmentsList(double Angle)
         {
+            //frist set segment that you need . 
+            //set color and angle as float then set last segment as 360 - total used angle   
             IList<Segment> segments = new List<Segment>
             {
                 new Segment { Color = PieChartColor, Radius = .8F, SweepAngle = (float)Angle },
@@ -324,15 +335,17 @@ namespace IDEX.ViewModel
         {
             List<Level> allLevels = new List<Level>();
             allLevels = AllLevels as List<Level>;
-
+            //get all levels types and sort it 
             List<int> AllLevelTypes = allLevels.Select(x => x.LevelType).Distinct().ToList();
             AllLevelTypes.Sort();
-
+            //get first levels depend on LevelTypes first type means this level have no parent 
             List<Level> Parents = allLevels
                 .Where(x => x.LevelType == AllLevelTypes.FirstOrDefault()).ToList();
 
             ItemListSource = Parents;
+            //put it in stack that used in navigate back 
             SelectedListStack.Add(Parents);
+
             SortChildren(AllLevelTypes, allLevels);
 
             allLevels = null;
@@ -341,6 +354,7 @@ namespace IDEX.ViewModel
         }
         void SortChildren(List<int> AllLevelTypes, List<Level> allLevels)
         {
+            //this code to sort all levels expect last level (Room level)
             for (int i = 0; i < AllLevelTypes.Count() - 1; i++)
             {
                 List<Level> searchList = allLevels
@@ -360,10 +374,11 @@ namespace IDEX.ViewModel
                     LevelListWithChildren.Add(level);
                 }
                 searchList = null;
+                allLevels = null;
             }
 
             LevelListWithChildren = LevelListWithChildren.Distinct().ToList();
-
+            //this level have no childern so it only gets parent level 
             int lastType = AllLevelTypes.Last();
             foreach (Level level in LevelListWithChildren.Where(x => x.LevelType == lastType))
             {
@@ -374,7 +389,9 @@ namespace IDEX.ViewModel
             GetFinishedPercentage(AllLevelTypes);
         }
         #endregion
-
+        //put the real data instead @FakeList and he will do the reset 
+        //it will start sorting parent level first and set it as ItemSource 
+        //then he will start sorting all levels and set childern 
         void AddDummyData()
         {
             List<Level> FakeList = new List<Level>

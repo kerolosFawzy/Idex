@@ -47,6 +47,7 @@
                     <Label BackgroundColor="#F1A4FF" Text="DUST" Grid.Row="3" Style="{StaticResource BigLabels}" />
                     <Label BackgroundColor="#A8FFC9" Text="STAINE" Grid.Row="5" Style="{StaticResource BigLabels}" />
                     <Label BackgroundColor="#ACC7F8" Text="SURFACE SOILING" LineBreakMode="WordWrap" Grid.Row="7" Style="{StaticResource BigLabels}" />
+                   
                     <Label Text="INV" Style="{StaticResource SmallLabelsStyle}" Grid.Row="0" Grid.Column="1" />
                     <Label Text="WALL" Style="{StaticResource SmallLabelsStyle}" Grid.Row="0" Grid.Column="2"/>
                     <Label Text="FLOOR" Style="{StaticResource SmallLabelsStyle}" Grid.Row="0" Grid.Column="3"/>
