@@ -117,7 +117,7 @@ namespace CustomControls.NavigationServices
                         "No suitable constructor found for page " + pageKey);
                 }
                 Page page;
-
+                //Note if code crashes here that means there is problem in page xaml or viewmodel not in navigation
                 page = constructor.Invoke(parameters) as Page;
                 return page;
             }
