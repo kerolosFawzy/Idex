@@ -10,11 +10,15 @@ namespace IDEX.ViewModel
 {
     class InstaPageViewModel : BaseViewModel
     {
-        private Dictionary<string, string> _buttonData = new Dictionary<string, string>();
         public Level SelectedLevel { get; set; } = OverviewScreenViewModel.SelectedRoom;
         public ICommand ItemClicked { get; set; }
+
+        //i using this to bind easy and hard to the view 
         public string Easy { get; set; } = "Easy";
         public string Hard { get; set; } = "Hard";
+
+
+        #region Title And SubTitle
         private string _subtitle;
 
         public string Subtitle
@@ -45,6 +49,9 @@ namespace IDEX.ViewModel
             }
             catch (Exception exception) { Crashes.TrackError(exception); }
         }
+        #endregion
+
+        private Dictionary<string, string> _buttonData = new Dictionary<string, string>();
         public Dictionary<string, string> ButtonData
         {
             get => _buttonData;
@@ -53,6 +60,7 @@ namespace IDEX.ViewModel
                 try
                 {
                     this.RaiseAndSetIfChanged(ref _buttonData, value);
+                    //fire only if there is data coming from view 
                     if (ButtonData != null)
                         SetInstaData();
                 }
@@ -60,6 +68,8 @@ namespace IDEX.ViewModel
 
             }
         }
+
+        #region Lists 
         private List<int> _soilingList = new List<int>();
 
         public List<int> SoilingList
@@ -76,8 +86,16 @@ namespace IDEX.ViewModel
         }
 
         private List<int> _numberPicker = new List<int>();
-        private bool _isVisible;
+        public List<int> NumberPicker
+        {
+            get => _numberPicker;
+            set => this.RaiseAndSetIfChanged(ref _numberPicker, value);
+        }
 
+        #endregion
+
+        #region View binding prop 
+        private bool _isVisible;
         public bool IsVisible
         {
             get => _isVisible;
@@ -91,12 +109,7 @@ namespace IDEX.ViewModel
             set => this.RaiseAndSetIfChanged(ref _selected, value);
         }
 
-        public List<int> NumberPicker
-        {
-            get => _numberPicker;
-            set => this.RaiseAndSetIfChanged(ref _numberPicker, value);
-        }
-
+       
         private string _instaCategoryEnum;
         public string InstaCategoryEnum
         {
@@ -118,7 +131,7 @@ namespace IDEX.ViewModel
             set => this.RaiseAndSetIfChanged(ref _instaRoomEnum, value);
         }
 
-
+        #endregion
         public static Insta800InseptionResult InstasResults
         { get; set; } = new Insta800InseptionResult();
 
@@ -150,9 +163,6 @@ namespace IDEX.ViewModel
                     int.TryParse(s, out int ButtonCount);
                     if (InstaCategoryEnum.Equals("SurfaceSoilings"))
                     {
-                        //if (ButtonCount == 100)
-                        //    Selected = 21;
-                        //else
                         Selected = ButtonCount / 5;
                     }
                     else
@@ -163,6 +173,7 @@ namespace IDEX.ViewModel
             catch (Exception exception) { Crashes.TrackError(exception); }
         }
 
+        //method to search in modle and set value 
         public static void PublicInstancePropertiesEqual<T>(string self, T to, int value) where T : class
         {
             if (self != null && to != null)
@@ -205,12 +216,11 @@ namespace IDEX.ViewModel
                 IsVisible = true;
         }
 
-
-
         public override void OnSoftBackButtonPressed()
         {
             Navigation.GoBack();
         }
+
         public override void DisAppearing()
         {
             OverviewScreenViewModel.SelectedRoom.insta800InseptionResult = InstasResults;

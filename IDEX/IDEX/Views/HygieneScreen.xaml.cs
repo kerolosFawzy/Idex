@@ -1,5 +1,4 @@
 ﻿using IDEX.ViewModel;
-using Xamarin.Forms.Xaml;
 
 namespace IDEX.Views
 {

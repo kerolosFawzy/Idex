@@ -17,13 +17,7 @@ namespace IDEX.ViewModel
         public static HygieneInsepectionResult InsepectionResult { get; set; }
             = new HygieneInsepectionResult();
 
-        private List<HygieneInsepectionResult> _hygieneInsepectionList = new List<HygieneInsepectionResult>();
-
-        public List<HygieneInsepectionResult> HygieneInsepectionList
-        {
-            get => _hygieneInsepectionList;
-            set => this.RaiseAndSetIfChanged(ref _hygieneInsepectionList, value);
-        }
+        #region set title and subtitle 
         private string _subtitle;
 
         public string Subtitle
@@ -38,7 +32,26 @@ namespace IDEX.ViewModel
             get { return _FormattedTitle; }
             set { _FormattedTitle = value; }
         }
+        private void SetTitle()
+        {
+            try
+            {
+                FormattedString Title = new FormattedString();
+                Title.Spans.Add(new Span()
+                {
+                    Text = "Hygiene",
+                    FontSize = 18
+                });
 
+                FormattedTitle = Title;
+                Subtitle = SelectedLevel.DoorNumber + " ," + SelectedLevel.Name;
+            }
+            catch (Exception exception) { Crashes.TrackError(exception); }
+        }
+
+        #endregion
+
+       
         public Dictionary<string, string> ButtonData
         {
             get => _buttonData;
@@ -51,13 +64,35 @@ namespace IDEX.ViewModel
                         SetData();
                 }
                 catch (Exception exception) { Crashes.TrackError(exception); }
-
             }
+        } 
+
+        #region class lists 
+        private List<HygieneInsepectionResult> _hygieneInsepectionList = new List<HygieneInsepectionResult>();
+
+        public List<HygieneInsepectionResult> HygieneInsepectionList
+        {
+            get => _hygieneInsepectionList;
+            set => this.RaiseAndSetIfChanged(ref _hygieneInsepectionList, value);
+        }
+        private List<int> _numberPicker = new List<int>();
+
+        public List<int> NumberPicker
+        {
+            get => _numberPicker;
+            set => this.RaiseAndSetIfChanged(ref _numberPicker, value);
         }
 
-        private List<int> _numberPicker = new List<int>();
-        private bool _isVisible;
+        private ReactiveList<string> _categoryList = new ReactiveList<string>();
+        public ReactiveList<string> CategoryList
+        {
+            get => _categoryList;
+            set => this.RaiseAndSetIfChanged(ref _categoryList, value);
+        }
+        #endregion
 
+        #region class prop 
+        private bool _isVisible;
         public bool IsVisible
         {
             get => _isVisible;
@@ -69,12 +104,6 @@ namespace IDEX.ViewModel
         {
             get => _selected;
             set => this.RaiseAndSetIfChanged(ref _selected, value);
-        }
-
-        public List<int> NumberPicker
-        {
-            get => _numberPicker;
-            set => this.RaiseAndSetIfChanged(ref _numberPicker, value);
         }
 
         private string _cleaningCategory;
@@ -98,13 +127,7 @@ namespace IDEX.ViewModel
             set => this.RaiseAndSetIfChanged(ref _category, value);
         }
 
-
-        private ReactiveList<string> _categoryList = new ReactiveList<string>();
-        public ReactiveList<string> CategoryList
-        {
-            get => _categoryList;
-            set => this.RaiseAndSetIfChanged(ref _categoryList, value);
-        }
+        #endregion
 
         public HygieneScreenViewModel()
         {
@@ -137,7 +160,9 @@ namespace IDEX.ViewModel
                 {
                     State = ButtonData["State"];
                     data = State;
+                    //state = easy or hard 
                     Category = ButtonData["Category"];
+                    //CleaningCategory = Wast or Dust or hum bio  
                     CleaningCategory = ButtonData["CleaningCategory"];
                     data += CleaningCategory;
                     string s = ButtonData["Count"];
@@ -175,33 +200,12 @@ namespace IDEX.ViewModel
             }
         }
 
-        private void SetTitle()
-        {
-            try
-            {
-                FormattedString Title = new FormattedString();
-                Title.Spans.Add(new Span()
-                {
-                    Text = "Hygiene",
-                    FontSize = 18
-                });
-
-                FormattedTitle = Title;
-                Subtitle = SelectedLevel.DoorNumber + " ," + SelectedLevel.Name;
-            }
-            catch (Exception exception) { Crashes.TrackError(exception); }
-        }
-
         public override void DisAppearing()
         {
             OverviewScreenViewModel.SelectedRoom.HygieneInsepectionResults = HygieneInsepectionList; 
             base.DisAppearing();
         }
 
-        public override void OnAppearing()
-        {
-            base.OnAppearing();
-        }
         private void SetDummyData()
         {
             for (int i = 1; i <= 10; i++)

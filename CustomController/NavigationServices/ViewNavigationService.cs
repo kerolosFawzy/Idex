@@ -117,14 +117,9 @@ namespace CustomControls.NavigationServices
                         "No suitable constructor found for page " + pageKey);
                 }
                 Page page;
-                try
-                {
-                    page = constructor.Invoke(parameters) as Page;
-                    return page;
-                }
-                catch (Exception exception) { Crashes.TrackError(exception); }
 
-                return null;
+                page = constructor.Invoke(parameters) as Page;
+                return page;
             }
         }
 

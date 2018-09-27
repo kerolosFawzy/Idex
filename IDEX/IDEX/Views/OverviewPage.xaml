@@ -30,6 +30,7 @@
                   SeparatorColor="Black" VerticalOptions="FillAndExpand" 
                   HorizontalOptions="Fill"
                   SelectionMode="None"
+                  x:Name="OverviewListView"
                   IsVisible="{Binding ListViewIsVisible}"
                   >
             <ListView.Behaviors>

@@ -15,6 +15,7 @@ namespace IDEX.ViewModel
         public ReactiveCommand HygieneCommand { get; set; }
         public ReactiveCommand AdditionalCommand { get; set; }
         bool flag = true;
+
         #region
         string GraySvg = "resource://IDEX.SvgImages.check_detials_room_gray.svg";
         string BlackSvg = "resource://IDEX.SvgImages.check_detials_room_black.svg";
@@ -122,23 +123,24 @@ namespace IDEX.ViewModel
             Navigation.GoBack();
         }
 
+        #region Commandes 
         private void AdditionalCommandHendler()
         {
             AdditionalSvgPath = BlackSvg;
             PageNavigate(nameof(AdditionalRequirementsPage));
         }
-
         private void HygieneCommandHendler()
         {
             HygSvgPath = BlackSvg;
             PageNavigate(nameof(HygieneScreen));
         }
-
         private void InstaCommandHendler()
         {
             InstaSvgPath = BlackSvg;
             PageNavigate(nameof(InstaPage));
         }
+        #endregion
+
         private void PageNavigate(string PageName)
         {
             Device.BeginInvokeOnMainThread(async () =>
@@ -159,7 +161,6 @@ namespace IDEX.ViewModel
             InstaSvgPath = GraySvg;
             HygSvgPath = GraySvg;
             AdditionalSvgPath = GraySvg;
-
         }
 
     }

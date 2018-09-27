@@ -64,6 +64,42 @@ namespace IDEX.ViewModel
 
         #endregion
 
+        #region class lists 
+        private List<int> _popUpPickerList = new List<int>();
+
+        public List<int> PopUpPickerList
+        {
+            get => _popUpPickerList;
+            set
+            {
+                this.RaiseAndSetIfChanged(ref _popUpPickerList, value);
+            }
+        }
+        private IList<string> _rangeList = new List<string>();
+
+        public IList<string> RangeList
+        {
+            get => _rangeList;
+            set
+            {
+                this.RaiseAndSetIfChanged(ref _rangeList, value);
+            }
+        }
+        public IList<string> RadioButtonItemsList { get; set; } = new List<string>();
+
+        private List<AdditionalRequirementsCheckBox> _checkBoxList = new List<AdditionalRequirementsCheckBox>();
+
+        public List<AdditionalRequirementsCheckBox> CheckBoxList
+        {
+            get => _checkBoxList;
+            set
+            {
+                this.RaiseAndSetIfChanged(ref _checkBoxList, value);
+            }
+        }
+
+        #endregion
+
         #region
         private double _largeRangeMax = 100.5;
 
@@ -85,18 +121,6 @@ namespace IDEX.ViewModel
                 this.RaiseAndSetIfChanged(ref _largeRangeMin, value);
             }
         }
-
-        private List<int> _popUpPickerList = new List<int>();
-
-        public List<int> PopUpPickerList
-        {
-            get => _popUpPickerList;
-            set
-            {
-                this.RaiseAndSetIfChanged(ref _popUpPickerList, value);
-            }
-        }
-
 
         private int _selectedDecimalNum;
 
@@ -123,17 +147,7 @@ namespace IDEX.ViewModel
             }
         }
 
-        private List<AdditionalRequirementsCheckBox> _checkBoxList = new List<AdditionalRequirementsCheckBox>();
-
-        public List<AdditionalRequirementsCheckBox> CheckBoxList
-        {
-            get => _checkBoxList;
-            set
-            {
-                this.RaiseAndSetIfChanged(ref _checkBoxList, value);
-            }
-        }
-
+        
         private bool _pickerVisible = false;
 
         public bool PickerVisible
@@ -155,8 +169,6 @@ namespace IDEX.ViewModel
                 this.RaiseAndSetIfChanged(ref _textBoxVisibility, value);
             }
         }
-
-        public IList<string> RadioButtonItemsList { get; set; } = new List<string>();
 
         private string _selectedItem;
         public string SelectedItem
@@ -213,16 +225,7 @@ namespace IDEX.ViewModel
                 this.RaiseAndSetIfChanged(ref _enteredRangeData, value);
             }
         }
-        private IList<string> _rangeList = new List<string>();
-
-        public IList<string> RangeList
-        {
-            get => _rangeList;
-            set
-            {
-                this.RaiseAndSetIfChanged(ref _rangeList, value);
-            }
-        }
+       
         private string _textBox;
 
         public string TextBox
@@ -311,7 +314,6 @@ namespace IDEX.ViewModel
         {
             for (int i = 0; i <= 5; i++)
             {
-
                 RadioButtonItemsList.Add("Option " + i);
                 CheckBoxList.Add(new AdditionalRequirementsCheckBox { Title = "Option " + i });
             }
@@ -327,7 +329,7 @@ namespace IDEX.ViewModel
             List<string> result = new List<string>();
             if (string.IsNullOrEmpty(Max) || string.IsNullOrEmpty(Min))
                 return;
-
+            //this is if the input is number start check range 
             if (int.TryParse(Max, out int max) && int.TryParse(Min, out int min))
             {
                 int range = max - min;
@@ -346,10 +348,13 @@ namespace IDEX.ViewModel
             }
             else
             {
+                //if the input is char start convert to decimal
+                // and start checking for range 
                 char firstChar = Min.ToCharArray()[0];
                 int minChar = Convert.ToInt32(firstChar);
                 char secondChar = Max.ToCharArray()[0];
                 int maxChar = Convert.ToInt32(secondChar);
+
                 int rangeChar = maxChar - minChar;
                 if (rangeChar <= 10)
                 {
@@ -378,12 +383,14 @@ namespace IDEX.ViewModel
         }
         void SetLargeRangeData()
         {
+            //get data from popUp view and set it to entry 
             double.TryParse(SelectedIntegerNum.ToString() + "." + SelectedDecimalNum.ToString(), out double value);
             EnteredRangeData = string.Empty;
             EnteredRangeData = value.ToString();
         }
         public override void DisAppearing()
         {
+            //i set new instance here to make sure that data will not be in other levels screen 
             RequirementsData.SelectedItem = SelectedItem;
             RequirementsData.checkBoxesList = CheckBoxList.Where(x => x.IsChecked == true).ToList();
             Instance = new AdditionalRequirementsViewModel();

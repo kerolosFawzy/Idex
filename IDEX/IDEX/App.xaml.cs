@@ -19,7 +19,6 @@ namespace IDEX
             InitializeComponent();
             RegisterPages();
             SetRootPage(nameof(IdexMasterDetailPage));
-
         }
 
         public void RegisterPages()

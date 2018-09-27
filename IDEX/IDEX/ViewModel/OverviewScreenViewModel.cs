@@ -350,7 +350,7 @@ namespace IDEX.ViewModel
 
             allLevels = null;
             Parents = null;
-            AllLevelTypes = null;
+          
         }
         void SortChildren(List<int> AllLevelTypes, List<Level> allLevels)
         {
@@ -374,7 +374,6 @@ namespace IDEX.ViewModel
                     LevelListWithChildren.Add(level);
                 }
                 searchList = null;
-                allLevels = null;
             }
 
             LevelListWithChildren = LevelListWithChildren.Distinct().ToList();
@@ -387,6 +386,7 @@ namespace IDEX.ViewModel
                     .FirstOrDefault();
             }
             GetFinishedPercentage(AllLevelTypes);
+            allLevels = null;
         }
         #endregion
         //put the real data instead @FakeList and he will do the reset 

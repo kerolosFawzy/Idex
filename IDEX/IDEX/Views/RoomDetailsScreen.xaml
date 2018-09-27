@@ -44,12 +44,13 @@
                     <Label Text="HYG.TYPE" Style="{StaticResource secondaryLabels}"/>
                     <Label Text="{Binding HygType}" Style="{StaticResource BoldLabel}"/>
                 </StackLayout>
+                
                 <!--<StackLayout Orientation="Horizontal" Margin="0,16">
                     <Label Text="Use Extra Level" Style="{StaticResource BoldLabel}" VerticalOptions="Center"/>
                     <Custom:CustomCheckBox Margin="10,0" HeightRequest="24" WidthRequest="24"/>
                 </StackLayout>-->
                 
-                <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="Center" Spacing="12">
+                <StackLayout Margin="0,20,0,0" Orientation="Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="Center" Spacing="12">
                     
                     <Custom:ExtFrameLayout Command="{Binding InstaCommand}" Style="{StaticResource FrameStyle}" >
                         <StackLayout Orientation="Horizontal">
