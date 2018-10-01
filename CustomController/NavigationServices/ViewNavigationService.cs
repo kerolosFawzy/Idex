@@ -5,10 +5,11 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using Xamarin.Forms;
+using Xamarin.Forms.Internals;
 
 namespace CustomControls.NavigationServices
 {
-    [Android.Runtime.Preserve(AllMembers = true)]
+    [Preserve(AllMembers = true)]
     public class ViewNavigationService : INavigationService
     {
         //this used to navigate in viewModel you have to use register new pages in app.cs
