@@ -77,6 +77,8 @@ namespace IDEX.Droid
 			global::Plugin.InputKit.Resource.Animation.design_bottom_sheet_slide_out = global::IDEX.Droid.Resource.Animation.design_bottom_sheet_slide_out;
 			global::Plugin.InputKit.Resource.Animation.design_snackbar_in = global::IDEX.Droid.Resource.Animation.design_snackbar_in;
 			global::Plugin.InputKit.Resource.Animation.design_snackbar_out = global::IDEX.Droid.Resource.Animation.design_snackbar_out;
+			global::Plugin.InputKit.Resource.Animation.tooltip_enter = global::IDEX.Droid.Resource.Animation.tooltip_enter;
+			global::Plugin.InputKit.Resource.Animation.tooltip_exit = global::IDEX.Droid.Resource.Animation.tooltip_exit;
 			global::Plugin.InputKit.Resource.Animator.design_appbar_state_list_animator = global::IDEX.Droid.Resource.Animator.design_appbar_state_list_animator;
 			global::Plugin.InputKit.Resource.Attribute.actionBarDivider = global::IDEX.Droid.Resource.Attribute.actionBarDivider;
 			global::Plugin.InputKit.Resource.Attribute.actionBarItemBackground = global::IDEX.Droid.Resource.Attribute.actionBarItemBackground;
@@ -118,9 +120,15 @@ namespace IDEX.Droid
 			global::Plugin.InputKit.Resource.Attribute.alertDialogTheme = global::IDEX.Droid.Resource.Attribute.alertDialogTheme;
 			global::Plugin.InputKit.Resource.Attribute.allowStacking = global::IDEX.Droid.Resource.Attribute.allowStacking;
 			global::Plugin.InputKit.Resource.Attribute.alpha = global::IDEX.Droid.Resource.Attribute.alpha;
+			global::Plugin.InputKit.Resource.Attribute.alphabeticModifiers = global::IDEX.Droid.Resource.Attribute.alphabeticModifiers;
 			global::Plugin.InputKit.Resource.Attribute.arrowHeadLength = global::IDEX.Droid.Resource.Attribute.arrowHeadLength;
 			global::Plugin.InputKit.Resource.Attribute.arrowShaftLength = global::IDEX.Droid.Resource.Attribute.arrowShaftLength;
 			global::Plugin.InputKit.Resource.Attribute.autoCompleteTextViewStyle = global::IDEX.Droid.Resource.Attribute.autoCompleteTextViewStyle;
+			global::Plugin.InputKit.Resource.Attribute.autoSizeMaxTextSize = global::IDEX.Droid.Resource.Attribute.autoSizeMaxTextSize;
+			global::Plugin.InputKit.Resource.Attribute.autoSizeMinTextSize = global::IDEX.Droid.Resource.Attribute.autoSizeMinTextSize;
+			global::Plugin.InputKit.Resource.Attribute.autoSizePresetSizes = global::IDEX.Droid.Resource.Attribute.autoSizePresetSizes;
+			global::Plugin.InputKit.Resource.Attribute.autoSizeStepGranularity = global::IDEX.Droid.Resource.Attribute.autoSizeStepGranularity;
+			global::Plugin.InputKit.Resource.Attribute.autoSizeTextType = global::IDEX.Droid.Resource.Attribute.autoSizeTextType;
 			global::Plugin.InputKit.Resource.Attribute.background = global::IDEX.Droid.Resource.Attribute.background;
 			global::Plugin.InputKit.Resource.Attribute.backgroundSplit = global::IDEX.Droid.Resource.Attribute.backgroundSplit;
 			global::Plugin.InputKit.Resource.Attribute.backgroundStacked = global::IDEX.Droid.Resource.Attribute.backgroundStacked;
@@ -168,10 +176,12 @@ namespace IDEX.Droid
 			global::Plugin.InputKit.Resource.Attribute.colorControlActivated = global::IDEX.Droid.Resource.Attribute.colorControlActivated;
 			global::Plugin.InputKit.Resource.Attribute.colorControlHighlight = global::IDEX.Droid.Resource.Attribute.colorControlHighlight;
 			global::Plugin.InputKit.Resource.Attribute.colorControlNormal = global::IDEX.Droid.Resource.Attribute.colorControlNormal;
+			global::Plugin.InputKit.Resource.Attribute.colorError = global::IDEX.Droid.Resource.Attribute.colorError;
 			global::Plugin.InputKit.Resource.Attribute.colorPrimary = global::IDEX.Droid.Resource.Attribute.colorPrimary;
 			global::Plugin.InputKit.Resource.Attribute.colorPrimaryDark = global::IDEX.Droid.Resource.Attribute.colorPrimaryDark;
 			global::Plugin.InputKit.Resource.Attribute.colorSwitchThumbNormal = global::IDEX.Droid.Resource.Attribute.colorSwitchThumbNormal;
 			global::Plugin.InputKit.Resource.Attribute.commitIcon = global::IDEX.Droid.Resource.Attribute.commitIcon;
+			global::Plugin.InputKit.Resource.Attribute.contentDescription = global::IDEX.Droid.Resource.Attribute.contentDescription;
 			global::Plugin.InputKit.Resource.Attribute.contentInsetEnd = global::IDEX.Droid.Resource.Attribute.contentInsetEnd;
 			global::Plugin.InputKit.Resource.Attribute.contentInsetEndWithActions = global::IDEX.Droid.Resource.Attribute.contentInsetEndWithActions;
 			global::Plugin.InputKit.Resource.Attribute.contentInsetLeft = global::IDEX.Droid.Resource.Attribute.contentInsetLeft;
@@ -219,6 +229,21 @@ namespace IDEX.Droid
 			global::Plugin.InputKit.Resource.Attribute.expandedTitleTextAppearance = global::IDEX.Droid.Resource.Attribute.expandedTitleTextAppearance;
 			global::Plugin.InputKit.Resource.Attribute.externalRouteEnabledDrawable = global::IDEX.Droid.Resource.Attribute.externalRouteEnabledDrawable;
 			global::Plugin.InputKit.Resource.Attribute.fabSize = global::IDEX.Droid.Resource.Attribute.fabSize;
+			global::Plugin.InputKit.Resource.Attribute.fastScrollEnabled = global::IDEX.Droid.Resource.Attribute.fastScrollEnabled;
+			global::Plugin.InputKit.Resource.Attribute.fastScrollHorizontalThumbDrawable = global::IDEX.Droid.Resource.Attribute.fastScrollHorizontalThumbDrawable;
+			global::Plugin.InputKit.Resource.Attribute.fastScrollHorizontalTrackDrawable = global::IDEX.Droid.Resource.Attribute.fastScrollHorizontalTrackDrawable;
+			global::Plugin.InputKit.Resource.Attribute.fastScrollVerticalThumbDrawable = global::IDEX.Droid.Resource.Attribute.fastScrollVerticalThumbDrawable;
+			global::Plugin.InputKit.Resource.Attribute.fastScrollVerticalTrackDrawable = global::IDEX.Droid.Resource.Attribute.fastScrollVerticalTrackDrawable;
+			global::Plugin.InputKit.Resource.Attribute.font = global::IDEX.Droid.Resource.Attribute.font;
+			global::Plugin.InputKit.Resource.Attribute.fontFamily = global::IDEX.Droid.Resource.Attribute.fontFamily;
+			global::Plugin.InputKit.Resource.Attribute.fontProviderAuthority = global::IDEX.Droid.Resource.Attribute.fontProviderAuthority;
+			global::Plugin.InputKit.Resource.Attribute.fontProviderCerts = global::IDEX.Droid.Resource.Attribute.fontProviderCerts;
+			global::Plugin.InputKit.Resource.Attribute.fontProviderFetchStrategy = global::IDEX.Droid.Resource.Attribute.fontProviderFetchStrategy;
+			global::Plugin.InputKit.Resource.Attribute.fontProviderFetchTimeout = global::IDEX.Droid.Resource.Attribute.fontProviderFetchTimeout;
+			global::Plugin.InputKit.Resource.Attribute.fontProviderPackage = global::IDEX.Droid.Resource.Attribute.fontProviderPackage;
+			global::Plugin.InputKit.Resource.Attribute.fontProviderQuery = global::IDEX.Droid.Resource.Attribute.fontProviderQuery;
+			global::Plugin.InputKit.Resource.Attribute.fontStyle = global::IDEX.Droid.Resource.Attribute.fontStyle;
+			global::Plugin.InputKit.Resource.Attribute.fontWeight = global::IDEX.Droid.Resource.Attribute.fontWeight;
 			global::Plugin.InputKit.Resource.Attribute.foregroundInsidePadding = global::IDEX.Droid.Resource.Attribute.foregroundInsidePadding;
 			global::Plugin.InputKit.Resource.Attribute.gapBetweenBars = global::IDEX.Droid.Resource.Attribute.gapBetweenBars;
 			global::Plugin.InputKit.Resource.Attribute.goIcon = global::IDEX.Droid.Resource.Attribute.goIcon;
@@ -231,6 +256,8 @@ namespace IDEX.Droid
 			global::Plugin.InputKit.Resource.Attribute.homeAsUpIndicator = global::IDEX.Droid.Resource.Attribute.homeAsUpIndicator;
 			global::Plugin.InputKit.Resource.Attribute.homeLayout = global::IDEX.Droid.Resource.Attribute.homeLayout;
 			global::Plugin.InputKit.Resource.Attribute.icon = global::IDEX.Droid.Resource.Attribute.icon;
+			global::Plugin.InputKit.Resource.Attribute.iconTint = global::IDEX.Droid.Resource.Attribute.iconTint;
+			global::Plugin.InputKit.Resource.Attribute.iconTintMode = global::IDEX.Droid.Resource.Attribute.iconTintMode;
 			global::Plugin.InputKit.Resource.Attribute.iconifiedByDefault = global::IDEX.Droid.Resource.Attribute.iconifiedByDefault;
 			global::Plugin.InputKit.Resource.Attribute.imageButtonStyle = global::IDEX.Droid.Resource.Attribute.imageButtonStyle;
 			global::Plugin.InputKit.Resource.Attribute.indeterminateProgressStyle = global::IDEX.Droid.Resource.Attribute.indeterminateProgressStyle;
@@ -273,6 +300,7 @@ namespace IDEX.Droid
 			global::Plugin.InputKit.Resource.Attribute.measureWithLargestChild = global::IDEX.Droid.Resource.Attribute.measureWithLargestChild;
 			global::Plugin.InputKit.Resource.Attribute.mediaRouteAudioTrackDrawable = global::IDEX.Droid.Resource.Attribute.mediaRouteAudioTrackDrawable;
 			global::Plugin.InputKit.Resource.Attribute.mediaRouteButtonStyle = global::IDEX.Droid.Resource.Attribute.mediaRouteButtonStyle;
+			global::Plugin.InputKit.Resource.Attribute.mediaRouteButtonTint = global::IDEX.Droid.Resource.Attribute.mediaRouteButtonTint;
 			global::Plugin.InputKit.Resource.Attribute.mediaRouteCloseDrawable = global::IDEX.Droid.Resource.Attribute.mediaRouteCloseDrawable;
 			global::Plugin.InputKit.Resource.Attribute.mediaRouteControlPanelThemeOverlay = global::IDEX.Droid.Resource.Attribute.mediaRouteControlPanelThemeOverlay;
 			global::Plugin.InputKit.Resource.Attribute.mediaRouteDefaultIconDrawable = global::IDEX.Droid.Resource.Attribute.mediaRouteDefaultIconDrawable;
@@ -288,6 +316,7 @@ namespace IDEX.Droid
 			global::Plugin.InputKit.Resource.Attribute.navigationContentDescription = global::IDEX.Droid.Resource.Attribute.navigationContentDescription;
 			global::Plugin.InputKit.Resource.Attribute.navigationIcon = global::IDEX.Droid.Resource.Attribute.navigationIcon;
 			global::Plugin.InputKit.Resource.Attribute.navigationMode = global::IDEX.Droid.Resource.Attribute.navigationMode;
+			global::Plugin.InputKit.Resource.Attribute.numericModifiers = global::IDEX.Droid.Resource.Attribute.numericModifiers;
 			global::Plugin.InputKit.Resource.Attribute.overlapAnchor = global::IDEX.Droid.Resource.Attribute.overlapAnchor;
 			global::Plugin.InputKit.Resource.Attribute.paddingBottomNoButtons = global::IDEX.Droid.Resource.Attribute.paddingBottomNoButtons;
 			global::Plugin.InputKit.Resource.Attribute.paddingEnd = global::IDEX.Droid.Resource.Attribute.paddingEnd;
@@ -404,6 +433,9 @@ namespace IDEX.Droid
 			global::Plugin.InputKit.Resource.Attribute.toolbarId = global::IDEX.Droid.Resource.Attribute.toolbarId;
 			global::Plugin.InputKit.Resource.Attribute.toolbarNavigationButtonStyle = global::IDEX.Droid.Resource.Attribute.toolbarNavigationButtonStyle;
 			global::Plugin.InputKit.Resource.Attribute.toolbarStyle = global::IDEX.Droid.Resource.Attribute.toolbarStyle;
+			global::Plugin.InputKit.Resource.Attribute.tooltipForegroundColor = global::IDEX.Droid.Resource.Attribute.tooltipForegroundColor;
+			global::Plugin.InputKit.Resource.Attribute.tooltipFrameBackground = global::IDEX.Droid.Resource.Attribute.tooltipFrameBackground;
+			global::Plugin.InputKit.Resource.Attribute.tooltipText = global::IDEX.Droid.Resource.Attribute.tooltipText;
 			global::Plugin.InputKit.Resource.Attribute.track = global::IDEX.Droid.Resource.Attribute.track;
 			global::Plugin.InputKit.Resource.Attribute.trackTint = global::IDEX.Droid.Resource.Attribute.trackTint;
 			global::Plugin.InputKit.Resource.Attribute.trackTintMode = global::IDEX.Droid.Resource.Attribute.trackTintMode;
@@ -481,6 +513,7 @@ namespace IDEX.Droid
 			global::Plugin.InputKit.Resource.Color.dim_foreground_disabled_material_light = global::IDEX.Droid.Resource.Color.dim_foreground_disabled_material_light;
 			global::Plugin.InputKit.Resource.Color.dim_foreground_material_dark = global::IDEX.Droid.Resource.Color.dim_foreground_material_dark;
 			global::Plugin.InputKit.Resource.Color.dim_foreground_material_light = global::IDEX.Droid.Resource.Color.dim_foreground_material_light;
+			global::Plugin.InputKit.Resource.Color.error_color_material = global::IDEX.Droid.Resource.Color.error_color_material;
 			global::Plugin.InputKit.Resource.Color.foreground_material_dark = global::IDEX.Droid.Resource.Color.foreground_material_dark;
 			global::Plugin.InputKit.Resource.Color.foreground_material_light = global::IDEX.Droid.Resource.Color.foreground_material_light;
 			global::Plugin.InputKit.Resource.Color.highlighted_text_material_dark = global::IDEX.Droid.Resource.Color.highlighted_text_material_dark;
@@ -520,6 +553,8 @@ namespace IDEX.Droid
 			global::Plugin.InputKit.Resource.Color.switch_thumb_material_light = global::IDEX.Droid.Resource.Color.switch_thumb_material_light;
 			global::Plugin.InputKit.Resource.Color.switch_thumb_normal_material_dark = global::IDEX.Droid.Resource.Color.switch_thumb_normal_material_dark;
 			global::Plugin.InputKit.Resource.Color.switch_thumb_normal_material_light = global::IDEX.Droid.Resource.Color.switch_thumb_normal_material_light;
+			global::Plugin.InputKit.Resource.Color.tooltip_background_dark = global::IDEX.Droid.Resource.Color.tooltip_background_dark;
+			global::Plugin.InputKit.Resource.Color.tooltip_background_light = global::IDEX.Droid.Resource.Color.tooltip_background_light;
 			global::Plugin.InputKit.Resource.Dimension.abc_action_bar_content_inset_material = global::IDEX.Droid.Resource.Dimension.abc_action_bar_content_inset_material;
 			global::Plugin.InputKit.Resource.Dimension.abc_action_bar_content_inset_with_nav = global::IDEX.Droid.Resource.Dimension.abc_action_bar_content_inset_with_nav;
 			global::Plugin.InputKit.Resource.Dimension.abc_action_bar_default_height_material = global::IDEX.Droid.Resource.Dimension.abc_action_bar_default_height_material;
@@ -597,6 +632,11 @@ namespace IDEX.Droid
 			global::Plugin.InputKit.Resource.Dimension.cardview_compat_inset_shadow = global::IDEX.Droid.Resource.Dimension.cardview_compat_inset_shadow;
 			global::Plugin.InputKit.Resource.Dimension.cardview_default_elevation = global::IDEX.Droid.Resource.Dimension.cardview_default_elevation;
 			global::Plugin.InputKit.Resource.Dimension.cardview_default_radius = global::IDEX.Droid.Resource.Dimension.cardview_default_radius;
+			global::Plugin.InputKit.Resource.Dimension.compat_button_inset_horizontal_material = global::IDEX.Droid.Resource.Dimension.compat_button_inset_horizontal_material;
+			global::Plugin.InputKit.Resource.Dimension.compat_button_inset_vertical_material = global::IDEX.Droid.Resource.Dimension.compat_button_inset_vertical_material;
+			global::Plugin.InputKit.Resource.Dimension.compat_button_padding_horizontal_material = global::IDEX.Droid.Resource.Dimension.compat_button_padding_horizontal_material;
+			global::Plugin.InputKit.Resource.Dimension.compat_button_padding_vertical_material = global::IDEX.Droid.Resource.Dimension.compat_button_padding_vertical_material;
+			global::Plugin.InputKit.Resource.Dimension.compat_control_corner_material = global::IDEX.Droid.Resource.Dimension.compat_control_corner_material;
 			global::Plugin.InputKit.Resource.Dimension.design_appbar_elevation = global::IDEX.Droid.Resource.Dimension.design_appbar_elevation;
 			global::Plugin.InputKit.Resource.Dimension.design_bottom_navigation_active_item_max_width = global::IDEX.Droid.Resource.Dimension.design_bottom_navigation_active_item_max_width;
 			global::Plugin.InputKit.Resource.Dimension.design_bottom_navigation_active_text_size = global::IDEX.Droid.Resource.Dimension.design_bottom_navigation_active_text_size;
@@ -637,6 +677,9 @@ namespace IDEX.Droid
 			global::Plugin.InputKit.Resource.Dimension.design_tab_text_size_2line = global::IDEX.Droid.Resource.Dimension.design_tab_text_size_2line;
 			global::Plugin.InputKit.Resource.Dimension.disabled_alpha_material_dark = global::IDEX.Droid.Resource.Dimension.disabled_alpha_material_dark;
 			global::Plugin.InputKit.Resource.Dimension.disabled_alpha_material_light = global::IDEX.Droid.Resource.Dimension.disabled_alpha_material_light;
+			global::Plugin.InputKit.Resource.Dimension.fastscroll_default_thickness = global::IDEX.Droid.Resource.Dimension.fastscroll_default_thickness;
+			global::Plugin.InputKit.Resource.Dimension.fastscroll_margin = global::IDEX.Droid.Resource.Dimension.fastscroll_margin;
+			global::Plugin.InputKit.Resource.Dimension.fastscroll_minimum_range = global::IDEX.Droid.Resource.Dimension.fastscroll_minimum_range;
 			global::Plugin.InputKit.Resource.Dimension.highlight_alpha_material_colored = global::IDEX.Droid.Resource.Dimension.highlight_alpha_material_colored;
 			global::Plugin.InputKit.Resource.Dimension.highlight_alpha_material_dark = global::IDEX.Droid.Resource.Dimension.highlight_alpha_material_dark;
 			global::Plugin.InputKit.Resource.Dimension.highlight_alpha_material_light = global::IDEX.Droid.Resource.Dimension.highlight_alpha_material_light;
@@ -668,6 +711,14 @@ namespace IDEX.Droid
 			global::Plugin.InputKit.Resource.Dimension.notification_subtext_size = global::IDEX.Droid.Resource.Dimension.notification_subtext_size;
 			global::Plugin.InputKit.Resource.Dimension.notification_top_pad = global::IDEX.Droid.Resource.Dimension.notification_top_pad;
 			global::Plugin.InputKit.Resource.Dimension.notification_top_pad_large_text = global::IDEX.Droid.Resource.Dimension.notification_top_pad_large_text;
+			global::Plugin.InputKit.Resource.Dimension.tooltip_corner_radius = global::IDEX.Droid.Resource.Dimension.tooltip_corner_radius;
+			global::Plugin.InputKit.Resource.Dimension.tooltip_horizontal_padding = global::IDEX.Droid.Resource.Dimension.tooltip_horizontal_padding;
+			global::Plugin.InputKit.Resource.Dimension.tooltip_margin = global::IDEX.Droid.Resource.Dimension.tooltip_margin;
+			global::Plugin.InputKit.Resource.Dimension.tooltip_precise_anchor_extra_offset = global::IDEX.Droid.Resource.Dimension.tooltip_precise_anchor_extra_offset;
+			global::Plugin.InputKit.Resource.Dimension.tooltip_precise_anchor_threshold = global::IDEX.Droid.Resource.Dimension.tooltip_precise_anchor_threshold;
+			global::Plugin.InputKit.Resource.Dimension.tooltip_vertical_padding = global::IDEX.Droid.Resource.Dimension.tooltip_vertical_padding;
+			global::Plugin.InputKit.Resource.Dimension.tooltip_y_offset_non_touch = global::IDEX.Droid.Resource.Dimension.tooltip_y_offset_non_touch;
+			global::Plugin.InputKit.Resource.Dimension.tooltip_y_offset_touch = global::IDEX.Droid.Resource.Dimension.tooltip_y_offset_touch;
 			global::Plugin.InputKit.Resource.Drawable.abc_ab_share_pack_mtrl_alpha = global::IDEX.Droid.Resource.Drawable.abc_ab_share_pack_mtrl_alpha;
 			global::Plugin.InputKit.Resource.Drawable.abc_action_bar_item_background_material = global::IDEX.Droid.Resource.Drawable.abc_action_bar_item_background_material;
 			global::Plugin.InputKit.Resource.Drawable.abc_btn_borderless_material = global::IDEX.Droid.Resource.Drawable.abc_btn_borderless_material;
@@ -854,6 +905,22 @@ namespace IDEX.Droid
 			global::Plugin.InputKit.Resource.Drawable.ic_mr_button_connected_21_light = global::IDEX.Droid.Resource.Drawable.ic_mr_button_connected_21_light;
 			global::Plugin.InputKit.Resource.Drawable.ic_mr_button_connected_22_dark = global::IDEX.Droid.Resource.Drawable.ic_mr_button_connected_22_dark;
 			global::Plugin.InputKit.Resource.Drawable.ic_mr_button_connected_22_light = global::IDEX.Droid.Resource.Drawable.ic_mr_button_connected_22_light;
+			global::Plugin.InputKit.Resource.Drawable.ic_mr_button_connected_23_dark = global::IDEX.Droid.Resource.Drawable.ic_mr_button_connected_23_dark;
+			global::Plugin.InputKit.Resource.Drawable.ic_mr_button_connected_23_light = global::IDEX.Droid.Resource.Drawable.ic_mr_button_connected_23_light;
+			global::Plugin.InputKit.Resource.Drawable.ic_mr_button_connected_24_dark = global::IDEX.Droid.Resource.Drawable.ic_mr_button_connected_24_dark;
+			global::Plugin.InputKit.Resource.Drawable.ic_mr_button_connected_24_light = global::IDEX.Droid.Resource.Drawable.ic_mr_button_connected_24_light;
+			global::Plugin.InputKit.Resource.Drawable.ic_mr_button_connected_25_dark = global::IDEX.Droid.Resource.Drawable.ic_mr_button_connected_25_dark;
+			global::Plugin.InputKit.Resource.Drawable.ic_mr_button_connected_25_light = global::IDEX.Droid.Resource.Drawable.ic_mr_button_connected_25_light;
+			global::Plugin.InputKit.Resource.Drawable.ic_mr_button_connected_26_dark = global::IDEX.Droid.Resource.Drawable.ic_mr_button_connected_26_dark;
+			global::Plugin.InputKit.Resource.Drawable.ic_mr_button_connected_26_light = global::IDEX.Droid.Resource.Drawable.ic_mr_button_connected_26_light;
+			global::Plugin.InputKit.Resource.Drawable.ic_mr_button_connected_27_dark = global::IDEX.Droid.Resource.Drawable.ic_mr_button_connected_27_dark;
+			global::Plugin.InputKit.Resource.Drawable.ic_mr_button_connected_27_light = global::IDEX.Droid.Resource.Drawable.ic_mr_button_connected_27_light;
+			global::Plugin.InputKit.Resource.Drawable.ic_mr_button_connected_28_dark = global::IDEX.Droid.Resource.Drawable.ic_mr_button_connected_28_dark;
+			global::Plugin.InputKit.Resource.Drawable.ic_mr_button_connected_28_light = global::IDEX.Droid.Resource.Drawable.ic_mr_button_connected_28_light;
+			global::Plugin.InputKit.Resource.Drawable.ic_mr_button_connected_29_dark = global::IDEX.Droid.Resource.Drawable.ic_mr_button_connected_29_dark;
+			global::Plugin.InputKit.Resource.Drawable.ic_mr_button_connected_29_light = global::IDEX.Droid.Resource.Drawable.ic_mr_button_connected_29_light;
+			global::Plugin.InputKit.Resource.Drawable.ic_mr_button_connected_30_dark = global::IDEX.Droid.Resource.Drawable.ic_mr_button_connected_30_dark;
+			global::Plugin.InputKit.Resource.Drawable.ic_mr_button_connected_30_light = global::IDEX.Droid.Resource.Drawable.ic_mr_button_connected_30_light;
 			global::Plugin.InputKit.Resource.Drawable.ic_mr_button_connecting_00_dark = global::IDEX.Droid.Resource.Drawable.ic_mr_button_connecting_00_dark;
 			global::Plugin.InputKit.Resource.Drawable.ic_mr_button_connecting_00_light = global::IDEX.Droid.Resource.Drawable.ic_mr_button_connecting_00_light;
 			global::Plugin.InputKit.Resource.Drawable.ic_mr_button_connecting_01_dark = global::IDEX.Droid.Resource.Drawable.ic_mr_button_connecting_01_dark;
@@ -900,6 +967,22 @@ namespace IDEX.Droid
 			global::Plugin.InputKit.Resource.Drawable.ic_mr_button_connecting_21_light = global::IDEX.Droid.Resource.Drawable.ic_mr_button_connecting_21_light;
 			global::Plugin.InputKit.Resource.Drawable.ic_mr_button_connecting_22_dark = global::IDEX.Droid.Resource.Drawable.ic_mr_button_connecting_22_dark;
 			global::Plugin.InputKit.Resource.Drawable.ic_mr_button_connecting_22_light = global::IDEX.Droid.Resource.Drawable.ic_mr_button_connecting_22_light;
+			global::Plugin.InputKit.Resource.Drawable.ic_mr_button_connecting_23_dark = global::IDEX.Droid.Resource.Drawable.ic_mr_button_connecting_23_dark;
+			global::Plugin.InputKit.Resource.Drawable.ic_mr_button_connecting_23_light = global::IDEX.Droid.Resource.Drawable.ic_mr_button_connecting_23_light;
+			global::Plugin.InputKit.Resource.Drawable.ic_mr_button_connecting_24_dark = global::IDEX.Droid.Resource.Drawable.ic_mr_button_connecting_24_dark;
+			global::Plugin.InputKit.Resource.Drawable.ic_mr_button_connecting_24_light = global::IDEX.Droid.Resource.Drawable.ic_mr_button_connecting_24_light;
+			global::Plugin.InputKit.Resource.Drawable.ic_mr_button_connecting_25_dark = global::IDEX.Droid.Resource.Drawable.ic_mr_button_connecting_25_dark;
+			global::Plugin.InputKit.Resource.Drawable.ic_mr_button_connecting_25_light = global::IDEX.Droid.Resource.Drawable.ic_mr_button_connecting_25_light;
+			global::Plugin.InputKit.Resource.Drawable.ic_mr_button_connecting_26_dark = global::IDEX.Droid.Resource.Drawable.ic_mr_button_connecting_26_dark;
+			global::Plugin.InputKit.Resource.Drawable.ic_mr_button_connecting_26_light = global::IDEX.Droid.Resource.Drawable.ic_mr_button_connecting_26_light;
+			global::Plugin.InputKit.Resource.Drawable.ic_mr_button_connecting_27_dark = global::IDEX.Droid.Resource.Drawable.ic_mr_button_connecting_27_dark;
+			global::Plugin.InputKit.Resource.Drawable.ic_mr_button_connecting_27_light = global::IDEX.Droid.Resource.Drawable.ic_mr_button_connecting_27_light;
+			global::Plugin.InputKit.Resource.Drawable.ic_mr_button_connecting_28_dark = global::IDEX.Droid.Resource.Drawable.ic_mr_button_connecting_28_dark;
+			global::Plugin.InputKit.Resource.Drawable.ic_mr_button_connecting_28_light = global::IDEX.Droid.Resource.Drawable.ic_mr_button_connecting_28_light;
+			global::Plugin.InputKit.Resource.Drawable.ic_mr_button_connecting_29_dark = global::IDEX.Droid.Resource.Drawable.ic_mr_button_connecting_29_dark;
+			global::Plugin.InputKit.Resource.Drawable.ic_mr_button_connecting_29_light = global::IDEX.Droid.Resource.Drawable.ic_mr_button_connecting_29_light;
+			global::Plugin.InputKit.Resource.Drawable.ic_mr_button_connecting_30_dark = global::IDEX.Droid.Resource.Drawable.ic_mr_button_connecting_30_dark;
+			global::Plugin.InputKit.Resource.Drawable.ic_mr_button_connecting_30_light = global::IDEX.Droid.Resource.Drawable.ic_mr_button_connecting_30_light;
 			global::Plugin.InputKit.Resource.Drawable.ic_mr_button_disabled_dark = global::IDEX.Droid.Resource.Drawable.ic_mr_button_disabled_dark;
 			global::Plugin.InputKit.Resource.Drawable.ic_mr_button_disabled_light = global::IDEX.Droid.Resource.Drawable.ic_mr_button_disabled_light;
 			global::Plugin.InputKit.Resource.Drawable.ic_mr_button_disconnected_dark = global::IDEX.Droid.Resource.Drawable.ic_mr_button_disconnected_dark;
@@ -944,6 +1027,14 @@ namespace IDEX.Droid
 			global::Plugin.InputKit.Resource.Drawable.notification_template_icon_low_bg = global::IDEX.Droid.Resource.Drawable.notification_template_icon_low_bg;
 			global::Plugin.InputKit.Resource.Drawable.notification_tile_bg = global::IDEX.Droid.Resource.Drawable.notification_tile_bg;
 			global::Plugin.InputKit.Resource.Drawable.notify_panel_notification_icon_bg = global::IDEX.Droid.Resource.Drawable.notify_panel_notification_icon_bg;
+			global::Plugin.InputKit.Resource.Drawable.tooltip_frame_dark = global::IDEX.Droid.Resource.Drawable.tooltip_frame_dark;
+			global::Plugin.InputKit.Resource.Drawable.tooltip_frame_light = global::IDEX.Droid.Resource.Drawable.tooltip_frame_light;
+			global::Plugin.InputKit.Resource.Id.ALT = global::IDEX.Droid.Resource.Id.ALT;
+			global::Plugin.InputKit.Resource.Id.CTRL = global::IDEX.Droid.Resource.Id.CTRL;
+			global::Plugin.InputKit.Resource.Id.FUNCTION = global::IDEX.Droid.Resource.Id.FUNCTION;
+			global::Plugin.InputKit.Resource.Id.META = global::IDEX.Droid.Resource.Id.META;
+			global::Plugin.InputKit.Resource.Id.SHIFT = global::IDEX.Droid.Resource.Id.SHIFT;
+			global::Plugin.InputKit.Resource.Id.SYM = global::IDEX.Droid.Resource.Id.SYM;
 			global::Plugin.InputKit.Resource.Id.action0 = global::IDEX.Droid.Resource.Id.action0;
 			global::Plugin.InputKit.Resource.Id.action_bar = global::IDEX.Droid.Resource.Id.action_bar;
 			global::Plugin.InputKit.Resource.Id.action_bar_activity_content = global::IDEX.Droid.Resource.Id.action_bar_activity_content;
@@ -968,8 +1059,10 @@ namespace IDEX.Droid
 			global::Plugin.InputKit.Resource.Id.alertTitle = global::IDEX.Droid.Resource.Id.alertTitle;
 			global::Plugin.InputKit.Resource.Id.all = global::IDEX.Droid.Resource.Id.all;
 			global::Plugin.InputKit.Resource.Id.always = global::IDEX.Droid.Resource.Id.always;
+			global::Plugin.InputKit.Resource.Id.async = global::IDEX.Droid.Resource.Id.async;
 			global::Plugin.InputKit.Resource.Id.auto = global::IDEX.Droid.Resource.Id.auto;
 			global::Plugin.InputKit.Resource.Id.beginning = global::IDEX.Droid.Resource.Id.beginning;
+			global::Plugin.InputKit.Resource.Id.blocking = global::IDEX.Droid.Resource.Id.blocking;
 			global::Plugin.InputKit.Resource.Id.bottom = global::IDEX.Droid.Resource.Id.bottom;
 			global::Plugin.InputKit.Resource.Id.buttonPanel = global::IDEX.Droid.Resource.Id.buttonPanel;
 			global::Plugin.InputKit.Resource.Id.cancel_action = global::IDEX.Droid.Resource.Id.cancel_action;
@@ -1006,6 +1099,8 @@ namespace IDEX.Droid
 			global::Plugin.InputKit.Resource.Id.fill_horizontal = global::IDEX.Droid.Resource.Id.fill_horizontal;
 			global::Plugin.InputKit.Resource.Id.fill_vertical = global::IDEX.Droid.Resource.Id.fill_vertical;
 			global::Plugin.InputKit.Resource.Id.@fixed = global::IDEX.Droid.Resource.Id.@fixed;
+			global::Plugin.InputKit.Resource.Id.forever = global::IDEX.Droid.Resource.Id.forever;
+			global::Plugin.InputKit.Resource.Id.ghost_view = global::IDEX.Droid.Resource.Id.ghost_view;
 			global::Plugin.InputKit.Resource.Id.home = global::IDEX.Droid.Resource.Id.home;
 			global::Plugin.InputKit.Resource.Id.homeAsUp = global::IDEX.Droid.Resource.Id.homeAsUp;
 			global::Plugin.InputKit.Resource.Id.icon = global::IDEX.Droid.Resource.Id.icon;
@@ -1013,6 +1108,7 @@ namespace IDEX.Droid
 			global::Plugin.InputKit.Resource.Id.ifRoom = global::IDEX.Droid.Resource.Id.ifRoom;
 			global::Plugin.InputKit.Resource.Id.image = global::IDEX.Droid.Resource.Id.image;
 			global::Plugin.InputKit.Resource.Id.info = global::IDEX.Droid.Resource.Id.info;
+			global::Plugin.InputKit.Resource.Id.italic = global::IDEX.Droid.Resource.Id.italic;
 			global::Plugin.InputKit.Resource.Id.item_touch_helper_previous_elevation = global::IDEX.Droid.Resource.Id.item_touch_helper_previous_elevation;
 			global::Plugin.InputKit.Resource.Id.largeLabel = global::IDEX.Droid.Resource.Id.largeLabel;
 			global::Plugin.InputKit.Resource.Id.left = global::IDEX.Droid.Resource.Id.left;
@@ -1022,6 +1118,7 @@ namespace IDEX.Droid
 			global::Plugin.InputKit.Resource.Id.list_item = global::IDEX.Droid.Resource.Id.list_item;
 			global::Plugin.InputKit.Resource.Id.masked = global::IDEX.Droid.Resource.Id.masked;
 			global::Plugin.InputKit.Resource.Id.media_actions = global::IDEX.Droid.Resource.Id.media_actions;
+			global::Plugin.InputKit.Resource.Id.message = global::IDEX.Droid.Resource.Id.message;
 			global::Plugin.InputKit.Resource.Id.middle = global::IDEX.Droid.Resource.Id.middle;
 			global::Plugin.InputKit.Resource.Id.mini = global::IDEX.Droid.Resource.Id.mini;
 			global::Plugin.InputKit.Resource.Id.mr_art = global::IDEX.Droid.Resource.Id.mr_art;
@@ -1059,6 +1156,7 @@ namespace IDEX.Droid
 			global::Plugin.InputKit.Resource.Id.notification_main_column_container = global::IDEX.Droid.Resource.Id.notification_main_column_container;
 			global::Plugin.InputKit.Resource.Id.parallax = global::IDEX.Droid.Resource.Id.parallax;
 			global::Plugin.InputKit.Resource.Id.parentPanel = global::IDEX.Droid.Resource.Id.parentPanel;
+			global::Plugin.InputKit.Resource.Id.parent_matrix = global::IDEX.Droid.Resource.Id.parent_matrix;
 			global::Plugin.InputKit.Resource.Id.pin = global::IDEX.Droid.Resource.Id.pin;
 			global::Plugin.InputKit.Resource.Id.progress_circular = global::IDEX.Droid.Resource.Id.progress_circular;
 			global::Plugin.InputKit.Resource.Id.progress_horizontal = global::IDEX.Droid.Resource.Id.progress_horizontal;
@@ -1066,6 +1164,9 @@ namespace IDEX.Droid
 			global::Plugin.InputKit.Resource.Id.right = global::IDEX.Droid.Resource.Id.right;
 			global::Plugin.InputKit.Resource.Id.right_icon = global::IDEX.Droid.Resource.Id.right_icon;
 			global::Plugin.InputKit.Resource.Id.right_side = global::IDEX.Droid.Resource.Id.right_side;
+			global::Plugin.InputKit.Resource.Id.save_image_matrix = global::IDEX.Droid.Resource.Id.save_image_matrix;
+			global::Plugin.InputKit.Resource.Id.save_non_transition_alpha = global::IDEX.Droid.Resource.Id.save_non_transition_alpha;
+			global::Plugin.InputKit.Resource.Id.save_scale_type = global::IDEX.Droid.Resource.Id.save_scale_type;
 			global::Plugin.InputKit.Resource.Id.screen = global::IDEX.Droid.Resource.Id.screen;
 			global::Plugin.InputKit.Resource.Id.scroll = global::IDEX.Droid.Resource.Id.scroll;
 			global::Plugin.InputKit.Resource.Id.scrollIndicatorDown = global::IDEX.Droid.Resource.Id.scrollIndicatorDown;
@@ -1101,6 +1202,7 @@ namespace IDEX.Droid
 			global::Plugin.InputKit.Resource.Id.submenuarrow = global::IDEX.Droid.Resource.Id.submenuarrow;
 			global::Plugin.InputKit.Resource.Id.submit_area = global::IDEX.Droid.Resource.Id.submit_area;
 			global::Plugin.InputKit.Resource.Id.tabMode = global::IDEX.Droid.Resource.Id.tabMode;
+			global::Plugin.InputKit.Resource.Id.tag_transition_group = global::IDEX.Droid.Resource.Id.tag_transition_group;
 			global::Plugin.InputKit.Resource.Id.text = global::IDEX.Droid.Resource.Id.text;
 			global::Plugin.InputKit.Resource.Id.text2 = global::IDEX.Droid.Resource.Id.text2;
 			global::Plugin.InputKit.Resource.Id.textSpacerNoButtons = global::IDEX.Droid.Resource.Id.textSpacerNoButtons;
@@ -1116,7 +1218,11 @@ namespace IDEX.Droid
 			global::Plugin.InputKit.Resource.Id.topPanel = global::IDEX.Droid.Resource.Id.topPanel;
 			global::Plugin.InputKit.Resource.Id.touch_outside = global::IDEX.Droid.Resource.Id.touch_outside;
 			global::Plugin.InputKit.Resource.Id.transition_current_scene = global::IDEX.Droid.Resource.Id.transition_current_scene;
+			global::Plugin.InputKit.Resource.Id.transition_layout_save = global::IDEX.Droid.Resource.Id.transition_layout_save;
+			global::Plugin.InputKit.Resource.Id.transition_position = global::IDEX.Droid.Resource.Id.transition_position;
 			global::Plugin.InputKit.Resource.Id.transition_scene_layoutid_cache = global::IDEX.Droid.Resource.Id.transition_scene_layoutid_cache;
+			global::Plugin.InputKit.Resource.Id.transition_transform = global::IDEX.Droid.Resource.Id.transition_transform;
+			global::Plugin.InputKit.Resource.Id.uniform = global::IDEX.Droid.Resource.Id.uniform;
 			global::Plugin.InputKit.Resource.Id.up = global::IDEX.Droid.Resource.Id.up;
 			global::Plugin.InputKit.Resource.Id.useLogo = global::IDEX.Droid.Resource.Id.useLogo;
 			global::Plugin.InputKit.Resource.Id.view_offset_helper = global::IDEX.Droid.Resource.Id.view_offset_helper;
@@ -1129,6 +1235,7 @@ namespace IDEX.Droid
 			global::Plugin.InputKit.Resource.Integer.app_bar_elevation_anim_duration = global::IDEX.Droid.Resource.Integer.app_bar_elevation_anim_duration;
 			global::Plugin.InputKit.Resource.Integer.bottom_sheet_slide_duration = global::IDEX.Droid.Resource.Integer.bottom_sheet_slide_duration;
 			global::Plugin.InputKit.Resource.Integer.cancel_button_image_alpha = global::IDEX.Droid.Resource.Integer.cancel_button_image_alpha;
+			global::Plugin.InputKit.Resource.Integer.config_tooltipAnimTime = global::IDEX.Droid.Resource.Integer.config_tooltipAnimTime;
 			global::Plugin.InputKit.Resource.Integer.design_snackbar_text_max_lines = global::IDEX.Droid.Resource.Integer.design_snackbar_text_max_lines;
 			global::Plugin.InputKit.Resource.Integer.hide_password_duration = global::IDEX.Droid.Resource.Integer.hide_password_duration;
 			global::Plugin.InputKit.Resource.Integer.mr_controller_volume_group_list_animation_duration_ms = global::IDEX.Droid.Resource.Integer.mr_controller_volume_group_list_animation_duration_ms;
@@ -1203,6 +1310,7 @@ namespace IDEX.Droid
 			global::Plugin.InputKit.Resource.Layout.select_dialog_multichoice_material = global::IDEX.Droid.Resource.Layout.select_dialog_multichoice_material;
 			global::Plugin.InputKit.Resource.Layout.select_dialog_singlechoice_material = global::IDEX.Droid.Resource.Layout.select_dialog_singlechoice_material;
 			global::Plugin.InputKit.Resource.Layout.support_simple_spinner_dropdown_item = global::IDEX.Droid.Resource.Layout.support_simple_spinner_dropdown_item;
+			global::Plugin.InputKit.Resource.Layout.tooltip = global::IDEX.Droid.Resource.Layout.tooltip;
 			global::Plugin.InputKit.Resource.String.abc_action_bar_home_description = global::IDEX.Droid.Resource.String.abc_action_bar_home_description;
 			global::Plugin.InputKit.Resource.String.abc_action_bar_up_description = global::IDEX.Droid.Resource.String.abc_action_bar_up_description;
 			global::Plugin.InputKit.Resource.String.abc_action_menu_overflow_description = global::IDEX.Droid.Resource.String.abc_action_menu_overflow_description;
@@ -1267,11 +1375,13 @@ namespace IDEX.Droid
 			global::Plugin.InputKit.Resource.Style.AlertDialog_AppCompat_Light = global::IDEX.Droid.Resource.Style.AlertDialog_AppCompat_Light;
 			global::Plugin.InputKit.Resource.Style.Animation_AppCompat_Dialog = global::IDEX.Droid.Resource.Style.Animation_AppCompat_Dialog;
 			global::Plugin.InputKit.Resource.Style.Animation_AppCompat_DropDownUp = global::IDEX.Droid.Resource.Style.Animation_AppCompat_DropDownUp;
+			global::Plugin.InputKit.Resource.Style.Animation_AppCompat_Tooltip = global::IDEX.Droid.Resource.Style.Animation_AppCompat_Tooltip;
 			global::Plugin.InputKit.Resource.Style.Animation_Design_BottomSheetDialog = global::IDEX.Droid.Resource.Style.Animation_Design_BottomSheetDialog;
 			global::Plugin.InputKit.Resource.Style.Base_AlertDialog_AppCompat = global::IDEX.Droid.Resource.Style.Base_AlertDialog_AppCompat;
 			global::Plugin.InputKit.Resource.Style.Base_AlertDialog_AppCompat_Light = global::IDEX.Droid.Resource.Style.Base_AlertDialog_AppCompat_Light;
 			global::Plugin.InputKit.Resource.Style.Base_Animation_AppCompat_Dialog = global::IDEX.Droid.Resource.Style.Base_Animation_AppCompat_Dialog;
 			global::Plugin.InputKit.Resource.Style.Base_Animation_AppCompat_DropDownUp = global::IDEX.Droid.Resource.Style.Base_Animation_AppCompat_DropDownUp;
+			global::Plugin.InputKit.Resource.Style.Base_Animation_AppCompat_Tooltip = global::IDEX.Droid.Resource.Style.Base_Animation_AppCompat_Tooltip;
 			global::Plugin.InputKit.Resource.Style.Base_CardView = global::IDEX.Droid.Resource.Style.Base_CardView;
 			global::Plugin.InputKit.Resource.Style.Base_DialogWindowTitle_AppCompat = global::IDEX.Droid.Resource.Style.Base_DialogWindowTitle_AppCompat;
 			global::Plugin.InputKit.Resource.Style.Base_DialogWindowTitleBackground_AppCompat = global::IDEX.Droid.Resource.Style.Base_DialogWindowTitleBackground_AppCompat;
@@ -1302,6 +1412,7 @@ namespace IDEX.Droid
 			global::Plugin.InputKit.Resource.Style.Base_TextAppearance_AppCompat_Subhead_Inverse = global::IDEX.Droid.Resource.Style.Base_TextAppearance_AppCompat_Subhead_Inverse;
 			global::Plugin.InputKit.Resource.Style.Base_TextAppearance_AppCompat_Title = global::IDEX.Droid.Resource.Style.Base_TextAppearance_AppCompat_Title;
 			global::Plugin.InputKit.Resource.Style.Base_TextAppearance_AppCompat_Title_Inverse = global::IDEX.Droid.Resource.Style.Base_TextAppearance_AppCompat_Title_Inverse;
+			global::Plugin.InputKit.Resource.Style.Base_TextAppearance_AppCompat_Tooltip = global::IDEX.Droid.Resource.Style.Base_TextAppearance_AppCompat_Tooltip;
 			global::Plugin.InputKit.Resource.Style.Base_TextAppearance_AppCompat_Widget_ActionBar_Menu = global::IDEX.Droid.Resource.Style.Base_TextAppearance_AppCompat_Widget_ActionBar_Menu;
 			global::Plugin.InputKit.Resource.Style.Base_TextAppearance_AppCompat_Widget_ActionBar_Subtitle = global::IDEX.Droid.Resource.Style.Base_TextAppearance_AppCompat_Widget_ActionBar_Subtitle;
 			global::Plugin.InputKit.Resource.Style.Base_TextAppearance_AppCompat_Widget_ActionBar_Subtitle_Inverse = global::IDEX.Droid.Resource.Style.Base_TextAppearance_AppCompat_Widget_ActionBar_Subtitle_Inverse;
@@ -1348,15 +1459,21 @@ namespace IDEX.Droid
 			global::Plugin.InputKit.Resource.Style.Base_V11_ThemeOverlay_AppCompat_Dialog = global::IDEX.Droid.Resource.Style.Base_V11_ThemeOverlay_AppCompat_Dialog;
 			global::Plugin.InputKit.Resource.Style.Base_V12_Widget_AppCompat_AutoCompleteTextView = global::IDEX.Droid.Resource.Style.Base_V12_Widget_AppCompat_AutoCompleteTextView;
 			global::Plugin.InputKit.Resource.Style.Base_V12_Widget_AppCompat_EditText = global::IDEX.Droid.Resource.Style.Base_V12_Widget_AppCompat_EditText;
+			global::Plugin.InputKit.Resource.Style.Base_V14_Widget_Design_AppBarLayout = global::IDEX.Droid.Resource.Style.Base_V14_Widget_Design_AppBarLayout;
 			global::Plugin.InputKit.Resource.Style.Base_V21_Theme_AppCompat = global::IDEX.Droid.Resource.Style.Base_V21_Theme_AppCompat;
 			global::Plugin.InputKit.Resource.Style.Base_V21_Theme_AppCompat_Dialog = global::IDEX.Droid.Resource.Style.Base_V21_Theme_AppCompat_Dialog;
 			global::Plugin.InputKit.Resource.Style.Base_V21_Theme_AppCompat_Light = global::IDEX.Droid.Resource.Style.Base_V21_Theme_AppCompat_Light;
 			global::Plugin.InputKit.Resource.Style.Base_V21_Theme_AppCompat_Light_Dialog = global::IDEX.Droid.Resource.Style.Base_V21_Theme_AppCompat_Light_Dialog;
 			global::Plugin.InputKit.Resource.Style.Base_V21_ThemeOverlay_AppCompat_Dialog = global::IDEX.Droid.Resource.Style.Base_V21_ThemeOverlay_AppCompat_Dialog;
+			global::Plugin.InputKit.Resource.Style.Base_V21_Widget_Design_AppBarLayout = global::IDEX.Droid.Resource.Style.Base_V21_Widget_Design_AppBarLayout;
 			global::Plugin.InputKit.Resource.Style.Base_V22_Theme_AppCompat = global::IDEX.Droid.Resource.Style.Base_V22_Theme_AppCompat;
 			global::Plugin.InputKit.Resource.Style.Base_V22_Theme_AppCompat_Light = global::IDEX.Droid.Resource.Style.Base_V22_Theme_AppCompat_Light;
 			global::Plugin.InputKit.Resource.Style.Base_V23_Theme_AppCompat = global::IDEX.Droid.Resource.Style.Base_V23_Theme_AppCompat;
 			global::Plugin.InputKit.Resource.Style.Base_V23_Theme_AppCompat_Light = global::IDEX.Droid.Resource.Style.Base_V23_Theme_AppCompat_Light;
+			global::Plugin.InputKit.Resource.Style.Base_V26_Theme_AppCompat = global::IDEX.Droid.Resource.Style.Base_V26_Theme_AppCompat;
+			global::Plugin.InputKit.Resource.Style.Base_V26_Theme_AppCompat_Light = global::IDEX.Droid.Resource.Style.Base_V26_Theme_AppCompat_Light;
+			global::Plugin.InputKit.Resource.Style.Base_V26_Widget_AppCompat_Toolbar = global::IDEX.Droid.Resource.Style.Base_V26_Widget_AppCompat_Toolbar;
+			global::Plugin.InputKit.Resource.Style.Base_V26_Widget_Design_AppBarLayout = global::IDEX.Droid.Resource.Style.Base_V26_Widget_Design_AppBarLayout;
 			global::Plugin.InputKit.Resource.Style.Base_V7_Theme_AppCompat = global::IDEX.Droid.Resource.Style.Base_V7_Theme_AppCompat;
 			global::Plugin.InputKit.Resource.Style.Base_V7_Theme_AppCompat_Dialog = global::IDEX.Droid.Resource.Style.Base_V7_Theme_AppCompat_Dialog;
 			global::Plugin.InputKit.Resource.Style.Base_V7_Theme_AppCompat_Light = global::IDEX.Droid.Resource.Style.Base_V7_Theme_AppCompat_Light;
@@ -1364,6 +1481,7 @@ namespace IDEX.Droid
 			global::Plugin.InputKit.Resource.Style.Base_V7_ThemeOverlay_AppCompat_Dialog = global::IDEX.Droid.Resource.Style.Base_V7_ThemeOverlay_AppCompat_Dialog;
 			global::Plugin.InputKit.Resource.Style.Base_V7_Widget_AppCompat_AutoCompleteTextView = global::IDEX.Droid.Resource.Style.Base_V7_Widget_AppCompat_AutoCompleteTextView;
 			global::Plugin.InputKit.Resource.Style.Base_V7_Widget_AppCompat_EditText = global::IDEX.Droid.Resource.Style.Base_V7_Widget_AppCompat_EditText;
+			global::Plugin.InputKit.Resource.Style.Base_V7_Widget_AppCompat_Toolbar = global::IDEX.Droid.Resource.Style.Base_V7_Widget_AppCompat_Toolbar;
 			global::Plugin.InputKit.Resource.Style.Base_Widget_AppCompat_ActionBar = global::IDEX.Droid.Resource.Style.Base_Widget_AppCompat_ActionBar;
 			global::Plugin.InputKit.Resource.Style.Base_Widget_AppCompat_ActionBar_Solid = global::IDEX.Droid.Resource.Style.Base_Widget_AppCompat_ActionBar_Solid;
 			global::Plugin.InputKit.Resource.Style.Base_Widget_AppCompat_ActionBar_TabBar = global::IDEX.Droid.Resource.Style.Base_Widget_AppCompat_ActionBar_TabBar;
@@ -1426,6 +1544,7 @@ namespace IDEX.Droid
 			global::Plugin.InputKit.Resource.Style.CardView = global::IDEX.Droid.Resource.Style.CardView;
 			global::Plugin.InputKit.Resource.Style.CardView_Dark = global::IDEX.Droid.Resource.Style.CardView_Dark;
 			global::Plugin.InputKit.Resource.Style.CardView_Light = global::IDEX.Droid.Resource.Style.CardView_Light;
+			global::Plugin.InputKit.Resource.Style.MyPopupMenu = global::IDEX.Droid.Resource.Style.MyPopupMenu;
 			global::Plugin.InputKit.Resource.Style.Platform_AppCompat = global::IDEX.Droid.Resource.Style.Platform_AppCompat;
 			global::Plugin.InputKit.Resource.Style.Platform_AppCompat_Light = global::IDEX.Droid.Resource.Style.Platform_AppCompat_Light;
 			global::Plugin.InputKit.Resource.Style.Platform_ThemeOverlay_AppCompat = global::IDEX.Droid.Resource.Style.Platform_ThemeOverlay_AppCompat;
@@ -1482,6 +1601,7 @@ namespace IDEX.Droid
 			global::Plugin.InputKit.Resource.Style.TextAppearance_AppCompat_Subhead_Inverse = global::IDEX.Droid.Resource.Style.TextAppearance_AppCompat_Subhead_Inverse;
 			global::Plugin.InputKit.Resource.Style.TextAppearance_AppCompat_Title = global::IDEX.Droid.Resource.Style.TextAppearance_AppCompat_Title;
 			global::Plugin.InputKit.Resource.Style.TextAppearance_AppCompat_Title_Inverse = global::IDEX.Droid.Resource.Style.TextAppearance_AppCompat_Title_Inverse;
+			global::Plugin.InputKit.Resource.Style.TextAppearance_AppCompat_Tooltip = global::IDEX.Droid.Resource.Style.TextAppearance_AppCompat_Tooltip;
 			global::Plugin.InputKit.Resource.Style.TextAppearance_AppCompat_Widget_ActionBar_Menu = global::IDEX.Droid.Resource.Style.TextAppearance_AppCompat_Widget_ActionBar_Menu;
 			global::Plugin.InputKit.Resource.Style.TextAppearance_AppCompat_Widget_ActionBar_Subtitle = global::IDEX.Droid.Resource.Style.TextAppearance_AppCompat_Widget_ActionBar_Subtitle;
 			global::Plugin.InputKit.Resource.Style.TextAppearance_AppCompat_Widget_ActionBar_Subtitle_Inverse = global::IDEX.Droid.Resource.Style.TextAppearance_AppCompat_Widget_ActionBar_Subtitle_Inverse;
@@ -1501,6 +1621,16 @@ namespace IDEX.Droid
 			global::Plugin.InputKit.Resource.Style.TextAppearance_AppCompat_Widget_PopupMenu_Small = global::IDEX.Droid.Resource.Style.TextAppearance_AppCompat_Widget_PopupMenu_Small;
 			global::Plugin.InputKit.Resource.Style.TextAppearance_AppCompat_Widget_Switch = global::IDEX.Droid.Resource.Style.TextAppearance_AppCompat_Widget_Switch;
 			global::Plugin.InputKit.Resource.Style.TextAppearance_AppCompat_Widget_TextView_SpinnerItem = global::IDEX.Droid.Resource.Style.TextAppearance_AppCompat_Widget_TextView_SpinnerItem;
+			global::Plugin.InputKit.Resource.Style.TextAppearance_Compat_Notification = global::IDEX.Droid.Resource.Style.TextAppearance_Compat_Notification;
+			global::Plugin.InputKit.Resource.Style.TextAppearance_Compat_Notification_Info = global::IDEX.Droid.Resource.Style.TextAppearance_Compat_Notification_Info;
+			global::Plugin.InputKit.Resource.Style.TextAppearance_Compat_Notification_Info_Media = global::IDEX.Droid.Resource.Style.TextAppearance_Compat_Notification_Info_Media;
+			global::Plugin.InputKit.Resource.Style.TextAppearance_Compat_Notification_Line2 = global::IDEX.Droid.Resource.Style.TextAppearance_Compat_Notification_Line2;
+			global::Plugin.InputKit.Resource.Style.TextAppearance_Compat_Notification_Line2_Media = global::IDEX.Droid.Resource.Style.TextAppearance_Compat_Notification_Line2_Media;
+			global::Plugin.InputKit.Resource.Style.TextAppearance_Compat_Notification_Media = global::IDEX.Droid.Resource.Style.TextAppearance_Compat_Notification_Media;
+			global::Plugin.InputKit.Resource.Style.TextAppearance_Compat_Notification_Time = global::IDEX.Droid.Resource.Style.TextAppearance_Compat_Notification_Time;
+			global::Plugin.InputKit.Resource.Style.TextAppearance_Compat_Notification_Time_Media = global::IDEX.Droid.Resource.Style.TextAppearance_Compat_Notification_Time_Media;
+			global::Plugin.InputKit.Resource.Style.TextAppearance_Compat_Notification_Title = global::IDEX.Droid.Resource.Style.TextAppearance_Compat_Notification_Title;
+			global::Plugin.InputKit.Resource.Style.TextAppearance_Compat_Notification_Title_Media = global::IDEX.Droid.Resource.Style.TextAppearance_Compat_Notification_Title_Media;
 			global::Plugin.InputKit.Resource.Style.TextAppearance_Design_CollapsingToolbar_Expanded = global::IDEX.Droid.Resource.Style.TextAppearance_Design_CollapsingToolbar_Expanded;
 			global::Plugin.InputKit.Resource.Style.TextAppearance_Design_Counter = global::IDEX.Droid.Resource.Style.TextAppearance_Design_Counter;
 			global::Plugin.InputKit.Resource.Style.TextAppearance_Design_Counter_Overflow = global::IDEX.Droid.Resource.Style.TextAppearance_Design_Counter_Overflow;
@@ -1626,6 +1756,8 @@ namespace IDEX.Droid
 			global::Plugin.InputKit.Resource.Style.Widget_AppCompat_TextView_SpinnerItem = global::IDEX.Droid.Resource.Style.Widget_AppCompat_TextView_SpinnerItem;
 			global::Plugin.InputKit.Resource.Style.Widget_AppCompat_Toolbar = global::IDEX.Droid.Resource.Style.Widget_AppCompat_Toolbar;
 			global::Plugin.InputKit.Resource.Style.Widget_AppCompat_Toolbar_Button_Navigation = global::IDEX.Droid.Resource.Style.Widget_AppCompat_Toolbar_Button_Navigation;
+			global::Plugin.InputKit.Resource.Style.Widget_Compat_NotificationActionContainer = global::IDEX.Droid.Resource.Style.Widget_Compat_NotificationActionContainer;
+			global::Plugin.InputKit.Resource.Style.Widget_Compat_NotificationActionText = global::IDEX.Droid.Resource.Style.Widget_Compat_NotificationActionText;
 			global::Plugin.InputKit.Resource.Style.Widget_Design_AppBarLayout = global::IDEX.Droid.Resource.Style.Widget_Design_AppBarLayout;
 			global::Plugin.InputKit.Resource.Style.Widget_Design_BottomNavigationView = global::IDEX.Droid.Resource.Style.Widget_Design_BottomNavigationView;
 			global::Plugin.InputKit.Resource.Style.Widget_Design_BottomSheet_Modal = global::IDEX.Droid.Resource.Style.Widget_Design_BottomSheet_Modal;
@@ -1694,6 +1826,8 @@ namespace IDEX.Droid
 			global::Plugin.InputKit.Resource.Styleable.AlertDialog_singleChoiceItemLayout = global::IDEX.Droid.Resource.Styleable.AlertDialog_singleChoiceItemLayout;
 			global::Plugin.InputKit.Resource.Styleable.AppBarLayout = global::IDEX.Droid.Resource.Styleable.AppBarLayout;
 			global::Plugin.InputKit.Resource.Styleable.AppBarLayout_android_background = global::IDEX.Droid.Resource.Styleable.AppBarLayout_android_background;
+			global::Plugin.InputKit.Resource.Styleable.AppBarLayout_android_keyboardNavigationCluster = global::IDEX.Droid.Resource.Styleable.AppBarLayout_android_keyboardNavigationCluster;
+			global::Plugin.InputKit.Resource.Styleable.AppBarLayout_android_touchscreenBlocksFocus = global::IDEX.Droid.Resource.Styleable.AppBarLayout_android_touchscreenBlocksFocus;
 			global::Plugin.InputKit.Resource.Styleable.AppBarLayout_elevation = global::IDEX.Droid.Resource.Styleable.AppBarLayout_elevation;
 			global::Plugin.InputKit.Resource.Styleable.AppBarLayout_expanded = global::IDEX.Droid.Resource.Styleable.AppBarLayout_expanded;
 			global::Plugin.InputKit.Resource.Styleable.AppBarLayoutStates = global::IDEX.Droid.Resource.Styleable.AppBarLayoutStates;
@@ -1722,6 +1856,12 @@ namespace IDEX.Droid
 			global::Plugin.InputKit.Resource.Styleable.AppCompatTextHelper_android_textAppearance = global::IDEX.Droid.Resource.Styleable.AppCompatTextHelper_android_textAppearance;
 			global::Plugin.InputKit.Resource.Styleable.AppCompatTextView = global::IDEX.Droid.Resource.Styleable.AppCompatTextView;
 			global::Plugin.InputKit.Resource.Styleable.AppCompatTextView_android_textAppearance = global::IDEX.Droid.Resource.Styleable.AppCompatTextView_android_textAppearance;
+			global::Plugin.InputKit.Resource.Styleable.AppCompatTextView_autoSizeMaxTextSize = global::IDEX.Droid.Resource.Styleable.AppCompatTextView_autoSizeMaxTextSize;
+			global::Plugin.InputKit.Resource.Styleable.AppCompatTextView_autoSizeMinTextSize = global::IDEX.Droid.Resource.Styleable.AppCompatTextView_autoSizeMinTextSize;
+			global::Plugin.InputKit.Resource.Styleable.AppCompatTextView_autoSizePresetSizes = global::IDEX.Droid.Resource.Styleable.AppCompatTextView_autoSizePresetSizes;
+			global::Plugin.InputKit.Resource.Styleable.AppCompatTextView_autoSizeStepGranularity = global::IDEX.Droid.Resource.Styleable.AppCompatTextView_autoSizeStepGranularity;
+			global::Plugin.InputKit.Resource.Styleable.AppCompatTextView_autoSizeTextType = global::IDEX.Droid.Resource.Styleable.AppCompatTextView_autoSizeTextType;
+			global::Plugin.InputKit.Resource.Styleable.AppCompatTextView_fontFamily = global::IDEX.Droid.Resource.Styleable.AppCompatTextView_fontFamily;
 			global::Plugin.InputKit.Resource.Styleable.AppCompatTextView_textAllCaps = global::IDEX.Droid.Resource.Styleable.AppCompatTextView_textAllCaps;
 			global::Plugin.InputKit.Resource.Styleable.AppCompatTheme = global::IDEX.Droid.Resource.Styleable.AppCompatTheme;
 			global::Plugin.InputKit.Resource.Styleable.AppCompatTheme_actionBarDivider = global::IDEX.Droid.Resource.Styleable.AppCompatTheme_actionBarDivider;
@@ -1778,6 +1918,7 @@ namespace IDEX.Droid
 			global::Plugin.InputKit.Resource.Styleable.AppCompatTheme_colorControlActivated = global::IDEX.Droid.Resource.Styleable.AppCompatTheme_colorControlActivated;
 			global::Plugin.InputKit.Resource.Styleable.AppCompatTheme_colorControlHighlight = global::IDEX.Droid.Resource.Styleable.AppCompatTheme_colorControlHighlight;
 			global::Plugin.InputKit.Resource.Styleable.AppCompatTheme_colorControlNormal = global::IDEX.Droid.Resource.Styleable.AppCompatTheme_colorControlNormal;
+			global::Plugin.InputKit.Resource.Styleable.AppCompatTheme_colorError = global::IDEX.Droid.Resource.Styleable.AppCompatTheme_colorError;
 			global::Plugin.InputKit.Resource.Styleable.AppCompatTheme_colorPrimary = global::IDEX.Droid.Resource.Styleable.AppCompatTheme_colorPrimary;
 			global::Plugin.InputKit.Resource.Styleable.AppCompatTheme_colorPrimaryDark = global::IDEX.Droid.Resource.Styleable.AppCompatTheme_colorPrimaryDark;
 			global::Plugin.InputKit.Resource.Styleable.AppCompatTheme_colorSwitchThumbNormal = global::IDEX.Droid.Resource.Styleable.AppCompatTheme_colorSwitchThumbNormal;
@@ -1830,6 +1971,8 @@ namespace IDEX.Droid
 			global::Plugin.InputKit.Resource.Styleable.AppCompatTheme_textColorSearchUrl = global::IDEX.Droid.Resource.Styleable.AppCompatTheme_textColorSearchUrl;
 			global::Plugin.InputKit.Resource.Styleable.AppCompatTheme_toolbarNavigationButtonStyle = global::IDEX.Droid.Resource.Styleable.AppCompatTheme_toolbarNavigationButtonStyle;
 			global::Plugin.InputKit.Resource.Styleable.AppCompatTheme_toolbarStyle = global::IDEX.Droid.Resource.Styleable.AppCompatTheme_toolbarStyle;
+			global::Plugin.InputKit.Resource.Styleable.AppCompatTheme_tooltipForegroundColor = global::IDEX.Droid.Resource.Styleable.AppCompatTheme_tooltipForegroundColor;
+			global::Plugin.InputKit.Resource.Styleable.AppCompatTheme_tooltipFrameBackground = global::IDEX.Droid.Resource.Styleable.AppCompatTheme_tooltipFrameBackground;
 			global::Plugin.InputKit.Resource.Styleable.AppCompatTheme_windowActionBar = global::IDEX.Droid.Resource.Styleable.AppCompatTheme_windowActionBar;
 			global::Plugin.InputKit.Resource.Styleable.AppCompatTheme_windowActionBarOverlay = global::IDEX.Droid.Resource.Styleable.AppCompatTheme_windowActionBarOverlay;
 			global::Plugin.InputKit.Resource.Styleable.AppCompatTheme_windowActionModeOverlay = global::IDEX.Droid.Resource.Styleable.AppCompatTheme_windowActionModeOverlay;
@@ -1929,6 +2072,20 @@ namespace IDEX.Droid
 			global::Plugin.InputKit.Resource.Styleable.FloatingActionButton_useCompatPadding = global::IDEX.Droid.Resource.Styleable.FloatingActionButton_useCompatPadding;
 			global::Plugin.InputKit.Resource.Styleable.FloatingActionButton_Behavior_Layout = global::IDEX.Droid.Resource.Styleable.FloatingActionButton_Behavior_Layout;
 			global::Plugin.InputKit.Resource.Styleable.FloatingActionButton_Behavior_Layout_behavior_autoHide = global::IDEX.Droid.Resource.Styleable.FloatingActionButton_Behavior_Layout_behavior_autoHide;
+			global::Plugin.InputKit.Resource.Styleable.FontFamily = global::IDEX.Droid.Resource.Styleable.FontFamily;
+			global::Plugin.InputKit.Resource.Styleable.FontFamily_fontProviderAuthority = global::IDEX.Droid.Resource.Styleable.FontFamily_fontProviderAuthority;
+			global::Plugin.InputKit.Resource.Styleable.FontFamily_fontProviderCerts = global::IDEX.Droid.Resource.Styleable.FontFamily_fontProviderCerts;
+			global::Plugin.InputKit.Resource.Styleable.FontFamily_fontProviderFetchStrategy = global::IDEX.Droid.Resource.Styleable.FontFamily_fontProviderFetchStrategy;
+			global::Plugin.InputKit.Resource.Styleable.FontFamily_fontProviderFetchTimeout = global::IDEX.Droid.Resource.Styleable.FontFamily_fontProviderFetchTimeout;
+			global::Plugin.InputKit.Resource.Styleable.FontFamily_fontProviderPackage = global::IDEX.Droid.Resource.Styleable.FontFamily_fontProviderPackage;
+			global::Plugin.InputKit.Resource.Styleable.FontFamily_fontProviderQuery = global::IDEX.Droid.Resource.Styleable.FontFamily_fontProviderQuery;
+			global::Plugin.InputKit.Resource.Styleable.FontFamilyFont = global::IDEX.Droid.Resource.Styleable.FontFamilyFont;
+			global::Plugin.InputKit.Resource.Styleable.FontFamilyFont_android_font = global::IDEX.Droid.Resource.Styleable.FontFamilyFont_android_font;
+			global::Plugin.InputKit.Resource.Styleable.FontFamilyFont_android_fontStyle = global::IDEX.Droid.Resource.Styleable.FontFamilyFont_android_fontStyle;
+			global::Plugin.InputKit.Resource.Styleable.FontFamilyFont_android_fontWeight = global::IDEX.Droid.Resource.Styleable.FontFamilyFont_android_fontWeight;
+			global::Plugin.InputKit.Resource.Styleable.FontFamilyFont_font = global::IDEX.Droid.Resource.Styleable.FontFamilyFont_font;
+			global::Plugin.InputKit.Resource.Styleable.FontFamilyFont_fontStyle = global::IDEX.Droid.Resource.Styleable.FontFamilyFont_fontStyle;
+			global::Plugin.InputKit.Resource.Styleable.FontFamilyFont_fontWeight = global::IDEX.Droid.Resource.Styleable.FontFamilyFont_fontWeight;
 			global::Plugin.InputKit.Resource.Styleable.ForegroundLinearLayout = global::IDEX.Droid.Resource.Styleable.ForegroundLinearLayout;
 			global::Plugin.InputKit.Resource.Styleable.ForegroundLinearLayout_android_foreground = global::IDEX.Droid.Resource.Styleable.ForegroundLinearLayout_android_foreground;
 			global::Plugin.InputKit.Resource.Styleable.ForegroundLinearLayout_android_foregroundGravity = global::IDEX.Droid.Resource.Styleable.ForegroundLinearLayout_android_foregroundGravity;
@@ -1955,6 +2112,7 @@ namespace IDEX.Droid
 			global::Plugin.InputKit.Resource.Styleable.MediaRouteButton_android_minHeight = global::IDEX.Droid.Resource.Styleable.MediaRouteButton_android_minHeight;
 			global::Plugin.InputKit.Resource.Styleable.MediaRouteButton_android_minWidth = global::IDEX.Droid.Resource.Styleable.MediaRouteButton_android_minWidth;
 			global::Plugin.InputKit.Resource.Styleable.MediaRouteButton_externalRouteEnabledDrawable = global::IDEX.Droid.Resource.Styleable.MediaRouteButton_externalRouteEnabledDrawable;
+			global::Plugin.InputKit.Resource.Styleable.MediaRouteButton_mediaRouteButtonTint = global::IDEX.Droid.Resource.Styleable.MediaRouteButton_mediaRouteButtonTint;
 			global::Plugin.InputKit.Resource.Styleable.MenuGroup = global::IDEX.Droid.Resource.Styleable.MenuGroup;
 			global::Plugin.InputKit.Resource.Styleable.MenuGroup_android_checkableBehavior = global::IDEX.Droid.Resource.Styleable.MenuGroup_android_checkableBehavior;
 			global::Plugin.InputKit.Resource.Styleable.MenuGroup_android_enabled = global::IDEX.Droid.Resource.Styleable.MenuGroup_android_enabled;
@@ -1966,6 +2124,7 @@ namespace IDEX.Droid
 			global::Plugin.InputKit.Resource.Styleable.MenuItem_actionLayout = global::IDEX.Droid.Resource.Styleable.MenuItem_actionLayout;
 			global::Plugin.InputKit.Resource.Styleable.MenuItem_actionProviderClass = global::IDEX.Droid.Resource.Styleable.MenuItem_actionProviderClass;
 			global::Plugin.InputKit.Resource.Styleable.MenuItem_actionViewClass = global::IDEX.Droid.Resource.Styleable.MenuItem_actionViewClass;
+			global::Plugin.InputKit.Resource.Styleable.MenuItem_alphabeticModifiers = global::IDEX.Droid.Resource.Styleable.MenuItem_alphabeticModifiers;
 			global::Plugin.InputKit.Resource.Styleable.MenuItem_android_alphabeticShortcut = global::IDEX.Droid.Resource.Styleable.MenuItem_android_alphabeticShortcut;
 			global::Plugin.InputKit.Resource.Styleable.MenuItem_android_checkable = global::IDEX.Droid.Resource.Styleable.MenuItem_android_checkable;
 			global::Plugin.InputKit.Resource.Styleable.MenuItem_android_checked = global::IDEX.Droid.Resource.Styleable.MenuItem_android_checked;
@@ -1979,7 +2138,12 @@ namespace IDEX.Droid
 			global::Plugin.InputKit.Resource.Styleable.MenuItem_android_title = global::IDEX.Droid.Resource.Styleable.MenuItem_android_title;
 			global::Plugin.InputKit.Resource.Styleable.MenuItem_android_titleCondensed = global::IDEX.Droid.Resource.Styleable.MenuItem_android_titleCondensed;
 			global::Plugin.InputKit.Resource.Styleable.MenuItem_android_visible = global::IDEX.Droid.Resource.Styleable.MenuItem_android_visible;
+			global::Plugin.InputKit.Resource.Styleable.MenuItem_contentDescription = global::IDEX.Droid.Resource.Styleable.MenuItem_contentDescription;
+			global::Plugin.InputKit.Resource.Styleable.MenuItem_iconTint = global::IDEX.Droid.Resource.Styleable.MenuItem_iconTint;
+			global::Plugin.InputKit.Resource.Styleable.MenuItem_iconTintMode = global::IDEX.Droid.Resource.Styleable.MenuItem_iconTintMode;
+			global::Plugin.InputKit.Resource.Styleable.MenuItem_numericModifiers = global::IDEX.Droid.Resource.Styleable.MenuItem_numericModifiers;
 			global::Plugin.InputKit.Resource.Styleable.MenuItem_showAsAction = global::IDEX.Droid.Resource.Styleable.MenuItem_showAsAction;
+			global::Plugin.InputKit.Resource.Styleable.MenuItem_tooltipText = global::IDEX.Droid.Resource.Styleable.MenuItem_tooltipText;
 			global::Plugin.InputKit.Resource.Styleable.MenuView = global::IDEX.Droid.Resource.Styleable.MenuView;
 			global::Plugin.InputKit.Resource.Styleable.MenuView_android_headerBackground = global::IDEX.Droid.Resource.Styleable.MenuView_android_headerBackground;
 			global::Plugin.InputKit.Resource.Styleable.MenuView_android_horizontalDivider = global::IDEX.Droid.Resource.Styleable.MenuView_android_horizontalDivider;
@@ -2013,6 +2177,11 @@ namespace IDEX.Droid
 			global::Plugin.InputKit.Resource.Styleable.RecyclerView = global::IDEX.Droid.Resource.Styleable.RecyclerView;
 			global::Plugin.InputKit.Resource.Styleable.RecyclerView_android_descendantFocusability = global::IDEX.Droid.Resource.Styleable.RecyclerView_android_descendantFocusability;
 			global::Plugin.InputKit.Resource.Styleable.RecyclerView_android_orientation = global::IDEX.Droid.Resource.Styleable.RecyclerView_android_orientation;
+			global::Plugin.InputKit.Resource.Styleable.RecyclerView_fastScrollEnabled = global::IDEX.Droid.Resource.Styleable.RecyclerView_fastScrollEnabled;
+			global::Plugin.InputKit.Resource.Styleable.RecyclerView_fastScrollHorizontalThumbDrawable = global::IDEX.Droid.Resource.Styleable.RecyclerView_fastScrollHorizontalThumbDrawable;
+			global::Plugin.InputKit.Resource.Styleable.RecyclerView_fastScrollHorizontalTrackDrawable = global::IDEX.Droid.Resource.Styleable.RecyclerView_fastScrollHorizontalTrackDrawable;
+			global::Plugin.InputKit.Resource.Styleable.RecyclerView_fastScrollVerticalThumbDrawable = global::IDEX.Droid.Resource.Styleable.RecyclerView_fastScrollVerticalThumbDrawable;
+			global::Plugin.InputKit.Resource.Styleable.RecyclerView_fastScrollVerticalTrackDrawable = global::IDEX.Droid.Resource.Styleable.RecyclerView_fastScrollVerticalTrackDrawable;
 			global::Plugin.InputKit.Resource.Styleable.RecyclerView_layoutManager = global::IDEX.Droid.Resource.Styleable.RecyclerView_layoutManager;
 			global::Plugin.InputKit.Resource.Styleable.RecyclerView_reverseLayout = global::IDEX.Droid.Resource.Styleable.RecyclerView_reverseLayout;
 			global::Plugin.InputKit.Resource.Styleable.RecyclerView_spanCount = global::IDEX.Droid.Resource.Styleable.RecyclerView_spanCount;
@@ -2086,15 +2255,18 @@ namespace IDEX.Droid
 			global::Plugin.InputKit.Resource.Styleable.TabLayout_tabTextAppearance = global::IDEX.Droid.Resource.Styleable.TabLayout_tabTextAppearance;
 			global::Plugin.InputKit.Resource.Styleable.TabLayout_tabTextColor = global::IDEX.Droid.Resource.Styleable.TabLayout_tabTextColor;
 			global::Plugin.InputKit.Resource.Styleable.TextAppearance = global::IDEX.Droid.Resource.Styleable.TextAppearance;
+			global::Plugin.InputKit.Resource.Styleable.TextAppearance_android_fontFamily = global::IDEX.Droid.Resource.Styleable.TextAppearance_android_fontFamily;
 			global::Plugin.InputKit.Resource.Styleable.TextAppearance_android_shadowColor = global::IDEX.Droid.Resource.Styleable.TextAppearance_android_shadowColor;
 			global::Plugin.InputKit.Resource.Styleable.TextAppearance_android_shadowDx = global::IDEX.Droid.Resource.Styleable.TextAppearance_android_shadowDx;
 			global::Plugin.InputKit.Resource.Styleable.TextAppearance_android_shadowDy = global::IDEX.Droid.Resource.Styleable.TextAppearance_android_shadowDy;
 			global::Plugin.InputKit.Resource.Styleable.TextAppearance_android_shadowRadius = global::IDEX.Droid.Resource.Styleable.TextAppearance_android_shadowRadius;
 			global::Plugin.InputKit.Resource.Styleable.TextAppearance_android_textColor = global::IDEX.Droid.Resource.Styleable.TextAppearance_android_textColor;
 			global::Plugin.InputKit.Resource.Styleable.TextAppearance_android_textColorHint = global::IDEX.Droid.Resource.Styleable.TextAppearance_android_textColorHint;
+			global::Plugin.InputKit.Resource.Styleable.TextAppearance_android_textColorLink = global::IDEX.Droid.Resource.Styleable.TextAppearance_android_textColorLink;
 			global::Plugin.InputKit.Resource.Styleable.TextAppearance_android_textSize = global::IDEX.Droid.Resource.Styleable.TextAppearance_android_textSize;
 			global::Plugin.InputKit.Resource.Styleable.TextAppearance_android_textStyle = global::IDEX.Droid.Resource.Styleable.TextAppearance_android_textStyle;
 			global::Plugin.InputKit.Resource.Styleable.TextAppearance_android_typeface = global::IDEX.Droid.Resource.Styleable.TextAppearance_android_typeface;
+			global::Plugin.InputKit.Resource.Styleable.TextAppearance_fontFamily = global::IDEX.Droid.Resource.Styleable.TextAppearance_fontFamily;
 			global::Plugin.InputKit.Resource.Styleable.TextAppearance_textAllCaps = global::IDEX.Droid.Resource.Styleable.TextAppearance_textAllCaps;
 			global::Plugin.InputKit.Resource.Styleable.TextInputLayout = global::IDEX.Droid.Resource.Styleable.TextInputLayout;
 			global::Plugin.InputKit.Resource.Styleable.TextInputLayout_android_hint = global::IDEX.Droid.Resource.Styleable.TextInputLayout_android_hint;
@@ -6395,8 +6567,8 @@ namespace IDEX.Droid
 			// aapt resource value: 0x7f0c016e
 			public const int Animation_Design_BottomSheetDialog = 2131493230;
 			
-			// aapt resource value: 0x7f0c0191
-			public const int AppCompatDialogStyle = 2131493265;
+			// aapt resource value: 0x7f0c0192
+			public const int AppCompatDialogStyle = 2131493266;
 			
 			// aapt resource value: 0x7f0c00a9
 			public const int Base_AlertDialog_AppCompat = 2131493033;
@@ -6899,11 +7071,14 @@ namespace IDEX.Droid
 			// aapt resource value: 0x7f0c000e
 			public const int CardView_Light = 2131492878;
 			
-			// aapt resource value: 0x7f0c018f
-			public const int MainTheme = 2131493263;
-			
 			// aapt resource value: 0x7f0c0190
-			public const int MainTheme_Base = 2131493264;
+			public const int MainTheme = 2131493264;
+			
+			// aapt resource value: 0x7f0c0191
+			public const int MainTheme_Base = 2131493265;
+			
+			// aapt resource value: 0x7f0c018f
+			public const int MyPopupMenu = 2131493263;
 			
 			// aapt resource value: 0x7f0c002d
 			public const int Platform_AppCompat = 2131492909;

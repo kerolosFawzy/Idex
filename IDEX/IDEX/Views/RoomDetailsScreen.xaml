@@ -6,6 +6,8 @@
              xmlns:Views="clr-namespace:IDEX.Views"
              NeedOverrideSoftBackButton="True"
              Title="{Binding Title}"
+             x:TypeArguments="vms:RoomDetailsScreenViewModel"
+             xmlns:vms="clr-namespace:IDEX.ViewModel"
              xmlns:ffimageloadingsvg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
                        >
 

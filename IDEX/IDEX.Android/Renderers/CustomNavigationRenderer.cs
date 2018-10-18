@@ -12,6 +12,7 @@ using Android.Views;
 using Android.Widget;
 using CustomControls.NavigationServices;
 using IDEX.Droid;
+using IDEX.ViewModel;
 using IDEX.Views;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.Android;
@@ -59,7 +60,7 @@ namespace IDEX.Droid
         {
             // Call the NavigationPage which will trigger the default behavior
             // The default behavior is to navigate back if the Page derived classes return true from OnBackButtonPressed override            
-            var curPage = Element.CurrentPage as BaseContentPage;
+            var curPage = Element.CurrentPage as BaseContentPage<BaseViewModel>;
             if (curPage == null)
             {
                 Element.PopAsync();
@@ -99,14 +100,14 @@ namespace IDEX.Droid
 
         private void UpdateToolbarInstance()
         {
-            if (!(Element.CurrentPage is BaseContentPage curPage) || !curPage.NeedOverrideSoftBackButton) return;
+            if (!(Element.CurrentPage is BaseContentPage<BaseViewModel> curPage) || !curPage.NeedOverrideSoftBackButton) return;
             RemoveToolbarInstance();
             GetToolbarInstance();
         }
 
         private void GetToolbarInstance()
         {
-            var curPage = Element.CurrentPage as BaseContentPage;
+            var curPage = Element.CurrentPage as BaseContentPage<BaseViewModel>;
             try
             {
                 //how to get toolbar navigation page
@@ -243,9 +244,9 @@ namespace IDEX.Droid
             {
                 UpdateTitleText(_titleTextView, lastPage.Title);
             }
-            else if (e.PropertyName == BaseContentPage.FormattedTitleProperty.PropertyName && (lastPage is BaseContentPage))
+            else if (e.PropertyName == BaseContentPage<BaseViewModel>.FormattedTitleProperty.PropertyName && (lastPage is BaseContentPage<BaseViewModel>))
             {
-                var cPage = lastPage as BaseContentPage;
+                var cPage = lastPage as BaseContentPage<BaseViewModel>;
                 UpdateFormattedTitleText(_titleTextView, cPage.FormattedTitle, cPage.Title);
 
             }
@@ -259,9 +260,9 @@ namespace IDEX.Droid
                 UpdateToolbarTextFont(_subTitleTextView, CustomNavigationPage.GetSubtitleFont(lastPage), _originalFont);
 
             }
-            else if (e.PropertyName == BaseContentPage.SubtitleProperty.PropertyName && (lastPage is BaseContentPage))
+            else if (e.PropertyName == BaseContentPage<BaseViewModel>.SubtitleProperty.PropertyName && (lastPage is BaseContentPage<BaseViewModel>))
             {
-                var cPage = lastPage as BaseContentPage;
+                var cPage = lastPage as BaseContentPage<BaseViewModel>;
                 if (!string.IsNullOrEmpty(cPage.Subtitle))
                 {
                     _subTitleTextView.Text = cPage.Subtitle;
@@ -273,9 +274,9 @@ namespace IDEX.Droid
                 }
 
             }
-            else if (e.PropertyName == BaseContentPage.FormattedTitleProperty.PropertyName && (lastPage is BaseContentPage))
+            else if (e.PropertyName == BaseContentPage<BaseViewModel>.FormattedTitleProperty.PropertyName && (lastPage is BaseContentPage<BaseViewModel>))
             {
-                var cPage = lastPage as BaseContentPage;
+                var cPage = lastPage as BaseContentPage<BaseViewModel>;
 
                 if (cPage.FormattedSubtitle != null && cPage.FormattedSubtitle.Spans.Count > 0)
                 {
@@ -550,9 +551,9 @@ namespace IDEX.Droid
         void UpdateToolbarTitle(Page lastPage, AppCompatTextView titleTextView, AppCompatTextView subTitleTextView, Typeface originalFont, ColorStateList defaultColorStateList)
         {
             //Check support for CustomPage 
-            if (lastPage is BaseContentPage)
+            if (lastPage is BaseContentPage<object>)
             {
-                var cPage = lastPage as BaseContentPage;
+                var cPage = lastPage as BaseContentPage<BaseViewModel>;
 
                 //Update main title formatted text
                 UpdateFormattedTitleText(titleTextView, cPage.FormattedTitle, lastPage.Title);
@@ -607,7 +608,7 @@ namespace IDEX.Droid
         #endregion
 
         #region Subtitle TextView
-        void UpdateToolbarSubtitle(BaseContentPage cPage, AppCompatTextView subTitleTextView, Typeface originalFont, ColorStateList defaultColorStateList)
+        void UpdateToolbarSubtitle(BaseContentPage<BaseViewModel> cPage, AppCompatTextView subTitleTextView, Typeface originalFont, ColorStateList defaultColorStateList)
         {
             ClearTextView(subTitleTextView, true);
 

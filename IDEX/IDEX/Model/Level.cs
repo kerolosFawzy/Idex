@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace IDEX.Model
 {
-    class Level : InitialModel
+    public class Level : InitialModel
     {
         public int UserId { get; set; }
         public string DoorNumber { get; set; }

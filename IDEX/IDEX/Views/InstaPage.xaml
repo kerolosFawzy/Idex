@@ -5,6 +5,8 @@
     xmlns:views="clr-namespace:IDEX.Views"
     x:Class="IDEX.Views.InstaPage"
     NeedOverrideSoftBackButton="True" 
+    x:TypeArguments="vms:InstaPageViewModel"
+    xmlns:vms="clr-namespace:IDEX.ViewModel"
     FormattedTitle="{Binding FormattedTitle}"
     Subtitle="{Binding Subtitle}"
     xmlns:Custom="clr-namespace:CustomControls;assembly=CustomControls"

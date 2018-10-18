@@ -4,6 +4,7 @@ using IDEX.Model;
 using IDEX.Views;
 using Microsoft.AppCenter.Crashes;
 using ReactiveUI;
+using ReactiveUI.Legacy;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -25,7 +26,7 @@ namespace IDEX.ViewModel
      * 
      * i used hear UserDialogs NuGet to make alarts  
      * * ***/
-    class MainPageViewModel : BaseViewModel
+    public class MainPageViewModel : BaseViewModel
     {
         private static int flag;
         ReactiveList<Customer> ts;
@@ -48,7 +49,7 @@ namespace IDEX.ViewModel
             }
         }
 
-        public MainPageViewModel()
+        public MainPageViewModel(IScreen hostScreen = null) : base(hostScreen)
         {
             flag = 0;
             AddDummyData();

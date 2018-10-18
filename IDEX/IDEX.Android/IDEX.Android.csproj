@@ -20,7 +20,7 @@
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
     <AndroidKeyStore>true</AndroidKeyStore>
-    <AndroidSigningKeyStore>C:\Users\minafaw\AppData\Local\Xamarin\Mono for Android\Keystore\general_alias\general_alias.keystore</AndroidSigningKeyStore>
+    <AndroidSigningKeyStore>D:\Programms\general_alias.jks</AndroidSigningKeyStore>
     <AndroidSigningStorePass>123456</AndroidSigningStorePass>
     <AndroidSigningKeyAlias>general_alias</AndroidSigningKeyAlias>
     <AndroidSigningKeyPass>123456</AndroidSigningKeyPass>
@@ -38,7 +38,7 @@
     <AndroidUseSharedRuntime>true</AndroidUseSharedRuntime>
     <AndroidSupportedAbis>
     </AndroidSupportedAbis>
-    <AndroidEnableMultiDex>false</AndroidEnableMultiDex>
+    <AndroidEnableMultiDex>true</AndroidEnableMultiDex>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
     <Debugger>Xamarin</Debugger>
     <AndroidLinkSkip>CustomControls</AndroidLinkSkip>
@@ -55,7 +55,7 @@
     <AndroidManagedSymbols>true</AndroidManagedSymbols>
     <AndroidUseSharedRuntime>false</AndroidUseSharedRuntime>
     <EnableProguard>false</EnableProguard>
-    <AndroidEnableMultiDex>false</AndroidEnableMultiDex>
+    <AndroidEnableMultiDex>true</AndroidEnableMultiDex>
     <AndroidLinkMode>Full</AndroidLinkMode>
     <AndroidLinkSkip>CustomControls;IDEX</AndroidLinkSkip>
     <AotAssemblies>false</AotAssemblies>
@@ -88,13 +88,13 @@
       <Version>2.1.0.4</Version>
     </PackageReference>
     <PackageReference Include="ReactiveUI">
-      <Version>8.7.2</Version>
+      <Version>9.0.1</Version>
     </PackageReference>
     <PackageReference Include="ReactiveUI.Events.XamForms">
-      <Version>8.7.2</Version>
+      <Version>9.0.1</Version>
     </PackageReference>
     <PackageReference Include="ReactiveUI.XamForms">
-      <Version>8.7.2</Version>
+      <Version>9.0.1</Version>
     </PackageReference>
     <PackageReference Include="Rg.Plugins.Popup">
       <Version>1.1.4.168</Version>
@@ -114,14 +114,14 @@
     <PackageReference Include="Xamarin.FFImageLoading.Svg.Forms">
       <Version>2.4.3.840</Version>
     </PackageReference>
-    <PackageReference Include="Xamarin.Forms" Version="3.2.0.839982" />
+    <PackageReference Include="Xamarin.Forms" Version="3.2.0.871581" />
     <PackageReference Include="Xamarin.Android.Support.Design" Version="27.0.2.1" />
     <PackageReference Include="Xamarin.Android.Support.v7.AppCompat" Version="27.0.2.1" />
     <PackageReference Include="Xamarin.Android.Support.v4" Version="27.0.2.1" />
     <PackageReference Include="Xamarin.Android.Support.v7.CardView" Version="27.0.2.1" />
     <PackageReference Include="Xamarin.Android.Support.v7.MediaRouter" Version="27.0.2.1" />
     <PackageReference Include="Xamarin.Forms.InputKit">
-      <Version>2.3.1</Version>
+      <Version>2.3.4</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>

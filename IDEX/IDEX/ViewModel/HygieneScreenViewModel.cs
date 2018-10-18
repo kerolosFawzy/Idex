@@ -1,6 +1,7 @@
 ﻿using IDEX.Model;
 using Microsoft.AppCenter.Crashes;
 using ReactiveUI;
+using ReactiveUI.Legacy;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,10 +10,10 @@ using Xamarin.Forms;
 
 namespace IDEX.ViewModel
 {
-    class HygieneScreenViewModel : BaseViewModel
+    public class HygieneScreenViewModel : BaseViewModel
     {
         private Dictionary<string, string> _buttonData = new Dictionary<string, string>();
-        public Level SelectedLevel { get; set; } = OverviewScreenViewModel.SelectedRoom;
+        Level SelectedLevel { get; set; } = OverviewScreenViewModel.SelectedRoom;
         public ICommand ItemClicked { get; set; }
         public static HygieneInsepectionResult InsepectionResult { get; set; }
             = new HygieneInsepectionResult();
@@ -129,7 +130,7 @@ namespace IDEX.ViewModel
 
         #endregion
 
-        public HygieneScreenViewModel()
+        public HygieneScreenViewModel(IScreen hostScreen = null) : base(hostScreen)
         {
             SetDummyData();
             IsVisible = false;

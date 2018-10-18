@@ -14,7 +14,7 @@ using Xamarin.Forms.Internals;
 
 namespace IDEX.ViewModel
 {
-    class AdditionalRequirementsViewModel : BaseViewModel
+    public class AdditionalRequirementsViewModel : BaseViewModel
     {
         public ICommand ThreeDotButtonCommand { get; set; }
         public ICommand OkButtonCommand { get; set; }
@@ -279,7 +279,7 @@ namespace IDEX.ViewModel
                 _lazyAdditionalRequirementsViewModelInstance = new Lazy<AdditionalRequirementsViewModel>(() => value); 
             }
         }
-        public AdditionalRequirementsViewModel()
+        public AdditionalRequirementsViewModel(IScreen hostScreen = null) : base(hostScreen)
         {
             SetDummyData();
             SetTitle();

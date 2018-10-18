@@ -8,7 +8,7 @@ using Xamarin.Forms;
 
 namespace IDEX.ViewModel
 {
-    class InstaPageViewModel : BaseViewModel
+    public class InstaPageViewModel : BaseViewModel
     {
         public Level SelectedLevel { get; set; } = OverviewScreenViewModel.SelectedRoom;
         public ICommand ItemClicked { get; set; }
@@ -196,7 +196,7 @@ namespace IDEX.ViewModel
             }
         }
 
-        public InstaPageViewModel()
+        public InstaPageViewModel(IScreen hostScreen = null) : base(hostScreen)
         {
             ItemClicked = new Command(ItemeClilckHandler);
             IsVisible = false;

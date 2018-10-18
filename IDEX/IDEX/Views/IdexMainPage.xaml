@@ -6,12 +6,11 @@
     x:Class="IDEX.IdexMainPage" Title="IDEX"
     xmlns:Custom="clr-namespace:CustomControls;assembly=CustomControls"
     NeedOverrideSoftBackButton="False"
+    x:TypeArguments="vms:MainPageViewModel"
+    xmlns:vms="clr-namespace:IDEX.ViewModel"
     xmlns:Converters="clr-namespace:IDEX.Converters"
     xmlns:Behavior="clr-namespace:IDEX.Behavior">
 
-    <views:BaseContentPage.Padding>
-        <OnPlatform iOS="0,10"/>
-    </views:BaseContentPage.Padding>
     <Page.Resources>
         <ResourceDictionary>
             <Converters:SelectedItemEventArgsToSelectedItemConverter x:Key="SelectedItemConverter"/>

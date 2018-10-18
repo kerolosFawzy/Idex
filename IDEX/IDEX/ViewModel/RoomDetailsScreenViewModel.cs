@@ -6,7 +6,7 @@ using Xamarin.Forms;
 
 namespace IDEX.ViewModel
 {
-    class RoomDetailsScreenViewModel : BaseViewModel
+    public class RoomDetailsScreenViewModel : BaseViewModel
     {
         public Level SelectedLevel { get; set; } = OverviewScreenViewModel.SelectedRoom;
 
@@ -100,7 +100,7 @@ namespace IDEX.ViewModel
         }
         #endregion
 
-        public RoomDetailsScreenViewModel()
+        public RoomDetailsScreenViewModel(IScreen hostScreen = null) : base(hostScreen)
         {
             SetRoomData();
             InstaCommand = ReactiveCommand.Create(InstaCommandHendler);

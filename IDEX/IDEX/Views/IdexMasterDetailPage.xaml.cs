@@ -11,10 +11,10 @@ namespace IDEX.View
         public IdexMasterDetailPage()
         {
             InitializeComponent();
-            CustomNavigationPage.SetHasNavigationBar(this, false);
+            NavigationPage.SetHasNavigationBar(this, false);
             MasterBehavior = MasterBehavior.Popover;
             MasterPage.ListView.ItemSelected += ListView_ItemSelected;
-            Detail = new CustomNavigationPage(new IdexMainPage());
+            Detail = new NavigationPage(new IdexMainPage());
         }
 
         private void ListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
@@ -26,12 +26,12 @@ namespace IDEX.View
                 
             if (item.Title.Equals("Home")) {
                 page.Title = "Home";
-                Detail = new CustomNavigationPage(new IdexMainPage());
+                Detail = new NavigationPage(new IdexMainPage());
             }
             else
             {
                 page.Title = item.Title;
-                Detail = new CustomNavigationPage(page);
+                Detail = new NavigationPage(page);
             }
                 
             IsPresented = false;

@@ -2,12 +2,12 @@
 
 namespace IDEX.Views
 {
-	public partial class InstaPage  
+	public partial class InstaPage : BaseContentPage<InstaPageViewModel>
 	{
-		public InstaPage()
+
+        public InstaPage()
 		{
             InitializeComponent();
-            BindingContext =new InstaPageViewModel(); 
         }
 	}
 }

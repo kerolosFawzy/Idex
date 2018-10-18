@@ -1,16 +1,20 @@
 ﻿using CustomControls.NavigationServices;
 using IDEX.ViewModel;
+using ReactiveUI.XamForms;
+using System.Reactive.Disposables;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace IDEX.Views
 {
     [XamlCompilation(XamlCompilationOptions.Compile)]
-    public class BaseContentPage : ContentPage
+    public class BaseContentPage<TViewModel> : ReactiveContentPage<TViewModel> where TViewModel : class
     {
+        protected readonly CompositeDisposable SubscriptionDisposables = new CompositeDisposable();
+
+
         protected override void OnAppearing()
         {
-            CustomNavigationPage.SetBarBackground(this, Color.FromHex("#008080"));
             CustomNavigationPage.SetTitleFont(this, Font.SystemFontOfSize(20));
             if (BindingContext is BaseViewModel viewAwair)
             {
@@ -25,6 +29,9 @@ namespace IDEX.Views
             {
                 viewAwair.DisAppearing();
             }
+
+            SubscriptionDisposables.Clear();
+
             base.OnDisappearing();
         }
         public void OnSoftBackButtonPressed()
@@ -35,7 +42,7 @@ namespace IDEX.Views
 
         public bool NeedOverrideSoftBackButton { get; set; } = false;
 
-       
+    
 
         //protected override bool OnBackButtonPressed()
         //{
@@ -50,11 +57,11 @@ namespace IDEX.Views
         //    // If you want to stop the back button
         //    return true;
         //}
-        
+
         #region Title and subTitle
 
         public static readonly BindableProperty FormattedTitleProperty =
-             BindableProperty.Create(nameof(FormattedTitle), typeof(FormattedString), typeof(BaseContentPage), null);
+             BindableProperty.Create(nameof(FormattedTitle), typeof(FormattedString), typeof(ContentPage), null);
         public FormattedString FormattedTitle
         {
             get { return (FormattedString)GetValue(FormattedTitleProperty); }
@@ -65,7 +72,7 @@ namespace IDEX.Views
         }
 
         public static readonly BindableProperty FormattedSubtitleProperty =
-            BindableProperty.Create(nameof(FormattedSubtitle), typeof(FormattedString), typeof(BaseContentPage), null);
+            BindableProperty.Create(nameof(FormattedSubtitle), typeof(FormattedString), typeof(ContentPage), null);
         public FormattedString FormattedSubtitle
         {
             get
@@ -80,7 +87,7 @@ namespace IDEX.Views
 
 
         public static readonly BindableProperty SubtitleProperty =
-            BindableProperty.Create(nameof(Subtitle), typeof(string), typeof(BaseContentPage), null);
+            BindableProperty.Create(nameof(Subtitle), typeof(string), typeof(ContentPage), null);
         public string Subtitle
         {
             get { return (string)GetValue(SubtitleProperty); }

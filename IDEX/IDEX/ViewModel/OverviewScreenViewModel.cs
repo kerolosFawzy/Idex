@@ -10,14 +10,14 @@ using Xamarin.Forms;
 
 namespace IDEX.ViewModel
 {
-    class OverviewScreenViewModel : BaseViewModel
+    public class OverviewScreenViewModel : BaseViewModel
     {
         public ICommand ShowAll { get; set; }
         public ICommand ItemTapped { get; set; }
         readonly Color PieChartColor = Color.FromHex("#008080");
 
 
-        public OverviewScreenViewModel()
+        public OverviewScreenViewModel(IScreen hostScreen = null) : base(hostScreen)
         {
             AddDummyData();
             SetFirstListOfLevels();
@@ -30,9 +30,9 @@ namespace IDEX.ViewModel
 
         #region class propfull(s)
         public bool ShowAllFlag { get; set; }
-        private FormattedString _formattedTitle;
+        private string _formattedTitle;
 
-        public FormattedString FormattedTitle
+        public string FormattedTitle
         {
             get => _formattedTitle;
             set => this.RaiseAndSetIfChanged(ref _formattedTitle, value);
@@ -156,19 +156,20 @@ namespace IDEX.ViewModel
         }
         private void HandleTitleSet(Level level)
         {
-            var formattedTitle = new FormattedString();
-            formattedTitle.Spans.Add
-                (new Span
-                {
-                    Text = level.Name
-                ,
-                    FontAttributes = FontAttributes.Bold
-                ,
-                    FontSize = 20
-                ,
-                    TextColor = Color.White
-                });
-            FormattedTitle = formattedTitle;
+            //var formattedTitle = new FormattedString();
+            //formattedTitle.Spans.Add
+            //    (new Span
+            //    {
+            //        Text = level.Name
+            //    ,
+            //        FontAttributes = FontAttributes.Bold
+            //    ,
+            //        FontSize = 20
+            //    ,
+            //        TextColor = Color.White
+            //    });
+            ////FormattedTitle = formattedTitle;
+            FormattedTitle = level.Name;
             Level newLevel = level;
             FormattedSubTitle = "";
             while (newLevel.Parent != null)
@@ -250,15 +251,15 @@ namespace IDEX.ViewModel
         }
         void SetFirstTitle()
         {
-            var formattedTitle = new FormattedString();
-            formattedTitle.Spans.Add(new Span
-            {
-                Text = "Site",
-                FontSize = 20,
-                TextColor = Color.White,
-                FontAttributes = FontAttributes.Bold
-            });
-            FormattedTitle = formattedTitle;
+            //var formattedTitle = new FormattedString();
+            //formattedTitle.Spans.Add(new Span
+            //{
+            //    Text = "Site",
+            //    FontSize = 20,
+            //    TextColor = Color.White,
+            //    FontAttributes = FontAttributes.Bold
+            //});
+            FormattedTitle = "Site";
         }
 
         #region setting level data 

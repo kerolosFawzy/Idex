@@ -7,12 +7,30 @@
              FormattedTitle="{Binding FormattedTitle}"
              Subtitle="{Binding Subtitle}"
              xmlns:Converters="clr-namespace:IDEX.Converters"
+             xmlns:vms="clr-namespace:IDEX.ViewModel"
+             x:TypeArguments="vms:OverviewScreenViewModel"
              xmlns:Behavior="clr-namespace:IDEX.Behavior"
              xmlns:Custom="clr-namespace:CustomControls;assembly=CustomControls"
              NeedOverrideSoftBackButton="True">
-
+    
+    <NavigationPage.TitleView>
+        <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Spacing="10" BackgroundColor="{StaticResource DarkBlueColor}" Orientation="Horizontal">
+            <Image Source="back_arrow.svg" BackgroundColor="{StaticResource DarkBlueColor}">
+                <Image.GestureRecognizers>
+                    <TapGestureRecognizer 
+                        Command="{Binding}"
+                        />
+                </Image.GestureRecognizers>
+            </Image>
+            <StackLayout>
+            <Custom:ExtLabel Text="{Binding FormattedTitle}" TextColor="White" FontSize="Medium" FontAttributes="Bold"/>
+            <Custom:ExtLabel Text="{Binding Subtitle}" FontSize="Small" />
+        </StackLayout>
+        </StackLayout>
+       
+    </NavigationPage.TitleView>
     <ContentPage.ToolbarItems >
-        <ToolbarItem Name="ShowAll" Order="Secondary" Text="{Binding ShowAllText}" Priority="0"  Command="{Binding ShowAll}"/>
+        <ToolbarItem x:Name="ShowAll" Order="Secondary" Text="{Binding ShowAllText}" Priority="0"  Command="{Binding ShowAll}"/>
         <ToolbarItem Name="ScanBarcode" Order="Secondary" Text="Scan Barcode"  Priority="1" />
     </ContentPage.ToolbarItems>
 

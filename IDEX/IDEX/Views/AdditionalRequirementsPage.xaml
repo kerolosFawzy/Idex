@@ -4,6 +4,8 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     x:Class="IDEX.Views.AdditionalRequirementsPage"
     NeedOverrideSoftBackButton="True" 
+    x:TypeArguments="vms:AdditionalRequirementsViewModel"
+    xmlns:vms="clr-namespace:IDEX.ViewModel"
     xmlns:views="clr-namespace:IDEX.Views"
     xmlns:input="clr-namespace:Plugin.InputKit.Shared.Controls;assembly=Plugin.InputKit"
     FormattedTitle="{Binding FormattedTitle}" 

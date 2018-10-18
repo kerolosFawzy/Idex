@@ -2,7 +2,7 @@
 
 namespace IDEX.Model
 {
-    class InitialModel :BaseModel 
+    public class InitialModel : BaseModel 
     {
         public int ID { get; set; }
         public string Name { get; set; }

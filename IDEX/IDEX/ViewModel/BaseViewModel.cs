@@ -3,6 +3,7 @@ using CustomControls;
 using IDEX.Views;
 using ReactiveUI;
 using Splat;
+using System.Reactive.Disposables;
 using Xamarin.Forms;
 
 namespace IDEX.ViewModel
@@ -35,6 +36,7 @@ namespace IDEX.ViewModel
         }
 
         protected readonly ViewModelActivator viewModelActivator = new ViewModelActivator();
+        protected readonly CompositeDisposable subscriptionDisposables = new CompositeDisposable();
 
         public BaseViewModel(IScreen hostScreen = null)
         {
