@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ReactiveUI;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Input;
@@ -115,9 +116,8 @@ namespace CustomControls
         }
         void Handle_Clicked(object sender, EventArgs e)
         {
-            ItemClicked?.Execute(sender);
-
-            SelectElement();
+              ItemClicked?.Execute(sender);
+              SelectElement();
         }
 
         private void SelectElement()

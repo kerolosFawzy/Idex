@@ -5,6 +5,8 @@ using IDEX.Views;
 using Microsoft.AppCenter;
 using Microsoft.AppCenter.Analytics;
 using Microsoft.AppCenter.Crashes;
+using ReactiveUI;
+using Splat;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 

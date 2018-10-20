@@ -39,17 +39,17 @@
                          HorizontalOptions="End">Inspection(s)</Custom:ExtLabel>
 
         <Custom:StepProgressBarControl     Grid.Row="1" Grid.ColumnSpan="3" 
+                                           x:Name="StepProgressBarControl"
                                            HorizontalOptions="FillAndExpand" 
-                                           StepColor="{StaticResource DarkBlueColor}" Steps="3" 
-                                           Margin="10,5,10,5"
+                                           StepColor="{StaticResource DarkBlueColor}" 
+                                           Margin="10,5,10,5" Steps="3" 
                                            ItemClicked="{Binding ItemSelected}"
-                                           ItemSelectedIndex ="{Binding SelectedIndexs}"
                                            />
 
         <!--#region this is the two hidden lists -->
-        <Custom:RepeaterView Grid.Row="2" Grid.Column="0"
+        <Custom:RepeaterView Grid.Row="2" Grid.Column="0" x:Name="SelectedCustomer"
                       Grid.ColumnSpan="1" HorizontalOptions="Start"
-                      ItemsSource="{Binding SelectedCustomer}" >
+                      >
             <Custom:RepeaterView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
@@ -63,8 +63,8 @@
         </Custom:RepeaterView>
 
         <Custom:RepeaterView 
-                Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" 
-                HorizontalOptions="StartAndExpand" ItemsSource="{Binding SelectedSchemes}">
+                Grid.Row="2" Grid.Column="1" Grid.ColumnSpan="2" x:Name="SelectedSchemes"
+                HorizontalOptions="StartAndExpand">
             <Custom:RepeaterView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
@@ -80,13 +80,13 @@
 
         <Frame Grid.Row="3" Grid.ColumnSpan="3" BorderColor="#ECECEC"
                    Margin="10" VerticalOptions="Start" MinimumHeightRequest="100" >
-            <ListView x:Name="MainPageListView" ItemsSource="{Binding ItemListSource}" 
+
+            <ListView x:Name="MainPageListView" 
                       VerticalOptions="FillAndExpand" 
                       Margin="10" HasUnevenRows="False" SelectionMode="None" 
                      >
                 <ListView.Behaviors>
-                    <Behavior:EventToCommandBehavior EventName="ItemTapped"
-                                               Command="{Binding ItemTapped}"
+                    <Behavior:EventToCommandBehavior x:Name="ItemTapped" EventName="ItemTapped"
                                                Converter="{StaticResource SelectedItemConverter}" />
                 </ListView.Behaviors>
                 <ListView.ItemTemplate>
@@ -110,8 +110,8 @@
                          Grid.ColumnSpan="2" Orientation="Horizontal" 
                          HorizontalOptions="End">
 
-            <Custom:ExtButton x:Name="BackButton" IsVisible="{Binding BackBtnVisibilty}"
-                                  Text="Back" FontAttributes="Bold" Command="{Binding ReactiveBackButtonClicked}"
+            <Custom:ExtButton x:Name="BackButton" 
+                                  Text="Back" FontAttributes="Bold" 
                                   TextColor="Black" BackgroundColor="White" 
                                   WidthRequest="{OnPlatform iOS=100 , Android=100}"                         
                                   Style="{StaticResource FirstScreenButtons}" 
@@ -121,7 +121,6 @@
                                   Text="{Binding NextButtonTitle}" 
                                   Style="{StaticResource FirstScreenButtons}" 
                                   WidthRequest="{OnPlatform iOS=100 , Android=100}"
-                                  Command="{Binding ReactiveNextItemClicked}"
                                   />
 
         </StackLayout>

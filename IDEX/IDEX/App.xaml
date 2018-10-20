@@ -6,7 +6,7 @@
         <ResourceDictionary>
             <Color x:Key="DarkBlueColor">#008080</Color>
             <Style TargetType="NavigationPage">
-                <Setter  Property="BarBackgroundColor" Value="#008080" />
+                <Setter Property="BarBackgroundColor" Value="#008080" />
             </Style>
             <Style x:Key="FrameStyle" TargetType="Frame">
                 <Setter Property="HasShadow" Value="True"/>

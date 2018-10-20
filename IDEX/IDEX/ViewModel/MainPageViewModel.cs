@@ -33,11 +33,12 @@ namespace IDEX.ViewModel
 
         #region Commands for the view
         public ICommand ItemSelected { get; set; }
-        public ICommand ItemTapped { get; set; }
+        public ReactiveCommand ItemTapped { get; set; }
         public ReactiveCommand ReactiveBackButtonClicked { get; set; }
         public ReactiveCommand ReactiveNextItemClicked { get; private set; }
         #endregion
 
+        #region the singletoon
         private static readonly Lazy<MainPageViewModel> _lazyMainPageViewModelInstance
             = new Lazy<MainPageViewModel>(() => new MainPageViewModel());
 
@@ -48,24 +49,20 @@ namespace IDEX.ViewModel
                 return _lazyMainPageViewModelInstance.Value;
             }
         }
+        #endregion
 
         public MainPageViewModel(IScreen hostScreen = null) : base(hostScreen)
         {
             flag = 0;
             AddDummyData();
             ItemSelected = new Command(HandleItemClicked);
-            ItemTapped = new Command(HandleItemTapped);
+            ItemTapped = ReactiveCommand.Create<Object>(HandleItemTapped);
             ReactiveBackButtonClicked = ReactiveCommand.Create(HandleReactiveBackButtonClicked);
             ReactiveNextItemClicked = ReactiveCommand.Create(HandleReactiveNextItemClicked);
             SetReactiveListListen();
         }
 
-        private void HandleItemTapped(object obj)
-        {
-            var Elemnet = obj as InitialModel;
-            Elemnet.IsChecked = !Elemnet.IsChecked;
-        }
-
+  
         /*
          * this is reactive ui listener on Reactive list 
          * there are listing for any change on isCheck prop
@@ -103,6 +100,13 @@ namespace IDEX.ViewModel
         }
 
         #region Handle all buttons on the view and listviews
+        private void HandleItemTapped(object obj)
+        {
+            var Elemnet = obj as InitialModel;
+            Elemnet.IsChecked = !Elemnet.IsChecked;
+        }
+
+
 
         private void HandleReactiveBackButtonClicked()
         {
