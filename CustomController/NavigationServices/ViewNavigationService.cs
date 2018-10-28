@@ -19,10 +19,10 @@ namespace CustomControls.NavigationServices
 
         private readonly object _sync = new object();
         private readonly Dictionary<string, Type> _pagesByKey = new Dictionary<string, Type>();
-        private readonly Stack<NavigationPage> _navigationPageStack =
-            new Stack<NavigationPage>();
+        private readonly Stack<CustomNavigationPage> _navigationPageStack =
+            new Stack<CustomNavigationPage>();
 
-        private NavigationPage CurrentNavigationPage => _navigationPageStack.Peek();
+        private CustomNavigationPage CurrentNavigationPage => _navigationPageStack.Peek();
 
         public void Configure(string pageKey, Type pageType)
         {
@@ -44,7 +44,7 @@ namespace CustomControls.NavigationServices
             var rootPage = GetPage(rootPageKey);
             _navigationPageStack.Clear();
 
-            var mainPage = new NavigationPage(rootPage);
+            var mainPage = new CustomNavigationPage(rootPage);
             _navigationPageStack.Push(mainPage);
             return mainPage;
         }
@@ -153,8 +153,8 @@ namespace CustomControls.NavigationServices
         public async Task NavigateModalAsync(string pageKey, object parameter, bool animated = true)
         {
             var page = GetPage(pageKey, parameter);
-            NavigationPage.SetHasNavigationBar(page, true);
-            var modalNavigationPage = new NavigationPage(page);
+            CustomNavigationPage.SetHasNavigationBar(page, true);
+            var modalNavigationPage = new CustomNavigationPage(page);
             await CurrentNavigationPage.Navigation.PushModalAsync(modalNavigationPage, animated);
             _navigationPageStack.Push(modalNavigationPage);
         }

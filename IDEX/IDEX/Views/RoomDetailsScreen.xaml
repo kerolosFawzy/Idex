@@ -16,35 +16,41 @@
         <ToolbarItem Name="AcceptAll" Text="Accept All" Priority="1" Order="Secondary" Command=""  />
         <ToolbarItem Name="camera" Icon="camera.png" Priority="0" Order="Primary" Command=""  />
         <ToolbarItem Name="addfile" Icon="addfile.png"  Priority="1" Order="Primary" Command=""  />
-        <ToolbarItem Name="UseExtra" Text="{Binding UseExtra}"  Priority="0" Order="Secondary" Command="{Binding ChangePageCommand}"  />
+        <ToolbarItem x:Name="UseExtra"  Priority="0" Order="Secondary" />
     </ContentPage.ToolbarItems>
     
     <ContentPage.Content>
         <ScrollView>
             <StackLayout Padding="20" Spacing="5" BackgroundColor="White" Orientation="Vertical"  HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+               
                 <StackLayout Spacing="0">
                     <Label Style="{StaticResource secondaryLabels}" Text="ID" />
-                    <Label Style="{StaticResource BoldLabel}" Text="{Binding ID}" />
+                    <Label x:Name="ID" Style="{StaticResource BoldLabel}"  />
                 </StackLayout>
+                
                 <StackLayout Spacing="0">
                     <Label Text="DOOR NO." Style="{StaticResource secondaryLabels}" />
-                    <Label Text="{Binding DoorNo}" Style="{StaticResource BoldLabel}" />
+                    <Label x:Name="DoorNo"  Style="{StaticResource BoldLabel}" />
                 </StackLayout>
+                
                 <StackLayout Spacing="0">
                     <Label Text="NAME" Style="{StaticResource secondaryLabels}"/>
-                    <Label Text="{Binding Name}" Style="{StaticResource BoldLabel}"/>
+                    <Label x:Name="Name"  Style="{StaticResource BoldLabel}"/>
                 </StackLayout>
+                
                 <StackLayout Spacing="0">
                     <Label Text="AREA" Style="{StaticResource secondaryLabels}"/>
-                    <Label Text="{Binding Area}" Style="{StaticResource BoldLabel}"/>
+                    <Label x:Name="Area" Style="{StaticResource BoldLabel}"/>
                 </StackLayout>
+                
                 <StackLayout Spacing="0">
                     <Label Text="HYG.LEVEL" Style="{StaticResource secondaryLabels}"/>
-                    <Label Text="{Binding HygLevel}" Style="{StaticResource BoldLabel}"/>
+                    <Label x:Name="HygLevel" Style="{StaticResource BoldLabel}"/>
                 </StackLayout>
+                
                 <StackLayout Spacing="0">
                     <Label Text="HYG.TYPE" Style="{StaticResource secondaryLabels}"/>
-                    <Label Text="{Binding HygType}" Style="{StaticResource BoldLabel}"/>
+                    <Label x:Name="HygType" Style="{StaticResource BoldLabel}"/>
                 </StackLayout>
                 
                 <!--<StackLayout Orientation="Horizontal" Margin="0,16">
@@ -54,23 +60,23 @@
                 
                 <StackLayout Margin="0,20,0,0" Orientation="Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="Center" Spacing="12">
                     
-                    <Custom:ExtFrameLayout Command="{Binding InstaCommand}" Style="{StaticResource FrameStyle}" >
+                    <Custom:ExtFrameLayout x:Name="Insta" Style="{StaticResource FrameStyle}" >
                         <StackLayout Orientation="Horizontal">
-                            <ffimageloadingsvg:SvgCachedImage Source="{Binding InstaSvgPath}" Style="SvgStyle" HorizontalOptions="Start" WidthRequest="32" HeightRequest="32" Margin="5"/>
+                            <ffimageloadingsvg:SvgCachedImage x:Name="InstaSvgPath" HorizontalOptions="Start" WidthRequest="32" HeightRequest="32" Margin="5"/>
                             <Label Text="INSTA 800" Style="{StaticResource BoldLabel}" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
                         </StackLayout>
                     </Custom:ExtFrameLayout>
 
-                    <Custom:ExtFrameLayout Command="{Binding HygieneCommand}" Style="{StaticResource FrameStyle}">
+                    <Custom:ExtFrameLayout x:Name="Hygiene" Command="{Binding HygieneCommand}" Style="{StaticResource FrameStyle}">
                         <StackLayout Orientation="Horizontal">
-                            <ffimageloadingsvg:SvgCachedImage Source="{Binding HygSvgPath}" HorizontalOptions="Start" WidthRequest="32" HeightRequest="32" Margin="5"/>
+                            <ffimageloadingsvg:SvgCachedImage x:Name="HygSvgPath" Source="{Binding HygSvgPath}" HorizontalOptions="Start" WidthRequest="32" HeightRequest="32" Margin="5"/>
                             <Label Text="Hygiene" Style="{StaticResource BoldLabel}" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
                         </StackLayout>
                     </Custom:ExtFrameLayout>
 
-                    <Custom:ExtFrameLayout Command="{Binding AdditionalCommand}" Style="{StaticResource FrameStyle}">
+                    <Custom:ExtFrameLayout x:Name="Additional" Command="{Binding AdditionalCommand}" Style="{StaticResource FrameStyle}">
                         <StackLayout Orientation="Horizontal">
-                            <ffimageloadingsvg:SvgCachedImage Source="{Binding AdditionalSvgPath}" HorizontalOptions="Start" WidthRequest="32" HeightRequest="32" Margin="5"/>
+                            <ffimageloadingsvg:SvgCachedImage x:Name="AdditionalSvgPath"  Source="{Binding AdditionalSvgPath}" HorizontalOptions="Start" WidthRequest="32" HeightRequest="32" Margin="5"/>
                             <Label Text="Additional Requirements" Style="{StaticResource BoldLabel}" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
                         </StackLayout>
                     </Custom:ExtFrameLayout>

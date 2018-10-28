@@ -12,7 +12,7 @@ namespace IDEX.ViewModel
 {
     public class OverviewScreenViewModel : BaseViewModel
     {
-        public ICommand ShowAll { get; set; }
+        public ReactiveCommand ShowAll { get; set; }
         public ICommand ItemTapped { get; set; }
         readonly Color PieChartColor = Color.FromHex("#008080");
 
@@ -23,7 +23,7 @@ namespace IDEX.ViewModel
             SetFirstListOfLevels();
             SetFirstTitle();
             ItemTapped = new Command<Level>(HandleItemTapped);
-            ShowAll = new Command(ShowAllCommand);
+            ShowAll = ReactiveCommand.Create(ShowAllCommand);
             ShowAllFlag = true;
         }
         public static Level SelectedRoom { get; set; }
@@ -51,6 +51,16 @@ namespace IDEX.ViewModel
             get => _subtitle;
             set => this.RaiseAndSetIfChanged(ref _subtitle, value);
         }
+
+        private bool _subtitleVisible=false;
+
+        public bool SubtitleVisible
+        {
+            get => _subtitleVisible;
+            set => this.RaiseAndSetIfChanged(ref _subtitleVisible, value);
+        }
+
+
         private bool _isVisible = false;
 
         public bool IsVisible
@@ -121,7 +131,7 @@ namespace IDEX.ViewModel
                 NavigationHandler(SelecedLevel);
             }
         }
-        private void ShowAllCommand(object obj)
+        private void ShowAllCommand()
         {
         //    var view = obj as MenuItem;
             ShowAllFlag = !ShowAllFlag;
@@ -180,6 +190,11 @@ namespace IDEX.ViewModel
             if (!string.IsNullOrEmpty(FormattedSubTitle))
                 FormattedSubTitle = FormattedSubTitle.Remove(FormattedSubTitle.Length - 1);
             Subtitle = FormattedSubTitle;
+
+            if (string.IsNullOrEmpty(Subtitle))
+                SubtitleVisible = false;
+            else
+                SubtitleVisible = true;
         }
         void HandleMenuItemText()
         {

@@ -7,7 +7,6 @@ using Xamarin.Forms.Xaml;
 
 namespace IDEX.Views
 {
-    [XamlCompilation(XamlCompilationOptions.Compile)]
     public class BaseContentPage<TViewModel> : ReactiveContentPage<TViewModel> where TViewModel : class
     {
         protected readonly CompositeDisposable SubscriptionDisposables = new CompositeDisposable();
@@ -15,7 +14,9 @@ namespace IDEX.Views
 
         protected override void OnAppearing()
         {
-            CustomNavigationPage.SetTitleFont(this, Font.SystemFontOfSize(20));
+            CustomNavigationPage.SetBarBackground(this, Color.FromHex("008080"));
+
+            //CustomNavigationPage.SetTitleFont(this, Font.SystemFontOfSize(20));
             if (BindingContext is BaseViewModel viewAwair)
             {
                 viewAwair.OnAppearing();
@@ -42,7 +43,7 @@ namespace IDEX.Views
 
         public bool NeedOverrideSoftBackButton { get; set; } = false;
 
-    
+
 
         //protected override bool OnBackButtonPressed()
         //{
@@ -58,45 +59,47 @@ namespace IDEX.Views
         //    return true;
         //}
 
-        #region Title and subTitle
+        /*
+         * old code not needed 
+    #region Title and subTitle
 
-        public static readonly BindableProperty FormattedTitleProperty =
-             BindableProperty.Create(nameof(FormattedTitle), typeof(FormattedString), typeof(ContentPage), null);
-        public FormattedString FormattedTitle
+    public static readonly BindableProperty FormattedTitleProperty =
+         BindableProperty.Create(nameof(FormattedTitle), typeof(FormattedString), typeof(ContentPage), null);
+    public FormattedString FormattedTitle
+    {
+        get { return (FormattedString)GetValue(FormattedTitleProperty); }
+        set
         {
-            get { return (FormattedString)GetValue(FormattedTitleProperty); }
-            set
-            {
-                SetValue(FormattedTitleProperty, value);
-            }
+            SetValue(FormattedTitleProperty, value);
         }
+    }
 
-        public static readonly BindableProperty FormattedSubtitleProperty =
-            BindableProperty.Create(nameof(FormattedSubtitle), typeof(FormattedString), typeof(ContentPage), null);
-        public FormattedString FormattedSubtitle
+    public static readonly BindableProperty FormattedSubtitleProperty =
+        BindableProperty.Create(nameof(FormattedSubtitle), typeof(FormattedString), typeof(ContentPage), null);
+    public FormattedString FormattedSubtitle
+    {
+        get
         {
-            get
-            {
-                return (FormattedString)GetValue(FormattedSubtitleProperty);
-            }
-            set
-            {
-                SetValue(FormattedSubtitleProperty, value);
-            }
+            return (FormattedString)GetValue(FormattedSubtitleProperty);
         }
-
-
-        public static readonly BindableProperty SubtitleProperty =
-            BindableProperty.Create(nameof(Subtitle), typeof(string), typeof(ContentPage), null);
-        public string Subtitle
+        set
         {
-            get { return (string)GetValue(SubtitleProperty); }
-            set
-            {
-                SetValue(SubtitleProperty, value);
-            }
+            SetValue(FormattedSubtitleProperty, value);
         }
-        #endregion
+    }
 
+
+    public static readonly BindableProperty SubtitleProperty =
+        BindableProperty.Create(nameof(Subtitle), typeof(string), typeof(ContentPage), null);
+    public string Subtitle
+    {
+        get { return (string)GetValue(SubtitleProperty); }
+        set
+        {
+            SetValue(SubtitleProperty, value);
+        }
+    }
+    #endregion
+    */
     }
 }

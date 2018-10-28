@@ -3,18 +3,46 @@ using CoreGraphics;
 using CustomControls.NavigationServices;
 using Foundation;
 using IDEX.iOS;
+using IDEX.ViewModel;
 using IDEX.Views;
 using System;
 using UIKit;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.iOS;
 
-[assembly: ExportRenderer(typeof(BaseContentPage), typeof(CustomNavigationRenderer))]
+[assembly: ExportRenderer(typeof(CustomNavigationPage), typeof(CustomNavigationRenderer))]
 
 namespace IDEX.iOS
 {
     public class CustomNavigationRenderer : PageRenderer
     {
+
+        public override void ViewWillAppear(bool animated)
+        {
+            base.ViewWillAppear(animated);
+
+            var page = Element as BaseContentPage<BaseViewModel>;
+            if (page == null) return;
+
+            #region for soft back button
+
+            var root = NavigationController.TopViewController;
+            if (!page.NeedOverrideSoftBackButton) return;
+            var title = NavigationPage.GetBackButtonTitle(Element);
+
+            root.NavigationItem.SetLeftBarButtonItem(
+                new UIBarButtonItem(title, UIBarButtonItemStyle.Plain, (sender, args) =>
+                {
+                    page.OnSoftBackButtonPressed();
+                }), true);
+
+            #endregion
+        }
+
+
+        /*
+        this is old code not needed now 
+        --------------------------------------------------------------------------------------------------
         public override void ViewWillAppear(bool animated)
         {
             base.ViewWillAppear(animated);
@@ -197,7 +225,7 @@ namespace IDEX.iOS
                         titleView.BackgroundColor = UIColor.FromPatternImage(image);
 
                     }
-                    catch (Exception )
+                    catch (Exception)
                     {
                         titleView.BackgroundColor = CustomNavigationPage.GetTitleFillColor(Element)?.ToUIColor() ?? UIColor.Clear;
 
@@ -592,5 +620,7 @@ namespace IDEX.iOS
             subtitleLabel = null;
             Element.PropertyChanged -= Element_PropertyChanged;
         }
+
+    */
     }
 }

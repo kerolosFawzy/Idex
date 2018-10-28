@@ -86,7 +86,7 @@
                       Margin="10" HasUnevenRows="False" SelectionMode="None" 
                      >
                 <ListView.Behaviors>
-                    <Behavior:EventToCommandBehavior x:Name="ItemTapped" EventName="ItemTapped"
+                    <Behavior:EventToCommandBehavior x:Name="ItemTapped" EventName="ItemTapped" Command="{Binding ItemTapped}"
                                                Converter="{StaticResource SelectedItemConverter}" />
                 </ListView.Behaviors>
                 <ListView.ItemTemplate>

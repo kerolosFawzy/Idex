@@ -4,8 +4,7 @@
              xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="IDEX.Views.OverviewPage"
-             FormattedTitle="{Binding FormattedTitle}"
-             Subtitle="{Binding Subtitle}"
+
              xmlns:Converters="clr-namespace:IDEX.Converters"
              xmlns:vms="clr-namespace:IDEX.ViewModel"
              x:TypeArguments="vms:OverviewScreenViewModel"
@@ -15,22 +14,15 @@
     
     <NavigationPage.TitleView>
         <StackLayout HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Spacing="10" BackgroundColor="{StaticResource DarkBlueColor}" Orientation="Horizontal">
-            <Image Source="back_arrow.svg" BackgroundColor="{StaticResource DarkBlueColor}">
-                <Image.GestureRecognizers>
-                    <TapGestureRecognizer 
-                        Command="{Binding}"
-                        />
-                </Image.GestureRecognizers>
-            </Image>
             <StackLayout>
-            <Custom:ExtLabel Text="{Binding FormattedTitle}" TextColor="White" FontSize="Medium" FontAttributes="Bold"/>
-            <Custom:ExtLabel Text="{Binding Subtitle}" FontSize="Small" />
+            <Custom:ExtLabel Text="{Binding FormattedTitle}" TextColor="White" FontSize="20" FontAttributes="Bold"/>
+                <Custom:ExtLabel Text="{Binding Subtitle}" TextColor="White" FontSize="Small" IsVisible="{Binding SubtitleVisible}" />
         </StackLayout>
         </StackLayout>
        
     </NavigationPage.TitleView>
     <ContentPage.ToolbarItems >
-        <ToolbarItem x:Name="ShowAll" Order="Secondary" Text="{Binding ShowAllText}" Priority="0"  Command="{Binding ShowAll}"/>
+        <ToolbarItem x:Name="ShowAll" Order="Secondary" Priority="0"/>
         <ToolbarItem Name="ScanBarcode" Order="Secondary" Text="Scan Barcode"  Priority="1" />
     </ContentPage.ToolbarItems>
 
@@ -41,19 +33,17 @@
     </ContentPage.Resources>
 
     <StackLayout Orientation="Horizontal" HorizontalOptions="Fill">
-        <Label Text="All Rooms Are Completed" FontSize="Large" IsVisible="{Binding IsVisible}"
+        <Label Text="All Rooms Are Completed" FontSize="Large" x:Name="EmptyViewLabel" 
                HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand" />
         <Custom:ExtListView HasUnevenRows="True" 
-                  ItemsSource="{Binding ItemListSource}" 
                   SeparatorColor="Black" VerticalOptions="FillAndExpand" 
                   HorizontalOptions="Fill"
                   SelectionMode="None"
                   x:Name="OverviewListView"
-                  IsVisible="{Binding ListViewIsVisible}"
                   >
             <ListView.Behaviors>
-                <Behavior:EventToCommandBehavior EventName="ItemTapped"
-                                               Command="{Binding ItemTapped}"
+                <Behavior:EventToCommandBehavior EventName="ItemTapped" x:Name="ItemTapped"
+                                                 Command="{Binding ItemTapped}"
                                                Converter="{StaticResource SelectedItemConverter}" />
             </ListView.Behaviors>
 
@@ -98,6 +88,5 @@
                 </DataTemplate>
             </ListView.ItemTemplate>
         </Custom:ExtListView>
-
     </StackLayout>
 </views:BaseContentPage>

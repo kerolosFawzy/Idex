@@ -1,10 +1,14 @@
-﻿using IDEX.ViewModel;
+﻿using CustomControls.NavigationServices;
+using IDEX.ViewModel;
 using IDEX.Views;
 using ReactiveUI;
+using System.Drawing;
 using System.Reactive.Disposables;
+using Xamarin.Forms.Xaml;
 
 namespace IDEX
 {
+    [XamlCompilation(XamlCompilationOptions.Compile)]
     public partial class IdexMainPage : BaseContentPage<MainPageViewModel>
     {
         public IdexMainPage(){
@@ -19,7 +23,7 @@ namespace IDEX
             {
                 this.BindCommand(ViewModel, x => x.ReactiveNextItemClicked, x => x.NextButton);
                 this.BindCommand(ViewModel, x => x.ReactiveBackButtonClicked, x => x.BackButton);
-                this.BindCommand(ViewModel, x => x.ItemTapped, x => x.ItemTapped);
+                //this.BindCommand(ViewModel, x => x.ItemTapped, x => x.ItemTapped);
 
                 this.OneWayBind(ViewModel, x => x.SelectedIndexs, x => x.StepProgressBarControl.ItemSelectedIndex).DisposeWith(SubscriptionDisposables);
                 this.OneWayBind(ViewModel, x => x.SelectedCustomer, x => x.SelectedCustomer.ItemsSource).DisposeWith(SubscriptionDisposables);

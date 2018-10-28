@@ -1,5 +1,6 @@
 ﻿using IDEX.ViewModel;
 using ReactiveUI;
+using System.Reactive.Disposables;
 using Xamarin.Forms.Xaml;
 
 namespace IDEX.Views
@@ -18,6 +19,11 @@ namespace IDEX.Views
             this.WhenActivated(disposables =>
             {
                 this.BindCommand(ViewModel, x => x.ShowAll, x => x.ShowAll);
+
+                this.OneWayBind(ViewModel, x => x.ShowAllText, x => x.ShowAll.Text).DisposeWith(SubscriptionDisposables);
+                this.OneWayBind(ViewModel, x => x.IsVisible, x => x.EmptyViewLabel.IsVisible).DisposeWith(SubscriptionDisposables);
+                this.OneWayBind(ViewModel, x => x.ItemListSource, x => x.OverviewListView.ItemsSource).DisposeWith(SubscriptionDisposables);
+                this.OneWayBind(ViewModel, x => x.ListViewIsVisible, x => x.OverviewListView.IsVisible).DisposeWith(SubscriptionDisposables);
             });
         }
 

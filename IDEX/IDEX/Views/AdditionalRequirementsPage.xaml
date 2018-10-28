@@ -8,8 +8,6 @@
     xmlns:vms="clr-namespace:IDEX.ViewModel"
     xmlns:views="clr-namespace:IDEX.Views"
     xmlns:input="clr-namespace:Plugin.InputKit.Shared.Controls;assembly=Plugin.InputKit"
-    FormattedTitle="{Binding FormattedTitle}" 
-    Subtitle="{Binding Subtitle}"
     xmlns:effects="clr-namespace:IDEX.Effects"
     xmlns:Behavior="clr-namespace:IDEX.Behavior"
     xmlns:custom="clr-namespace:CustomControls;assembly=CustomControls" >

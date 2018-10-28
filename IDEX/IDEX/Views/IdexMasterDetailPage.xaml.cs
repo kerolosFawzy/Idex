@@ -11,10 +11,10 @@ namespace IDEX.View
         public IdexMasterDetailPage()
         {
             InitializeComponent();
-            NavigationPage.SetHasNavigationBar(this, false);
+            CustomNavigationPage.SetHasNavigationBar(this, false);
             MasterBehavior = MasterBehavior.Popover;
             MasterPage.ListView.ItemSelected += ListView_ItemSelected;
-            Detail = new NavigationPage(new IdexMainPage());
+            Detail = new CustomNavigationPage(new IdexMainPage());
         }
 
         private void ListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)

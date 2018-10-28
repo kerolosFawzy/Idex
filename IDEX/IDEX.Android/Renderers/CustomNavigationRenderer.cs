@@ -1,21 +1,11 @@
 ﻿using System;
-using System.ComponentModel;
-using System.Linq;
 using System.Reflection;
-using Android.App;
 using Android.Content.Res;
-using Android.Graphics;
-using Android.Graphics.Drawables;
-using Android.Support.V7.Widget;
-using Android.Util;
-using Android.Views;
-using Android.Widget;
 using CustomControls.NavigationServices;
 using IDEX.Droid;
 using IDEX.ViewModel;
 using IDEX.Views;
 using Xamarin.Forms;
-using Xamarin.Forms.Platform.Android;
 using Xamarin.Forms.Platform.Android.AppCompat;
 using AToolbar = Android.Support.V7.Widget.Toolbar;
 
@@ -27,6 +17,104 @@ namespace IDEX.Droid
     public class CustomNavigationRenderer : NavigationPageRenderer, Android.Views.View.IOnClickListener
     {
 
+        //protected override void SetupPageTransition(Android.Support.V4.App.FragmentTransaction transaction, bool isPush)
+        //{
+        //    if (isPush)
+        //        transaction.SetCustomAnimations(Resource.Animation.enter_from_right, Resource.Animation.exit_to_left,
+        //            Resource.Animation.enter_from_left, Resource.Animation.exit_to_right);
+        //    else
+        //    {
+        //        transaction.SetCustomAnimations(Resource.Animation.enter_from_left, Resource.Animation.exit_to_right,
+        //            Resource.Animation.enter_from_right, Resource.Animation.exit_to_left);
+
+        //    }
+        //}
+
+        private static readonly FieldInfo ToolbarFieldInfo;
+
+        private bool _disposed;
+        private AToolbar _toolbar;
+
+        static CustomNavigationRenderer()
+        {
+            // get _toolbar private field info
+            ToolbarFieldInfo = typeof(NavigationPageRenderer).GetField("_toolbar",
+                    BindingFlags.NonPublic | BindingFlags.Instance)
+                ;
+        }
+        public new void OnClick(Android.Views.View v)
+        {
+            // Call the NavigationPage which will trigger the default behavior
+            // The default behavior is to navigate back if the Page derived classes return true from OnBackButtonPressed override            
+            var curPage = Element.CurrentPage as BaseContentPage<OverviewScreenViewModel>;
+            if (curPage == null)
+            {
+                Element.PopAsync();
+            }
+            else
+            {
+                if (curPage.NeedOverrideSoftBackButton)
+                    curPage.OnSoftBackButtonPressed();
+                else Element.PopAsync();
+            }
+        }
+
+        protected override void OnLayout(bool changed, int l, int t, int r, int b)
+        {
+            base.OnLayout(changed, l, t, r, b);
+
+            UpdateToolbarInstance();
+        }
+
+        protected override void OnConfigurationChanged(Configuration newConfig)
+        {
+            base.OnConfigurationChanged(newConfig);
+
+            UpdateToolbarInstance();
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && !_disposed)
+            {
+                _disposed = true;
+
+                RemoveToolbarInstance();
+            }
+
+            base.Dispose(disposing);
+        }
+
+        private void UpdateToolbarInstance()
+        {
+            RemoveToolbarInstance();
+            GetToolbarInstance();
+        }
+
+        private void GetToolbarInstance()
+        {
+            try
+            {
+                _toolbar = (AToolbar)ToolbarFieldInfo.GetValue(this);
+                _toolbar.SetNavigationOnClickListener(this);
+            }
+            catch (Exception exception)
+            {
+                System.Diagnostics.Debug.WriteLine($"Can'tbar with error: {exception.Message}");
+            }
+        }
+
+        private void RemoveToolbarInstance()
+        {
+            if (_toolbar == null) return;
+            _toolbar.SetNavigationOnClickListener(null);
+            _toolbar = null;
+        }
+
+
+
+
+        /*
         AToolbar _toolbar;
         LinearLayout _titleViewLayout;
         AppCompatTextView _titleTextView;
@@ -312,12 +400,12 @@ namespace IDEX.Droid
             {
                 var lastPage = Element?.Navigation?.NavigationStack?.Last();
 
-                /*if (_toolbar !=null)
-                {
-                    _toolbar.ChildViewAdded -= OnToolbarChildViewAdded;
-                    var lPage = Element?.Navigation?.NavigationStack?.Last();
-                    lPage.PropertyChanged -= LastPage_PropertyChanged;
-                }*/
+                //if (_toolbar !=null)
+                //{
+                //    _toolbar.ChildViewAdded -= OnToolbarChildViewAdded;
+                //    var lPage = Element?.Navigation?.NavigationStack?.Last();
+                //    lPage.PropertyChanged -= LastPage_PropertyChanged;
+                //}
 
                 _toolbar = (Android.Support.V7.Widget.Toolbar)child;
                 _originalToolbarBackground = _toolbar.Background;
@@ -710,6 +798,7 @@ namespace IDEX.Droid
             }
         }
 
+*/
     }
 }
 #pragma warning restore CS0618 // Type or member is obsolete
