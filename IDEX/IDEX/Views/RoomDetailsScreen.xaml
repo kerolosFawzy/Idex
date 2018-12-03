@@ -5,7 +5,6 @@
              xmlns:Custom="clr-namespace:CustomControls;assembly=CustomControls"
              xmlns:Views="clr-namespace:IDEX.Views"
              NeedOverrideSoftBackButton="True"
-             Title="{Binding Title}"
              x:TypeArguments="vms:RoomDetailsScreenViewModel"
              xmlns:vms="clr-namespace:IDEX.ViewModel"
              xmlns:ffimageloadingsvg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
@@ -18,7 +17,9 @@
         <ToolbarItem Name="addfile" Icon="addfile.png"  Priority="1" Order="Primary" Command=""  />
         <ToolbarItem x:Name="UseExtra"  Priority="0" Order="Secondary" />
     </ContentPage.ToolbarItems>
-    
+    <NavigationPage.TitleView>
+        <Label x:Name="Title" FontSize="Medium" LineBreakMode="WordWrap" Style="{StaticResource TitleStyle}" />
+    </NavigationPage.TitleView>
     <ContentPage.Content>
         <ScrollView>
             <StackLayout Padding="20" Spacing="5" BackgroundColor="White" Orientation="Vertical"  HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
@@ -62,7 +63,7 @@
                     
                     <Custom:ExtFrameLayout x:Name="Insta" Style="{StaticResource FrameStyle}" >
                         <StackLayout Orientation="Horizontal">
-                            <ffimageloadingsvg:SvgCachedImage x:Name="InstaSvgPath" HorizontalOptions="Start" WidthRequest="32" HeightRequest="32" Margin="5"/>
+                            <ffimageloadingsvg:SvgCachedImage x:Name="InstaSvgPath" Source="{Binding InstaSvgPath}" HorizontalOptions="Start" WidthRequest="32" HeightRequest="32" Margin="5"/>
                             <Label Text="INSTA 800" Style="{StaticResource BoldLabel}" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"/>
                         </StackLayout>
                     </Custom:ExtFrameLayout>

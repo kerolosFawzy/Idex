@@ -9,6 +9,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reactive;
 using System.Reactive.Linq;
 using System.Windows.Input;
 using Xamarin.Forms;
@@ -33,9 +34,9 @@ namespace IDEX.ViewModel
 
         #region Commands for the view
         public ICommand ItemSelected { get; set; }
-        public ReactiveCommand ItemTapped { get; set; }
-        public ReactiveCommand ReactiveBackButtonClicked { get; set; }
-        public ReactiveCommand ReactiveNextItemClicked { get; private set; }
+        public ReactiveCommand<object, Unit> ItemTapped { get; set; }
+        public ReactiveCommand<Unit, Unit> ReactiveBackButtonClicked { get; set; }
+        public ReactiveCommand<Unit, Unit> ReactiveNextItemClicked { get;  set; }
         #endregion
 
         #region the singletoon
@@ -56,13 +57,16 @@ namespace IDEX.ViewModel
             flag = 0;
             AddDummyData();
             ItemSelected = new Command(HandleItemClicked);
-            ItemTapped = ReactiveCommand.Create<Object>(HandleItemTapped);
-            ReactiveBackButtonClicked = ReactiveCommand.Create(HandleReactiveBackButtonClicked);
-            ReactiveNextItemClicked = ReactiveCommand.Create(HandleReactiveNextItemClicked);
+             ItemTapped = ReactiveCommand.Create<object , Unit>(HandleItemTapped);
+             ReactiveBackButtonClicked = ReactiveCommand.Create(HandleReactiveBackButtonClicked);
+             ReactiveNextItemClicked = ReactiveCommand.Create(HandleReactiveNextItemClicked);
             SetReactiveListListen();
         }
 
-  
+      
+
+
+
         /*
          * this is reactive ui listener on Reactive list 
          * there are listing for any change on isCheck prop
@@ -100,12 +104,14 @@ namespace IDEX.ViewModel
         }
 
         #region Handle all buttons on the view and listviews
-        private void HandleItemTapped(object obj)
-        {
-            var Elemnet = obj as InitialModel;
-            Elemnet.IsChecked = !Elemnet.IsChecked;
-        }
 
+
+        private Unit HandleItemTapped(object arg)
+        {
+            var Elemnet = arg as InitialModel;
+            Elemnet.IsChecked = !Elemnet.IsChecked;
+            return new Unit();
+        }
 
 
         private void HandleReactiveBackButtonClicked()

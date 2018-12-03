@@ -2329,7 +2329,6 @@ namespace IDEX.Droid
 			global::Plugin.InputKit.Resource.Styleable.ViewStubCompat_android_id = global::IDEX.Droid.Resource.Styleable.ViewStubCompat_android_id;
 			global::Plugin.InputKit.Resource.Styleable.ViewStubCompat_android_inflatedId = global::IDEX.Droid.Resource.Styleable.ViewStubCompat_android_inflatedId;
 			global::Plugin.InputKit.Resource.Styleable.ViewStubCompat_android_layout = global::IDEX.Droid.Resource.Styleable.ViewStubCompat_android_layout;
-			global::Splat.Resource.String.library_name = global::IDEX.Droid.Resource.String.library_name;
 			global::Xamarin.Forms.Platform.Android.Resource.Attribute.actionBarSize = global::IDEX.Droid.Resource.Attribute.actionBarSize;
 		}
 		

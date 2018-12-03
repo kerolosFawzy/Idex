@@ -16,6 +16,7 @@
             <Converters:SelectedItemEventArgsToSelectedItemConverter x:Key="SelectedItemConverter"/>
         </ResourceDictionary>
     </Page.Resources>
+    
     <Grid BackgroundColor="White" Padding="10" RowSpacing="5" >
 
         <Grid.RowDefinitions>

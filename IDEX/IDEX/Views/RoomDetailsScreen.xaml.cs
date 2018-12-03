@@ -11,6 +11,7 @@ namespace IDEX.Views
 		public RoomDetailsScreen ()
 		{
 			InitializeComponent ();
+            BindingContext = new RoomDetailsScreenViewModel();
         }
 
         protected override void OnAppearing()
@@ -23,6 +24,7 @@ namespace IDEX.Views
                 this.BindCommand(ViewModel, x => x.HygieneCommand, x => x.Hygiene);
                 this.BindCommand(ViewModel, x => x.AdditionalCommand, x => x.Additional);
 
+                this.OneWayBind(ViewModel, x => x.Title, x => x.Title.Text).DisposeWith(SubscriptionDisposables);
                 this.OneWayBind(ViewModel, x => x.UseExtra, x => x.UseExtra.Text).DisposeWith(SubscriptionDisposables);
                 this.OneWayBind(ViewModel, x => x.ID, x => x.ID.Text).DisposeWith(SubscriptionDisposables);
                 this.OneWayBind(ViewModel, x => x.DoorNo, x => x.DoorNo.Text).DisposeWith(SubscriptionDisposables);

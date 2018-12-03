@@ -2,9 +2,11 @@
 using IDEX.Model;
 using IDEX.Views;
 using ReactiveUI;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reactive;
 using System.Windows.Input;
 using Xamarin.Forms;
 
@@ -12,7 +14,7 @@ namespace IDEX.ViewModel
 {
     public class OverviewScreenViewModel : BaseViewModel
     {
-        public ReactiveCommand ShowAll { get; set; }
+        public ReactiveCommand<Unit , Unit> ShowAll { get; set; }
         public ICommand ItemTapped { get; set; }
         readonly Color PieChartColor = Color.FromHex("#008080");
 
@@ -23,9 +25,11 @@ namespace IDEX.ViewModel
             SetFirstListOfLevels();
             SetFirstTitle();
             ItemTapped = new Command<Level>(HandleItemTapped);
-            ShowAll = ReactiveCommand.Create(ShowAllCommand);
+            ShowAll = ReactiveCommand.Create<Unit, Unit>(ShowAllCommand);
             ShowAllFlag = true;
         }
+
+        
         public static Level SelectedRoom { get; set; }
 
         #region class propfull(s)
@@ -131,9 +135,10 @@ namespace IDEX.ViewModel
                 NavigationHandler(SelecedLevel);
             }
         }
-        private void ShowAllCommand()
+
+        private Unit ShowAllCommand(Unit arg)
         {
-        //    var view = obj as MenuItem;
+            //    var view = obj as MenuItem;
             ShowAllFlag = !ShowAllFlag;
 
             HandleMenuItemText();
@@ -147,6 +152,13 @@ namespace IDEX.ViewModel
                 ItemListSource = SelectedListStack.Last();
                 SetVisiablity();
             }
+            return new Unit();
+        }
+
+
+        private void ShowAllCommand()
+        {
+        
         }
         #endregion
 

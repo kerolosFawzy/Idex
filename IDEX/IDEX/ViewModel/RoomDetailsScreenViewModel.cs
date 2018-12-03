@@ -10,10 +10,11 @@ namespace IDEX.ViewModel
     {
         public Level SelectedLevel { get; set; } = OverviewScreenViewModel.SelectedRoom;
 
-        public ReactiveCommand InstaCommand { get; set; }
-        public ReactiveCommand ChangePageCommand { get; set; }
-        public ReactiveCommand HygieneCommand { get; set; }
-        public ReactiveCommand AdditionalCommand { get; set; }
+        //public ReactiveCommand InstaCommand { get; set; }
+        //public ReactiveCommand ChangePageCommand { get; set; }
+        //public ReactiveCommand HygieneCommand { get; set; }
+        //public ReactiveCommand AdditionalCommand { get; set; }
+
         bool flag = true;
 
         #region
@@ -103,10 +104,10 @@ namespace IDEX.ViewModel
         public RoomDetailsScreenViewModel(IScreen hostScreen = null) : base(hostScreen)
         {
             SetRoomData();
-            InstaCommand = ReactiveCommand.Create(InstaCommandHendler);
-            HygieneCommand = ReactiveCommand.Create(HygieneCommandHendler);
-            AdditionalCommand = ReactiveCommand.Create(AdditionalCommandHendler);
-            ChangePageCommand = ReactiveCommand.Create(ChangePageCommandHendler);
+            var InstaCommand = ReactiveCommand.Create(InstaCommandHendler);
+            var HygieneCommand = ReactiveCommand.Create(HygieneCommandHendler);
+            var AdditionalCommand = ReactiveCommand.Create(AdditionalCommandHendler);
+            var ChangePageCommand = ReactiveCommand.Create(ChangePageCommandHendler);
         }
 
         private void ChangePageCommandHendler()

@@ -14,7 +14,7 @@ namespace IDEX.Views
 
         protected override void OnAppearing()
         {
-            CustomNavigationPage.SetBarBackground(this, Color.FromHex("008080"));
+           // CustomNavigationPage.SetBarBackground(this, Color.FromHex("008080"));
 
             //CustomNavigationPage.SetTitleFont(this, Font.SystemFontOfSize(20));
             if (BindingContext is BaseViewModel viewAwair)
